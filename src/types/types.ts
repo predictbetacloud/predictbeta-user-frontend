@@ -71,23 +71,8 @@ export interface AuthType {
 }
 
 export interface TeamState {
-	clubTeams: IClub[];
-	searchQuery: string;
-	specificTeam: IClub | null;
-	specificTeamPlayers: IPlayer[];
-	noMoreTeams: boolean;
-	isFetchingTeams: boolean;
-	isFetchingSpecificTeam: boolean;
-	isFetchingSpecificTeamPlayers: boolean;
-	isCreatingTeam: boolean;
-	isDeletingTeam: boolean;
-	isUpdatingTeam: boolean;
-	isCreatingPlayer: boolean;
-	isUpdatingPlayer: boolean;
-	isDeletingPlayer: boolean;
-	showAddPlayerModal: boolean;
-	showEditPlayerModal: boolean;
-	showDeletePlayerModal: boolean;
+	allPlayers: IPlayer[];
+	isFetchingAllPlayers: boolean;
 }
 
 export interface ISeason {
@@ -130,24 +115,12 @@ export interface FixtureState {
 	specificSeason: ISeason | null;
 	weeks: IWeek[];
 	matches: IMatch[];
-	isCreatingSeason: boolean;
-	isCreatingWeek: boolean;
-	isCreatingMatch: boolean;
 	specificWeek: IWeek | null;
 	isFetchingSeasons: boolean;
 	isFetchingSpecificSeason: boolean;
 	isFetchingWeeks: boolean;
 	isFetchingSpecificWeek: boolean;
-	isPublishingWeek: boolean;
 	isFetchingMatches: boolean;
-	isEditingMatch: boolean;
-	isDeletingMatch: boolean;
-	showCreateSeasonModal: boolean;
-	showCreateWeekModal: boolean;
-	showCreateMatchModal: boolean;
-	showEditMatchModal: boolean;
-	showDeleteMatchModal: boolean;
-	showPublishWeekModal: boolean;
 }
 
 export interface WalletHistoryItem {

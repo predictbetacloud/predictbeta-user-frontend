@@ -13,19 +13,7 @@ const initialState: FixtureState = {
 	isFetchingSpecificSeason: false,
 	isFetchingWeeks: false,
 	isFetchingSpecificWeek: false,
-	isPublishingWeek: false,
 	isFetchingMatches: false,
-	isCreatingSeason: false,
-	isCreatingWeek: false,
-	isCreatingMatch: false,
-	isEditingMatch: false,
-	isDeletingMatch: false,
-	showCreateSeasonModal: false,
-	showCreateWeekModal: false,
-	showCreateMatchModal: false,
-	showPublishWeekModal: false,
-	showEditMatchModal: false,
-	showDeleteMatchModal: false,
 };
 
 export const fixtureSlice = createSlice({
@@ -73,83 +61,11 @@ export const fixtureSlice = createSlice({
 		) => {
 			state.isFetchingSpecificWeek = action.payload;
 		},
-		setIsPublishingWeek: (
-			state,
-			action: PayloadAction<FixtureState["isPublishingWeek"]>
-		) => {
-			state.isPublishingWeek = action.payload;
-		},
 		setIsFetchingMatches: (
 			state,
 			action: PayloadAction<FixtureState["isFetchingMatches"]>
 		) => {
 			state.isFetchingMatches = action.payload;
-		},
-		setIsCreatingSeason: (
-			state,
-			action: PayloadAction<FixtureState["isCreatingSeason"]>
-		) => {
-			state.isCreatingSeason = action.payload;
-		},
-		setIsCreatingWeek: (
-			state,
-			action: PayloadAction<FixtureState["isCreatingWeek"]>
-		) => {
-			state.isCreatingWeek = action.payload;
-		},
-		setIsCreatingMatch: (
-			state,
-			action: PayloadAction<FixtureState["isCreatingMatch"]>
-		) => {
-			state.isCreatingMatch = action.payload;
-		},
-		setIsEditingMatch: (
-			state,
-			action: PayloadAction<FixtureState["isEditingMatch"]>
-		) => {
-			state.isEditingMatch = action.payload;
-		},
-		setIsDeletingMatch: (
-			state,
-			action: PayloadAction<FixtureState["isDeletingMatch"]>
-		) => {
-			state.isDeletingMatch = action.payload;
-		},
-		setShowCreateSeasonModal: (
-			state,
-			action: PayloadAction<FixtureState["showCreateSeasonModal"]>
-		) => {
-			state.showCreateSeasonModal = action.payload;
-		},
-		setShowCreateWeekModal: (
-			state,
-			action: PayloadAction<FixtureState["showCreateWeekModal"]>
-		) => {
-			state.showCreateWeekModal = action.payload;
-		},
-		setShowCreateMatchModal: (
-			state,
-			action: PayloadAction<FixtureState["showCreateMatchModal"]>
-		) => {
-			state.showCreateMatchModal = action.payload;
-		},
-		setShowEditMatchModal: (
-			state,
-			action: PayloadAction<FixtureState["showEditMatchModal"]>
-		) => {
-			state.showEditMatchModal = action.payload;
-		},
-		setShowDeleteMatchModal: (
-			state,
-			action: PayloadAction<FixtureState["showDeleteMatchModal"]>
-		) => {
-			state.showDeleteMatchModal = action.payload;
-		},
-		setShowPublishWeekModal: (
-			state,
-			action: PayloadAction<FixtureState["showPublishWeekModal"]>
-		) => {
-			state.showPublishWeekModal = action.payload;
 		},
 	},
 });
@@ -165,18 +81,6 @@ export const {
 	setIsFetchingSpecificSeason,
 	setIsFetchingSpecificWeek,
 	setIsFetchingMatches,
-	setIsPublishingWeek,
-	setIsCreatingSeason,
-	setIsCreatingWeek,
-	setIsCreatingMatch,
-	setIsEditingMatch,
-	setIsDeletingMatch,
-	setShowCreateSeasonModal,
-	setShowCreateWeekModal,
-	setShowCreateMatchModal,
-	setShowEditMatchModal,
-	setShowDeleteMatchModal,
-	setShowPublishWeekModal,
 } = fixtureSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
@@ -204,41 +108,5 @@ export const selectIsFetchingAllWeeks = (state: RootState) =>
 export const selectIsFetchingSpecificWeek = (state: RootState) =>
 	state.fixtures.isFetchingSpecificWeek;
 
-export const selectIsPublishingWeek = (state: RootState) =>
-	state.fixtures.isPublishingWeek;
-
 export const selectIsFetchingMatches = (state: RootState) =>
 	state.fixtures.isFetchingMatches;
-
-export const selectIsCreatingSeason = (state: RootState) =>
-	state.fixtures.isCreatingSeason;
-
-export const selectIsCreatingWeek = (state: RootState) =>
-	state.fixtures.isCreatingWeek;
-
-export const selectIsCreatingMatch = (state: RootState) =>
-	state.fixtures.isCreatingMatch;
-
-export const selectIsEditingMatch = (state: RootState) =>
-	state.fixtures.isEditingMatch;
-
-export const selectIsDeletingMatch = (state: RootState) =>
-	state.fixtures.isDeletingMatch;
-
-export const selectShowCreateSeasonModal = (state: RootState) =>
-	state.fixtures.showCreateSeasonModal;
-
-export const selectShowCreateWeekModal = (state: RootState) =>
-	state.fixtures.showCreateWeekModal;
-
-export const selectShowCreateMatchModal = (state: RootState) =>
-	state.fixtures.showCreateMatchModal;
-
-export const selectShowEditMatchModal = (state: RootState) =>
-	state.fixtures.showEditMatchModal;
-
-export const selectShowDeleteMatchModal = (state: RootState) =>
-	state.fixtures.showDeleteMatchModal;
-
-export const selectShowPublishWeekModal = (state: RootState) =>
-	state.fixtures.showPublishWeekModal;

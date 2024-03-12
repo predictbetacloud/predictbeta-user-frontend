@@ -2,53 +2,21 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { FieldValues } from "react-hook-form";
 
 import axiosInstance from "../connection/defaultClient";
-import { toastError, toastSuccess } from "../utils/toast";
+import { toastError } from "../utils/toast";
 import {
-	setIsCreatingMatch,
-	setIsCreatingSeason,
-	setIsCreatingWeek,
-	setIsDeletingMatch,
-	setIsEditingMatch,
 	setIsFetchingAllSeasons,
 	setIsFetchingAllWeeks,
 	setIsFetchingMatches,
 	setIsFetchingSpecificSeason,
 	setIsFetchingSpecificWeek,
-	setIsPublishingWeek,
 	setMatches,
 	setSeasons,
-	setShowCreateMatchModal,
-	setShowCreateSeasonModal,
-	setShowCreateWeekModal,
-	setShowDeleteMatchModal,
-	setShowEditMatchModal,
-	setShowPublishWeekModal,
 	setSpecificSeason,
 	setSpecificWeek,
 	setWeeks,
 } from "../state/slices/fixtures";
 
 // Season
-export const createSeasonAPI = createAsyncThunk(
-	"fixtures/createSeason",
-	({ name }: FieldValues, { dispatch }) => {
-		dispatch(setIsCreatingSeason(true));
-
-		axiosInstance
-			.post(`/seasons`, { name })
-			.then((data) => {
-				dispatch(setIsCreatingSeason(false));
-				toastSuccess(data?.data?.message ?? "Season added successfully");
-				dispatch(getAllSeasonsAPI({}));
-				dispatch(setShowCreateSeasonModal(false));
-			})
-			.catch((error) => {
-				dispatch(setIsCreatingSeason(false));
-				toastError(error?.response?.data?.message);
-				console.error(error);
-			});
-	}
-);
 
 export const getAllSeasonsAPI = createAsyncThunk(
 	"fixtures/getAllSeasons",
@@ -85,48 +53,6 @@ export const getSpecificSeasonAPI = createAsyncThunk(
 );
 
 // Weeks
-
-export const createWeekAPI = createAsyncThunk(
-	"fixtures/createWeek",
-	({ seasonId, number }: FieldValues, { dispatch }) => {
-		dispatch(setIsCreatingWeek(true));
-
-		axiosInstance
-			.post(`/weeks`, { seasonId, number })
-			.then((data) => {
-				dispatch(setIsCreatingWeek(false));
-				toastSuccess(data?.data?.message ?? "Week added successfully");
-				dispatch(getAllWeeksAPI({ seasonId }));
-				dispatch(setShowCreateWeekModal(false));
-			})
-			.catch((error) => {
-				dispatch(setIsCreatingWeek(false));
-				toastError(error?.response?.data?.message);
-				console.error(error);
-			});
-	}
-);
-
-export const publishWeekAPI = createAsyncThunk(
-	"fixtures/publishWeek",
-	({ seasonId, weekId }: FieldValues, { dispatch }) => {
-		dispatch(setIsPublishingWeek(true));
-
-		axiosInstance
-			.post(`/fixtures/publish/${weekId}`)
-			.then((data) => {
-				dispatch(setIsPublishingWeek(false));
-				toastSuccess(data?.data?.message ?? "Week published successfully");
-				dispatch(getAllMatchesAPI({ seasonId, weekId }));
-				dispatch(setShowPublishWeekModal(false));
-			})
-			.catch((error) => {
-				dispatch(setIsPublishingWeek(false));
-				toastError(error?.response?.data?.message);
-				console.error(error);
-			});
-	}
-);
 
 export const getAllWeeksAPI = createAsyncThunk(
 	"fixtures/getAllWeeks",
@@ -166,93 +92,6 @@ export const getSpecificWeekAPI = createAsyncThunk(
 );
 
 // Matches
-export const createMatchAPI = createAsyncThunk(
-	"fixtures/createMatch",
-	(
-		{ homeTeamId, awayTeamId, weekId, seasonId, fixtureDateTime }: FieldValues,
-		{ dispatch }
-	) => {
-		dispatch(setIsCreatingMatch(true));
-
-		axiosInstance
-			.post(`/fixtures`, {
-				homeTeamId,
-				awayTeamId,
-				weekId,
-				seasonId,
-				fixtureDateTime,
-			})
-			.then((data) => {
-				dispatch(setIsCreatingMatch(false));
-				toastSuccess(data?.data?.message ?? "Match added successfully");
-				dispatch(getAllMatchesAPI({ seasonId, weekId }));
-				dispatch(setShowCreateMatchModal(false));
-			})
-			.catch((error) => {
-				dispatch(setIsCreatingMatch(false));
-				toastError(error?.response?.data?.message);
-				console.error(error);
-			});
-	}
-);
-
-export const editMatchAPI = createAsyncThunk(
-	"fixtures/editMatch",
-	(
-		{
-			homeTeamId,
-			awayTeamId,
-			weekId,
-			seasonId,
-			fixtureDateTime,
-			matchId,
-		}: FieldValues,
-		{ dispatch }
-	) => {
-		dispatch(setIsEditingMatch(true));
-
-		axiosInstance
-			.patch(`/fixtures/${matchId}`, {
-				homeTeamId,
-				awayTeamId,
-				weekId,
-				seasonId,
-				fixtureDateTime,
-			})
-			.then((data) => {
-				dispatch(setIsEditingMatch(false));
-				toastSuccess(data?.data?.message ?? "Match updated successfully");
-				dispatch(getAllMatchesAPI({ seasonId, weekId }));
-				dispatch(setShowEditMatchModal(false));
-			})
-			.catch((error) => {
-				dispatch(setIsEditingMatch(false));
-				toastError(error?.response?.data?.message);
-				console.error(error);
-			});
-	}
-);
-
-export const deleteMatchAPI = createAsyncThunk(
-	"fixtures/deleteMatch",
-	({ weekId, seasonId, matchId }: FieldValues, { dispatch }) => {
-		dispatch(setIsDeletingMatch(true));
-
-		axiosInstance
-			.delete(`/fixtures/${matchId}`)
-			.then((data) => {
-				dispatch(setIsDeletingMatch(false));
-				toastSuccess(data?.data?.message ?? "Match deleted successfully");
-				dispatch(getAllMatchesAPI({ seasonId, weekId }));
-				dispatch(setShowDeleteMatchModal(false));
-			})
-			.catch((error) => {
-				dispatch(setIsDeletingMatch(false));
-				toastError(error?.response?.data?.message);
-				console.error(error);
-			});
-	}
-);
 
 export const getAllMatchesAPI = createAsyncThunk(
 	"fixtures/getAllMatches",

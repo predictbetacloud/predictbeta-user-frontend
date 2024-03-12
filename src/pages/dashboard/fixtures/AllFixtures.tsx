@@ -1,9 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import queryString from "query-string";
+import Select from "react-select";
+import { useLocation, useSearchParams } from "react-router-dom";
+import { AiOutlineLoading } from "react-icons/ai";
+import { Controller, useForm } from "react-hook-form";
 
 import Button from "../../../components/Buttons";
 import DashboardLayout from "../../../components/layout/DashboardLayout";
-import CreateSeasonModal from "../../../components/modals/CreateSeasonModal";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import {
 	selectAllSeasons,
@@ -12,35 +15,27 @@ import {
 	selectIsFetchingAllWeeks,
 	selectIsFetchingMatches,
 	selectMatches,
-	selectShowCreateMatchModal,
-	selectShowCreateSeasonModal,
-	selectShowCreateWeekModal,
-	selectShowDeleteMatchModal,
-	selectShowEditMatchModal,
-	selectShowPublishWeekModal,
 } from "../../../state/slices/fixtures";
 import {
 	getAllMatchesAPI,
 	getAllSeasonsAPI,
 	getAllWeeksAPI,
 } from "../../../api/fixturesAPI";
-import CreateWeekModal from "../../../components/modals/CreateWeekModal";
 import { VscFilter } from "react-icons/vsc";
-import { useLocation, useSearchParams } from "react-router-dom";
 import { InputPlaceholder } from "../../../components/inputs/Input";
-import { AiOutlineLoading } from "react-icons/ai";
 import CustomListBox from "../../../components/inputs/CustomListBox";
-import CreateMatchModal from "../../../components/modals/CreateMatchModal";
-import PublishWeekModal from "../../../components/modals/PublishWeekModal";
 import PageLoading from "../../../components/loaders/PageLoading";
 import { MatchCard } from "../../../components/fixtures/MatchCard";
-import { IMatch } from "../../../types/types";
-import EditMatchModal from "../../../components/modals/EditMatchModal";
-import DeleteMatchModal from "../../../components/modals/DeleteMatchModal";
 import { SelectionIcon } from "../../../assets/icons";
-import { useForm } from "react-hook-form";
 import ErrorMessage from "../../../components/inputs/ErrorMessage";
 import SelectionCard from "../../../components/fixtures/SelectionCard";
+import IndicatorSeparator from "../../../components/IndicatorSeparator";
+import { defaultStyle, invalidStyle } from "../../../utils/selectStyle";
+import { getAllPlayersAPI } from "../../../api/teamsAPI";
+import {
+	selectAllPlayers,
+	selectIsFetchingAllPlayers,
+} from "../../../state/slices/teams";
 
 const AllFixtures = () => {
 	const dispatch = useAppDispatch();
@@ -53,23 +48,18 @@ const AllFixtures = () => {
 	const isFetchingSeasons = useAppSelector(selectIsFetchingAllSeasons);
 	const isFetchingWeeks = useAppSelector(selectIsFetchingAllWeeks);
 	const isFetchingMatches = useAppSelector(selectIsFetchingMatches);
-	const showCreateSeasonModal = useAppSelector(selectShowCreateSeasonModal);
-	const showCreateWeekModal = useAppSelector(selectShowCreateWeekModal);
-	const showCreateMatchModal = useAppSelector(selectShowCreateMatchModal);
-	const showEditMatchModal = useAppSelector(selectShowEditMatchModal);
-	const showDeleteMatchModal = useAppSelector(selectShowDeleteMatchModal);
-	const showPublishWeekModal = useAppSelector(selectShowPublishWeekModal);
+	const isFetchingAllPlayers = useAppSelector(selectIsFetchingAllPlayers);
 
 	const allWeeks = useAppSelector(selectAllWeeks);
 	const allMatches = useAppSelector(selectMatches);
 	const seasons = useAppSelector(selectAllSeasons);
+	const allPlayers = useAppSelector(selectAllPlayers);
 
 	const [selectedWeek, setSelectedWeek] = useState<{
 		id: string;
 		number: string;
 	} | null>(null);
 
-	const [selectedMatch, setSelectedMatch] = useState<IMatch | null>(null);
 	const [matches, setMatches] = useState(allMatches);
 
 	const {
@@ -78,10 +68,7 @@ const AllFixtures = () => {
 		handleSubmit,
 		control,
 		trigger,
-		watch,
-		getValues,
 		formState: { errors },
-		reset,
 	} = useForm();
 
 	// Set matches
@@ -99,6 +86,7 @@ const AllFixtures = () => {
 	// Get all Season
 	useMemo(() => {
 		dispatch(getAllSeasonsAPI({}));
+		dispatch(getAllPlayersAPI({}));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -231,6 +219,52 @@ const AllFixtures = () => {
 									Select three likely different scorers and minute of first goal
 									to decide your tie
 								</p>
+								<div className="md:grid grid-cols-2 gap-6">
+									{/* Most likely to score? */}
+									<div>
+										<label htmlFor="most_likely" className="mb-2 block">
+											<p className="text-[#222222] text-sm">
+												Most likely to score?
+											</p>
+										</label>
+										<Controller
+											control={control}
+											name="most_likely"
+											rules={{
+												required: "Make a selection",
+											}}
+											render={({ field: { onChange, value, ref } }) => (
+												<Select
+													ref={ref}
+													onChange={onChange}
+													options={allPlayers}
+													value={value}
+													isLoading={isFetchingAllPlayers}
+													components={{
+														IndicatorSeparator,
+													}}
+													getOptionValue={(option) => option["id"]}
+													getOptionLabel={(option) => option["name"]}
+													maxMenuHeight={300}
+													placeholder="- Select -"
+													classNamePrefix="react-select"
+													isClearable
+													styles={
+														errors?.most_likely ? invalidStyle : defaultStyle
+													}
+												/>
+											)}
+										/>
+										{errors?.most_likely && (
+											<ErrorMessage
+												message={
+													errors?.most_likely &&
+													errors?.most_likely.message?.toString()
+												}
+											/>
+										)}
+									</div>
+								</div>
 							</div>
 							<div className="md:w-1/3 md:pl-8">
 								<div className="bg-white pb-7 rounded-4xl rounded-b-none shadow">
@@ -269,20 +303,6 @@ const AllFixtures = () => {
 					)}
 				</form>
 			)}
-
-			{showCreateSeasonModal ? <CreateSeasonModal /> : null}
-			{showCreateWeekModal ? <CreateWeekModal /> : null}
-			{showCreateMatchModal ? <CreateMatchModal /> : null}
-			{showEditMatchModal ? <EditMatchModal match={selectedMatch} /> : null}
-			{showDeleteMatchModal ? <DeleteMatchModal match={selectedMatch} /> : null}
-			{showPublishWeekModal ? (
-				<PublishWeekModal
-					weekId={Number(selectedWeek?.id)}
-					seasonId={seasons?.[0]?.id}
-					season={seasons?.[0]?.name}
-					week={Number(selectedWeek?.number)}
-				/>
-			) : null}
 		</DashboardLayout>
 	);
 };
