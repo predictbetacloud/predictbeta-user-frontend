@@ -23,10 +23,10 @@ export const Input = styled.input`
 
 	&.invalid {
 		border-color: var(--alert-red);
-		// background: #d52a2a40;
+		background: #d52a2a40;
 
 		&::placeholder {
-			// color: var(--alert-red);
+			color: #eb1536;
 		}
 	}
 

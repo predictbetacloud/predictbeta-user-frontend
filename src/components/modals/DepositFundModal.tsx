@@ -86,7 +86,7 @@ const DepositFundModal = () => {
 								/>
 							))}
 						</div>
-						{errors?.name && (
+						{errors?.amount && (
 							<ErrorMessage
 								message={errors?.amount && errors?.amount.message?.toString()}
 							/>
