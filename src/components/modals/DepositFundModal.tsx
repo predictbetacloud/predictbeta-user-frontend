@@ -1,6 +1,5 @@
 import Modal from "./Modal";
 import { FieldValues, useForm } from "react-hook-form";
-import { IoMdInformationCircle } from "react-icons/io";
 
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import {

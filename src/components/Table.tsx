@@ -26,6 +26,23 @@ const TableHolder = styled.table`
 
 	tr:nth-child(even) {
 		background: #f5f8fa;
+		box-shadow: 0px -1px 0px 0px #e1e7ec inset;
+	}
+
+	tr:nth-child(odd):not(:last-of-type) {
+		background: #ffffff;
+		box-shadow: 0px -1px 0px 0px #e1e7ec inset;
+	}
+
+	tbody {
+		tr:last-of-type {
+			td:first-of-type {
+				border-radius: 0 0 0 10px;
+			}
+			td:last-of-type {
+				border-radius: 0 0 10px 0;
+			}
+		}
 	}
 `;
 

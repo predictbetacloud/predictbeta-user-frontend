@@ -1,7 +1,6 @@
 import DashboardLayout from "../../../components/layout/DashboardLayout";
 
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
-import { selectIsFetchingWalletInfo } from "../../../state/slices/wallet";
 import { selectAuth } from "../../../state/slices/auth";
 import TabNav from "../../../components/layout/TabNav";
 import { Controller, FieldValues, useForm } from "react-hook-form";
@@ -12,7 +11,6 @@ import Button from "../../../components/Buttons";
 
 const EditProfile = () => {
 	const { user } = useAppSelector(selectAuth);
-	const isFetchingWalletInfo = useAppSelector(selectIsFetchingWalletInfo);
 	const dispatch = useAppDispatch();
 
 	const {
