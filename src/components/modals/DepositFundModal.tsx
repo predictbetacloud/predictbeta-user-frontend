@@ -73,7 +73,7 @@ const DepositFundModal = () => {
 							{...register("amount", {
 								required: "Please enter an amount",
 							})}
-							className={`w-full input ${errors?.name ? "invalid" : ""}`}
+							className={`w-full input ${errors?.amount ? "invalid" : ""}`}
 						/>
 						<div className="flex items-center max-w-full overflow-x-auto space-x-2 mt-3 pb-4">
 							{amountOptions.map((option) => (

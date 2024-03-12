@@ -57,6 +57,7 @@ export const defaultStyle = {
 		lineHeight: "22px",
 	}),
 };
+
 export const invalidStyle = {
 	control: (baseStyles: any, state: { isFocused: any }) => ({
 		...baseStyles,

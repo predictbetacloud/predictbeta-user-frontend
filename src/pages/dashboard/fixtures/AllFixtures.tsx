@@ -3,7 +3,7 @@ import queryString from "query-string";
 import Select from "react-select";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { AiOutlineLoading } from "react-icons/ai";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, FieldValues, useForm } from "react-hook-form";
 
 import Button from "../../../components/Buttons";
 import DashboardLayout from "../../../components/layout/DashboardLayout";
@@ -22,7 +22,7 @@ import {
 	getAllWeeksAPI,
 } from "../../../api/fixturesAPI";
 import { VscFilter } from "react-icons/vsc";
-import { InputPlaceholder } from "../../../components/inputs/Input";
+import { Input, InputPlaceholder } from "../../../components/inputs/Input";
 import CustomListBox from "../../../components/inputs/CustomListBox";
 import PageLoading from "../../../components/loaders/PageLoading";
 import { MatchCard } from "../../../components/fixtures/MatchCard";
@@ -146,13 +146,13 @@ const AllFixtures = () => {
 		setMatches(old_matches_array);
 	};
 
-	const onPredict = () => {
-		console.log(errors);
+	const onPredict = (data: FieldValues) => {
+		console.log(data);
 	};
 
 	return (
 		<DashboardLayout>
-			<section className="predictbeta-header w-full px-8 py-3 flex items-center justify-between">
+			<section className="predictbeta-header bg-white w-full px-8 py-3 flex items-center justify-between">
 				{/* week select */}
 				<div>
 					{isFetchingWeeks || !allWeeks ? (
@@ -187,7 +187,7 @@ const AllFixtures = () => {
 				<form onSubmit={handleSubmit(onPredict)} className="py-10 px-8">
 					{matches?.length > 0 ? (
 						<section className="flex ">
-							<div className="flex-grow">
+							<div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
 								<div className="grid md:grid-cols-2 gap-6">
 									{matches?.map((match, idx) => (
 										<div key={idx}>
@@ -219,7 +219,7 @@ const AllFixtures = () => {
 									Select three likely different scorers and minute of first goal
 									to decide your tie
 								</p>
-								<div className="md:grid grid-cols-2 gap-6">
+								<div className="grid md:grid-cols-2 gap-6 py-6">
 									{/* Most likely to score? */}
 									<div>
 										<label htmlFor="most_likely" className="mb-2 block">
@@ -264,10 +264,126 @@ const AllFixtures = () => {
 											/>
 										)}
 									</div>
+
+									{/* More likely to score? */}
+									<div>
+										<label htmlFor="more_likely" className="mb-2 block">
+											<p className="text-[#222222] text-sm">
+												More likely to score?
+											</p>
+										</label>
+										<Controller
+											control={control}
+											name="more_likely"
+											rules={{
+												required: "Make a selection",
+											}}
+											render={({ field: { onChange, value, ref } }) => (
+												<Select
+													ref={ref}
+													onChange={onChange}
+													options={allPlayers}
+													value={value}
+													isLoading={isFetchingAllPlayers}
+													components={{
+														IndicatorSeparator,
+													}}
+													getOptionValue={(option) => option["id"]}
+													getOptionLabel={(option) => option["name"]}
+													maxMenuHeight={300}
+													placeholder="- Select -"
+													classNamePrefix="react-select"
+													isClearable
+													styles={
+														errors?.more_likely ? invalidStyle : defaultStyle
+													}
+												/>
+											)}
+										/>
+										{errors?.more_likely && (
+											<ErrorMessage
+												message={
+													errors?.more_likely &&
+													errors?.more_likely.message?.toString()
+												}
+											/>
+										)}
+									</div>
+
+									{/* Likely to score? */}
+									<div>
+										<label htmlFor="likely" className="mb-2 block">
+											<p className="text-[#222222] text-sm">Likely to score?</p>
+										</label>
+										<Controller
+											control={control}
+											name="likely"
+											rules={{
+												required: "Make a selection",
+											}}
+											render={({ field: { onChange, value, ref } }) => (
+												<Select
+													ref={ref}
+													onChange={onChange}
+													options={allPlayers}
+													value={value}
+													isLoading={isFetchingAllPlayers}
+													components={{
+														IndicatorSeparator,
+													}}
+													getOptionValue={(option) => option["id"]}
+													getOptionLabel={(option) => option["name"]}
+													maxMenuHeight={300}
+													placeholder="- Select -"
+													classNamePrefix="react-select"
+													isClearable
+													menuPlacement="auto"
+													styles={errors?.likely ? invalidStyle : defaultStyle}
+												/>
+											)}
+										/>
+										{errors?.likely && (
+											<ErrorMessage
+												message={
+													errors?.likely && errors?.likely.message?.toString()
+												}
+											/>
+										)}
+									</div>
+
+									{/* Goal time */}
+									<div className="">
+										<label htmlFor="goal_time" className="mb-2 block">
+											<p className="text-[#222222] text-sm">
+												Minute the first goal in the round be scored
+											</p>
+										</label>
+										<Input
+											id="goal_time"
+											type="number"
+											placeholder="1"
+											max={120}
+											{...register("goal_time", {
+												required: "Enter a valid number",
+												min: {
+													value: 1,
+													message: "Please enter a valid number",
+												},
+											})}
+											className={`w-full input ${
+												errors?.goal_time ? "invalid" : ""
+											}`}
+										/>
+										{errors?.goal_time && (
+											<ErrorMessage
+												message={errors.goal_time.message?.toString()}
+											/>
+										)}
+									</div>
 								</div>
 							</div>
 							<div className="md:w-1/3 md:pl-8">
-								<div className="bg-white pb-7 rounded-4xl rounded-b-none shadow">
+								<div className="bg-white pb-7 rounded-md border">
 									<div className="bg-[#EB1536] px-2 py-3 flex items-center justify-center rounded-md rounded-b-none space-x-2.5 mb-6">
 										<SelectionIcon />
 										<p className="text-white">Selections</p>
