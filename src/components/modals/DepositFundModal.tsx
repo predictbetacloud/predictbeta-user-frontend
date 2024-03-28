@@ -81,7 +81,7 @@ const DepositFundModal = () => {
 									currency="NGN"
 									key={option}
 									value={option}
-									isSelected={option === amountValue}
+									isselected={option === amountValue}
 									onClick={() => setValue("amount", option)}
 								/>
 							))}

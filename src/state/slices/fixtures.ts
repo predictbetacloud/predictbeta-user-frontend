@@ -1,19 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { type RootState } from "../store";
-import { FixtureState, IMatch, ISeason, IWeek } from "../../types/types";
+import {
+	FixtureState,
+	IMatch,
+	ISeason,
+	IWeek,
+	IWeekPrediction,
+} from "../../types/types";
 
 const initialState: FixtureState = {
 	seasons: [],
 	specificSeason: null,
 	weeks: [],
 	specificWeek: null,
+	specificWeekPrediction: null,
 	matches: [],
 	isFetchingSeasons: false,
 	isFetchingSpecificSeason: false,
 	isFetchingWeeks: false,
 	isFetchingSpecificWeek: false,
+	isFetchingSpecificWeekPrediction: false,
 	isFetchingMatches: false,
+	isSubmittingPredictions: false,
 };
 
 export const fixtureSlice = createSlice({
@@ -33,6 +42,12 @@ export const fixtureSlice = createSlice({
 		},
 		setSpecificWeek: (state, action: PayloadAction<IWeek>) => {
 			state.specificWeek = action.payload;
+		},
+		setSpecificWeekPrediction: (
+			state,
+			action: PayloadAction<IWeekPrediction | null>
+		) => {
+			state.specificWeekPrediction = action.payload;
 		},
 		setMatches: (state, action: PayloadAction<IMatch[]>) => {
 			state.matches = action.payload;
@@ -61,11 +76,23 @@ export const fixtureSlice = createSlice({
 		) => {
 			state.isFetchingSpecificWeek = action.payload;
 		},
+		setIsFetchingSpecificWeekPrediction: (
+			state,
+			action: PayloadAction<FixtureState["isFetchingSpecificWeekPrediction"]>
+		) => {
+			state.isFetchingSpecificWeekPrediction = action.payload;
+		},
 		setIsFetchingMatches: (
 			state,
 			action: PayloadAction<FixtureState["isFetchingMatches"]>
 		) => {
 			state.isFetchingMatches = action.payload;
+		},
+		setIsSubmittingPredictions: (
+			state,
+			action: PayloadAction<FixtureState["isSubmittingPredictions"]>
+		) => {
+			state.isSubmittingPredictions = action.payload;
 		},
 	},
 });
@@ -75,12 +102,15 @@ export const {
 	setWeeks,
 	setSpecificSeason,
 	setSpecificWeek,
+	setSpecificWeekPrediction,
 	setMatches,
 	setIsFetchingAllSeasons,
 	setIsFetchingAllWeeks,
 	setIsFetchingSpecificSeason,
 	setIsFetchingSpecificWeek,
+	setIsFetchingSpecificWeekPrediction,
 	setIsFetchingMatches,
+	setIsSubmittingPredictions,
 } = fixtureSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
@@ -93,6 +123,9 @@ export const selectAllWeeks = (state: RootState) => state.fixtures.weeks;
 
 export const selectSpecificWeek = (state: RootState) =>
 	state.fixtures.specificWeek;
+
+export const selectSpecificWeekPrediction = (state: RootState) =>
+	state.fixtures.specificWeekPrediction;
 
 export const selectMatches = (state: RootState) => state.fixtures.matches;
 
@@ -108,5 +141,11 @@ export const selectIsFetchingAllWeeks = (state: RootState) =>
 export const selectIsFetchingSpecificWeek = (state: RootState) =>
 	state.fixtures.isFetchingSpecificWeek;
 
+export const selectIsFetchingSpecificWeekPrediction = (state: RootState) =>
+	state.fixtures.isFetchingSpecificWeekPrediction;
+
 export const selectIsFetchingMatches = (state: RootState) =>
 	state.fixtures.isFetchingMatches;
+
+export const selectIsSubmittingPredictions = (state: RootState) =>
+	state.fixtures.isSubmittingPredictions;

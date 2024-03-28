@@ -1,0 +1,265 @@
+import { useEffect, useMemo, useState } from "react";
+import queryString from "query-string";
+import { useLocation, useSearchParams } from "react-router-dom";
+import { AiOutlineLoading } from "react-icons/ai";
+
+import DashboardLayout from "../../../components/layout/DashboardLayout";
+import { useAppDispatch, useAppSelector } from "../../../state/hooks";
+import {
+	selectAllSeasons,
+	selectAllWeeks,
+	selectIsFetchingAllSeasons,
+	selectIsFetchingAllWeeks,
+	selectIsFetchingMatches,
+	selectIsFetchingSpecificWeekPrediction,
+	selectMatches,
+	selectSpecificWeekPrediction,
+} from "../../../state/slices/fixtures";
+import {
+	getAllMatchesAPI,
+	getAllSeasonsAPI,
+	getAllWeeksAPI,
+	getSpecificWeekPredictionAPI,
+} from "../../../api/fixturesAPI";
+import { VscFilter } from "react-icons/vsc";
+import { InputPlaceholder } from "../../../components/inputs/Input";
+import CustomListBox from "../../../components/inputs/CustomListBox";
+import PageLoading from "../../../components/loaders/PageLoading";
+import SelectionCard from "../../../components/fixtures/SelectionCard";
+
+const PredictionHistory = () => {
+	const dispatch = useAppDispatch();
+	const [, setSearchParams] = useSearchParams();
+	const l = useLocation();
+
+	const queries = queryString.parse(l.search);
+	const query_week = queries?.week;
+	const query_season = queries?.season;
+
+	const isFetchingSeasons = useAppSelector(selectIsFetchingAllSeasons);
+	const isFetchingWeeks = useAppSelector(selectIsFetchingAllWeeks);
+	const isFetchingMatches = useAppSelector(selectIsFetchingMatches);
+	const isFetchingSpecificWeekPredictions = useAppSelector(
+		selectIsFetchingSpecificWeekPrediction
+	);
+	const specificWeekPredictions = useAppSelector(selectSpecificWeekPrediction);
+
+	const allWeeks = useAppSelector(selectAllWeeks);
+	const allMatches = useAppSelector(selectMatches);
+	const seasons = useAppSelector(selectAllSeasons);
+
+	const [selectedWeek, setSelectedWeek] = useState<{
+		id: string;
+		number: string;
+	} | null>(null);
+
+	// Get all Season
+	useMemo(() => {
+		dispatch(getAllSeasonsAPI({}));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	// Make latest week the active week
+	useMemo(() => {
+		if (allWeeks?.[0]?.id) {
+			// if week is in query use that week
+			if (query_week) {
+				const activeWeek = allWeeks.find(
+					(_week) => _week.number === Number(query_week)
+				);
+
+				if (activeWeek) {
+					setSelectedWeek({
+						id: String(activeWeek?.id),
+						number: String(activeWeek?.number),
+					});
+				}
+			} else {
+				setSearchParams({
+					season: query_season
+						? String(query_season)
+						: String(seasons?.[0]?.name),
+					week: String(allWeeks?.[0]?.number),
+				});
+			}
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [allWeeks, query_week]);
+
+	useMemo(() => {
+		if (query_season) {
+			const activeSeason = seasons.find(
+				(_season) => _season.name === query_season
+			);
+			if (activeSeason?.id && selectedWeek?.id) {
+				dispatch(
+					getAllMatchesAPI({
+						seasonId: activeSeason?.id,
+						weekId: selectedWeek?.id,
+					})
+				);
+			}
+			if (selectedWeek?.id) {
+				dispatch(
+					getSpecificWeekPredictionAPI({
+						weekId: selectedWeek?.id,
+					})
+				);
+			}
+		} else if (seasons?.[0]?.id && selectedWeek?.id) {
+			dispatch(
+				getAllMatchesAPI({
+					seasonId: seasons?.[0]?.id,
+					weekId: selectedWeek?.id,
+				})
+			);
+			dispatch(
+				getSpecificWeekPredictionAPI({
+					weekId: selectedWeek?.id,
+				})
+			);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedWeek]);
+
+	// Make latest season the active season
+	useEffect(() => {
+		if (query_season) {
+			const activeSeason = seasons.find(
+				(_season) => _season.name === query_season
+			);
+
+			if (activeSeason?.id) {
+				dispatch(getAllWeeksAPI({ seasonId: activeSeason?.id }));
+			}
+		} else {
+			if (seasons?.[0]?.id) {
+				dispatch(getAllWeeksAPI({ seasonId: seasons?.[0]?.id }));
+			}
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [seasons, query_season]);
+
+	return (
+		<DashboardLayout title="Prediction History">
+			<section className="predictbeta-header bg-white w-full px-8 py-3 flex items-center justify-between">
+				{/* season select */}
+				<div className="flex items-center gap-4">
+					{isFetchingSeasons || !seasons ? (
+						<InputPlaceholder>
+							<AiOutlineLoading
+								className="animate-spin"
+								color="#5D65F6"
+								size={16}
+							/>
+						</InputPlaceholder>
+					) : (
+						<CustomListBox
+							options={seasons?.map((season) => ({
+								name: season.name,
+								value: String(season.name),
+							}))}
+							onChange={(value: string): void => {
+								setSearchParams({
+									season: String(value),
+									week: "",
+								});
+							}}
+							defaultOption={String(query_season)}
+							title={"Season"}
+							icon={<VscFilter />}
+						/>
+					)}
+
+					{/* week select */}
+					{isFetchingWeeks || !allWeeks ? (
+						<InputPlaceholder>
+							<AiOutlineLoading
+								className="animate-spin"
+								color="#5D65F6"
+								size={16}
+							/>
+						</InputPlaceholder>
+					) : (
+						<CustomListBox
+							options={allWeeks?.map((week) => ({
+								name: `Week ${week.number}`,
+								value: String(week.number),
+							}))}
+							onChange={(value: string): void => {
+								setSearchParams({
+									season: String(query_season),
+									week: String(value),
+								});
+							}}
+							defaultOption={selectedWeek?.number}
+							title={"Week"}
+							icon={<VscFilter />}
+						/>
+					)}
+				</div>
+			</section>
+
+			{/* Matches */}
+			{isFetchingMatches ||
+			isFetchingWeeks ||
+			isFetchingSeasons ||
+			isFetchingSpecificWeekPredictions ? (
+				<PageLoading />
+			) : (
+				<>
+					{Array.isArray(specificWeekPredictions?.predictions?.fixtures) &&
+					specificWeekPredictions?.predictions?.fixtures.length > 0 ? (
+						<>
+							<section className="flex py-10 px-8">
+								<div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
+									<div className="grid md:grid-cols-2 gap-6">
+										{allMatches?.map((match) => (
+											<SelectionCard
+												key={match.id}
+												match={{
+													...match,
+													prediction:
+														specificWeekPredictions?.predictions?.fixtures.find(
+															(_match) => _match.fixture.id === match.id
+														)?.result,
+													outcome:
+														specificWeekPredictions?.predictions?.fixtures.find(
+															(_match) => _match.fixture.id === match.id
+														)?.result ===
+														specificWeekPredictions?.results?.fixtures.find(
+															(_match) => _match.fixture.id === match.id
+														)?.result
+															? "win"
+															: "lose",
+												}}
+											/>
+										))}
+									</div>
+									<div className="mt-6 bg-[#f5f8fa] border border-gray-400 border-dashed rounded-md text-center py-3 px-10">
+										<p className="text-[#5F6B7A]">
+											Week {query_week} points:{" "}
+											<span className="font-semibold">
+												{specificWeekPredictions?.score}
+											</span>
+										</p>
+									</div>
+								</div>
+							</section>
+						</>
+					) : (
+						<div className="flex items-center justify-center py-20 lg:py-32 flex-col">
+							<h3 className="font-bold text-3xl mb-2">
+								There no Predictions for this week
+							</h3>
+							<p className="">Predictions will show here once they are made.</p>
+						</div>
+					)}
+				</>
+			)}
+		</DashboardLayout>
+	);
+};
+
+export default PredictionHistory;

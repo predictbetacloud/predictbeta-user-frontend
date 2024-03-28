@@ -10,7 +10,7 @@ import { P } from "../../components/Texts";
 import { Input } from "../../components/inputs/Input";
 import Button from "../../components/Buttons";
 
-import { loginAPI, signUpAPI } from "../../api/authAPI";
+import { signUpAPI } from "../../api/authAPI";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { selectAuth } from "../../state/slices/auth";
 import CustomPhoneInput from "../../components/inputs/CustomPhoneInput";
@@ -38,14 +38,13 @@ const Register = () => {
 		lastName,
 		userName,
 	}: FieldValues) => {
-		console.log(email, password);
 		dispatch(
 			signUpAPI({
 				email,
 				password,
 				mobileNumber,
 				firstName,
-				// middleName: ,
+				middleName: userName,
 				surname: lastName,
 			})
 		);

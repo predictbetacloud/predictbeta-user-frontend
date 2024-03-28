@@ -20,6 +20,8 @@ import DepositFundModal from "./components/modals/DepositFundModal";
 import { selectShowDepositModal } from "./state/slices/wallet";
 import EditProfile from "./pages/dashboard/account/EditProfile";
 import EditPassword from "./pages/dashboard/account/EditPassword";
+import PredictionHistory from "./pages/dashboard/predictionHistory/PredictionHistory";
+import WeekLeaderboard from "./pages/dashboard/leaderboard/WeekLeaderboard";
 
 function App() {
 	const navigate = useNavigate();
@@ -62,6 +64,12 @@ function App() {
 				<Route path="/dashboard/account" element={<EditProfile />} />
 				<Route path="/dashboard/wallet" element={<Wallet />} />
 				<Route path="/dashboard/fixtures" element={<AllFixtures />} />
+				<Route path="/dashboard/leaderboard" element={<WeekLeaderboard />} />
+				{/* <Route path="/dashboard/leaderboard/season" element={<SeasonL />} /> */}
+				<Route
+					path="/dashboard/prediction-history"
+					element={<PredictionHistory />}
+				/>
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 

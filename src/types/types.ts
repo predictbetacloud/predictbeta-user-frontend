@@ -75,6 +75,18 @@ export interface TeamState {
 	isFetchingAllPlayers: boolean;
 }
 
+export interface LeaderboardItem {
+	position: number;
+	username: string;
+	location: string | null;
+	points: number;
+}
+export interface LeaderboardState {
+	leaderboard: LeaderboardItem[];
+	isFetchingWeekLeaderboard: boolean;
+	isFetchingSeasonLeaderboard: boolean;
+}
+
 export interface ISeason {
 	id: number;
 	name: string;
@@ -88,7 +100,7 @@ export interface IWeek {
 	deadline?: string | number;
 }
 export interface IMatch {
-	prediction: "" | "1" | "X" | "2" | undefined;
+	prediction: "" | "HOME" | "DRAW" | "AWAY" | undefined;
 	awayTeam: IClub;
 	homeTeam: IClub;
 	id: number;
@@ -96,19 +108,59 @@ export interface IMatch {
 	createdAt: string;
 	fixtureDateTime: string;
 	week: IWeek;
+	outcome?: "win" | "lose";
 }
 
 export const predictionEnum = {
-	AWAY: "2",
-	HOME: "1",
-	DRAW: "X",
+	AWAY: "AWAY",
+	HOME: "HOME",
+	DRAW: "DRAW",
 };
 
-export const reversePredictionEnum = {
-	1: "HOME",
-	X: "DRAW",
-	2: "AWAY",
+export type Prediction = {
+	fixtureId: number;
+	result: string;
 };
+
+export interface IWeekPrediction {
+	score: number;
+
+	predictions: {
+		fixtures: {
+			fixture: {
+				id: number;
+				createdAt: string;
+				deletedAt: string | null;
+				weekId: number;
+				fixtureDateTime: string;
+				homeTeam: IClub;
+				awayTeam: IClub;
+			};
+			result: "HOME" | "AWAY" | "DRAW";
+		}[];
+		timeOfFirstGoal: number;
+		mostLikelyToScore: IPlayer;
+		moreLikelyToScore: IPlayer;
+		likelyToScore: IPlayer;
+	};
+
+	results: {
+		fixtures: {
+			fixture: {
+				id: number;
+				createdAt: string;
+				deletedAt: string | null;
+				weekId: number;
+				fixtureDateTime: string;
+				homeTeam: IClub;
+				awayTeam: IClub;
+			};
+			result: "HOME" | "AWAY" | "DRAW";
+		}[];
+		timeOfFirstGoal: number;
+		scorers: IPlayer[];
+	};
+}
 
 export interface FixtureState {
 	seasons: ISeason[];
@@ -116,11 +168,16 @@ export interface FixtureState {
 	weeks: IWeek[];
 	matches: IMatch[];
 	specificWeek: IWeek | null;
+	specificWeekPrediction: IWeekPrediction | null;
+	// specificWeekResult: IWeekPrediction | null;
 	isFetchingSeasons: boolean;
 	isFetchingSpecificSeason: boolean;
 	isFetchingWeeks: boolean;
 	isFetchingSpecificWeek: boolean;
+	isFetchingSpecificWeekPrediction: boolean;
+	// isFetchingSpecificWeekResult: boolean;
 	isFetchingMatches: boolean;
+	isSubmittingPredictions: boolean;
 }
 
 export interface WalletHistoryItem {

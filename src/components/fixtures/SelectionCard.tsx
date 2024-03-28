@@ -4,6 +4,7 @@ import t from "prop-types";
 
 import { P } from "../Texts";
 import { IMatch } from "../../types/types";
+import { GreenTick, RedClose } from "../../assets/icons";
 // import { ReactComponent as GreenTick } from "../../../assets/icons/tick-green.svg";
 // import { ReactComponent as RedClose } from "../../../assets/icons/close-circle.svg";
 
@@ -38,15 +39,15 @@ const SelectionCard = ({ match, type }: { match: IMatch; type?: string }) => {
 					<p className="text-[#160B0F] text-sm">{match?.awayTeam?.name}</p>
 				</div>
 			</div>
-			<P className="text-center text-[#8895A7] text-xs font-light">
-				{type ? type : null}
-				<>
-					{match.prediction === "1" && "Home"}
-					{match.prediction === "X" && "Draw"}
-					{match.prediction === "2" && "Away"}
-				</>
-			</P>
-			{/* {match?.outcome && <>{match.outcome === "win" ? <GreenTick /> : <RedClose />}</>} */}
+			<div className="flex flex-col items-center">
+				<P className="text-center text-[#8895A7] text-xs font-light">
+					{type ? type : null}
+					<>{match.prediction}</>
+				</P>
+				{match?.outcome && (
+					<>{match.outcome === "win" ? <GreenTick /> : <RedClose />}</>
+				)}
+			</div>
 		</Style>
 	);
 };

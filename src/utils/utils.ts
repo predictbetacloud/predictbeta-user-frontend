@@ -1,4 +1,5 @@
 import { NavigateFunction, Location } from "react-router-dom";
+import { Prediction } from "../types/types";
 
 export const globalRouter = { navigate: null } as {
 	navigate: null | NavigateFunction;
@@ -55,3 +56,13 @@ export const formatCurrency = (number: number) => {
 		maximumFractionDigits: 2,
 	});
 };
+
+// Format Predictions
+export function formatPredictionsFromObjectToArray(predictions: {
+	[key: number]: string;
+}): Prediction[] {
+	return Object.entries(predictions).map(([key, value]) => ({
+		fixtureId: parseInt(key),
+		result: value,
+	}));
+}

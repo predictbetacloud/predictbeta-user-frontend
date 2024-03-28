@@ -31,7 +31,8 @@ export const Input = styled.input`
 	}
 
 	&:disabled {
-		background: #CED6DE;
+		background: #f5f6f8;
+		color: #8c97a7;
 		&:hover {
 			cursor: not-allowed;
 		}

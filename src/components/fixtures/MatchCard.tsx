@@ -7,21 +7,26 @@ import { P } from "../Texts";
 import { IClub } from "../../types/types";
 import { colors } from "../../utils/colors";
 import { MdOutlineBarChart } from "react-icons/md";
-import Button from "../Buttons";
-import { IoCaretUpOutline } from "react-icons/io5";
-import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+import { BsChevronDown } from "react-icons/bs";
 
-const Style = styled.div<{ invalid: boolean }>`
+const Style = styled.div<{ invalid: "true" | "false" }>`
 	border: 1px solid;
-	border-color: ${(props) => (props.invalid ? "#EB1536" : "#e1e7ec")};
+	border-color: ${(props) =>
+		props.invalid === "true" ? "#EB1536" : "#e1e7ec"};
 `;
 
 interface PredictionStyle {
-	isSelected: boolean;
+	isselected: "true" | "false";
+	isCorrect: "true" | "false";
 }
 
 const PredictionStyle = styled.div<PredictionStyle>`
-	background: ${(props) => (props.isSelected ? "#EB1536" : "#051B30")};
+	background: ${(props) =>
+		props.isCorrect === "true"
+			? colors.green700
+			: props.isselected === "true"
+			? "#EB1536"
+			: "#051B30"};
 	padding: 8px 14px;
 `;
 
@@ -34,6 +39,7 @@ const Prediction = ({
 	style,
 	locked,
 	inactive,
+	result,
 }: {
 	className?: string;
 	onClick: (value: any) => void;
@@ -42,6 +48,7 @@ const Prediction = ({
 	title?: string;
 	locked: boolean;
 	inactive: boolean;
+	result: "" | "HOME" | "DRAW" | "AWAY" | undefined;
 	value: any;
 }) => (
 	<PredictionStyle
@@ -50,7 +57,8 @@ const Prediction = ({
 		} ${className ? className : ""}`}
 		style={style}
 		onClick={inactive ? () => {} : () => onClick(value)}
-		isSelected={selectedPrediction === value}
+		isCorrect={result === value ? "true" : "false"}
+		isselected={selectedPrediction === value ? "true" : "false"}
 	>
 		{locked ? (
 			<IoIosLock color="white" width="14px" className="cursor-not-allowed" />
@@ -76,13 +84,9 @@ export const MatchCard = ({
 	matchTime,
 	inactive = false,
 	locked = false,
-	adminSet,
-	toggleUpdateModal,
-	toggleDeleteModal,
 	invalid = false,
-}: // isScoreSet,
-// score,
-{
+	result,
+}: {
 	away: any;
 	home: any;
 	id: number;
@@ -92,8 +96,8 @@ export const MatchCard = ({
 	inactive?: boolean;
 	invalid?: boolean;
 	isScoreSet?: boolean;
-	prediction?: "" | "1" | "X" | "2";
-	score?: "" | "AWAY" | "DRAW" | "HOME";
+	prediction?: "" | "HOME" | "DRAW" | "AWAY";
+	result?: "" | "AWAY" | "DRAW" | "HOME";
 	adminSet?: boolean;
 	toggleUpdateModal?: () => void;
 	toggleDeleteModal?: () => void;
@@ -103,7 +107,7 @@ export const MatchCard = ({
 	};
 
 	return (
-		<Style className="p-4 rounded-md" invalid={invalid}>
+		<Style className="p-4 rounded-md" invalid={invalid ? "true" : "false"}>
 			<div className="md:flex items-center justify-between">
 				<div className="md:space-y-2 flex md:block items-center justify-between mb-4 md:mb-0">
 					<Team team={home} />
@@ -112,7 +116,7 @@ export const MatchCard = ({
 				<div>
 					<div className="grid grid-cols-3 w-fit ml-auto">
 						<Prediction
-							value={"1"}
+							value={"HOME"}
 							onClick={captureSelection}
 							inactive={inactive}
 							locked={locked}
@@ -121,14 +125,16 @@ export const MatchCard = ({
 							style={{
 								borderRadius: "5px 0px 0px 5px",
 							}}
+							result={result}
 						/>
 						<Prediction
 							// title="1"
-							value={"X"}
+							value={"DRAW"}
 							onClick={captureSelection}
 							inactive={inactive}
 							locked={locked}
 							title="X"
+							result={result}
 							selectedPrediction={prediction}
 							style={{
 								borderRight: `1px solid ${colors.grey500}`,
@@ -136,11 +142,12 @@ export const MatchCard = ({
 							}}
 						/>
 						<Prediction
-							value={"2"}
+							value={"AWAY"}
 							title="A"
 							inactive={inactive}
 							locked={locked}
 							onClick={captureSelection}
+							result={result}
 							selectedPrediction={prediction}
 							style={{
 								borderRadius: "0px 5px 5px 0px",

@@ -13,7 +13,6 @@ export const getAllPlayersAPI = createAsyncThunk(
 			.get(`/players`)
 			.then((data) => {
 				dispatch(setIsFetchingAllPlayers(false));
-				console.log(data);
 				dispatch(setAllPlayers(data.data?.data));
 			})
 			.catch((error) => {

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { colors } from "../../utils/colors";
 
-const Style = styled.button<{ isSelected: boolean }>`
+const Style = styled.button<{ isselected: boolean }>`
 	border: 1px solid;
 	border-color: ${(props) =>
-		props.isSelected ? colors.accent : colors.grey200};
+		props.isselected ? colors.accent : colors.grey200};
 	border-radius: 8px;
 
 	&:focus {
@@ -16,17 +16,17 @@ const Style = styled.button<{ isSelected: boolean }>`
 export const AmountOption = ({
 	currency = "NGN",
 	value,
-	isSelected,
+	isselected,
 	onClick = () => {},
 }: {
 	currency: string;
 	value: number;
-	isSelected: boolean;
+	isselected: boolean;
 	onClick: () => void;
 }) => {
 	return (
 		<Style
-			isSelected={isSelected}
+			isselected={isselected}
 			onClick={onClick}
 			type="button"
 			className="py-2 px-3 cursor-pointer"

@@ -50,10 +50,8 @@ export const withdrawWalletAPI = createAsyncThunk(
 		dispatch(setIsFundingWallet(true));
 		axiosInstance
 			.post(`/users/${userId}/withdraw-wallet`, { amount })
-			.then((data) => {
+			.then(() => {
 				dispatch(setIsFundingWallet(false));
-				console.log(data.data);
-				// dispatch(setSeasons(data.data?.data));
 			})
 			.catch((error) => {
 				dispatch(setIsFundingWallet(false));

@@ -1,16 +1,21 @@
 import DashboardLayout from "../../../components/layout/DashboardLayout";
 
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
-import { selectAuth } from "../../../state/slices/auth";
+import {
+	selectAuth,
+	selectIsPerformingAuthAction,
+} from "../../../state/slices/auth";
 import TabNav from "../../../components/layout/TabNav";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import { Input } from "../../../components/inputs/Input";
 import ErrorMessage from "../../../components/inputs/ErrorMessage";
 import CustomPhoneInput from "../../../components/inputs/CustomPhoneInput";
 import Button from "../../../components/Buttons";
+import { updateProfileAPI } from "../../../api/authAPI";
 
 const EditProfile = () => {
 	const { user } = useAppSelector(selectAuth);
+	const isUpdatingProfile = useAppSelector(selectIsPerformingAuthAction);
 	const dispatch = useAppDispatch();
 
 	const {
@@ -18,17 +23,26 @@ const EditProfile = () => {
 		handleSubmit,
 		formState: { errors },
 		control,
-		watch,
 	} = useForm();
 
-	const submit = async (data: FieldValues) => {
+	const submit = async ({
+		mobileNumber,
+		firstName,
+		username,
+		lastName,
+	}: FieldValues) => {
 		const email = user?.email;
-		console.log({ ...data, email });
-		// try {
-		// 	dispatch(createTeamAPI({ name, shortName, clubLogo: logo?.[0] }));
-		// } catch (error) {
-		// 	toastError("An error occured! Please try again");
-		// }
+		dispatch(
+			updateProfileAPI({
+				email,
+				mobileNumber,
+				firstName,
+				middleName: username,
+				username,
+				surname: lastName,
+				userId: user?.id,
+			})
+		);
 	};
 
 	return (
@@ -157,7 +171,7 @@ const EditProfile = () => {
 					</section>
 
 					<div className="flex items-center justify-end space-x-4 mt-8">
-						<Button type="submit" title="Save" />
+						<Button type="submit" title="Save" loading={isUpdatingProfile} />
 					</div>
 				</form>
 			</main>

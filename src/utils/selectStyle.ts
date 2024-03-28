@@ -28,14 +28,14 @@ export const defaultStyle = {
 		fontSize: "14px",
 		lineHeight: "22px",
 	}),
-	option: (baseStyles: any, state: { isFocused: any; isSelected: any }) => ({
+	option: (baseStyles: any, state: { isFocused: any; isselected: any }) => ({
 		...baseStyles,
 		fontFamily: "Rubik",
 		fontStyle: "normal",
 		fontWeight: 400,
 		fontSize: "14px",
 		lineHeight: "22px",
-		color: state.isSelected ? "#FFFFFF" : "#121212",
+		color: state.isselected ? "#FFFFFF" : "#121212",
 	}),
 	valueContainer: (baseStyles: any) => ({
 		...baseStyles,

@@ -52,7 +52,7 @@ const CustomListBox = ({
 		// <div className="fixed top-16 w-72">
 		<Listbox value={selected} onChange={setSelected}>
 			<div className="relative mt-1">
-				<Listbox.Button className="relative w-full cursor-default rounded-lg bg-[#F5F8FA] p-3 pr-10 text-left border-[#E1E7EC] border focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-cyan-300 sm:text-sm">
+				<Listbox.Button className="relative w-full cursor-pointer rounded-lg bg-[#F5F8FA] p-3 pr-10 text-left border-[#E1E7EC] border focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-cyan-300 sm:text-sm">
 					{loading ? (
 						<AiOutlineLoading
 							className="animate-spin"

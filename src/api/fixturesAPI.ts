@@ -2,17 +2,20 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { FieldValues } from "react-hook-form";
 
 import axiosInstance from "../connection/defaultClient";
-import { toastError } from "../utils/toast";
+import { toastError, toastSuccess } from "../utils/toast";
 import {
 	setIsFetchingAllSeasons,
 	setIsFetchingAllWeeks,
 	setIsFetchingMatches,
 	setIsFetchingSpecificSeason,
 	setIsFetchingSpecificWeek,
+	setIsFetchingSpecificWeekPrediction,
+	setIsSubmittingPredictions,
 	setMatches,
 	setSeasons,
 	setSpecificSeason,
 	setSpecificWeek,
+	setSpecificWeekPrediction,
 	setWeeks,
 } from "../state/slices/fixtures";
 
@@ -92,7 +95,6 @@ export const getSpecificWeekAPI = createAsyncThunk(
 );
 
 // Matches
-
 export const getAllMatchesAPI = createAsyncThunk(
 	"fixtures/getAllMatches",
 	({ seasonId, weekId }: FieldValues, { dispatch }) => {
@@ -113,19 +115,58 @@ export const getAllMatchesAPI = createAsyncThunk(
 	}
 );
 
-// export const getSpecificWeekAPI = createAsyncThunk(
-// 	"fixtures/getSpecificWeek",
-// 	({ weekId }: FieldValues, { dispatch }) => {
-// 		dispatch(setIsFetchingSpecificWeek(true));
-// 		axiosInstance
-// 			.get(`/weeks/${weekId}`)
-// 			.then((data) => {
-// 				dispatch(setIsFetchingSpecificWeek(false));
-// 				dispatch(setSpecificWeek(data.data?.data));
-// 			})
-// 			.catch((error) => {
-// 				dispatch(setIsFetchingSpecificWeek(false));
-// 				toastError(error?.response?.data?.message);
-// 			});
-// 	}
-// );
+// Prediction
+export const submitPredictionAPI = createAsyncThunk(
+	"fixtures/submitPrediction",
+	(
+		{
+			weekId,
+			predictions,
+			mostLikelyToScore,
+			moreLikelyToScore,
+			likelyToScore,
+			timeOfFirstGoal,
+		}: FieldValues,
+		{ dispatch }
+	) => {
+		dispatch(setIsSubmittingPredictions(true));
+		axiosInstance
+			.post(`/predictions`, {
+				weekId,
+				predictions,
+				mostLikelyToScore,
+				moreLikelyToScore,
+				likelyToScore,
+				timeOfFirstGoal,
+			})
+			.then((data) => {
+				dispatch(setIsSubmittingPredictions(false));
+				toastSuccess(
+					data?.data?.message ??
+						"Your prediction has been submitted succesfully"
+				);
+			})
+			.catch((error) => {
+				dispatch(setIsSubmittingPredictions(false));
+				toastError(error?.response?.data?.message);
+			});
+	}
+);
+
+export const getSpecificWeekPredictionAPI = createAsyncThunk(
+	"fixtures/getSpecificWeekPrediction",
+	({ weekId }: FieldValues, { dispatch }) => {
+		dispatch(setIsFetchingSpecificWeekPrediction(true));
+		axiosInstance
+			.get(`/predictions/week/${weekId}`)
+			.then((data) => {
+				dispatch(setIsFetchingSpecificWeekPrediction(false));
+				dispatch(setSpecificWeekPrediction(data?.data?.data));
+			})
+			.catch((error) => {
+				dispatch(setSpecificWeekPrediction(null));
+				dispatch(setIsFetchingSpecificWeekPrediction(false));
+				toastError(error?.response?.data?.message);
+			});
+	}
+);

@@ -4,6 +4,7 @@ import Select from "react-select";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { AiOutlineLoading } from "react-icons/ai";
 import { Controller, FieldValues, useForm } from "react-hook-form";
+import { isBefore } from "date-fns";
 
 import Button from "../../../components/Buttons";
 import DashboardLayout from "../../../components/layout/DashboardLayout";
@@ -14,12 +15,17 @@ import {
 	selectIsFetchingAllSeasons,
 	selectIsFetchingAllWeeks,
 	selectIsFetchingMatches,
+	selectIsFetchingSpecificWeekPrediction,
+	selectIsSubmittingPredictions,
 	selectMatches,
+	selectSpecificWeekPrediction,
 } from "../../../state/slices/fixtures";
 import {
 	getAllMatchesAPI,
 	getAllSeasonsAPI,
 	getAllWeeksAPI,
+	getSpecificWeekPredictionAPI,
+	submitPredictionAPI,
 } from "../../../api/fixturesAPI";
 import { VscFilter } from "react-icons/vsc";
 import { Input, InputPlaceholder } from "../../../components/inputs/Input";
@@ -36,6 +42,7 @@ import {
 	selectAllPlayers,
 	selectIsFetchingAllPlayers,
 } from "../../../state/slices/teams";
+import { formatPredictionsFromObjectToArray } from "../../../utils/utils";
 
 const AllFixtures = () => {
 	const dispatch = useAppDispatch();
@@ -44,11 +51,17 @@ const AllFixtures = () => {
 
 	const queries = queryString.parse(l.search);
 	const query_week = queries?.week;
+	const query_season = queries?.season;
 
 	const isFetchingSeasons = useAppSelector(selectIsFetchingAllSeasons);
 	const isFetchingWeeks = useAppSelector(selectIsFetchingAllWeeks);
 	const isFetchingMatches = useAppSelector(selectIsFetchingMatches);
 	const isFetchingAllPlayers = useAppSelector(selectIsFetchingAllPlayers);
+	const isSubmittingPrediction = useAppSelector(selectIsSubmittingPredictions);
+	const isFetchingSpecificWeekPredictions = useAppSelector(
+		selectIsFetchingSpecificWeekPrediction
+	);
+	const specificWeekPredictions = useAppSelector(selectSpecificWeekPrediction);
 
 	const allWeeks = useAppSelector(selectAllWeeks);
 	const allMatches = useAppSelector(selectMatches);
@@ -61,6 +74,7 @@ const AllFixtures = () => {
 	} | null>(null);
 
 	const [matches, setMatches] = useState(allMatches);
+	const [isWeekDeadlineElasped, setIsWeekDeadlineElasped] = useState(true);
 
 	const {
 		register,
@@ -90,46 +104,90 @@ const AllFixtures = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	// Get all weeks in the latest season
-	useMemo(() => {
-		if (seasons?.[0]?.id) {
-			dispatch(getAllWeeksAPI({ seasonId: seasons?.[0]?.id }));
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [seasons?.[0]?.id]);
-
 	// Make latest week the active week
-	useEffect(() => {
+	useMemo(() => {
 		if (allWeeks?.[0]?.id) {
 			// if week is in query use that week
 			if (query_week) {
 				const activeWeek = allWeeks.find(
 					(_week) => _week.number === Number(query_week)
 				);
+
 				if (activeWeek) {
+					setIsWeekDeadlineElasped(
+						!isBefore(new Date(), new Date(String(activeWeek?.deadline)))
+					);
 					setSelectedWeek({
 						id: String(activeWeek?.id),
 						number: String(activeWeek?.number),
 					});
 				}
 			} else {
-				setSearchParams({ week: String(allWeeks?.[0]?.id) });
+				setSearchParams({
+					season: query_season
+						? String(query_season)
+						: String(seasons?.[0]?.name),
+					week: String(allWeeks?.[0]?.number),
+				});
 			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [allWeeks, query_week]);
 
 	useMemo(() => {
-		if (seasons?.[0]?.id && selectedWeek?.id) {
+		if (query_season) {
+			const activeSeason = seasons.find(
+				(_season) => _season.name === query_season
+			);
+			if (activeSeason?.id && selectedWeek?.id) {
+				dispatch(
+					getAllMatchesAPI({
+						seasonId: activeSeason?.id,
+						weekId: selectedWeek?.id,
+					})
+				);
+			}
+			if (selectedWeek?.id) {
+				dispatch(
+					getSpecificWeekPredictionAPI({
+						weekId: selectedWeek?.id,
+					})
+				);
+			}
+		} else if (seasons?.[0]?.id && selectedWeek?.id) {
 			dispatch(
 				getAllMatchesAPI({
 					seasonId: seasons?.[0]?.id,
 					weekId: selectedWeek?.id,
 				})
 			);
+			dispatch(
+				getSpecificWeekPredictionAPI({
+					weekId: selectedWeek?.id,
+				})
+			);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedWeek]);
+
+	// Make latest season the active season
+	useEffect(() => {
+		if (query_season) {
+			const activeSeason = seasons.find(
+				(_season) => _season.name === query_season
+			);
+
+			if (activeSeason?.id) {
+				dispatch(getAllWeeksAPI({ seasonId: activeSeason?.id }));
+			}
+		} else {
+			if (seasons?.[0]?.id) {
+				dispatch(getAllWeeksAPI({ seasonId: seasons?.[0]?.id }));
+			}
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [seasons, query_season]);
 
 	// Update Selection
 	const updateSelection = (matchId: number, prediction: any) => {
@@ -146,15 +204,59 @@ const AllFixtures = () => {
 		setMatches(old_matches_array);
 	};
 
-	const onPredict = (data: FieldValues) => {
-		console.log(data);
+	const onPredict = ({
+		mostLikelyToScore,
+		moreLikelyToScore,
+		likelyToScore,
+		timeOfFirstGoal,
+		..._predictions
+	}: FieldValues) => {
+		const predictions = formatPredictionsFromObjectToArray(_predictions);
+
+		dispatch(
+			submitPredictionAPI({
+				weekId: Number(selectedWeek?.id),
+				mostLikelyToScore: { playerId: mostLikelyToScore.id },
+				moreLikelyToScore: { playerId: moreLikelyToScore.id },
+				likelyToScore: { playerId: likelyToScore.id },
+				timeOfFirstGoal: Number(timeOfFirstGoal),
+				predictions,
+			})
+		);
 	};
 
 	return (
 		<DashboardLayout>
 			<section className="predictbeta-header bg-white w-full px-8 py-3 flex items-center justify-between">
-				{/* week select */}
-				<div>
+				{/* season select */}
+				<div className="flex items-center gap-4">
+					{isFetchingSeasons || !seasons ? (
+						<InputPlaceholder>
+							<AiOutlineLoading
+								className="animate-spin"
+								color="#5D65F6"
+								size={16}
+							/>
+						</InputPlaceholder>
+					) : (
+						<CustomListBox
+							options={seasons?.map((season) => ({
+								name: season.name,
+								value: String(season.name),
+							}))}
+							onChange={(value: string): void => {
+								setSearchParams({
+									season: String(value),
+									week: "",
+								});
+							}}
+							defaultOption={String(query_season)}
+							title={"Season"}
+							icon={<VscFilter />}
+						/>
+					)}
+
+					{/* week select */}
 					{isFetchingWeeks || !allWeeks ? (
 						<InputPlaceholder>
 							<AiOutlineLoading
@@ -167,12 +269,15 @@ const AllFixtures = () => {
 						<CustomListBox
 							options={allWeeks?.map((week) => ({
 								name: `Week ${week.number}`,
-								value: String(week.id),
+								value: String(week.number),
 							}))}
 							onChange={(value: string): void => {
-								setSearchParams({ week: String(value) });
+								setSearchParams({
+									season: String(query_season),
+									week: String(value),
+								});
 							}}
-							defaultOption={selectedWeek?.id}
+							defaultOption={selectedWeek?.number}
 							title={"Week"}
 							icon={<VscFilter />}
 						/>
@@ -181,243 +286,528 @@ const AllFixtures = () => {
 			</section>
 
 			{/* Matches */}
-			{isFetchingMatches || isFetchingWeeks || isFetchingSeasons ? (
+			{isFetchingMatches ||
+			isFetchingWeeks ||
+			isFetchingSeasons ||
+			isFetchingSpecificWeekPredictions ? (
 				<PageLoading />
 			) : (
-				<form onSubmit={handleSubmit(onPredict)} className="py-10 px-8">
-					{matches?.length > 0 ? (
-						<section className="flex ">
-							<div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
-								<div className="grid md:grid-cols-2 gap-6">
-									{matches?.map((match, idx) => (
-										<div key={idx}>
-											<MatchCard
-												key={match.id}
-												home={match.homeTeam}
-												away={match.awayTeam}
-												id={match.id}
-												matchTime={match.fixtureDateTime}
-												prediction={match.prediction}
-												onChange={updateSelection}
-												invalid={!!errors?.[match?.id]}
-											/>
-											{errors?.[match?.id] && (
-												<div className="-mt-0.5">
-													<ErrorMessage
-														message={errors?.[match?.id]?.message?.toString()}
-													/>
-												</div>
-											)}
-										</div>
-									))}
-								</div>
-								<hr className="my-8" />
-								<h3 className="text-[#000] font-medium text-lg text-center">
-									Decider
-								</h3>
-								<p className="md:text-center text-[#5F6B7A] text-sm mt-3">
-									Select three likely different scorers and minute of first goal
-									to decide your tie
-								</p>
-								<div className="grid md:grid-cols-2 gap-6 py-6">
-									{/* Most likely to score? */}
-									<div>
-										<label htmlFor="most_likely" className="mb-2 block">
-											<p className="text-[#222222] text-sm">
-												Most likely to score?
-											</p>
-										</label>
-										<Controller
-											control={control}
-											name="most_likely"
-											rules={{
-												required: "Make a selection",
-											}}
-											render={({ field: { onChange, value, ref } }) => (
-												<Select
-													ref={ref}
-													onChange={onChange}
-													options={allPlayers}
-													value={value}
-													isLoading={isFetchingAllPlayers}
-													components={{
-														IndicatorSeparator,
-													}}
-													getOptionValue={(option) => option["id"]}
-													getOptionLabel={(option) => option["name"]}
-													maxMenuHeight={300}
-													placeholder="- Select -"
-													classNamePrefix="react-select"
-													isClearable
-													styles={
-														errors?.most_likely ? invalidStyle : defaultStyle
+				<>
+					{Array.isArray(specificWeekPredictions?.predictions?.fixtures) &&
+					specificWeekPredictions?.predictions?.fixtures?.length > 0 ? (
+						<>
+							<section className="flex py-10 px-8 ">
+								<div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
+									<div className="grid md:grid-cols-2 gap-6">
+										{matches?.map((match, idx) => (
+											<div key={idx}>
+												<MatchCard
+													key={match.id}
+													home={match.homeTeam}
+													away={match.awayTeam}
+													id={match.id}
+													matchTime={match.fixtureDateTime}
+													prediction={
+														specificWeekPredictions?.predictions?.fixtures?.find(
+															(_match) => _match.fixture.id === match.id
+														)?.result
 													}
-												/>
-											)}
-										/>
-										{errors?.most_likely && (
-											<ErrorMessage
-												message={
-													errors?.most_likely &&
-													errors?.most_likely.message?.toString()
-												}
-											/>
-										)}
-									</div>
-
-									{/* More likely to score? */}
-									<div>
-										<label htmlFor="more_likely" className="mb-2 block">
-											<p className="text-[#222222] text-sm">
-												More likely to score?
-											</p>
-										</label>
-										<Controller
-											control={control}
-											name="more_likely"
-											rules={{
-												required: "Make a selection",
-											}}
-											render={({ field: { onChange, value, ref } }) => (
-												<Select
-													ref={ref}
-													onChange={onChange}
-													options={allPlayers}
-													value={value}
-													isLoading={isFetchingAllPlayers}
-													components={{
-														IndicatorSeparator,
-													}}
-													getOptionValue={(option) => option["id"]}
-													getOptionLabel={(option) => option["name"]}
-													maxMenuHeight={300}
-													placeholder="- Select -"
-													classNamePrefix="react-select"
-													isClearable
-													styles={
-														errors?.more_likely ? invalidStyle : defaultStyle
+													result={
+														specificWeekPredictions?.results?.fixtures?.find(
+															(_match) => _match.fixture.id === match.id
+														)?.result
 													}
+													inactive
+													onChange={updateSelection}
+													invalid={!!errors?.[match?.id]}
 												/>
-											)}
-										/>
-										{errors?.more_likely && (
-											<ErrorMessage
-												message={
-													errors?.more_likely &&
-													errors?.more_likely.message?.toString()
-												}
-											/>
-										)}
-									</div>
-
-									{/* Likely to score? */}
-									<div>
-										<label htmlFor="likely" className="mb-2 block">
-											<p className="text-[#222222] text-sm">Likely to score?</p>
-										</label>
-										<Controller
-											control={control}
-											name="likely"
-											rules={{
-												required: "Make a selection",
-											}}
-											render={({ field: { onChange, value, ref } }) => (
-												<Select
-													ref={ref}
-													onChange={onChange}
-													options={allPlayers}
-													value={value}
-													isLoading={isFetchingAllPlayers}
-													components={{
-														IndicatorSeparator,
-													}}
-													getOptionValue={(option) => option["id"]}
-													getOptionLabel={(option) => option["name"]}
-													maxMenuHeight={300}
-													placeholder="- Select -"
-													classNamePrefix="react-select"
-													isClearable
-													menuPlacement="auto"
-													styles={errors?.likely ? invalidStyle : defaultStyle}
-												/>
-											)}
-										/>
-										{errors?.likely && (
-											<ErrorMessage
-												message={
-													errors?.likely && errors?.likely.message?.toString()
-												}
-											/>
-										)}
-									</div>
-
-									{/* Goal time */}
-									<div className="">
-										<label htmlFor="goal_time" className="mb-2 block">
-											<p className="text-[#222222] text-sm">
-												Minute the first goal in the round be scored
-											</p>
-										</label>
-										<Input
-											id="goal_time"
-											type="number"
-											placeholder="1"
-											max={120}
-											{...register("goal_time", {
-												required: "Enter a valid number",
-												min: {
-													value: 1,
-													message: "Please enter a valid number",
-												},
-											})}
-											className={`w-full input ${
-												errors?.goal_time ? "invalid" : ""
-											}`}
-										/>
-										{errors?.goal_time && (
-											<ErrorMessage
-												message={errors.goal_time.message?.toString()}
-											/>
-										)}
-									</div>
-								</div>
-							</div>
-							<div className="md:w-1/3 md:pl-8">
-								<div className="bg-white pb-7 rounded-md border">
-									<div className="bg-[#EB1536] px-2 py-3 flex items-center justify-center rounded-md rounded-b-none space-x-2.5 mb-6">
-										<SelectionIcon />
-										<p className="text-white">Selections</p>
-									</div>
-									<div
-										className="px-4 space-y-4 overflow-y-auto"
-										style={{ maxHeight: "450px" }}
-									>
-										{matches?.map((match) => (
-											<SelectionCard key={match.id} match={match} />
+											</div>
 										))}
 									</div>
-									<div className="mt-6 px-4">
-										<hr className="mt-8" />
+									<hr className="my-8" />
+									<h3 className="text-[#000] font-medium text-lg text-center">
+										Decider
+									</h3>
+									<p className="md:text-center text-[#5F6B7A] text-sm mt-3">
+										Select three likelyToScore different scorers and minute of
+										first goal to decide your tie
+									</p>
+									<div className="grid md:grid-cols-2 gap-6 py-6">
+										{/* Most likely To Score to score? */}
+										<div>
+											<label htmlFor="mostLikelyToScore" className="mb-2 block">
+												<p className="text-[#222222] text-sm">
+													Most likelyToScore to score?
+												</p>
+											</label>
+											<Controller
+												control={control}
+												name="mostLikelyToScore"
+												rules={{
+													required: "Make a selection",
+												}}
+												disabled
+												defaultValue={allPlayers.find(
+													(player) =>
+														player.id ===
+														specificWeekPredictions?.predictions
+															?.mostLikelyToScore?.id
+												)}
+												render={({ field: { onChange, value, ref } }) => (
+													<Select
+														ref={ref}
+														onChange={onChange}
+														options={allPlayers}
+														value={value}
+														isLoading={isFetchingAllPlayers}
+														components={{
+															IndicatorSeparator,
+														}}
+														getOptionValue={(option) => option["id"]}
+														getOptionLabel={(option) => option["name"]}
+														maxMenuHeight={300}
+														placeholder="- Select -"
+														classNamePrefix="react-select"
+														isClearable
+														isDisabled
+														styles={
+															errors?.mostLikelyToScore
+																? invalidStyle
+																: defaultStyle
+														}
+													/>
+												)}
+											/>
+										</div>
 
-										<Button
-											className="w-full"
-											type="submit"
-											// loading={predicting}
-											title="Submit your prediction"
-										/>
+										{/* More likely To Score to score? */}
+										<div>
+											<label htmlFor="moreLikelyToScore" className="mb-2 block">
+												<p className="text-[#222222] text-sm">
+													More likelyToScore to score?
+												</p>
+											</label>
+											<Controller
+												control={control}
+												name="moreLikelyToScore"
+												rules={{
+													required: "Make a selection",
+												}}
+												disabled
+												defaultValue={allPlayers.find(
+													(player) =>
+														player.id ===
+														specificWeekPredictions?.predictions
+															?.moreLikelyToScore?.id
+												)}
+												render={({ field: { onChange, value, ref } }) => (
+													<Select
+														ref={ref}
+														onChange={onChange}
+														options={allPlayers}
+														value={value}
+														isLoading={isFetchingAllPlayers}
+														components={{
+															IndicatorSeparator,
+														}}
+														getOptionValue={(option) => option["id"]}
+														getOptionLabel={(option) => option["name"]}
+														maxMenuHeight={300}
+														placeholder="- Select -"
+														classNamePrefix="react-select"
+														isClearable
+														isDisabled
+														styles={
+															errors?.moreLikelyToScore
+																? invalidStyle
+																: defaultStyle
+														}
+													/>
+												)}
+											/>
+										</div>
+
+										{/* Likely to score? */}
+										<div>
+											<label htmlFor="likelyToScore" className="mb-2 block">
+												<p className="text-[#222222] text-sm">
+													Likely to score?
+												</p>
+											</label>
+											<Controller
+												control={control}
+												name="likelyToScore"
+												rules={{
+													required: "Make a selection",
+												}}
+												disabled
+												defaultValue={allPlayers.find(
+													(player) =>
+														player.id ===
+														specificWeekPredictions?.predictions?.likelyToScore
+															?.id
+												)}
+												render={({ field: { onChange, value, ref } }) => (
+													<Select
+														ref={ref}
+														onChange={onChange}
+														options={allPlayers}
+														value={value}
+														isLoading={isFetchingAllPlayers}
+														components={{
+															IndicatorSeparator,
+														}}
+														getOptionValue={(option) => option["id"]}
+														getOptionLabel={(option) => option["name"]}
+														maxMenuHeight={300}
+														placeholder="- Select -"
+														classNamePrefix="react-select"
+														isClearable
+														menuPlacement="auto"
+														isDisabled
+														styles={
+															errors?.likelyToScore
+																? invalidStyle
+																: defaultStyle
+														}
+													/>
+												)}
+											/>
+										</div>
+
+										{/* Goal time */}
+										<div className="">
+											<label htmlFor="timeOfFirstGoal" className="mb-2 block">
+												<p className="text-[#222222] text-sm">
+													Minute the first goal in the round be scored
+												</p>
+											</label>
+											<Input
+												id="timeOfFirstGoal"
+												type="text"
+												placeholder="1"
+												disabled
+												defaultValue={
+													specificWeekPredictions?.predictions?.timeOfFirstGoal
+												}
+												className={`w-full input`}
+											/>
+										</div>
 									</div>
 								</div>
-							</div>
-						</section>
+								<div className="md:w-1/3 md:pl-8">
+									<div className="bg-white pb-7 rounded-md border">
+										<div className="bg-[#EB1536] px-2 py-3 flex items-center justify-center rounded-md rounded-b-none space-x-2.5 mb-6">
+											<SelectionIcon />
+											<p className="text-white">Selections</p>
+										</div>
+										<div
+											className="px-4 space-y-4 overflow-y-auto"
+											style={{ maxHeight: "450px" }}
+										>
+											{matches?.map((match) => (
+												<SelectionCard
+													key={match.id}
+													match={{
+														...match,
+														prediction:
+															specificWeekPredictions?.predictions?.fixtures?.find(
+																(_match) => _match.fixture.id === match.id
+															)?.result,
+														outcome:
+															specificWeekPredictions?.predictions?.fixtures?.find(
+																(_match) => _match.fixture.id === match.id
+															)?.result ===
+															specificWeekPredictions?.results?.fixtures?.find(
+																(_match) => _match.fixture.id === match.id
+															)?.result
+																? "win"
+																: "lose",
+													}}
+												/>
+											))}
+										</div>
+										<div className="mt-6 px-4">
+											<hr className="mt-8" />
+
+											<Button
+												className="w-full"
+												type="submit"
+												disabled
+												title="You have already predicted"
+											/>
+										</div>
+									</div>
+								</div>
+							</section>
+						</>
 					) : (
-						<div className="flex items-center justify-center py-20 lg:py-32 flex-col">
-							<h3 className="font-bold text-3xl mb-2">
-								There no matches for this week
-							</h3>
-							<p className="">Create a match to begin</p>
-						</div>
+						<form onSubmit={handleSubmit(onPredict)} className="py-10 px-8">
+							{matches?.length > 0 ? (
+								<section className="flex ">
+									<div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
+										<div className="grid md:grid-cols-2 gap-6">
+											{matches?.map((match, idx) => (
+												<div key={idx}>
+													<MatchCard
+														key={match.id}
+														home={match.homeTeam}
+														away={match.awayTeam}
+														id={match.id}
+														matchTime={match.fixtureDateTime}
+														prediction={match.prediction}
+														onChange={updateSelection}
+														invalid={!!errors?.[match?.id]}
+													/>
+													{errors?.[match?.id] && (
+														<div className="-mt-0.5">
+															<ErrorMessage
+																message={errors?.[
+																	match?.id
+																]?.message?.toString()}
+															/>
+														</div>
+													)}
+												</div>
+											))}
+										</div>
+										<hr className="my-8" />
+										<h3 className="text-[#000] font-medium text-lg text-center">
+											Decider
+										</h3>
+										<p className="md:text-center text-[#5F6B7A] text-sm mt-3">
+											Select three likelyToScore different scorers and minute of
+											first goal to decide your tie
+										</p>
+										<div className="grid md:grid-cols-2 gap-6 py-6">
+											{/* Most likely To Score to score? */}
+											<div>
+												<label
+													htmlFor="mostLikelyToScore"
+													className="mb-2 block"
+												>
+													<p className="text-[#222222] text-sm">
+														Most likelyToScore to score?
+													</p>
+												</label>
+												<Controller
+													control={control}
+													name="mostLikelyToScore"
+													rules={{
+														required: "Make a selection",
+													}}
+													render={({ field: { onChange, value, ref } }) => (
+														<Select
+															ref={ref}
+															onChange={onChange}
+															options={allPlayers}
+															value={value}
+															isLoading={isFetchingAllPlayers}
+															components={{
+																IndicatorSeparator,
+															}}
+															getOptionValue={(option) => option["id"]}
+															getOptionLabel={(option) => option["name"]}
+															maxMenuHeight={300}
+															placeholder="- Select -"
+															classNamePrefix="react-select"
+															isClearable
+															styles={
+																errors?.mostLikelyToScore
+																	? invalidStyle
+																	: defaultStyle
+															}
+														/>
+													)}
+												/>
+												{errors?.mostLikelyToScore && (
+													<ErrorMessage
+														message={
+															errors?.mostLikelyToScore &&
+															errors?.mostLikelyToScore.message?.toString()
+														}
+													/>
+												)}
+											</div>
+
+											{/* More likely To Score to score? */}
+											<div>
+												<label
+													htmlFor="moreLikelyToScore"
+													className="mb-2 block"
+												>
+													<p className="text-[#222222] text-sm">
+														More likelyToScore to score?
+													</p>
+												</label>
+												<Controller
+													control={control}
+													name="moreLikelyToScore"
+													rules={{
+														required: "Make a selection",
+													}}
+													render={({ field: { onChange, value, ref } }) => (
+														<Select
+															ref={ref}
+															onChange={onChange}
+															options={allPlayers}
+															value={value}
+															isLoading={isFetchingAllPlayers}
+															components={{
+																IndicatorSeparator,
+															}}
+															getOptionValue={(option) => option["id"]}
+															getOptionLabel={(option) => option["name"]}
+															maxMenuHeight={300}
+															placeholder="- Select -"
+															classNamePrefix="react-select"
+															isClearable
+															styles={
+																errors?.moreLikelyToScore
+																	? invalidStyle
+																	: defaultStyle
+															}
+														/>
+													)}
+												/>
+												{errors?.moreLikelyToScore && (
+													<ErrorMessage
+														message={
+															errors?.moreLikelyToScore &&
+															errors?.moreLikelyToScore.message?.toString()
+														}
+													/>
+												)}
+											</div>
+
+											{/* Likely to score? */}
+											<div>
+												<label htmlFor="likelyToScore" className="mb-2 block">
+													<p className="text-[#222222] text-sm">
+														Likely to score?
+													</p>
+												</label>
+												<Controller
+													control={control}
+													name="likelyToScore"
+													rules={{
+														required: "Make a selection",
+													}}
+													render={({ field: { onChange, value, ref } }) => (
+														<Select
+															ref={ref}
+															onChange={onChange}
+															options={allPlayers}
+															value={value}
+															isLoading={isFetchingAllPlayers}
+															components={{
+																IndicatorSeparator,
+															}}
+															getOptionValue={(option) => option["id"]}
+															getOptionLabel={(option) => option["name"]}
+															maxMenuHeight={300}
+															placeholder="- Select -"
+															classNamePrefix="react-select"
+															isClearable
+															menuPlacement="auto"
+															styles={
+																errors?.likelyToScore
+																	? invalidStyle
+																	: defaultStyle
+															}
+														/>
+													)}
+												/>
+												{errors?.likelyToScore && (
+													<ErrorMessage
+														message={
+															errors?.likelyToScore &&
+															errors?.likelyToScore.message?.toString()
+														}
+													/>
+												)}
+											</div>
+
+											{/* Goal time */}
+											<div className="">
+												<label htmlFor="timeOfFirstGoal" className="mb-2 block">
+													<p className="text-[#222222] text-sm">
+														Minute the first goal in the round be scored
+													</p>
+												</label>
+												<Input
+													id="timeOfFirstGoal"
+													type="number"
+													placeholder="1"
+													max={120}
+													{...register("timeOfFirstGoal", {
+														required: "Enter a valid number",
+														min: {
+															value: 1,
+															message: "Please enter a valid number",
+														},
+													})}
+													className={`w-full input ${
+														errors?.timeOfFirstGoal ? "invalid" : ""
+													}`}
+												/>
+												{errors?.timeOfFirstGoal && (
+													<ErrorMessage
+														message={errors.timeOfFirstGoal.message?.toString()}
+													/>
+												)}
+											</div>
+										</div>
+									</div>
+									<div className="md:w-1/3 md:pl-8">
+										<div className="bg-white pb-7 rounded-md border">
+											<div className="bg-[#EB1536] px-2 py-3 flex items-center justify-center rounded-md rounded-b-none space-x-2.5 mb-6">
+												<SelectionIcon />
+												<p className="text-white">Selections</p>
+											</div>
+											<div
+												className="px-4 space-y-4 overflow-y-auto"
+												style={{ maxHeight: "450px" }}
+											>
+												{matches?.map((match) => (
+													<SelectionCard key={match.id} match={match} />
+												))}
+											</div>
+											<div className="mt-6 px-4">
+												<hr className="mt-8" />
+
+												{isWeekDeadlineElasped ? (
+													<Button
+														className="w-full"
+														// type="submit"
+														disabled
+														title="The deadline has passed"
+													/>
+												) : (
+													<Button
+														className="w-full"
+														type="submit"
+														loading={isSubmittingPrediction}
+														title="Submit your prediction"
+													/>
+												)}
+											</div>
+										</div>
+									</div>
+								</section>
+							) : (
+								<div className="flex items-center justify-center py-20 lg:py-32 flex-col">
+									<h3 className="font-bold text-3xl mb-2">
+										There no matches for this week
+									</h3>
+									<p className="">
+										Matches will show here once they are published.
+									</p>
+								</div>
+							)}
+						</form>
 					)}
-				</form>
+				</>
 			)}
 		</DashboardLayout>
 	);

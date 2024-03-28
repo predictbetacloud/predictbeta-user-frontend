@@ -29,7 +29,6 @@ const Login = () => {
 
 	// Form Submission Handler
 	const submit = ({ email, password }: FieldValues) => {
-		console.log(email, password);
 		dispatch(loginAPI({ email, password }));
 	};
 

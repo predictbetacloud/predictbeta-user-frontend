@@ -38,22 +38,10 @@ export const signUpAPI = createAsyncThunk(
 				mobileNumber,
 				firstName,
 				middleName,
+				username: middleName,
 				surname,
 			})
 			.then((data) => {
-				// dispatch(
-				// 	updateAuth({
-				// 		user: {
-				// 			email: data.data.user.email,
-				// 			fullName: data.data.user.fullName,
-				// 			id: data.data.user.id,
-				// 			verifiedOn: data.data.user.verifiedOn,
-				// 		},
-				// 		token: data.data.tokens.access_token,
-				// 		refresh_token: data.data.tokens.refresh_token,
-				// 	})
-				// );
-
 				toastSuccess(
 					data?.data?.message ?? "Your account has been created successfully"
 				);
@@ -62,6 +50,46 @@ export const signUpAPI = createAsyncThunk(
 				if (globalRouter.navigate) {
 					globalRouter.navigate("/login");
 				}
+			})
+			.catch((error) => {
+				dispatch(setIsPerformingAuthAction(false));
+				toastError(error?.response?.data?.message);
+			});
+	}
+);
+
+export const updateProfileAPI = createAsyncThunk(
+	"auth/updateProfile",
+	(
+		{
+			email,
+			password,
+			mobileNumber,
+			firstName,
+			middleName,
+			username,
+			surname,
+			userId,
+		}: FieldValues,
+		{ dispatch }
+	) => {
+		dispatch(setIsPerformingAuthAction(true));
+		axiosInstance
+			.put(`/users/${userId}`, {
+				email,
+				password,
+				mobileNumber,
+				firstName,
+				middleName,
+				username,
+				surname,
+			})
+			.then((data) => {
+				toastSuccess(
+					data?.data?.message ?? "Your account has been updated successfully"
+				);
+				dispatch(setIsPerformingAuthAction(false));
+				// window.location.reload();
 			})
 			.catch((error) => {
 				dispatch(setIsPerformingAuthAction(false));
