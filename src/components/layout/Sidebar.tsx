@@ -13,7 +13,6 @@ import {
 	LeaderboardIcon,
 	PrivateLeagueIcon,
 	SettingsIcon,
-	WithdrawIcon,
 } from "../../assets/icons";
 import { logOutAPI } from "../../api/authAPI";
 

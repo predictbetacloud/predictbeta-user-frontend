@@ -1,12 +1,8 @@
-import React from "react";
 import styled from "styled-components";
-import t from "prop-types";
 
 import { P } from "../Texts";
 import { IMatch } from "../../types/types";
 import { GreenTick, RedClose } from "../../assets/icons";
-// import { ReactComponent as GreenTick } from "../../../assets/icons/tick-green.svg";
-// import { ReactComponent as RedClose } from "../../../assets/icons/close-circle.svg";
 
 const Style = styled.div`
 	border: 0.5px solid #e1e7ec;
