@@ -10,7 +10,7 @@ const ButtonStyle = styled.button`
 
 const PrimaryStyle = styled(ButtonStyle)`
 	background-color: #eb1536;
-	border-radius: 8px;
+	border-radius: 6px;
 
 	&:hover {
 		background-color: #eb1536ee;
@@ -101,6 +101,64 @@ Button.Outline = ({
 			}
 		>
 			<span className="text-[#6D7786] font-medium">
+				{title ?? "Title"} {content ?? null}{" "}
+			</span>
+			{loading && <RiLoader5Fill size={24} className="animate-spin ml-4" />}
+		</ButtonStyle>
+	);
+};
+
+Button.OutlineWhite = ({
+	title,
+	type = "button",
+	style,
+	className,
+	disabled,
+	loading,
+	content,
+	onClick = () => {},
+}: ButtonType) => {
+	return (
+		<ButtonStyle
+			type={type}
+			style={style}
+			onClick={() => onClick()}
+			disabled={disabled}
+			className={
+				"py-2 px-4 bg-[white] border border-[#051B30] space-x-4 hover:bg-[##F5F8FAaa] text-center rounded disabled:opacity-50 disabled:cursor-not-allowed " +
+				className
+			}
+		>
+			<span className="text-[#051B30] font-medium">
+				{title ?? "Title"} {content ?? null}{" "}
+			</span>
+			{loading && <RiLoader5Fill size={24} className="animate-spin ml-4" />}
+		</ButtonStyle>
+	);
+};
+
+Button.OutlineRed = ({
+	title,
+	type = "button",
+	style,
+	className,
+	disabled,
+	loading,
+	content,
+	onClick = () => {},
+}: ButtonType) => {
+	return (
+		<ButtonStyle
+			type={type}
+			style={style}
+			onClick={() => onClick()}
+			disabled={disabled}
+			className={
+				"py-2 px-4 bg-[white] border border-[#eb1536] space-x-4 hover:bg-[##F5F8FAaa] text-center rounded disabled:opacity-50 disabled:cursor-not-allowed " +
+				className
+			}
+		>
+			<span className="text-[#eb1536] font-medium">
 				{title ?? "Title"} {content ?? null}{" "}
 			</span>
 			{loading && <RiLoader5Fill size={24} className="animate-spin ml-4" />}

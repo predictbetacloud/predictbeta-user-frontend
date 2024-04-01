@@ -1,5 +1,231 @@
+import { Link, useNavigate } from "react-router-dom";
+import { isBefore } from "date-fns";
+import { useEffect, useMemo, useState } from "react";
+
+import { useAppDispatch, useAppSelector } from "../../state/hooks";
+import {
+	selectAllSeasons,
+	selectAllWeeks,
+	selectIsFetchingAllSeasons,
+	selectIsFetchingAllWeeks,
+	selectIsFetchingMatches,
+	selectMatches,
+} from "../../state/slices/fixtures";
+
+import heroImg from "../../assets/images/hero img.png";
+
+import PublicHeader from "../../components/layout/PublicHeader";
+import Button from "../../components/Buttons";
+import WinnersCarousel from "../../components/WinnersCarousel";
+
+import winners from "../../utils/winners";
+import { colors } from "../../utils/colors";
+import {
+	getAllMatchesAPI,
+	getAllSeasonsAPI,
+	getAllWeeksAPI,
+} from "../../api/fixturesAPI";
+import PageLoading from "../../components/loaders/PageLoading";
+import { MatchCard } from "../../components/fixtures/MatchCard";
+import PublicFooter from "../../components/layout/PublicFooter";
+
 const LandingPage = () => {
-	return <div>LandingPage</div>;
+	const dispatch = useAppDispatch();
+	let navigate = useNavigate();
+
+	const isFetchingSeasons = useAppSelector(selectIsFetchingAllSeasons);
+	const isFetchingWeeks = useAppSelector(selectIsFetchingAllWeeks);
+	const isFetchingMatches = useAppSelector(selectIsFetchingMatches);
+
+	const allWeeks = useAppSelector(selectAllWeeks);
+	const allMatches = useAppSelector(selectMatches);
+	const seasons = useAppSelector(selectAllSeasons);
+
+	const [isWeekDeadlineElasped, setIsWeekDeadlineElasped] = useState(true);
+	// Get all Season
+	useMemo(() => {
+		dispatch(getAllSeasonsAPI({}));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	// Make latest week the active week
+	useMemo(() => {
+		if (allWeeks?.[0]?.id) {
+			// if week is in query use that week
+			setIsWeekDeadlineElasped(
+				!isBefore(new Date(), new Date(String(allWeeks?.[0]?.deadline)))
+			);
+			if (seasons?.[0]?.id && allWeeks?.[0]?.id) {
+				dispatch(
+					getAllMatchesAPI({
+						seasonId: seasons?.[0]?.id,
+						weekId: allWeeks?.[0]?.id,
+					})
+				);
+			}
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [allWeeks]);
+
+	// Make latest season the active season
+	useEffect(() => {
+		if (seasons?.[0]?.id) {
+			dispatch(getAllWeeksAPI({ seasonId: seasons?.[0]?.id }));
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [seasons]);
+
+	return (
+		<main className="bg-white">
+			<PublicHeader />
+			{/* Hero Image */}
+			<section className="px-6 md:px-40 max-h-screen w-full lg:flex justify-between">
+				<div className="lg:w-1/2 flex-shrink-0 lg:pt-24">
+					<h1 className="text-[56px] font-semibold leading-[68px]">
+						<span className="text-[#eb1536]">Predict</span>! <br />
+						Take Everyone’s Money<span className="text-[#eb1536]">.</span>
+					</h1>
+					<p className="mt-4 mb-8 text-[#5F6B7A]">
+						Luck or skill? Let’s see who’s better.
+					</p>
+					<div className="flex items-center gap-x-5">
+						<Link to="/dashboard/fixtures">
+							<Button title="Start predicting" />
+						</Link>
+						<Link to="/dashboard/private-league">
+							<Button.OutlineRed title="Create a league" />
+						</Link>
+					</div>
+				</div>
+				<img
+					src={heroImg}
+					alt="We play ball"
+					className="hidden lg:block max-h-[90vh] -translate-x-20 -translate-y-10 transform z-0"
+				/>
+			</section>
+
+			{/* Carousel section */}
+			<div className="px-6 md:px-40 md:-mt-96 mb-24 font-medium">
+				<h3 className="mb-5 lg:mt-32 text-[#2A2E33]">Recent winners</h3>
+				<WinnersCarousel winners={winners} />
+			</div>
+
+			{/* Weekly Predictions Teaser */}
+			<section
+				className="px-6 md:px-40 pt-20 lg:py-32 mb-10 lg:mb-0"
+				style={{
+					background: colors.peach,
+				}}
+			>
+				<h2
+					className="text-center mb-10 lg:w-2/5 lg:mx-auto text-4xl font-semibold"
+					color={colors.grey700}
+				>
+					Are you up to the task this week?
+				</h2>
+				<div className="p-8 bg-white rounded-xl -mx-6 lg:mx-0">
+					<p
+						color={colors.grey700}
+						className="pb-2 inline-block mb-6 text-[#2A2E33]"
+						style={{
+							borderBottom: `3px solid ${colors.accent}`,
+						}}
+					>
+						This Week’s Fixtures
+					</p>
+					{isFetchingMatches || isFetchingWeeks || isFetchingSeasons ? (
+						<PageLoading />
+					) : (
+						<>
+							{allMatches?.length > 0 ? (
+								<div className="grid md:grid-cols-2 gap-6">
+									{allMatches?.map((match, idx) => (
+										<div key={idx}>
+											<MatchCard
+												key={match.id}
+												home={match.homeTeam}
+												away={match.awayTeam}
+												id={match.id}
+												matchTime={match.fixtureDateTime}
+												prediction={match.prediction}
+												onChange={() => {
+													navigate("/dashboard/fixtures");
+												}}
+											/>
+										</div>
+									))}
+								</div>
+							) : (
+								<div className="flex items-center justify-center py-20 lg:py-32 flex-col">
+									<h3 className="font-bold text-3xl mb-2">
+										There no matches for this week
+									</h3>
+									<p className="">
+										Matches will show here once they are published.
+									</p>
+								</div>
+							)}
+						</>
+					)}
+					{/* {isFetchingCurrentDraw ? (
+						<BallLoader className="mx-auto" />
+					) : (
+						<>
+							{currentDraws?.[0]?.matches?.length > 0 ? (
+								<>
+									<div className="grid lg:grid-cols-2 gap-8">
+										{currentDraws?.[0]?.matches?.map((match, idx) =>
+											idx % 2 ? null : (
+												<div key={idx}>
+													<MatchCard
+														key={match.id}
+														home={match.home}
+														away={match.away}
+														id={match.id}
+														prediction={match.prediction}
+														onChange={() => {
+															history.push("?modal=login");
+														}}
+													/>
+												</div>
+											)
+										)}
+									</div>
+									<div
+										className="mt-8 mx-auto"
+										style={{
+											width: "fit-content",
+										}}
+									>
+										<Link to="?modal=login">
+											<P
+												color={colors.accent}
+												className="flex items-center justify-center"
+											>
+												See more games{" "}
+												<div className="h-5 w-5 rounded-full flex items-center justify-center bg-accent ml-4">
+													<Icon.ChevronRight color={colors.white} />
+												</div>
+											</P>
+										</Link>
+									</div>
+								</>
+							) : (
+								<H3 className="mb-5" color={colors.grey700}>
+									There are no games for this week. Check back soon!
+								</H3>
+							)}
+						</>
+					)} */}
+				</div>
+			</section>
+
+			{/* FOOTER */}
+			<PublicFooter />
+		</main>
+	);
 };
 
 export default LandingPage;

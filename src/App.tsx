@@ -13,7 +13,7 @@ import { globalRouter } from "./utils/utils";
 import Login from "./pages/auth/Login";
 import AllFixtures from "./pages/dashboard/fixtures/AllFixtures";
 import NotFound from "./pages/404";
-// import LandingPage from "./pages/public/LandingPage";
+import LandingPage from "./pages/public/LandingPage";
 import Register from "./pages/auth/Register";
 import Wallet from "./pages/dashboard/wallet/Wallet";
 import DepositFundModal from "./components/modals/DepositFundModal";
@@ -57,7 +57,7 @@ function App() {
 		// <ErrorBoundary FallbackComponent={ErrorFallback}>
 		<>
 			<Routes>
-				<Route path="/" element={<Login />} />
+				<Route path="/" element={<LandingPage />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/dashboard/account/password" element={<EditPassword />} />
