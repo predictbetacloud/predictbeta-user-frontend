@@ -24,12 +24,12 @@ const PublicHeader = () => {
 							{route.title}
 						</Link>
 					))}
-					<a
+					{/* <a
 						href="https://gobet247.com"
 						className="text-[#153243] hover:text-[#eb1536]"
 					>
 						Gobet247
-					</a>
+					</a> */}
 				</nav>
 			</div>
 			<div className="flex items-center gap-x-5">

@@ -24,6 +24,9 @@ import PredictionHistory from "./pages/dashboard/predictionHistory/PredictionHis
 import WeekLeaderboard from "./pages/dashboard/leaderboard/WeekLeaderboard";
 import Terms from "./pages/public/Terms";
 import AboutPage from "./pages/public/AboutPage";
+import ContactPage from "./pages/public/ContactPage";
+import HowToPlayPage from "./pages/public/HowToPlayPage";
+import FaqPage from "./pages/public/FAQs";
 
 function App() {
 	const navigate = useNavigate();
@@ -61,7 +64,10 @@ function App() {
 			<Routes>
 				<Route path="/" element={<LandingPage />} />
 				<Route path="/terms" element={<Terms />} />
+				<Route path="/contact" element={<ContactPage />} />
 				<Route path="/about-us" element={<AboutPage />} />
+				<Route path="/how-to-play" element={<HowToPlayPage />} />
+				<Route path="/faq" element={<FaqPage />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/dashboard/account/password" element={<EditPassword />} />
