@@ -22,6 +22,8 @@ import EditProfile from "./pages/dashboard/account/EditProfile";
 import EditPassword from "./pages/dashboard/account/EditPassword";
 import PredictionHistory from "./pages/dashboard/predictionHistory/PredictionHistory";
 import WeekLeaderboard from "./pages/dashboard/leaderboard/WeekLeaderboard";
+import Terms from "./pages/public/Terms";
+import AboutPage from "./pages/public/AboutPage";
 
 function App() {
 	const navigate = useNavigate();
@@ -58,6 +60,8 @@ function App() {
 		<>
 			<Routes>
 				<Route path="/" element={<LandingPage />} />
+				<Route path="/terms" element={<Terms />} />
+				<Route path="/about-us" element={<AboutPage />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/dashboard/account/password" element={<EditPassword />} />

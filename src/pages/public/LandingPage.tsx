@@ -28,6 +28,8 @@ import {
 import PageLoading from "../../components/loaders/PageLoading";
 import { MatchCard } from "../../components/fixtures/MatchCard";
 import PublicFooter from "../../components/layout/PublicFooter";
+import { selectShowAdPopUp, setShowAdPopUp } from "../../state/slices/auth";
+import AdPopUp from "../../components/modals/AdPopUp";
 
 const LandingPage = () => {
 	const dispatch = useAppDispatch();
@@ -36,6 +38,7 @@ const LandingPage = () => {
 	const isFetchingSeasons = useAppSelector(selectIsFetchingAllSeasons);
 	const isFetchingWeeks = useAppSelector(selectIsFetchingAllWeeks);
 	const isFetchingMatches = useAppSelector(selectIsFetchingMatches);
+	const showAdPopUp = useAppSelector(selectShowAdPopUp);
 
 	const allWeeks = useAppSelector(selectAllWeeks);
 	const allMatches = useAppSelector(selectMatches);
@@ -76,6 +79,13 @@ const LandingPage = () => {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [seasons]);
+
+	useEffect(() => {
+		dispatch(setShowAdPopUp(true));
+		return () => {
+			dispatch(setShowAdPopUp(false));
+		};
+	}, []);
 
 	return (
 		<main className="bg-white">
@@ -224,6 +234,8 @@ const LandingPage = () => {
 
 			{/* FOOTER */}
 			<PublicFooter />
+
+			{showAdPopUp ? <AdPopUp /> : null}
 		</main>
 	);
 };

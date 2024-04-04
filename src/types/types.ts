@@ -68,6 +68,7 @@ export interface AuthType {
 	logout_retryCount?: number | string | null;
 	isPerformingAuthAction?: boolean;
 	isFetchingUserInfo?: boolean;
+	showAdPopUp?: boolean;
 }
 
 export interface TeamState {

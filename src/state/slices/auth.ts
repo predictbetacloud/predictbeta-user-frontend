@@ -34,6 +34,7 @@ const initialState: AuthType = {
 		: "",
 	isPerformingAuthAction: false,
 	isFetchingUserInfo: false,
+	showAdPopUp: false,
 };
 
 export const authSlice = createSlice({
@@ -112,6 +113,9 @@ export const authSlice = createSlice({
 		) => {
 			state.isFetchingUserInfo = action.payload;
 		},
+		setShowAdPopUp: (state, action: PayloadAction<AuthType["showAdPopUp"]>) => {
+			state.showAdPopUp = action.payload;
+		},
 	},
 });
 
@@ -124,6 +128,7 @@ export const {
 	setAuthFromCache,
 	setIsPerformingAuthAction,
 	setIsFetchingUserInfo,
+	setShowAdPopUp,
 } = authSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
@@ -134,5 +139,6 @@ export const selectIsPerformingAuthAction = (state: RootState) =>
 	state.auth.isPerformingAuthAction;
 export const selectIsFetchingUserInfo = (state: RootState) =>
 	state.auth.isFetchingUserInfo;
+export const selectShowAdPopUp = (state: RootState) => state.auth.showAdPopUp;
 
 export default authSlice.reducer;

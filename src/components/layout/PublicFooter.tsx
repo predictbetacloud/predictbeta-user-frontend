@@ -8,7 +8,6 @@ const routes: { title: string; route: string }[] = [
 	{ title: "About us", route: "/about-us" },
 	{ title: "Contact us", route: "/contact" },
 	{ title: "Terms & conditions", route: "/terms" },
-	{ title: "Privacy policy", route: "/privacy" },
 ];
 
 const PublicFooter = () => {
