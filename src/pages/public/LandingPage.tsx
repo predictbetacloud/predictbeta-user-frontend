@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { isBefore } from "date-fns";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import {
@@ -44,7 +43,6 @@ const LandingPage = () => {
 	const allMatches = useAppSelector(selectMatches);
 	const seasons = useAppSelector(selectAllSeasons);
 
-	const [isWeekDeadlineElasped, setIsWeekDeadlineElasped] = useState(true);
 	// Get all Season
 	useMemo(() => {
 		dispatch(getAllSeasonsAPI({}));
@@ -55,9 +53,6 @@ const LandingPage = () => {
 	useMemo(() => {
 		if (allWeeks?.[0]?.id) {
 			// if week is in query use that week
-			setIsWeekDeadlineElasped(
-				!isBefore(new Date(), new Date(String(allWeeks?.[0]?.deadline)))
-			);
 			if (seasons?.[0]?.id && allWeeks?.[0]?.id) {
 				dispatch(
 					getAllMatchesAPI({
