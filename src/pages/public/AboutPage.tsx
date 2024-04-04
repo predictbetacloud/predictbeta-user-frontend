@@ -20,14 +20,14 @@ const AboutPage = () => {
 							What we do
 						</h3>
 						<p className="text-[#212934]">
-							Predict9ja is a one of a kind sport prediction entertainment
+							Predictbeta is a one of a kind sport prediction entertainment
 							platform owned by TwinLove Media Limited. We offer a monetary
 							rewarding sports prediction league on a fixture/weekly basis on
 							our platform to help you make the best of your prediction
 							super-powers.
 						</p>
 						<p className="text-[#212934] mt-3">
-							Wins on Predict9ja are weekly and payout happens immediately after
+							Wins on Predictbeta are weekly and payout happens immediately after
 							every match-week on the platform. Our league offerings go from
 							general league to private league for our subscribers.
 						</p>
@@ -36,7 +36,7 @@ const AboutPage = () => {
 							Goal
 						</h3>
 						<p className="text-[#212934]">
-							Our primary goal at Predict9ja is enjoyment, sport banter and
+							Our primary goal at Predictbeta is enjoyment, sport banter and
 							getting you a little richer.
 						</p>
 						<p className="text-[#212934] mt-3">
@@ -50,7 +50,7 @@ const AboutPage = () => {
 							Partners
 						</h3>
 						<p className="text-[#212934]">
-							Predict9ja owned by TwinLove Media Limited operate with the
+							Predictbeta owned by TwinLove Media Limited operate with the
 							following partners:
 						</p> */}
 					</div>
