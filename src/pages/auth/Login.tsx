@@ -33,7 +33,7 @@ const Login = () => {
 	};
 
 	return (
-		<main className="w-screen h-screen bg-[#FFFFFF] flex flex-col items-center justify-center">
+		<main className="w-screen h-screen px-4 md:px-0 bg-[#FFFFFF] flex flex-col items-center justify-center">
 			<img src={logo} alt="Predictbeta" />
 			<form onSubmit={handleSubmit(submit)} className="mt-10 md:min-w-[400px]">
 

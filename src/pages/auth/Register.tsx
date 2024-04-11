@@ -51,7 +51,7 @@ const Register = () => {
 	};
 
 	return (
-		<main className="w-screen min-h-screen py-20 bg-[#FFFFFF] flex flex-col items-center justify-center">
+		<main className="w-screen min-h-screen px-4 md:px-0 py-20 bg-[#FFFFFF] flex flex-col items-center justify-center">
 			<img src={logo} alt="Predictbeta" />
 			<form onSubmit={handleSubmit(submit)} className="mt-4 md:w-[400px]">
 				<h3 className="text-xl text-[#222222] font-medium mb-2">
