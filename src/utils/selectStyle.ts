@@ -78,4 +78,8 @@ export const invalidStyle = {
 		fontSize: "14px",
 		lineHeight: "22px",
 	}),
+	// dropdownIndicator: () => ({
+		// ...baseStyles,
+		// color: "#eb1536",
+	// }),
 };

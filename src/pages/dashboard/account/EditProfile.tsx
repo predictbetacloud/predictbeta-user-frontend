@@ -47,7 +47,7 @@ const EditProfile = () => {
 
 	return (
 		<DashboardLayout title="Account Setting - Profile">
-			<section className="predictbeta-header px-8 py-4 flex items-center">
+			<section className="predictbeta-header px-8 pt-6 flex items-center">
 				<TabNav
 					tabs={[
 						{ path: "/dashboard/account", title: "Edit/Update Profile" },

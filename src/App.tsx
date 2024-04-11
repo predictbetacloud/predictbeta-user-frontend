@@ -27,6 +27,9 @@ import AboutPage from "./pages/public/AboutPage";
 import ContactPage from "./pages/public/ContactPage";
 import HowToPlayPage from "./pages/public/HowToPlayPage";
 import FaqPage from "./pages/public/FAQs";
+import AllPrivateLeagues from "./pages/dashboard/privateLeague/AllPrivateLeagues";
+import CreatePrivateLeague from "./pages/dashboard/privateLeague/CreatePrivateLeague";
+import JoinPrivateLeague from "./pages/dashboard/privateLeague/JoinPrivateLeague";
 
 function App() {
 	const navigate = useNavigate();
@@ -75,6 +78,18 @@ function App() {
 				<Route path="/dashboard/wallet" element={<Wallet />} />
 				<Route path="/dashboard/fixtures" element={<AllFixtures />} />
 				<Route path="/dashboard/leaderboard" element={<WeekLeaderboard />} />
+				<Route
+					path="/dashboard/private-league/create"
+					element={<CreatePrivateLeague />}
+				/>
+				<Route
+					path="/dashboard/private-league/join"
+					element={<JoinPrivateLeague />}
+				/>
+				<Route
+					path="/dashboard/private-league"
+					element={<AllPrivateLeagues />}
+				/>
 				{/* <Route path="/dashboard/leaderboard/season" element={<SeasonL />} /> */}
 				<Route
 					path="/dashboard/prediction-history"

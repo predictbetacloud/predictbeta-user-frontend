@@ -88,6 +88,39 @@ export interface LeaderboardState {
 	isFetchingSeasonLeaderboard: boolean;
 }
 
+export type SharingFormularType = {
+	position: number;
+	percentage: number;
+}[];
+
+export interface PrivateLeagueItem {
+	name: string;
+	leagueCode: string;
+	id?: number;
+	scoringStarts: number;
+	entranceFee: number;
+	numberOfPlayers: number;
+	winningPositions: number;
+	sharingFormula: {
+		position: number;
+		percentage: number;
+	}[];
+}
+export interface PrivateLeagueState {
+	allPrivateLeagues: PrivateLeagueItem[];
+	specificPrivateLeague: PrivateLeagueItem | null;
+	specificPrivateLeagueLeaderboard: LeaderboardItem[];
+	isFetchingAllPrivateLeagues: boolean;
+	isFetchingSpecificPrivateLeague: boolean;
+	isFetchingSpecificPrivateLeagueWeekLeaderboard: boolean;
+	isFetchingSpecificPrivateLeagueSeasonLeaderboard: boolean;
+	isJoiningPrivateLeague: boolean;
+	isCreatingPrivateLeague: boolean;
+	isEditingPrivateLeague: boolean;
+	isDeletingPrivateLeague: boolean;
+	showSharePrivateLeagueModal: boolean;
+}
+
 export interface ISeason {
 	id: number;
 	name: string;

@@ -16,6 +16,7 @@ import {
 	IClub,
 	IPlayer,
 	LeaderboardItem,
+	PrivateLeagueItem,
 	WalletHistoryItem,
 } from "../types/types";
 import Button from "./Buttons";
@@ -76,12 +77,18 @@ const TableHeadStyle = styled.th`
 `;
 
 type Props = {
-	data: IClub[] | IPlayer[] | WalletHistoryItem[] | LeaderboardItem[];
+	data:
+		| IClub[]
+		| IPlayer[]
+		| WalletHistoryItem[]
+		| LeaderboardItem[]
+		| PrivateLeagueItem[];
 	columns:
 		| ColumnDef<IClub>[]
 		| ColumnDef<IPlayer>[]
 		| ColumnDef<WalletHistoryItem>[]
-		| ColumnDef<LeaderboardItem>[];
+		| ColumnDef<LeaderboardItem>[]
+		| ColumnDef<PrivateLeagueItem>[];
 	rows: number;
 	loading?: boolean;
 	isLeaderboardTable?: boolean;
@@ -172,7 +179,7 @@ function Table({
 	return (
 		<div className={" flex flex-col min-w-0 break-words w-full"}>
 			{loading ? (
-				<div className="block w-full overflow-x-auto">
+				<div className="block w-full overflow-x-auto overflow-y-hidden">
 					<TableHolder className="items-center w-full bg-transparent border-collapse relative">
 						<thead className="">
 							{table.getHeaderGroups().map((headerGroup) => (
@@ -219,7 +226,7 @@ function Table({
 				<>
 					{tableData && data?.length > 0 ? (
 						<>
-							<div className="block w-full overflow-x-auto">
+							<div className="block w-full overflow-x-auto ">
 								<TableHolder className="items-center w-full bg-transparent border-collapse relative">
 									<thead className="">
 										{table.getHeaderGroups().map((headerGroup) => (

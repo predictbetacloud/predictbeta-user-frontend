@@ -337,7 +337,7 @@ const AllFixtures = () => {
 										<div>
 											<label htmlFor="mostLikelyToScore" className="mb-2 block">
 												<p className="text-[#222222] text-sm">
-													Most likelyToScore to score?
+													Most likely to score?
 												</p>
 											</label>
 											<Controller
@@ -384,7 +384,7 @@ const AllFixtures = () => {
 										<div>
 											<label htmlFor="moreLikelyToScore" className="mb-2 block">
 												<p className="text-[#222222] text-sm">
-													More likelyToScore to score?
+													More likely to score?
 												</p>
 											</label>
 											<Controller
@@ -587,7 +587,7 @@ const AllFixtures = () => {
 													className="mb-2 block"
 												>
 													<p className="text-[#222222] text-sm">
-														Most likelyToScore to score?
+														Most likely to score?
 													</p>
 												</label>
 												<Controller
@@ -637,7 +637,7 @@ const AllFixtures = () => {
 													className="mb-2 block"
 												>
 													<p className="text-[#222222] text-sm">
-														More likelyToScore to score?
+														More likely to score?
 													</p>
 												</label>
 												<Controller
