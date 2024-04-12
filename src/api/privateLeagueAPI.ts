@@ -11,6 +11,7 @@ import {
 	setIsFetchingSpecificPrivateLeagueSeasonLeaderboard,
 	setIsFetchingSpecificPrivateLeagueWeekLeaderboard,
 	setIsJoiningPrivateLeague,
+	setIsLeavingPrivateLeague,
 	setSpecificPrivateLeague,
 	setSpecificPrivateLeagueLeaderboard,
 } from "../state/slices/privateLeague";
@@ -71,6 +72,23 @@ export const joinPrivateLeagueAPI = createAsyncThunk(
 			})
 			.catch((error) => {
 				dispatch(setIsJoiningPrivateLeague(false));
+				toastError(error?.response?.data?.message);
+			});
+	}
+);
+
+export const leavePrivateLeagueAPI = createAsyncThunk(
+	"privateLeague/leavePrivateLeague",
+	({ leagueId }: FieldValues, { dispatch }) => {
+		dispatch(setIsLeavingPrivateLeague(true));
+		axiosInstance
+			.post(`/private-/${leagueId}/join`)
+			.then(() => {
+				dispatch(setIsLeavingPrivateLeague(false));
+				dispatch(getAllPrivateLeaguesAPI());
+			})
+			.catch((error) => {
+				dispatch(setIsLeavingPrivateLeague(false));
 				toastError(error?.response?.data?.message);
 			});
 	}

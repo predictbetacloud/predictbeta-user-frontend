@@ -5,9 +5,11 @@ import { Float } from "@headlessui-float/react";
 
 import { PrivateLeagueItem } from "../types/types";
 import { Link } from "react-router-dom";
-import { selectAuth } from "../state/slices/auth";
-import { useAppDispatch, useAppSelector } from "../state/hooks";
-import { setShowSharePrivateLeagueModal } from "../state/slices/privateLeague";
+import { useAppDispatch } from "../state/hooks";
+import {
+	setShowLeavePrivateLeagueModal,
+	setShowSharePrivateLeagueModal,
+} from "../state/slices/privateLeague";
 
 const DropdownStyle = styled(Menu.Items)`
 	box-shadow: 0px 8px 30px 0px #aeaec026;
@@ -42,6 +44,7 @@ const PrivateLeagueOptions = ({
 					>
 						<p className="text-[#5F6B7A]">Edit League</p>
 					</Link>
+					{/* Invite Friends */}
 					<Menu.Item>
 						{({ close }) => (
 							<button
@@ -56,18 +59,38 @@ const PrivateLeagueOptions = ({
 							</button>
 						)}
 					</Menu.Item>
-					<button
-						type="button"
-						className="block px-4 py-2.5 w-40 text-left focus:bg-slate-100 hover:bg-slate-100"
-					>
-						<p className="text-[#5F6B7A]">Leave league</p>
-					</button>
-					<button
-						type="button"
-						className="block px-4 py-2.5 w-40 text-left focus:bg-red-100 hover:bg-red-100"
-					>
-						<p className="text-[#EB1536]">Delete League</p>
-					</button>
+
+					{/* Leave */}
+					<Menu.Item>
+						{({ close }) => (
+							<button
+								onClick={() => {
+									setSelectedLeague(leagueDetails);
+									dispatch(setShowLeavePrivateLeagueModal(true));
+									close();
+								}}
+								className="block px-4 py-2.5 w-40 text-left focus:bg-slate-100 hover:bg-slate-100"
+							>
+								<p className="text-[#5F6B7A]">Leave league</p>
+							</button>
+						)}
+					</Menu.Item>
+
+					{/* Delete League */}
+					<Menu.Item>
+						{({ close }) => (
+							<button
+								onClick={() => {
+									setSelectedLeague(leagueDetails);
+									dispatch(setShowLeavePrivateLeagueModal(true));
+									close();
+								}}
+								className="block px-4 py-2.5 w-40 text-left focus:bg-red-100 hover:bg-red-100"
+							>
+								<p className="text-[#EB1536]">Delete League</p>
+							</button>
+						)}
+					</Menu.Item>
 				</DropdownStyle>
 			</Float>
 		</Menu>

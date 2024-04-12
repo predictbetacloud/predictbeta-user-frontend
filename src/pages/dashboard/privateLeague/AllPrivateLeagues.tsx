@@ -9,6 +9,7 @@ import { PrivateLeagueItem } from "../../../types/types";
 import {
 	selectAllPrivateLeagues,
 	selectIsFetchingAllPrivateLeagues,
+	selectShowLeavePrivateLeagueModal,
 	selectShowSharePrivateLeagueModal,
 } from "../../../state/slices/privateLeague";
 import { getAllPrivateLeaguesAPI } from "../../../api/privateLeagueAPI";
@@ -16,6 +17,7 @@ import Button from "../../../components/Buttons";
 import { Link, useNavigate } from "react-router-dom";
 import PrivateLeagueOptions from "../../../components/PrivateLeagueOptions";
 import SharePrivateLeagueModal from "../../../components/modals/SharePrivateLeagueModal";
+import LeavePrivateLeagueModal from "../../../components/modals/LeavePrivateLeagueModal";
 
 const AllPrivateLeagues = () => {
 	const dispatch = useAppDispatch();
@@ -27,6 +29,9 @@ const AllPrivateLeagues = () => {
 	const allPrivateLeagues = useAppSelector(selectAllPrivateLeagues);
 	const showSharePrivateLeagueModal = useAppSelector(
 		selectShowSharePrivateLeagueModal
+	);
+	const showLeavePrivateLeagueModal = useAppSelector(
+		selectShowLeavePrivateLeagueModal
 	);
 	const isFetchingAllPrivateLeagues = useAppSelector(
 		selectIsFetchingAllPrivateLeagues
@@ -104,6 +109,10 @@ const AllPrivateLeagues = () => {
 
 			{showSharePrivateLeagueModal ? (
 				<SharePrivateLeagueModal leagueDetails={selectedLeague} />
+			) : null}
+
+			{showLeavePrivateLeagueModal ? (
+				<LeavePrivateLeagueModal leagueDetails={selectedLeague} />
 			) : null}
 		</DashboardLayout>
 	);

@@ -118,7 +118,10 @@ export interface PrivateLeagueState {
 	isCreatingPrivateLeague: boolean;
 	isEditingPrivateLeague: boolean;
 	isDeletingPrivateLeague: boolean;
+	isLeavingPrivateLeague: boolean;
 	showSharePrivateLeagueModal: boolean;
+	showLeavePrivateLeagueModal: boolean;
+	showDeletePrivateLeagueModal: boolean;
 }
 
 export interface ISeason {

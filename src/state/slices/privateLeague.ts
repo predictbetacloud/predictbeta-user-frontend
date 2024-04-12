@@ -14,12 +14,15 @@ const initialState: PrivateLeagueState = {
 	isCreatingPrivateLeague: false,
 	isDeletingPrivateLeague: false,
 	isEditingPrivateLeague: false,
+	isLeavingPrivateLeague: false,
 	isFetchingAllPrivateLeagues: false,
 	isFetchingSpecificPrivateLeague: false,
 	isFetchingSpecificPrivateLeagueSeasonLeaderboard: false,
 	isFetchingSpecificPrivateLeagueWeekLeaderboard: false,
 	isJoiningPrivateLeague: false,
 	showSharePrivateLeagueModal: false,
+	showLeavePrivateLeagueModal: false,
+	showDeletePrivateLeagueModal: false,
 };
 
 export const privateLeagueSlice = createSlice({
@@ -82,6 +85,12 @@ export const privateLeagueSlice = createSlice({
 		) => {
 			state.isDeletingPrivateLeague = action.payload;
 		},
+		setIsLeavingPrivateLeague: (
+			state,
+			action: PayloadAction<PrivateLeagueState["isLeavingPrivateLeague"]>
+		) => {
+			state.isLeavingPrivateLeague = action.payload;
+		},
 		setIsFetchingSpecificPrivateLeagueWeekLeaderboard: (
 			state,
 			action: PayloadAction<
@@ -104,6 +113,18 @@ export const privateLeagueSlice = createSlice({
 		) => {
 			state.showSharePrivateLeagueModal = action.payload;
 		},
+		setShowLeavePrivateLeagueModal: (
+			state,
+			action: PayloadAction<PrivateLeagueState["showLeavePrivateLeagueModal"]>
+		) => {
+			state.showLeavePrivateLeagueModal = action.payload;
+		},
+		setShowLeavePrivateLeagueModal: (
+			state,
+			action: PayloadAction<PrivateLeagueState["showLeavePrivateLeagueModal"]>
+		) => {
+			state.showLeavePrivateLeagueModal = action.payload;
+		},
 	},
 });
 
@@ -114,12 +135,14 @@ export const {
 	setIsDeletingPrivateLeague,
 	setIsEditingPrivateLeague,
 	setIsJoiningPrivateLeague,
+	setIsLeavingPrivateLeague,
 	setIsFetchingAllPrivateLeagues,
 	setIsFetchingSpecificPrivateLeague,
 	setSpecificPrivateLeagueLeaderboard,
 	setIsFetchingSpecificPrivateLeagueSeasonLeaderboard,
 	setIsFetchingSpecificPrivateLeagueWeekLeaderboard,
 	setShowSharePrivateLeagueModal,
+	setShowLeavePrivateLeagueModal,
 } = privateLeagueSlice.actions;
 
 export const selectAllPrivateLeagues = (state: RootState) =>
@@ -157,5 +180,11 @@ export const selectIsEditingPrivateLeague = (state: RootState) =>
 export const selectIsJoiningPrivateLeague = (state: RootState) =>
 	state.privateLeague.isJoiningPrivateLeague;
 
+export const selectIsLeavingPrivateLeague = (state: RootState) =>
+	state.privateLeague.isLeavingPrivateLeague;
+
 export const selectShowSharePrivateLeagueModal = (state: RootState) =>
 	state.privateLeague.showSharePrivateLeagueModal;
+
+export const selectShowLeavePrivateLeagueModal = (state: RootState) =>
+	state.privateLeague.showLeavePrivateLeagueModal;
