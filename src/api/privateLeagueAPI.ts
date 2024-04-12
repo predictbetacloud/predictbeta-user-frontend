@@ -6,6 +6,7 @@ import { toastError } from "../utils/toast";
 import {
 	setAllPrivateLeagues,
 	setIsCreatingPrivateLeague,
+	setIsDeletingPrivateLeague,
 	setIsFetchingAllPrivateLeagues,
 	setIsFetchingSpecificPrivateLeague,
 	setIsFetchingSpecificPrivateLeagueSeasonLeaderboard,
@@ -89,6 +90,23 @@ export const leavePrivateLeagueAPI = createAsyncThunk(
 			})
 			.catch((error) => {
 				dispatch(setIsLeavingPrivateLeague(false));
+				toastError(error?.response?.data?.message);
+			});
+	}
+);
+
+export const deletePrivateLeagueAPI = createAsyncThunk(
+	"privateLeague/deletePrivateLeague",
+	({ leagueId }: FieldValues, { dispatch }) => {
+		dispatch(setIsDeletingPrivateLeague(true));
+		axiosInstance
+			.delete(`/private-league/${leagueId}`)
+			.then(() => {
+				dispatch(setIsDeletingPrivateLeague(false));
+				dispatch(getAllPrivateLeaguesAPI());
+			})
+			.catch((error) => {
+				dispatch(setIsDeletingPrivateLeague(false));
 				toastError(error?.response?.data?.message);
 			});
 	}

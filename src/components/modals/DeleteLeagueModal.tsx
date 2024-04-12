@@ -2,53 +2,54 @@ import Modal from "./Modal";
 
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import {
+	selectIsDeletingPrivateLeague,
 	selectIsLeavingPrivateLeague,
-	selectShowLeavePrivateLeagueModal,
-	setShowLeavePrivateLeagueModal,
+	selectShowDeletePrivateLeagueModal,
+	setShowDeletePrivateLeagueModal,
 } from "../../state/slices/privateLeague";
 import { PrivateLeagueItem } from "../../types/types";
 import Button from "../Buttons";
-import { leavePrivateLeagueAPI } from "../../api/privateLeagueAPI";
+import { deletePrivateLeagueAPI } from "../../api/privateLeagueAPI";
 
-const LeavePrivateLeagueModal = ({
+const DeletePrivateLeagueModal = ({
 	leagueDetails,
 }: {
 	leagueDetails: PrivateLeagueItem | null;
 }) => {
 	const dispatch = useAppDispatch();
 
-	const showLeavePrivateLeagueModal = useAppSelector(
-		selectShowLeavePrivateLeagueModal
+	const showDeletePrivateLeagueModal = useAppSelector(
+		selectShowDeletePrivateLeagueModal
 	);
 
-	const isLeavingLeague = useAppSelector(selectIsLeavingPrivateLeague);
+	const isDeletingLeague = useAppSelector(selectIsDeletingPrivateLeague);
 
 	return (
 		<Modal
 			closeModal={() => {
-				dispatch(setShowLeavePrivateLeagueModal(false));
+				dispatch(setShowDeletePrivateLeagueModal(false));
 			}}
 			content={
 				<section>
 					<p className="text-[#5F6B7A] text-sm">
-						You are about to leave{" "}
+						You are about to Delete{" "}
 						<span className="font-semibold">{leagueDetails?.name}</span>. Are
 						you really sure about this? This action cannot be undone.
 					</p>
 					<Button
 						className="w-full mt-6"
 						onClick={() =>
-							dispatch(leavePrivateLeagueAPI({ leagueId: leagueDetails?.id }))
+							dispatch(deletePrivateLeagueAPI({ leagueId: leagueDetails?.id }))
 						}
-						title="Leave League"
-						loading={isLeavingLeague}
+						title="Delete League"
+						loading={isDeletingLeague}
 					/>
 				</section>
 			}
-			isOpen={showLeavePrivateLeagueModal}
-			title="Leave Private League"
+			isOpen={showDeletePrivateLeagueModal}
+			title="Delete Private League"
 		/>
 	);
 };
 
-export default LeavePrivateLeagueModal;
+export default DeletePrivateLeagueModal;

@@ -119,11 +119,11 @@ export const privateLeagueSlice = createSlice({
 		) => {
 			state.showLeavePrivateLeagueModal = action.payload;
 		},
-		setShowLeavePrivateLeagueModal: (
+		setShowDeletePrivateLeagueModal: (
 			state,
-			action: PayloadAction<PrivateLeagueState["showLeavePrivateLeagueModal"]>
+			action: PayloadAction<PrivateLeagueState["showDeletePrivateLeagueModal"]>
 		) => {
-			state.showLeavePrivateLeagueModal = action.payload;
+			state.showDeletePrivateLeagueModal = action.payload;
 		},
 	},
 });
@@ -143,6 +143,7 @@ export const {
 	setIsFetchingSpecificPrivateLeagueWeekLeaderboard,
 	setShowSharePrivateLeagueModal,
 	setShowLeavePrivateLeagueModal,
+	setShowDeletePrivateLeagueModal,
 } = privateLeagueSlice.actions;
 
 export const selectAllPrivateLeagues = (state: RootState) =>
@@ -188,3 +189,6 @@ export const selectShowSharePrivateLeagueModal = (state: RootState) =>
 
 export const selectShowLeavePrivateLeagueModal = (state: RootState) =>
 	state.privateLeague.showLeavePrivateLeagueModal;
+
+export const selectShowDeletePrivateLeagueModal = (state: RootState) =>
+	state.privateLeague.showDeletePrivateLeagueModal;

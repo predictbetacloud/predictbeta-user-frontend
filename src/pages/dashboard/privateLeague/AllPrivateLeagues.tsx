@@ -9,15 +9,17 @@ import { PrivateLeagueItem } from "../../../types/types";
 import {
 	selectAllPrivateLeagues,
 	selectIsFetchingAllPrivateLeagues,
+	selectShowDeletePrivateLeagueModal,
 	selectShowLeavePrivateLeagueModal,
 	selectShowSharePrivateLeagueModal,
 } from "../../../state/slices/privateLeague";
 import { getAllPrivateLeaguesAPI } from "../../../api/privateLeagueAPI";
 import Button from "../../../components/Buttons";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PrivateLeagueOptions from "../../../components/PrivateLeagueOptions";
 import SharePrivateLeagueModal from "../../../components/modals/SharePrivateLeagueModal";
 import LeavePrivateLeagueModal from "../../../components/modals/LeavePrivateLeagueModal";
+import DeletePrivateLeagueModal from "../../../components/modals/DeleteLeagueModal";
 
 const AllPrivateLeagues = () => {
 	const dispatch = useAppDispatch();
@@ -30,11 +32,14 @@ const AllPrivateLeagues = () => {
 	const showSharePrivateLeagueModal = useAppSelector(
 		selectShowSharePrivateLeagueModal
 	);
+	const isFetchingAllPrivateLeagues = useAppSelector(
+		selectIsFetchingAllPrivateLeagues
+	);
 	const showLeavePrivateLeagueModal = useAppSelector(
 		selectShowLeavePrivateLeagueModal
 	);
-	const isFetchingAllPrivateLeagues = useAppSelector(
-		selectIsFetchingAllPrivateLeagues
+	const showDeletePrivateLeagueModal = useAppSelector(
+		selectShowDeletePrivateLeagueModal
 	);
 
 	const [page, setPage] = useState(1);
@@ -113,6 +118,10 @@ const AllPrivateLeagues = () => {
 
 			{showLeavePrivateLeagueModal ? (
 				<LeavePrivateLeagueModal leagueDetails={selectedLeague} />
+			) : null}
+
+			{showDeletePrivateLeagueModal ? (
+				<DeletePrivateLeagueModal leagueDetails={selectedLeague} />
 			) : null}
 		</DashboardLayout>
 	);
