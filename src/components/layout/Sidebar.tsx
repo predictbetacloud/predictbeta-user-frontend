@@ -72,7 +72,7 @@ const Sidebar = () => {
 	const dispatch = useAppDispatch();
 
 	return (
-		<Style className="flex-shrink-0 bg-[#FFF] w-1/5 top-[80px] sticky pt-2.5 pb-10 flex flex-col">
+		<Style className="flex-shrink-0 bg-[#FFF] w-1/5 top-[80px] sticky pt-2.5 pb-10 hidden lg:flex flex-col">
 			<div className="flex flex-col flex-grow justify-between px-3">
 				{/* Links */}
 				<div>

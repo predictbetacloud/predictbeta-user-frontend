@@ -16,6 +16,7 @@ import CustomCountDown from "../Countdown";
 import { setShowDepositModal } from "../../state/slices/wallet";
 import { IWeek } from "../../types/types";
 import { isBefore } from "date-fns";
+import Drawer from "./Drawer";
 
 type Props = { title?: string };
 
@@ -50,12 +51,12 @@ const Header = ({ title }: Props) => {
 	}, [allWeeks, query_week]);
 
 	return (
-		<header className="bg-[#051B30] py-3 px-8 sticky top-0 flex items-center justify-between z-[100]">
+		<header className="bg-[#051B30] py-3 px-4 lg:px-8 sticky top-0 flex items-center justify-between z-[100]">
 			<div className="md:px-10 flex-shrink-0">
 				<img src={logo} alt="Predictbeta" className="" />
 			</div>
 
-			<div className=" hidden md:flex items-center justify-between flex-grow md:pl-32">
+			<div className=" hidden lg:flex items-center justify-between flex-grow md:pl-32">
 				{/* Title */}
 				{!title ? (
 					<>
@@ -68,7 +69,9 @@ const Header = ({ title }: Props) => {
 										new Date(),
 										new Date(String(selectedWeek?.deadline))
 									) ? (
-										<p className="ml-4 text-white">Prediction deadline has passed</p>
+										<p className="ml-4 text-white">
+											Prediction deadline has passed
+										</p>
 									) : (
 										<p className="ml-4 text-white">
 											Time left until the end of this round
@@ -128,6 +131,8 @@ const Header = ({ title }: Props) => {
 					/>
 				</div>
 			</div>
+
+			<Drawer />
 		</header>
 	);
 };

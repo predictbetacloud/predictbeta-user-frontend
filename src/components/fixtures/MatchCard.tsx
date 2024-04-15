@@ -70,7 +70,7 @@ const Prediction = ({
 
 const Team = ({ team }: { team: IClub }) => (
 	<div className="flex items-center">
-		<img src={team?.clubLogo} className="h-6 w-6 mr-3" alt={team?.name} />
+		<img src={team?.clubLogo} className="h-6 w-6 mr-1 md:mr-3" alt={team?.name} />
 		<P className="text-[#000301] text-[0.8em]">{team?.name}</P>
 	</div>
 );
@@ -108,8 +108,8 @@ export const MatchCard = ({
 
 	return (
 		<Style className="p-4 rounded-md" invalid={invalid ? "true" : "false"}>
-			<div className="md:flex items-center justify-between">
-				<div className="md:space-y-2 flex md:block items-center justify-between mb-4 md:mb-0">
+			<div className="flex items-center justify-between">
+				<div className="md:space-y-2 items-center justify-between space-y-4">
 					<Team team={home} />
 					<Team team={away} />
 				</div>
@@ -158,7 +158,7 @@ export const MatchCard = ({
 			</div>
 			<>
 				<hr className="my-4" />
-				<div className="md:flex items-center justify-between gap-4">
+				<div className="flex items-center justify-between gap-4">
 					<div className="flex items-center justify-between gap-4">
 						<button type="button" className="flex items-center w-fit gap-1">
 							<MdOutlineBarChart size={18} color={colors.accent} />

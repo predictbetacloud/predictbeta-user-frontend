@@ -227,7 +227,7 @@ const AllFixtures = () => {
 
 	return (
 		<DashboardLayout>
-			<section className="predictbeta-header bg-white w-full px-8 py-3 flex items-center justify-between">
+			<section className="predictbeta-header bg-white w-full px-4 lg:px-8 py-3 flex items-center justify-between">
 				{/* season select */}
 				<div className="flex items-center gap-4">
 					{isFetchingSeasons || !seasons ? (
@@ -296,7 +296,7 @@ const AllFixtures = () => {
 					{Array.isArray(specificWeekPredictions?.predictions?.fixtures) &&
 					specificWeekPredictions?.predictions?.fixtures?.length > 0 ? (
 						<>
-							<section className="flex py-10 px-8 ">
+							<section className="flex py-5 lg:py-10 px-4 lg:px-8 ">
 								<div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
 									<div className="grid md:grid-cols-2 gap-6">
 										{matches?.map((match, idx) => (
@@ -328,10 +328,6 @@ const AllFixtures = () => {
 									<h3 className="text-[#000] font-medium text-lg text-center">
 										Decider
 									</h3>
-									<p className="md:text-center text-[#5F6B7A] text-sm mt-3">
-										Select three likelyToScore different scorers and minute of
-										first goal to decide your tie
-									</p>
 									<div className="grid md:grid-cols-2 gap-6 py-6">
 										{/* Most likely To Score to score? */}
 										<div>
@@ -495,7 +491,7 @@ const AllFixtures = () => {
 										</div>
 									</div>
 								</div>
-								<div className="md:w-1/3 md:pl-8">
+								<div className="hidden lg:block md:w-1/3 md:pl-8">
 									<div className="bg-white pb-7 rounded-md border">
 										<div className="bg-[#EB1536] px-2 py-3 flex items-center justify-center rounded-md rounded-b-none space-x-2.5 mb-6">
 											<SelectionIcon />
@@ -542,7 +538,10 @@ const AllFixtures = () => {
 							</section>
 						</>
 					) : (
-						<form onSubmit={handleSubmit(onPredict)} className="py-10 px-8">
+						<form
+							onSubmit={handleSubmit(onPredict)}
+							className="py-5 lg:py-10 px-4 lg:px-8"
+						>
 							{matches?.length > 0 ? (
 								<section className="flex ">
 									<div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
@@ -576,8 +575,8 @@ const AllFixtures = () => {
 											Decider
 										</h3>
 										<p className="md:text-center text-[#5F6B7A] text-sm mt-3">
-											Select three likelyToScore different scorers and minute of
-											first goal to decide your tie
+											Select three likely to score different scorers and minute
+											of first goal to decide your tie
 										</p>
 										<div className="grid md:grid-cols-2 gap-6 py-6">
 											{/* Most likely To Score to score? */}
@@ -757,9 +756,29 @@ const AllFixtures = () => {
 													/>
 												)}
 											</div>
+
+											<div className="mt-6 px-4">
+												<hr className="mt-8" />
+
+												{isWeekDeadlineElasped ? (
+													<Button
+														className="w-full"
+														// type="submit"
+														disabled
+														title="The deadline has passed"
+													/>
+												) : (
+													<Button
+														className="w-full"
+														type="submit"
+														loading={isSubmittingPrediction}
+														title="Submit your prediction"
+													/>
+												)}
+											</div>
 										</div>
 									</div>
-									<div className="md:w-1/3 md:pl-8">
+									<div className="hidden lg:block md:w-1/3 md:pl-8">
 										<div className="bg-white pb-7 rounded-md border">
 											<div className="bg-[#EB1536] px-2 py-3 flex items-center justify-center rounded-md rounded-b-none space-x-2.5 mb-6">
 												<SelectionIcon />
