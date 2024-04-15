@@ -1,8 +1,8 @@
 import Countdown, { zeroPad } from "react-countdown";
 
 // Random component
-const Completionist = () => (
-	<p className="-mt-1 text-[10px] font-light text-white"></p>
+const Completed = () => (
+	<p className="hidden -mt-1 text-[10px] font-light text-white"></p>
 );
 
 // Renderer callback with condition
@@ -21,7 +21,7 @@ const renderer = ({
 }) => {
 	if (completed) {
 		// Render a complete state
-		return <Completionist />;
+		return <Completed />;
 	} else {
 		// Render a countdown
 		return (
@@ -58,7 +58,7 @@ const renderer = ({
 const CustomCountDown = ({ deadline }: { deadline: string | number }) => {
 	return (
 		<div className="h-10">
-			<Countdown date={deadline} renderer={renderer} />.
+			<Countdown date={deadline} renderer={renderer} />
 		</div>
 	);
 };

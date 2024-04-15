@@ -23,7 +23,7 @@ const Style = styled.aside`
 	box-shadow: 2px 4px 8px 0px #0000000a;
 `;
 
-const routes: {
+export const routes: {
 	icon: any;
 	path: string;
 	title: string;

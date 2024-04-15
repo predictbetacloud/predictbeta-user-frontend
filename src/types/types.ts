@@ -289,3 +289,7 @@ export const statusEnum = {
 		color: colors.orange700,
 	},
 };
+
+export interface DrawerState {
+	isDrawerOpen: boolean;
+}

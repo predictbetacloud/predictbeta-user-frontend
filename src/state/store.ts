@@ -5,6 +5,7 @@ import { fixtureSlice } from "./slices/fixtures";
 import { walletSlice } from "./slices/wallet";
 import { leaderboardSlice } from "./slices/leaderboard";
 import { privateLeagueSlice } from "./slices/privateLeague";
+import { drawerSlice } from "./slices/drawer";
 
 export const store = configureStore({
 	reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
 		auth: authSlice.reducer,
 		wallet: walletSlice.reducer,
 		privateLeague: privateLeagueSlice.reducer,
+		drawer: drawerSlice.reducer,
 	},
 });
 

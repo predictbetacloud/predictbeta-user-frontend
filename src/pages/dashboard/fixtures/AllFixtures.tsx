@@ -43,6 +43,10 @@ import {
 	selectIsFetchingAllPlayers,
 } from "../../../state/slices/teams";
 import { formatPredictionsFromObjectToArray } from "../../../utils/utils";
+import CustomCountDown from "../../../components/Countdown";
+import { BsFillClockFill } from "react-icons/bs";
+import { IWeek } from "../../../types/types";
+import { colors } from "../../../utils/colors";
 
 const AllFixtures = () => {
 	const dispatch = useAppDispatch();
@@ -72,6 +76,7 @@ const AllFixtures = () => {
 		id: string;
 		number: string;
 	} | null>(null);
+	const [activeWeek, setActiveWeek] = useState<IWeek | null>(null);
 
 	const [matches, setMatches] = useState(allMatches);
 	const [isWeekDeadlineElasped, setIsWeekDeadlineElasped] = useState(true);
@@ -114,6 +119,7 @@ const AllFixtures = () => {
 				);
 
 				if (activeWeek) {
+					setActiveWeek(activeWeek);
 					setIsWeekDeadlineElasped(
 						!isBefore(new Date(), new Date(String(activeWeek?.deadline)))
 					);
@@ -284,6 +290,31 @@ const AllFixtures = () => {
 					)}
 				</div>
 			</section>
+
+			<div className="lg:hidden bg-[#051B30] p-4">
+				{/* Countdown */}
+				{activeWeek?.deadline ? (
+					<div className="">
+						<div className="flex items-center">
+							<BsFillClockFill color={colors.blue900} fill={colors.white} />
+							{!isBefore(new Date(), new Date(String(activeWeek?.deadline))) ? (
+								<p className="ml-4 text-[#fff]">
+									Prediction deadline has passed
+								</p>
+							) : (
+								<>
+									<p className="ml-4 text-[#fff]">
+										Time left until the end of this round
+									</p>
+									<CustomCountDown deadline={activeWeek?.deadline} />
+								</>
+							)}
+						</div>
+					</div>
+				) : (
+					<p></p>
+				)}
+			</div>
 
 			{/* Matches */}
 			{isFetchingMatches ||
