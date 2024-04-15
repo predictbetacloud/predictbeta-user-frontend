@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { FieldValues } from "react-hook-form";
 
 import axiosInstance from "../connection/defaultClient";
-import { toastError } from "../utils/toast";
+import { toastError, toastSuccess } from "../utils/toast";
 import {
 	setAllPrivateLeagues,
 	setIsCreatingPrivateLeague,
@@ -41,9 +41,11 @@ export const createPrivateLeagueAPI = createAsyncThunk(
 				winningPositions,
 				sharingFormula,
 			})
-			.then(() => {
+			.then((data) => {
 				dispatch(setIsCreatingPrivateLeague(false));
-
+				toastSuccess(
+					data?.data?.message ?? "You have created a private league"
+				);
 				if (globalRouter.navigate) {
 					if (globalRouter.location?.state?.from) {
 						globalRouter.navigate(globalRouter?.location?.state?.from);
@@ -67,9 +69,18 @@ export const joinPrivateLeagueAPI = createAsyncThunk(
 		dispatch(setIsJoiningPrivateLeague(true));
 		axiosInstance
 			.post(`/private-league/${code}/join`)
-			.then(() => {
+			.then((data) => {
 				dispatch(setIsJoiningPrivateLeague(false));
-				dispatch(getAllPrivateLeaguesAPI());
+				toastSuccess(
+					data?.data?.message ?? "You have joined the private league"
+				);
+				if (globalRouter.navigate) {
+					if (globalRouter.location?.state?.from) {
+						globalRouter.navigate(globalRouter?.location?.state?.from);
+					} else {
+						globalRouter.navigate("/dashboard/private-league");
+					}
+				}
 			})
 			.catch((error) => {
 				dispatch(setIsJoiningPrivateLeague(false));
@@ -84,8 +95,9 @@ export const leavePrivateLeagueAPI = createAsyncThunk(
 		dispatch(setIsLeavingPrivateLeague(true));
 		axiosInstance
 			.post(`/private-/${leagueId}/join`)
-			.then(() => {
+			.then((data) => {
 				dispatch(setIsLeavingPrivateLeague(false));
+				toastSuccess(data?.data?.message ?? "You have left the private league");
 				dispatch(getAllPrivateLeaguesAPI());
 			})
 			.catch((error) => {
@@ -101,8 +113,11 @@ export const deletePrivateLeagueAPI = createAsyncThunk(
 		dispatch(setIsDeletingPrivateLeague(true));
 		axiosInstance
 			.delete(`/private-league/${leagueId}`)
-			.then(() => {
+			.then((data) => {
 				dispatch(setIsDeletingPrivateLeague(false));
+				toastSuccess(
+					data?.data?.message ?? "You have deleted the private league"
+				);
 				dispatch(getAllPrivateLeaguesAPI());
 			})
 			.catch((error) => {
@@ -130,7 +145,7 @@ export const getAllPrivateLeaguesAPI = createAsyncThunk(
 	}
 );
 
-export const getSpecificPrivateLeaguesAPI = createAsyncThunk(
+export const getSpecificPrivateLeagueAPI = createAsyncThunk(
 	"privateLeague/getSpecificPrivateLeagues",
 	({ leagueId }: FieldValues, { dispatch }) => {
 		dispatch(setIsFetchingSpecificPrivateLeague(true));

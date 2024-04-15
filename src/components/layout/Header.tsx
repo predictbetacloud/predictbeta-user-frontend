@@ -55,7 +55,7 @@ const Header = ({ title }: Props) => {
 				<img src={logo} alt="Predictbeta" className="" />
 			</div>
 
-			<div className="flex items-center justify-between flex-grow md:pl-32">
+			<div className=" hidden md:flex items-center justify-between flex-grow md:pl-32">
 				{/* Title */}
 				{!title ? (
 					<>

@@ -35,7 +35,7 @@ const PrivateLeagueOptions = ({
 				<DropdownStyle className="private-league-options ring-white outline-none bg-white rounded-md border border-[#E1E7EC]">
 					<Menu.Item>
 						<Link
-							to={`/dashboard/private-league/view/${leagueDetails?.id}`}
+							to={`/dashboard/private-league/standing/${leagueDetails?.id}`}
 							className="block px-4 py-2.5 w-40 focus:bg-slate-100 hover:bg-slate-100"
 						>
 							<p className="text-[#5F6B7A]">View Standings</p>
