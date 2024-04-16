@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import Select from "react-select";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import DashboardLayout from "../../../components/layout/DashboardLayout";
 
@@ -137,7 +137,9 @@ const EditPrivateLeague = () => {
 							onSubmit={handleSubmit(submit)}
 							className="col-span-12 lg:col-span-5 bg-white rounded-lg p-6 shadow-md"
 						>
-							<h3 className="text-[#212934] font-semibold mb-1">Edit Private League</h3>
+							<h3 className="text-[#212934] font-semibold mb-1">
+								Edit Private League
+							</h3>
 							<p className="text-sm text-[#5F6B7A]">
 								By default, prizes go to the top 3 winners at the end of each
 								match week. You can also use the advanced settings feature for

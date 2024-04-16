@@ -3,7 +3,6 @@ import Modal from "./Modal";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import {
 	selectIsDeletingPrivateLeague,
-	selectIsLeavingPrivateLeague,
 	selectShowDeletePrivateLeagueModal,
 	setShowDeletePrivateLeagueModal,
 } from "../../state/slices/privateLeague";
