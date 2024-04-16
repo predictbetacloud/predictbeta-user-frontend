@@ -4,6 +4,7 @@ import { DrawerState } from "../../types/types";
 
 const initialState: DrawerState = {
 	isDrawerOpen: false,
+	isPublicDrawerOpen: false,
 };
 
 export const drawerSlice = createSlice({
@@ -13,10 +14,16 @@ export const drawerSlice = createSlice({
 		toggleDrawer: (state) => {
 			state.isDrawerOpen = !state.isDrawerOpen;
 		},
+		togglePublicDrawer: (state) => {
+			state.isPublicDrawerOpen = !state.isPublicDrawerOpen;
+		},
 	},
 });
 
-export const { toggleDrawer } = drawerSlice.actions;
+export const { toggleDrawer, togglePublicDrawer } = drawerSlice.actions;
 
 export const selectDrawerState = (state: RootState) =>
 	state.drawer.isDrawerOpen;
+
+export const selectPublicDrawerState = (state: RootState) =>
+	state.drawer.isPublicDrawerOpen;

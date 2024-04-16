@@ -64,12 +64,12 @@ const AdPopUp = () => {
 									</h4>
 									<div className="flex items-center justify-between mt-8">
 										<div className="md:w-3/5">
-											<h2 className="text-6xl text-white font-bold">
+											<h2 className="text-3xl lg:text-6xl text-white font-bold">
 												We’re the fastest growing sports prediction platform!
 											</h2>
 										</div>
 										{/* Match img */}
-										<img src={matchImg} alt="match" className="" />
+										<img src={matchImg} alt="match" className="hidden lg:block" />
 									</div>
 									<Link to="/login">
 										<Button title="Join predictbeta" className="mt-8" />
@@ -79,7 +79,7 @@ const AdPopUp = () => {
 								<img
 									src={legImg}
 									alt="foot"
-									className="absolute h-full right-0 top-0"
+									className="hidden md:block absolute h-full right-0 top-0"
 								/>
 							</Dialog.Panel>
 						</Transition.Child>

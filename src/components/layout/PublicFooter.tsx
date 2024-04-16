@@ -12,7 +12,7 @@ const routes: { title: string; route: string }[] = [
 
 const PublicFooter = () => {
 	return (
-		<footer className=" w-full">
+		<footer className="w-full">
 			{/* top */}
 			<div className="md:flex items-center justify-between py-6 px-6 md:px-40 bg-white">
 				<img src={logo} alt="Predictbeta" className="md:mr-8" />

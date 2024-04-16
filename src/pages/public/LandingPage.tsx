@@ -86,9 +86,9 @@ const LandingPage = () => {
 		<main className="bg-white">
 			<PublicHeader />
 			{/* Hero Image */}
-			<section className="px-6 md:px-40 max-h-screen w-full lg:flex justify-between">
+			<section className="px-6 md:px-40 pt-10 lg:pt-0 max-h-screen w-full lg:flex justify-between">
 				<div className="lg:w-1/2 flex-shrink-0 lg:pt-24">
-					<h1 className="text-[56px] font-semibold leading-[68px]">
+					<h1 className="text-[50px] lg:text-[56px] font-semibold leading-[55px] lg:leading-[68px]">
 						<span className="text-[#eb1536]">Predict</span>! <br />
 						Take Everyone’s Money<span className="text-[#eb1536]">.</span>
 					</h1>
@@ -112,14 +112,14 @@ const LandingPage = () => {
 			</section>
 
 			{/* Carousel section */}
-			<div className="px-6 md:px-40 md:-mt-96 mb-24 font-medium">
+			<div className="px-4 md:px-40 mt-10 md:-mt-96 mb-24 font-medium">
 				<h3 className="mb-5 lg:mt-32 text-[#2A2E33]">Recent winners</h3>
 				<WinnersCarousel winners={winners} />
 			</div>
 
 			{/* Weekly Predictions Teaser */}
 			<section
-				className="px-6 md:px-40 pt-20 lg:py-32 mb-10 lg:mb-0"
+				className="px-4 md:px-40 pt-16 lg:py-32 mb-10 lg:mb-0"
 				style={{
 					background: colors.peach,
 				}}
@@ -130,7 +130,7 @@ const LandingPage = () => {
 				>
 					Are you up to the task this week?
 				</h2>
-				<div className="p-8 bg-white rounded-xl -mx-6 lg:mx-0">
+				<div className="p-4 lg:p-8 bg-white rounded-xl">
 					<p
 						color={colors.grey700}
 						className="pb-2 inline-block mb-6 text-[#2A2E33]"

@@ -292,4 +292,5 @@ export const statusEnum = {
 
 export interface DrawerState {
 	isDrawerOpen: boolean;
+	isPublicDrawerOpen: boolean;
 }

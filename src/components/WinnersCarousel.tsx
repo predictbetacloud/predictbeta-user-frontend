@@ -48,13 +48,6 @@ const CustomSlider = styled(Slider)`
 		display: none;
 	}
 
-	@media (max-width: 1000px) {
-		& .slick-prev,
-		.slick-next {
-			display: none;
-		}
-	}
-
 	& .slick-prev,
 	.slick-next {
 		&:before {
@@ -72,6 +65,23 @@ const CustomSlider = styled(Slider)`
 		display: flex;
 		justify-content: center;
 		align-items: center;
+
+		@media (max-width: 600px) {
+			width: 20px;
+			height: 20px;
+		}
+	}
+
+	@media (max-width: 1000px) {
+		& .slick-prev,
+		.slick-next,
+		.slick-arrow {
+			display: none;
+
+			&:before {
+				display: none;
+			}
+		}
 	}
 `;
 
@@ -130,7 +140,7 @@ const WinnersCarousel = ({
 	};
 
 	return (
-		<div className="-mx-3">
+		<div className="lg:-mx-3">
 			<CustomSlider {...settings}>
 				{winners.map((winner, index) => (
 					<WinnersCard winner={winner} key={index} data-index={index} />
