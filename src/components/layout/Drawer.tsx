@@ -1,57 +1,31 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { IoCloseCircleSharp, IoMenuOutline } from "react-icons/io5";
-import queryString from "query-string";
 
 import logo from "../../assets/logo/logo-light.svg";
 
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { selectDrawerState, toggleDrawer } from "../../state/slices/drawer";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { selectAuth, selectIsFetchingUserInfo } from "../../state/slices/auth";
-import { IWeek } from "../../types/types";
-import { selectAllWeeks } from "../../state/slices/fixtures";
 import { TextSkeleton } from "../loaders/TextSkeleton";
 import { formatCurrency } from "../../utils/utils";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { colors } from "../../utils/colors";
 import Button from "../Buttons";
-import { setShowDepositModal } from "../../state/slices/wallet";
-import { BsFillClockFill } from "react-icons/bs";
-import { isBefore } from "date-fns";
-import CustomCountDown from "../Countdown";
 import { routes } from "./Sidebar";
 import { logOutAPI } from "../../api/authAPI";
 
 const Drawer = () => {
 	const dispatch = useAppDispatch();
-	const l = useLocation();
-
-	const queries = queryString.parse(l.search);
-	const query_week = queries?.week;
 
 	const showDrawer = useAppSelector(selectDrawerState);
 	const isFetchingUserInfo = useAppSelector(selectIsFetchingUserInfo);
-	const allWeeks = useAppSelector(selectAllWeeks);
 	const { wallet, user } = useAppSelector(selectAuth);
 
-	const [selectedWeek, setSelectedWeek] = useState<IWeek | null>(null);
 	const [hideBalance, setHideBalance] = useState(false);
 
 	const toggleHideBalance = () => setHideBalance(!hideBalance);
-
-	// Make latest week the active week
-	useEffect(() => {
-		if (query_week) {
-			const activeWeek = allWeeks.find(
-				(_week) => _week.number === Number(query_week)
-			);
-			if (activeWeek) {
-				setSelectedWeek(activeWeek);
-			}
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [allWeeks, query_week]);
 
 	return (
 		<main className="lg:hidden">
@@ -63,16 +37,7 @@ const Drawer = () => {
 				<IoMenuOutline color="#fff" size={24} />
 			</button>
 
-			<Transition
-				as={Fragment}
-				show={showDrawer}
-				// enter="transform transition duration-[400ms]"
-				// enterFrom="opacity-0 rotate-[-120deg] scale-50"
-				// enterTo="opacity-100 rotate-0 scale-100"
-				// leave="transform duration-200 transition ease-in-out"
-				// leaveFrom="opacity-100 rotate-0 scale-100 "
-				// leaveTo="opacity-0 scale-95 "
-			>
+			<Transition as={Fragment} show={showDrawer}>
 				<Dialog
 					as="div"
 					className="relative z-[1000]"
@@ -112,77 +77,44 @@ const Drawer = () => {
 										</button>
 									</div>
 
-									{/* Countdown */}
-									<div className="mb-4">
-										{/* Countdown */}
-										{selectedWeek?.deadline ? (
-											<div className="">
-												<div className="flex items-center">
-													<BsFillClockFill
-														color={colors.white}
-														fill={colors.blue900}
-													/>
-													{!isBefore(
-														new Date(),
-														new Date(String(selectedWeek?.deadline))
-													) ? (
-														<p className="ml-4 text-[#051B30]">
-															Prediction deadline has passed
+									<div className="mt-2 mb-4">
+										{/* Balance */}
+										<div className="rounded-md p-2 px-3 flex items-center bg-[#F5F8FA]">
+											<p className="mr-2 text-[#212934]">Balance:</p>
+											<p className="mr-1 text-[#8895A7] text-xs font-semibold">
+												NGN
+											</p>
+											{isFetchingUserInfo ? (
+												<TextSkeleton width="100px" />
+											) : (
+												<>
+													{hideBalance ? (
+														<p className="mr-1 text-[#2A2E33] font-semibold">
+															********
 														</p>
 													) : (
-														<>
-															<p className="ml-4 text-[#051B30]">
-																Time left until the end of this round
-															</p>
-															<CustomCountDown
-																deadline={selectedWeek?.deadline}
-															/>
-														</>
+														<p className="mr-1 text-[#2A2E33] font-semibold">
+															{formatCurrency(wallet?.balance || 0)}
+														</p>
 													)}
-												</div>
-											</div>
-										) : (
-											<p></p>
-										)}
-										<div className="mt-2">
-											{/* Balance */}
-											<div className="rounded-md p-2 px-3 flex items-center bg-[#F5F8FA]">
-												<p className="mr-2 text-[#212934]">Balance:</p>
-												<p className="mr-1 text-[#8895A7] text-xs font-semibold">
-													NGN
-												</p>
-												{isFetchingUserInfo ? (
-													<TextSkeleton width="100px" />
+												</>
+											)}
+											<div className="ml-auto">
+												{hideBalance ? (
+													<AiOutlineEye
+														fill={colors.grey500}
+														color={colors.grey700}
+														size={18}
+														onClick={toggleHideBalance}
+													/>
 												) : (
-													<>
-														{hideBalance ? (
-															<p className="mr-1 text-[#2A2E33] font-semibold">
-																********
-															</p>
-														) : (
-															<p className="mr-1 text-[#2A2E33] font-semibold">
-																{formatCurrency(wallet?.balance || 0)}
-															</p>
-														)}
-													</>
+													<AiOutlineEyeInvisible
+														fill={colors.grey500}
+														color={colors.grey100}
+														size={18}
+														onClick={toggleHideBalance}
+													/>
 												)}
-												<div className="ml-auto">
-													{hideBalance ? (
-														<AiOutlineEye
-															fill={colors.grey500}
-															color={colors.grey700}
-															size={18}
-															onClick={toggleHideBalance}
-														/>
-													) : (
-														<AiOutlineEyeInvisible
-															fill={colors.grey500}
-															color={colors.grey100}
-															size={18}
-															onClick={toggleHideBalance}
-														/>
-													)}
-												</div>
 											</div>
 										</div>
 									</div>

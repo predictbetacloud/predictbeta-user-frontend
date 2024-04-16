@@ -94,7 +94,7 @@ const CreatePrivateLeague = () => {
 
 	return (
 		<DashboardLayout title="Private League - Create">
-			<section className="predictbeta-header px-8 pt-6 flex items-center">
+			<section className="predictbeta-header px-4 lg:px-8 pt-6 flex items-center">
 				<TabNav
 					tabs={[
 						{
@@ -108,10 +108,10 @@ const CreatePrivateLeague = () => {
 					]}
 				/>
 			</section>
-			<main className="p-8 grid md:grid-cols-11 gap-4">
+			<main className="px-4 py-8 lg:p-8 grid md:grid-cols-11 gap-4">
 				<form
 					onSubmit={handleSubmit(submit)}
-					className="col-span-12 lg:col-span-5 bg-white rounded-lg p-6 shadow-md"
+					className="col-span-12 lg:col-span-5 bg-white rounded-lg p-4 lg:p-6 shadow-md"
 				>
 					<h3 className="text-[#212934] font-semibold mb-1">
 						Create new league

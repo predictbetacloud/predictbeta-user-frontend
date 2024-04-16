@@ -176,7 +176,7 @@ const PrivateLeagueWeekLeaderboard = () => {
 					: `Standings - ${leagueDetails?.name}`
 			}
 		>
-			<section className="predictbeta-header bg-white w-full px-8 flex items-end justify-between">
+			<section className="predictbeta-header bg-white w-full px-4 lg:px-8 flex lg:items-end lg:justify-between flex-col-reverse lg:flex-row gap-4 lg:gap-0">
 				<TabNav
 					tabs={[
 						{
@@ -245,7 +245,7 @@ const PrivateLeagueWeekLeaderboard = () => {
 					)}
 				</div>
 			</section>
-			<section className="w-full p-8">
+			<section className="w-full px-4 py-8 lg:p-8">
 				<Table
 					data={leaderboard}
 					columns={columns}

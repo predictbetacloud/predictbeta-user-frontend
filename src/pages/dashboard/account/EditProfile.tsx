@@ -47,7 +47,7 @@ const EditProfile = () => {
 
 	return (
 		<DashboardLayout title="Account Setting - Profile">
-			<section className="predictbeta-header px-8 pt-6 flex items-center">
+			<section className="predictbeta-header px-4 lg:px-8 pt-6 flex items-center">
 				<TabNav
 					tabs={[
 						{ path: "/dashboard/account", title: "Edit/Update Profile" },
@@ -55,12 +55,12 @@ const EditProfile = () => {
 					]}
 				/>
 			</section>
-			<main className="p-8 grid md:grid-cols-11 gap-4">
+			<main className="p-4 py-8 lg:p-8 grid md:grid-cols-11 gap-4">
 				<form
 					onSubmit={handleSubmit(submit)}
 					className="col-span-12 lg:col-span-5"
 				>
-					<section className="bg-white rounded p-8 shadow-md">
+					<section className="bg-white rounded p-4 lg:p-8 shadow-md">
 						{/* First Name */}
 						<div className="">
 							<label htmlFor="firstName" className="mb-2 block">

@@ -29,7 +29,7 @@ const JoinPrivateLeague = () => {
 
 	return (
 		<DashboardLayout title="Private League - Join">
-			<section className="predictbeta-header px-8 pt-6 flex items-center">
+			<section className="predictbeta-header px-4 lg:px-8 pt-6 flex items-center">
 				<TabNav
 					tabs={[
 						{
@@ -43,7 +43,7 @@ const JoinPrivateLeague = () => {
 					]}
 				/>
 			</section>
-			<main className="p-8 grid md:grid-cols-11 gap-4">
+			<main className="px-4 py-8 lg:px-8 grid md:grid-cols-11 gap-4">
 				<form
 					onSubmit={handleSubmit(submit)}
 					className="col-span-12 lg:col-span-5 bg-white rounded-lg p-6 shadow-md"

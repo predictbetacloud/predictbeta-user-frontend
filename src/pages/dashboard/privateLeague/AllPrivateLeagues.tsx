@@ -82,7 +82,7 @@ const AllPrivateLeagues = () => {
 
 	return (
 		<DashboardLayout title="Private Leagues">
-			<section className="predictbeta-header bg-white w-full px-8 py-4 flex items-end justify-between">
+			<section className="predictbeta-header bg-white w-full px-4 lg:px-8 py-4 md:flex items-end justify-between space-y-2 md:space-y-0">
 				<h3 className="text-[#212934] font-semibold text-lg">My Leagues</h3>
 				<div className="flex items-center gap-x-4">
 					<Button
@@ -95,7 +95,7 @@ const AllPrivateLeagues = () => {
 					/>
 				</div>
 			</section>
-			<section className="w-full md:w-3/4 p-8">
+			<section className="w-screen md:w-3/4 p-4 lg:p-8">
 				<Table
 					data={allPrivateLeagues}
 					columns={columns}
