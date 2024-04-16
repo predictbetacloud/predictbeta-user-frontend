@@ -143,7 +143,7 @@ const PredictionHistory = () => {
 
 	return (
 		<DashboardLayout title="Prediction History">
-			<section className="predictbeta-header bg-white w-full px-8 py-3 flex items-center justify-between">
+			<section className="predictbeta-header bg-white w-full px-4 lg:px-8 py-3 flex items-center justify-between">
 				{/* season select */}
 				<div className="flex items-center gap-4">
 					{isFetchingSeasons || !seasons ? (
@@ -212,7 +212,7 @@ const PredictionHistory = () => {
 					{Array.isArray(specificWeekPredictions?.predictions?.fixtures) &&
 					specificWeekPredictions?.predictions?.fixtures.length > 0 ? (
 						<>
-							<section className="flex py-10 px-8">
+							<section className="flex py-5 lg:py-10 px-4 lg:px-8">
 								<div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
 									<div className="grid md:grid-cols-2 gap-6">
 										{allMatches?.map((match) => (
@@ -249,7 +249,7 @@ const PredictionHistory = () => {
 							</section>
 						</>
 					) : (
-						<div className="flex items-center justify-center py-20 lg:py-32 flex-col">
+						<div className="flex items-center justify-center py-20 lg:py-32 px-4 lg:px-0 flex-col text-center">
 							<h3 className="font-bold text-3xl mb-2">
 								There no Predictions for this week
 							</h3>
