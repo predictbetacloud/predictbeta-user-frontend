@@ -155,7 +155,7 @@ const WeekLeaderboard = () => {
 
 	return (
 		<DashboardLayout title="Leaderboard">
-			<section className="predictbeta-header bg-white w-full px-8 flex items-end justify-between">
+			<section className="predictbeta-header bg-white w-full px-4 md:px-8 flex lg:items-end lg:justify-between flex-col-reverse lg:flex-row gap-4 lg:gap-0">
 				<TabNav
 					tabs={[
 						{ path: "/dashboard/leaderboard", title: "Week" },
@@ -218,7 +218,7 @@ const WeekLeaderboard = () => {
 					)}
 				</div>
 			</section>
-			<section className="w-full p-8">
+			<section className="w-full p-4 md:p-8">
 				<Table
 					data={leaderboard}
 					columns={columns}

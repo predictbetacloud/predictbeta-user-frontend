@@ -52,8 +52,16 @@ const Header = ({ title }: Props) => {
 
 	return (
 		<header className="bg-[#051B30] py-3 px-4 lg:px-8 sticky top-0 flex items-center justify-between z-[100]">
-			<div className="md:px-10 flex-shrink-0">
-				<img src={logo} alt="Predictbeta" className="" />
+			<div className="flex items-center">
+				<div className="md:px-10 flex-shrink-0">
+					<img src={logo} alt="Predictbeta" className="" />
+				</div>
+
+				{title ? (
+					<h1 className="lg:hidden text-white font-semibold text-sm ml-4">
+						{title}
+					</h1>
+				) : null}
 			</div>
 
 			<div className=" hidden lg:flex items-center justify-between flex-grow md:pl-32">

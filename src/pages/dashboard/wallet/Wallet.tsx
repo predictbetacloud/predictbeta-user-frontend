@@ -96,14 +96,14 @@ const Wallet = () => {
 
 	return (
 		<DashboardLayout title="Wallet">
-			<section className="px-8 py-4 flex items-center justify-end gap-x-4">
+			<section className="px-4 lg:px-8 py-4 flex items-center justify-end gap-x-4">
 				<Button
 					title="Deposit"
 					onClick={() => dispatch(setShowDepositModal(true))}
 				/>
 				<Button.Blue title="Withdraw" />
 			</section>
-			<section className="w-full p-8">
+			<section className="w-screen lg:w-full p-4 lg:p-8">
 				<Table
 					data={walletHistory}
 					columns={columns}

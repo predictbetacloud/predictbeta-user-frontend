@@ -24,7 +24,7 @@ import { P } from "./Texts";
 import { TextSkeleton } from "./loaders/TextSkeleton";
 
 const TableHolder = styled.table`
-	max-height: 80vh;
+	// max-height: 80vh;
 	box-shadow: 0px 4px 16px 0px #0000000d;
 	border: 1px solid #e1e7ec;
 
@@ -177,9 +177,10 @@ function Table({
 	});
 
 	return (
-		<div className={" flex flex-col min-w-0 break-words w-full"}>
+		<>
+			{/* <div className=""> */}
 			{loading ? (
-				<div className="block w-full overflow-x-auto overflow-y-hidden">
+				<div className="block max-w-full overflow-x-auto">
 					<TableHolder className="items-center w-full bg-transparent border-collapse relative">
 						<thead className="">
 							{table.getHeaderGroups().map((headerGroup) => (
@@ -226,8 +227,8 @@ function Table({
 				<>
 					{tableData && data?.length > 0 ? (
 						<>
-							<div className="block w-full overflow-x-auto ">
-								<TableHolder className="items-center w-full bg-transparent border-collapse relative">
+							<div className="max-w-full overflow-x-scroll">
+								<TableHolder className="w-full bg-transparent border-collapse">
 									<thead className="">
 										{table.getHeaderGroups().map((headerGroup) => (
 											<tr key={headerGroup.id}>
@@ -316,7 +317,8 @@ function Table({
 					)}
 				</>
 			)}
-		</div>
+			{/* </div> */}
+		</>
 	);
 }
 
