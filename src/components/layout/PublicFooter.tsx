@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
 
 import logo from "../../assets/logo/logo-light.svg";
-import goBetLogo from "../../assets/images/Gobet-Featured-Image 1.png";
+// import goBetLogo from "../../assets/images/Gobet-Featured-Image 1.png";
 
 const routes: { title: string; route: string }[] = [
 	{ title: "About us", route: "/about-us" },
