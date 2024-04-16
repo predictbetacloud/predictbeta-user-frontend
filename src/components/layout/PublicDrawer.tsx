@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { IoCloseCircleSharp, IoMenuOutline } from "react-icons/io5";
 
@@ -10,25 +10,19 @@ import {
 	togglePublicDrawer,
 } from "../../state/slices/drawer";
 import { Link } from "react-router-dom";
-import { selectAuth, selectIsFetchingUserInfo } from "../../state/slices/auth";
-import { TextSkeleton } from "../loaders/TextSkeleton";
-import { formatCurrency } from "../../utils/utils";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { colors } from "../../utils/colors";
 import Button from "../Buttons";
-import { routes } from "./Sidebar";
-import { logOutAPI } from "../../api/authAPI";
+
+const routes: { title: string; route: string }[] = [
+	{ title: "Home", route: "/" },
+	{ title: "How to Play", route: "/how-to-play" },
+	{ title: "Leaderboard", route: "/leaderboard" },
+	{ title: "FAQs", route: "/faq" },
+];
 
 const PublicDrawer = () => {
 	const dispatch = useAppDispatch();
 
 	const showDrawer = useAppSelector(selectPublicDrawerState);
-	const isFetchingUserInfo = useAppSelector(selectIsFetchingUserInfo);
-	const { wallet, user } = useAppSelector(selectAuth);
-
-	const [hideBalance, setHideBalance] = useState(false);
-
-	const toggleHideBalance = () => setHideBalance(!hideBalance);
 
 	return (
 		<main className="lg:hidden">
@@ -80,103 +74,36 @@ const PublicDrawer = () => {
 										</button>
 									</div>
 
-									<div className="mt-2 mb-4">
-										{/* Balance */}
-										<div className="rounded-md p-2 px-3 flex items-center bg-[#F5F8FA]">
-											<p className="mr-2 text-[#212934]">Balance:</p>
-											<p className="mr-1 text-[#8895A7] text-xs font-semibold">
-												NGN
-											</p>
-											{isFetchingUserInfo ? (
-												<TextSkeleton width="100px" />
-											) : (
-												<>
-													{hideBalance ? (
-														<p className="mr-1 text-[#2A2E33] font-semibold">
-															********
-														</p>
-													) : (
-														<p className="mr-1 text-[#2A2E33] font-semibold">
-															{formatCurrency(wallet?.balance || 0)}
-														</p>
-													)}
-												</>
-											)}
-											<div className="ml-auto">
-												{hideBalance ? (
-													<AiOutlineEye
-														fill={colors.grey500}
-														color={colors.grey700}
-														size={18}
-														onClick={toggleHideBalance}
-													/>
-												) : (
-													<AiOutlineEyeInvisible
-														fill={colors.grey500}
-														color={colors.grey100}
-														size={18}
-														onClick={toggleHideBalance}
-													/>
-												)}
-											</div>
-										</div>
-									</div>
-
-									<hr className="my-4" />
-
 									{/* Routes */}
 									<div className="flex flex-col flex-grow justify-between">
 										{/* Links */}
-										<div>
-											{routes.map((route, idx) => (
-												<Link
-													key={idx}
-													to={route.path}
-													onClick={() => dispatch(togglePublicDrawer())}
-													className={`rounded-md p-3 flex items-center mb-3 gap-3 ${
-														location.pathname.includes(route.path)
-															? "bg-[#051B30] text-white font-normal"
-															: "bg-[#F5F8FA] text-[#051B30] font-light"
-													}`}
-												>
-													{route.icon
-														? React.cloneElement(route.icon, {
-																color: location.pathname.includes(route.path)
-																	? "#fff"
-																	: "#051B30",
-														  })
-														: null}
-													<p className="text-sm">{route.title}</p>
-												</Link>
-											))}
-										</div>
+										{routes.map((route) => (
+											<Link
+												key={route.title}
+												to={route.route}
+												className="text-[#153243] hover:text-[#eb1536] block my-2"
+												onClick={() => dispatch(togglePublicDrawer())}
+											>
+												{route.title}
+											</Link>
+										))}
 									</div>
-								</section>
 
-								<div className="p-3 pt-4 border border-[#E1E7EC] rounded-xl">
-									<div className="flex items-center gap-x-3">
-										<div className="flex items-center justify-center rounded-md w-9 h-9 bg-[#F5F8FA] border border-[#E1E7EC]">
-											<p className="uppercase text-[#051B30]">
-												{user?.firstName?.[0]}
-												{user?.lastName?.[0]}
-											</p>
-										</div>
-										<div>
-											<p className="text-[#212934] text-sm">
-												{user?.firstName} {user?.lastName}
-											</p>
-											<p className="text-[#8895A7] text-xs">({user?.email})</p>
-										</div>
-									</div>
-									<Button.Outline
-										title="Log out"
-										className="mt-3 w-full"
-										onClick={() => {
-											dispatch(togglePublicDrawer());
-											dispatch(logOutAPI());
-										}}
-									/>
-								</div>
+									<Link
+										to="/login"
+										className="block mt-4"
+										onClick={() => dispatch(togglePublicDrawer())}
+									>
+										<Button.OutlineWhite className="w-full" title="Login" />
+									</Link>
+									<Link
+										to="/register"
+										className="block mt-4"
+										onClick={() => dispatch(togglePublicDrawer())}
+									>
+										<Button.Blue className="w-full" title="Create account" />
+									</Link>
+								</section>
 								{/* <Button.Outline
 									title="Log out"
 									className="mt-3 w-full"

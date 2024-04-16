@@ -16,32 +16,32 @@ const PublicFooter = () => {
 			{/* top */}
 			<div className="md:flex items-center justify-between py-6 px-6 md:px-40 bg-white">
 				<img src={logo} alt="Predictbeta" className="md:mr-8" />
-				<nav className="flex items-center gap-x-8">
+				<nav className="flex items-center gap-x-8 mt-4 md:mt-0">
 					{routes.map((route) => (
 						<Link
 							key={route.title}
 							to={route.route}
-							className="text-[#153243] hover:text-[#eb1536]"
+							className="text-sm md:text-base text-[#153243] hover:text-[#eb1536]"
 						>
 							{route.title}
 						</Link>
 					))}
 				</nav>
-				<a
+				{/* <a
 					href="https://gobet247.com"
 					className="text-[#153243] hover:text-[#eb1536]"
 				>
 					<img src={goBetLogo} alt="Gobet247" className="" />
-				</a>
+				</a> */}
 			</div>
 
 			{/* copyright */}
-			<div className="flex items-center justify-between bg-[#051B30] py-3 px-6 md:px-40">
-				<p className="text-white font-light text-sm">
+			<div className="md:flex items-center justify-between bg-[#051B30] py-3 px-6 md:px-40">
+				<p className="text-white font-light text-xs md:text-sm">
 					© {new Date().getFullYear()} - Predictbeta. All rights reserved |
 					(18+) Predict Responsibly
 				</p>
-				<div className="flex items-center gap-x-4">
+				<div className="flex items-center gap-x-4 mt-4 md:mt-0">
 					<a
 						href="#"
 						className="flex items-center justify-center w-8 h-8 rounded-full bg-[#EB1536]"
