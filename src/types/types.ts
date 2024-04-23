@@ -82,8 +82,18 @@ export interface LeaderboardItem {
 	location: string | null;
 	points: number;
 }
+export interface IPaginatedLeaderboard {
+	items: LeaderboardItem[];
+	meta: {
+		totalItems: number;
+		itemCount: number;
+		itemsPerPage: number;
+		totalPages: number;
+		currentPage: number;
+	};
+}
 export interface LeaderboardState {
-	leaderboard: LeaderboardItem[];
+	leaderboard: IPaginatedLeaderboard | null;
 	isFetchingWeekLeaderboard: boolean;
 	isFetchingSeasonLeaderboard: boolean;
 }
@@ -229,9 +239,20 @@ export interface WalletHistoryItem {
 	type: "credit" | "debit";
 }
 
+export interface IPaginatedWalletHistory {
+	items: LeaderboardItem[];
+	meta: {
+		totalItems: number;
+		itemCount: number;
+		itemsPerPage: number;
+		totalPages: number;
+		currentPage: number;
+	};
+}
+
 export interface WalletState {
 	wallet: WalletType | null;
-	walletHistory: WalletHistoryItem[];
+	walletHistory: IPaginatedWalletHistory | null;
 	isFetchingWalletInfo: boolean;
 	isFundingWallet: boolean;
 	isWithdrawingWallet: boolean;

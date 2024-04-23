@@ -70,7 +70,7 @@ export function formatPredictionsFromObjectToArray(predictions: {
 
 // create positions array
 export const createPositionsArray = (count: number) => {
-	let array = [];
+	const array = [];
 
 	for (let index = 0; index < count; index++) {
 		const position = index + 1;

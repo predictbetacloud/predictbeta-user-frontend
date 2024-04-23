@@ -1,7 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { type RootState } from "../store";
-import { WalletState, WalletType } from "../../types/types";
+import {
+	IPaginatedWalletHistory,
+	WalletState,
+	WalletType,
+} from "../../types/types";
 
 const sessionName = import.meta.env.VITE_REACT_APP_SLUG + "_session";
 
@@ -9,7 +13,7 @@ const initialState: WalletState = {
 	wallet: localStorage.getItem(sessionName)
 		? JSON.parse(localStorage.getItem(sessionName) ?? "")?.wallet
 		: {},
-	walletHistory: [],
+	walletHistory: null,
 	isFetchingWalletInfo: false,
 	isFundingWallet: false,
 	isWithdrawingWallet: false,
@@ -26,7 +30,10 @@ export const walletSlice = createSlice({
 		setWallet: (state, action: PayloadAction<WalletType>) => {
 			state.wallet = action.payload;
 		},
-		setWalletHistory: (state, action: PayloadAction<any>) => {
+		setWalletHistory: (
+			state,
+			action: PayloadAction<IPaginatedWalletHistory>
+		) => {
 			state.walletHistory = action.payload;
 		},
 		setIsFundingWallet: (

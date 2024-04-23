@@ -11,11 +11,11 @@ import {
 
 export const getWalletHistoryAPI = createAsyncThunk(
 	"wallet/getHistory",
-	({ userId }: FieldValues, { dispatch }) => {
+	({ userId, params }: FieldValues, { dispatch }) => {
 		dispatch(setIsFetchingWalletInfo(true));
 
 		axiosInstance
-			.get(`/users/${userId}/wallet-history`)
+			.get(`/users/${userId}/wallet-history`, { params })
 			.then((data) => {
 				dispatch(setIsFetchingWalletInfo(false));
 				dispatch(setWalletHistory(data.data.data));

@@ -1,10 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { type RootState } from "../store";
-import { LeaderboardItem, LeaderboardState } from "../../types/types";
+import {
+	IPaginatedLeaderboard,
+	LeaderboardItem,
+	LeaderboardState,
+} from "../../types/types";
 
 const initialState: LeaderboardState = {
-	leaderboard: [],
+	leaderboard: null,
 	isFetchingSeasonLeaderboard: false,
 	isFetchingWeekLeaderboard: false,
 };
@@ -13,7 +17,7 @@ export const leaderboardSlice = createSlice({
 	name: "leaderboard",
 	initialState,
 	reducers: {
-		setLeaderboard: (state, action: PayloadAction<LeaderboardItem[]>) => {
+		setLeaderboard: (state, action: PayloadAction<IPaginatedLeaderboard>) => {
 			state.leaderboard = action.payload;
 		},
 		setIsFetchingWeekLeaderboard: (

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import * as dfn from "date-fns";
 import { ColumnDef } from "@tanstack/react-table";
+import queryString from "query-string";
 
 import Button from "../../../components/Buttons";
 import DashboardLayout from "../../../components/layout/DashboardLayout";
@@ -17,14 +18,19 @@ import { formatCurrency } from "../../../utils/utils";
 import { getWalletHistoryAPI } from "../../../api/walletAPI";
 import { selectAuth } from "../../../state/slices/auth";
 import PillIndicator from "../../../components/PillIndicators";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 const Wallet = () => {
+	const dispatch = useAppDispatch();
+	const [, setSearchParams] = useSearchParams();
+	const l = useLocation();
+
+	const queries = queryString.parse(l.search);
+	const page = queries?.page;
+
 	const walletHistory = useAppSelector(selectWalletHistory);
 	const { user } = useAppSelector(selectAuth);
 	const isFetchingWalletInfo = useAppSelector(selectIsFetchingWalletInfo);
-	const dispatch = useAppDispatch();
-
-	const [page, setPage] = useState(1);
 
 	// useMemo(
 	// 	() =>
@@ -37,9 +43,21 @@ const Wallet = () => {
 	// );
 
 	useEffect(() => {
+		if (!page) {
+			setSearchParams({
+				page: String(1),
+			});
+		}
+	});
+
+	useEffect(() => {
 		dispatch(
 			getWalletHistoryAPI({
 				userId: user?.id,
+				params: {
+					limit: 10,
+					page,
+				},
 			})
 		);
 	}, []);
@@ -105,15 +123,16 @@ const Wallet = () => {
 			</section>
 			<section className="w-screen lg:w-full p-4 lg:p-8">
 				<Table
-					data={walletHistory}
+					data={walletHistory?.items ?? []}
 					columns={columns}
 					rows={10}
 					loading={isFetchingWalletInfo}
-					totalPages={1}
-					current_page={page}
+					totalPages={walletHistory?.meta?.totalPages ?? 1}
+					current_page={Number(page ?? 1)}
 					setCurrentPage={(page: number): void => {
-						setPage(page);
-						// throw new Error("Function not implemented.");
+						setSearchParams({
+							page: String(page),
+						});
 					}}
 				/>
 			</section>
