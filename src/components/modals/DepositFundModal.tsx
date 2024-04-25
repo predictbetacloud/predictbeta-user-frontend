@@ -15,6 +15,7 @@ import { selectAuth } from "../../state/slices/auth";
 import { fundWalletAPI, getWalletHistoryAPI } from "../../api/walletAPI";
 import { AmountOption } from "../inputs/AmountOption";
 import { InfoIcon } from "../../assets/icons";
+import { getUserInfoAPI } from "../../api/authAPI";
 
 const DepositFundModal = () => {
 	const dispatch = useAppDispatch();
@@ -48,6 +49,7 @@ const DepositFundModal = () => {
 	return (
 		<Modal
 			closeModal={() => {
+				dispatch(getUserInfoAPI({ id: user?.id }));
 				dispatch(getWalletHistoryAPI({ userId: user?.id }));
 				dispatch(setShowDepositModal(false));
 				reset();

@@ -1,4 +1,5 @@
 import React from "react";
+import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import styled from "styled-components";
 
 import {
@@ -116,30 +117,32 @@ export function CardTableFooter({
 	canNextPage?: boolean;
 }) {
 	return (
-		<div className="flex justify-end items-center mt-4 pb-6 px-6 md:px-2 ">
-			<div className="flex">
-				<span className="text-sm leading-7 text-gray-500">
-					{"Page " + pageNumber + " of " + totalPages}
-				</span>
-			</div>
-			<div className="flex">
-				{canPreviousPage && (
-					<Button.Outline
-						disabled={!canPreviousPage}
-						title="Prev"
-						className="font-bold text-base leading-7 text-gray-500"
-						onClick={prevOnClick}
-					/>
-				)}
-				{canNextPage && (
-					<Button.Outline
-						disabled={!canNextPage}
-						title="Next"
-						className="font-bold text-base leading-7 text-gray-500"
-						onClick={nextOnClick}
-					/>
-				)}
-			</div>
+		<div className="flex justify-end items-center mt-4 pb-6 px-6 md:px-2 gap-x-4">
+			{canPreviousPage && (
+				<button
+					type="button"
+					className="text-sm leading-7 text-[#051B30] flex items-center gap-1"
+					disabled={!canPreviousPage}
+					onClick={prevOnClick}
+				>
+					<FiChevronsLeft color="inherit" />
+					Prev
+				</button>
+			)}
+			<span className="text-sm text-[#8895A7]">
+				{"Page " + pageNumber + " of " + totalPages}
+			</span>
+			{canNextPage && (
+				<button
+					type="button"
+					className="text-sm leading-7 text-[#EB1536] flex items-center gap-1"
+					disabled={!canNextPage}
+					onClick={nextOnClick}
+				>
+					Next
+					<FiChevronsRight color="inherit" />
+				</button>
+			)}
 		</div>
 	);
 }
@@ -173,6 +176,7 @@ function Table({
 			sorting,
 		},
 		onSortingChange: setSorting,
+		manualPagination: true,
 		debugTable: true,
 	});
 
@@ -298,10 +302,10 @@ function Table({
 							</div>
 							<CardTableFooter
 								pageNumber={current_page}
-								totalPages={Math.ceil(Number(totalPages ?? 10) / 10)}
+								totalPages={totalPages}
 								prevOnClick={() => setCurrentPage(Number(current_page) - 1)}
 								nextOnClick={() => setCurrentPage(Number(current_page) + 1)}
-								canNextPage={current_page < totalPages / 10}
+								canNextPage={current_page < totalPages}
 								canPreviousPage={current_page > 1}
 							/>
 						</>

@@ -32,16 +32,6 @@ const Wallet = () => {
 	const { user } = useAppSelector(selectAuth);
 	const isFetchingWalletInfo = useAppSelector(selectIsFetchingWalletInfo);
 
-	// useMemo(
-	// 	() =>
-	// 		dispatch(
-	// 			getWalletHistoryAPI({
-	// 				userId: user?.id,
-	// 			})
-	// 		),
-	// 	[]
-	// );
-
 	useEffect(() => {
 		if (!page) {
 			setSearchParams({
@@ -60,7 +50,7 @@ const Wallet = () => {
 				},
 			})
 		);
-	}, []);
+	}, [page]);
 
 	const columns = useMemo<ColumnDef<WalletHistoryItem>[]>(
 		() => [
@@ -123,7 +113,7 @@ const Wallet = () => {
 			</section>
 			<section className="w-screen lg:w-full p-4 lg:p-8">
 				<Table
-					data={walletHistory?.items ?? []}
+					data={walletHistory?.items ? walletHistory?.items : []}
 					columns={columns}
 					rows={10}
 					loading={isFetchingWalletInfo}

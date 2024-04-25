@@ -106,7 +106,9 @@ const failureResponseHandler = async (error: AxiosError) => {
 
 	// No authorization response (401)
 	if (error.response && error.response.status === 401) {
-		toastError("You need to be authenticated to continue");
+		toastError(
+			"You were logged out because your session expired. Please login again."
+		);
 		if (
 			error &&
 			error.config &&
