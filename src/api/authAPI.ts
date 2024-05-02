@@ -140,6 +140,57 @@ export const loginAPI = createAsyncThunk(
 	}
 );
 
+export const forgotPasswordAPI = createAsyncThunk(
+	"auth/forgot-password",
+	({ email }: FieldValues, { dispatch }) => {
+		dispatch(setIsPerformingAuthAction(true));
+		axiosInstance
+			.post(`/users/reset-password`, {
+				email,
+			})
+			.then((data) => {
+				toastSuccess(
+					data?.data?.message ?? "Request submitted, please check your email."
+				);
+				dispatch(setIsPerformingAuthAction(false));
+
+				if (globalRouter.navigate) {
+					globalRouter.navigate("/new-password");
+				}
+			})
+			.catch((error) => {
+				dispatch(setIsPerformingAuthAction(false));
+				toastError(error?.response?.data?.message);
+			});
+	}
+);
+
+export const newPasswordAPI = createAsyncThunk(
+	"auth/new-password",
+	({ oneTimeToken, password }: FieldValues, { dispatch }) => {
+		dispatch(setIsPerformingAuthAction(true));
+		axiosInstance
+			.post(`/users/new-password`, {
+				oneTimeToken,
+				password,
+			})
+			.then((data) => {
+				toastSuccess(
+					data?.data?.message ?? "New password set up successfully."
+				);
+				dispatch(setIsPerformingAuthAction(false));
+
+				if (globalRouter.navigate) {
+					globalRouter.navigate("/login");
+				}
+			})
+			.catch((error) => {
+				dispatch(setIsPerformingAuthAction(false));
+				toastError(error?.response?.data?.message);
+			});
+	}
+);
+
 export const getUserInfoAPI = createAsyncThunk(
 	"auth/getUserInfo",
 	({ id }: FieldValues, { dispatch }) => {

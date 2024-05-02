@@ -32,6 +32,8 @@ import CreatePrivateLeague from "./pages/dashboard/privateLeague/CreatePrivateLe
 import JoinPrivateLeague from "./pages/dashboard/privateLeague/JoinPrivateLeague";
 import PrivateLeagueWeekLeaderboard from "./pages/dashboard/privateLeague/PrivateLeagueWeekLeaderboard";
 import EditPrivateLeague from "./pages/dashboard/privateLeague/EditPrivateLeague";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import NewPassword from "./pages/auth/NewPassword";
 
 function App() {
 	const navigate = useNavigate();
@@ -75,6 +77,8 @@ function App() {
 				<Route path="/faq" element={<FaqPage />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
+				<Route path="/forgot-password" element={<ForgotPassword />} />
+				<Route path="/new-password" element={<NewPassword />} />
 				<Route path="/dashboard/account/password" element={<EditPassword />} />
 				<Route path="/dashboard/account" element={<EditProfile />} />
 				<Route path="/dashboard/wallet" element={<Wallet />} />
