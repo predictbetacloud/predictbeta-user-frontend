@@ -11,7 +11,7 @@ import {
 	HistoryIcon,
 	HomeIcon,
 	LeaderboardIcon,
-	PrivateLeagueIcon,
+	// PrivateLeagueIcon,
 	SettingsIcon,
 } from "../../assets/icons";
 import { logOutAPI } from "../../api/authAPI";
