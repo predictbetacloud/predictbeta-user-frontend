@@ -20,7 +20,6 @@ import {
 	PrivateLeagueItem,
 	WalletHistoryItem,
 } from "../types/types";
-import Button from "./Buttons";
 import { P } from "./Texts";
 import { TextSkeleton } from "./loaders/TextSkeleton";
 

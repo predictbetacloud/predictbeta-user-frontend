@@ -34,6 +34,8 @@ import PrivateLeagueWeekLeaderboard from "./pages/dashboard/privateLeague/Privat
 import EditPrivateLeague from "./pages/dashboard/privateLeague/EditPrivateLeague";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import NewPassword from "./pages/auth/NewPassword";
+import SeasonLeaderboard from "./pages/dashboard/leaderboard/SeasonLeaderboard";
+import MonthLeaderboard from "./pages/dashboard/leaderboard/MonthLeaderboard";
 
 function App() {
 	const navigate = useNavigate();
@@ -83,6 +85,14 @@ function App() {
 				<Route path="/dashboard/account" element={<EditProfile />} />
 				<Route path="/dashboard/wallet" element={<Wallet />} />
 				<Route path="/dashboard/fixtures" element={<AllFixtures />} />
+				<Route
+					path="/dashboard/leaderboard/month"
+					element={<MonthLeaderboard />}
+				/>
+				<Route
+					path="/dashboard/leaderboard/season"
+					element={<SeasonLeaderboard />}
+				/>
 				<Route path="/dashboard/leaderboard" element={<WeekLeaderboard />} />
 				<Route
 					path="/dashboard/private-league/standing/:leagueId"
@@ -104,7 +114,6 @@ function App() {
 					path="/dashboard/private-league"
 					element={<AllPrivateLeagues />}
 				/>
-				{/* <Route path="/dashboard/leaderboard/season" element={<SeasonL />} /> */}
 				<Route
 					path="/dashboard/prediction-history"
 					element={<PredictionHistory />}

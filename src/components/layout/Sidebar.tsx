@@ -11,7 +11,7 @@ import {
 	HistoryIcon,
 	HomeIcon,
 	LeaderboardIcon,
-	PrivateLeagueIcon,
+	// PrivateLeagueIcon,
 	SettingsIcon,
 } from "../../assets/icons";
 import { logOutAPI } from "../../api/authAPI";
@@ -58,11 +58,11 @@ export const routes: {
 		title: "Prediction history",
 		icon: <HistoryIcon />,
 	},
-	{
-		path: "/dashboard/private-league",
-		title: "Private leagues",
-		icon: <PrivateLeagueIcon />,
-	},
+	// {
+	// 	path: "/dashboard/private-league",
+	// 	title: "Private leagues",
+	// 	icon: <PrivateLeagueIcon />,
+	// },
 ];
 
 const Sidebar = () => {

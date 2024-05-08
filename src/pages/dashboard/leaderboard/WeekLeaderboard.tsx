@@ -174,6 +174,7 @@ const WeekLeaderboard = () => {
 				<TabNav
 					tabs={[
 						{ path: "/dashboard/leaderboard", title: "Week" },
+						{ path: "/dashboard/leaderboard/month", title: "Month" },
 						{ path: "/dashboard/leaderboard/season", title: "Season" },
 					]}
 				/>
@@ -197,6 +198,7 @@ const WeekLeaderboard = () => {
 								setSearchParams({
 									season: String(value),
 									week: "",
+									page: String(1),
 								});
 							}}
 							defaultOption={String(query_season)}
@@ -236,13 +238,13 @@ const WeekLeaderboard = () => {
 			</section>
 			<section className="w-full p-4 md:p-8">
 				<Table
-					data={leaderboard?.items ?? []}
+					data={leaderboard?.data ?? []}
 					columns={columns}
 					rows={10}
 					loading={
 						isFetchingSeasons || isFetchingWeeks || isFetchingWeekLeaderboard
 					}
-					totalPages={leaderboard?.meta?.totalPages ?? 1}
+					totalPages={leaderboard?.totalPages ?? 1}
 					isLeaderboardTable
 					current_page={Number(page ?? 1)}
 					setCurrentPage={(page: number): void => {

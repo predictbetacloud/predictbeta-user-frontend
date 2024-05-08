@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import queryString from "query-string";
 
@@ -13,7 +13,7 @@ import {
 	selectIsFetchingAllSeasons,
 } from "../../../state/slices/fixtures";
 import { useLocation, useSearchParams } from "react-router-dom";
-import { getAllSeasonsAPI, getAllWeeksAPI } from "../../../api/fixturesAPI";
+import { getAllSeasonsAPI } from "../../../api/fixturesAPI";
 import {
 	selectIsFetchingSeasonLeaderboard,
 	selectLeaderboard,
@@ -32,14 +32,13 @@ const SeasonLeaderboard = () => {
 
 	const queries = queryString.parse(l.search);
 	const query_season = queries?.season;
+	const page = queries?.page;
 
 	const leaderboard = useAppSelector(selectLeaderboard);
 	const isFetchingSeasons = useAppSelector(selectIsFetchingAllSeasons);
 	const isFetchingSeasonLeaderboard = useAppSelector(
 		selectIsFetchingSeasonLeaderboard
 	);
-
-	const [page, setPage] = useState(1);
 
 	const seasons = useAppSelector(selectAllSeasons);
 
@@ -86,6 +85,10 @@ const SeasonLeaderboard = () => {
 				dispatch(
 					getSeasonLeaderboardAPI({
 						seasonId: activeSeason?.id,
+						params: {
+							limit: 10,
+							page,
+						},
 					})
 				);
 			}
@@ -93,30 +96,15 @@ const SeasonLeaderboard = () => {
 			dispatch(
 				getSeasonLeaderboardAPI({
 					seasonId: selectedSeason?.id,
+					params: {
+						limit: 10,
+						page,
+					},
 				})
 			);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedSeason]);
-
-	// Make latest season the active season
-	useEffect(() => {
-		if (query_season) {
-			const activeSeason = seasons.find(
-				(_season) => _season.name === query_season
-			);
-
-			if (activeSeason?.id) {
-				dispatch(getAllWeeksAPI({ seasonId: activeSeason?.id }));
-			}
-		} else {
-			if (seasons?.[0]?.id) {
-				dispatch(getAllWeeksAPI({ seasonId: seasons?.[0]?.id }));
-			}
-		}
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [seasons, query_season]);
 
 	const columns = useMemo<ColumnDef<LeaderboardItem>[]>(
 		() => [
@@ -150,6 +138,7 @@ const SeasonLeaderboard = () => {
 				<TabNav
 					tabs={[
 						{ path: "/dashboard/leaderboard", title: "Week" },
+						{ path: "/dashboard/leaderboard/month", title: "Month" },
 						{ path: "/dashboard/leaderboard/season", title: "Season" },
 					]}
 				/>
@@ -172,7 +161,7 @@ const SeasonLeaderboard = () => {
 							onChange={(value: string): void => {
 								setSearchParams({
 									season: String(value),
-									week: "",
+									page: String(1),
 								});
 							}}
 							defaultOption={String(query_season)}
@@ -184,19 +173,20 @@ const SeasonLeaderboard = () => {
 			</section>
 			<section className="w-full p-4 md:p-8">
 				<Table
-					data={leaderboard}
+					data={leaderboard?.data ?? []}
 					columns={columns}
 					rows={10}
 					loading={isFetchingSeasons || isFetchingSeasonLeaderboard}
-					totalPages={1}
+					totalPages={leaderboard?.totalPages ?? 1}
 					isLeaderboardTable
-					current_page={page}
+					current_page={Number(page ?? 1)}
 					setCurrentPage={(page: number): void => {
-						setPage(page);
-						// throw new Error("Function not implemented.");
+						setSearchParams({
+							page: String(page),
+						});
 					}}
 					empty_message="No leaderboard"
-					empty_sub_message="There is no leaderboard for this week"
+					empty_sub_message="There is no leaderboard for this season"
 				/>
 			</section>
 		</DashboardLayout>
