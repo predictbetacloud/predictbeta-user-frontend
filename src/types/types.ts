@@ -83,18 +83,16 @@ export interface LeaderboardItem {
 	points: number;
 }
 export interface IPaginatedLeaderboard {
-	items: LeaderboardItem[];
-	meta: {
-		totalItems: number;
-		itemCount: number;
-		itemsPerPage: number;
-		totalPages: number;
-		currentPage: number;
-	};
+	data: LeaderboardItem[];
+	totalElements: number;
+	elementsPerPage: number;
+	totalPages: number;
+	currentPage: number;
 }
 export interface LeaderboardState {
 	leaderboard: IPaginatedLeaderboard | null;
 	isFetchingWeekLeaderboard: boolean;
+	isFetchingMonthLeaderboard: boolean;
 	isFetchingSeasonLeaderboard: boolean;
 }
 

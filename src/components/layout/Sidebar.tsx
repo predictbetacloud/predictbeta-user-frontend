@@ -58,11 +58,11 @@ export const routes: {
 		title: "Prediction history",
 		icon: <HistoryIcon />,
 	},
-	{
-		path: "/dashboard/private-league",
-		title: "Private leagues",
-		icon: <PrivateLeagueIcon />,
-	},
+	// {
+	// 	path: "/dashboard/private-league",
+	// 	title: "Private leagues",
+	// 	icon: <PrivateLeagueIcon />,
+	// },
 ];
 
 const Sidebar = () => {
