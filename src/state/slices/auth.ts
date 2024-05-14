@@ -33,6 +33,7 @@ const initialState: AuthType = {
 				?.logout_retryCount
 		: "",
 	isPerformingAuthAction: false,
+	isRequestingOtp: false,
 	isFetchingUserInfo: false,
 	showAdPopUp: false,
 };
@@ -101,6 +102,12 @@ export const authSlice = createSlice({
 			state.user = null;
 			state.token = null;
 		},
+		setIsRequestingOtp: (
+			state,
+			action: PayloadAction<AuthType["isRequestingOtp"]>
+		) => {
+			state.isRequestingOtp = action.payload;
+		},
 		setIsPerformingAuthAction: (
 			state,
 			action: PayloadAction<AuthType["isPerformingAuthAction"]>
@@ -127,6 +134,7 @@ export const {
 	logoutUser,
 	setAuthFromCache,
 	setIsPerformingAuthAction,
+	setIsRequestingOtp,
 	setIsFetchingUserInfo,
 	setShowAdPopUp,
 } = authSlice.actions;
@@ -137,6 +145,8 @@ export const selectAuthUser = (state: RootState) => state.auth.user;
 export const selectAuthToken = (state: RootState) => state.auth.token;
 export const selectIsPerformingAuthAction = (state: RootState) =>
 	state.auth.isPerformingAuthAction;
+export const selectIsRequestingOtp = (state: RootState) =>
+	state.auth.isRequestingOtp;
 export const selectIsFetchingUserInfo = (state: RootState) =>
 	state.auth.isFetchingUserInfo;
 export const selectShowAdPopUp = (state: RootState) => state.auth.showAdPopUp;

@@ -7,6 +7,7 @@ import {
 	logoutUser,
 	setIsFetchingUserInfo,
 	setIsPerformingAuthAction,
+	setIsRequestingOtp,
 	updateAuth,
 	updateLogoutRetryCount,
 	updateRetryCount,
@@ -140,6 +141,54 @@ export const loginAPI = createAsyncThunk(
 	}
 );
 
+export const verifyEmailAPI = createAsyncThunk(
+	"auth/verify-email",
+	({ oneTimeToken }: FieldValues, { dispatch }) => {
+		dispatch(setIsPerformingAuthAction(true));
+		axiosInstance
+			.post(`/users/verify-email-action`, {
+				oneTimeToken,
+			})
+			.then((data) => {
+				toastSuccess(data?.data?.message ?? "Email verified");
+				dispatch(setIsPerformingAuthAction(false));
+
+				if (globalRouter.navigate) {
+					globalRouter.navigate("/login");
+				}
+			})
+			.catch((error) => {
+				dispatch(setIsPerformingAuthAction(false));
+				toastError(
+					Array.isArray(error?.response?.data?.message)
+						? error?.response?.data?.message?.[0]
+						: error?.response?.data?.message
+				);
+			});
+	}
+);
+
+export const requestPasswordOTP = createAsyncThunk(
+	"auth/request-OTP",
+	({ email }: FieldValues, { dispatch }) => {
+		dispatch(setIsRequestingOtp(true));
+		axiosInstance
+			.post(`/users/reset-password`, {
+				email,
+			})
+			.then((data) => {
+				toastSuccess(
+					data?.data?.message ?? "Request submitted, please check your email."
+				);
+				dispatch(setIsRequestingOtp(false));
+			})
+			.catch((error) => {
+				dispatch(setIsRequestingOtp(false));
+				toastError(error?.response?.data?.message);
+			});
+	}
+);
+
 export const forgotPasswordAPI = createAsyncThunk(
 	"auth/forgot-password",
 	({ email }: FieldValues, { dispatch }) => {
@@ -167,11 +216,11 @@ export const forgotPasswordAPI = createAsyncThunk(
 
 export const newPasswordAPI = createAsyncThunk(
 	"auth/new-password",
-	({ oneTimeToken, password }: FieldValues, { dispatch }) => {
+	({ oneTimePassword, password }: FieldValues, { dispatch }) => {
 		dispatch(setIsPerformingAuthAction(true));
 		axiosInstance
-			.post(`/users/new-password`, {
-				oneTimeToken,
+			.post(`/users/new-password-otp`, {
+				oneTimePassword,
 				password,
 			})
 			.then((data) => {

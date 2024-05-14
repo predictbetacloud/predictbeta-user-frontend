@@ -67,6 +67,7 @@ export interface AuthType {
 	retryCount?: number | string | null;
 	logout_retryCount?: number | string | null;
 	isPerformingAuthAction?: boolean;
+	isRequestingOtp?: boolean;
 	isFetchingUserInfo?: boolean;
 	showAdPopUp?: boolean;
 }

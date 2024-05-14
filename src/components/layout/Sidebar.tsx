@@ -100,9 +100,9 @@ const Sidebar = () => {
 
 				{/* User Card */}
 				<div className="p-3 pt-4 border border-[#E1E7EC] rounded-xl">
-					<div className="flex items-center gap-x-3">
+					<div className="flex items-center gap-x-2">
 						<div className="flex items-center justify-center rounded-md w-9 h-9 bg-[#F5F8FA] border border-[#E1E7EC]">
-							<P className="uppercase text-[#051B30]">
+							<P className="uppercase text-[#051B30] px-4">
 								{user?.firstName?.[0]}
 								{user?.lastName?.[0]}
 							</P>
@@ -111,7 +111,7 @@ const Sidebar = () => {
 							<P className="text-[#212934] text-sm">
 								{user?.firstName} {user?.lastName}
 							</P>
-							<P className="text-[#8895A7] text-xs">({user?.email})</P>
+							<P className="text-[#8895A7] text-xs">{user?.email}</P>
 						</div>
 					</div>
 					<Button.Outline

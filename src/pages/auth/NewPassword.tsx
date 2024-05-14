@@ -9,7 +9,7 @@ import { P } from "../../components/Texts";
 import { Input } from "../../components/inputs/Input";
 import Button from "../../components/Buttons";
 
-import { loginAPI } from "../../api/authAPI";
+import { newPasswordAPI } from "../../api/authAPI";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { selectAuth } from "../../state/slices/auth";
 import { Link } from "react-router-dom";
@@ -29,7 +29,7 @@ const NewPassword = () => {
 
 	// Form Submission Handler
 	const submit = ({ oneTimeToken, password }: FieldValues) => {
-		dispatch(loginAPI({ oneTimeToken, password }));
+		dispatch(newPasswordAPI({ oneTimeToken, password }));
 	};
 
 	return (
@@ -43,7 +43,7 @@ const NewPassword = () => {
 					Set a password you can easily remember.
 				</p>
 
-				{/* Email */}
+				{/* OTP */}
 				<div className="mt-5">
 					<label htmlFor="oneTimeToken" className="mb-2 block">
 						<P className="text-[#222222] text-sm">OTP</P>

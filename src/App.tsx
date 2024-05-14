@@ -36,6 +36,7 @@ import ForgotPassword from "./pages/auth/ForgotPassword";
 import NewPassword from "./pages/auth/NewPassword";
 import SeasonLeaderboard from "./pages/dashboard/leaderboard/SeasonLeaderboard";
 import MonthLeaderboard from "./pages/dashboard/leaderboard/MonthLeaderboard";
+import VerifyEmail from "./pages/auth/VerifyEmail";
 
 function App() {
 	const navigate = useNavigate();
@@ -79,6 +80,7 @@ function App() {
 				<Route path="/faq" element={<FaqPage />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
+				<Route path="/verify" element={<VerifyEmail />} />
 				<Route path="/forgot-password" element={<ForgotPassword />} />
 				<Route path="/new-password" element={<NewPassword />} />
 				<Route path="/dashboard/account/password" element={<EditPassword />} />

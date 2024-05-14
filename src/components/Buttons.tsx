@@ -96,7 +96,7 @@ Button.Outline = ({
 			onClick={() => onClick()}
 			disabled={disabled}
 			className={
-				"py-2 px-4 bg-[#F5F8FA] border border-[#E1E7EC] space-x-4 hover:bg-[##F5F8FAaa] text-center rounded disabled:opacity-50 disabled:cursor-not-allowed " +
+				"py-2 px-4 flex justify-center items-center bg-[#F5F8FA] border border-[#E1E7EC] space-x-4 hover:bg-[##F5F8FAaa] text-center rounded disabled:opacity-50 disabled:cursor-not-allowed " +
 				className
 			}
 		>

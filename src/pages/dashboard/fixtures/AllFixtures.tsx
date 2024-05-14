@@ -588,6 +588,18 @@ const AllFixtures = () => {
 														prediction={match.prediction}
 														onChange={updateSelection}
 														invalid={!!errors?.[match?.id]}
+														locked={
+															!isBefore(
+																new Date(),
+																new Date(String(activeWeek?.deadline))
+															)
+														}
+														inactive={
+															!isBefore(
+																new Date(),
+																new Date(String(activeWeek?.deadline))
+															)
+														}
 													/>
 													{errors?.[match?.id] && (
 														<div className="-mt-0.5">
@@ -647,6 +659,12 @@ const AllFixtures = () => {
 																	? invalidStyle
 																	: defaultStyle
 															}
+															isDisabled={
+																!isBefore(
+																	new Date(),
+																	new Date(String(activeWeek?.deadline))
+																)
+															}
 														/>
 													)}
 												/>
@@ -697,6 +715,12 @@ const AllFixtures = () => {
 																	? invalidStyle
 																	: defaultStyle
 															}
+															isDisabled={
+																!isBefore(
+																	new Date(),
+																	new Date(String(activeWeek?.deadline))
+																)
+															}
 														/>
 													)}
 												/>
@@ -745,6 +769,12 @@ const AllFixtures = () => {
 																	? invalidStyle
 																	: defaultStyle
 															}
+															isDisabled={
+																!isBefore(
+																	new Date(),
+																	new Date(String(activeWeek?.deadline))
+																)
+															}
 														/>
 													)}
 												/>
@@ -780,6 +810,12 @@ const AllFixtures = () => {
 													className={`w-full input ${
 														errors?.timeOfFirstGoal ? "invalid" : ""
 													}`}
+													disabled={
+														!isBefore(
+															new Date(),
+															new Date(String(activeWeek?.deadline))
+														)
+													}
 												/>
 												{errors?.timeOfFirstGoal && (
 													<ErrorMessage
