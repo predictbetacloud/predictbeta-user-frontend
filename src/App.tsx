@@ -37,6 +37,7 @@ import NewPassword from "./pages/auth/NewPassword";
 import SeasonLeaderboard from "./pages/dashboard/leaderboard/SeasonLeaderboard";
 import MonthLeaderboard from "./pages/dashboard/leaderboard/MonthLeaderboard";
 import VerifyEmail from "./pages/auth/VerifyEmail";
+import UserPredictionHistory from "./pages/dashboard/predictionHistory/UserPredictionHistory";
 
 function App() {
 	const navigate = useNavigate();
@@ -115,6 +116,10 @@ function App() {
 				<Route
 					path="/dashboard/private-league"
 					element={<AllPrivateLeagues />}
+				/>
+				<Route
+					path="/dashboard/user-prediction-history/:username"
+					element={<UserPredictionHistory />}
 				/>
 				<Route
 					path="/dashboard/prediction-history"

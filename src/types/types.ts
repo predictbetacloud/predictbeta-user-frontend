@@ -154,6 +154,9 @@ export interface IMatch {
 	createdAt: string;
 	fixtureDateTime: string;
 	week: IWeek;
+	homeForm: string;
+	awayForm: string;
+	head2head: any;
 	outcome?: "win" | "lose";
 }
 
@@ -308,6 +311,12 @@ export const statusEnum = {
 		bg: colors.orange200,
 		color: colors.orange700,
 	},
+};
+
+export const FormEnum = {
+	W: "#27C079",
+	L: "#D62F4B",
+	D: "#B8C4CE",
 };
 
 export interface DrawerState {

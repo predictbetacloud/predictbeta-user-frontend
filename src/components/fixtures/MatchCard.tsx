@@ -4,10 +4,11 @@ import { IoIosLock } from "react-icons/io";
 import * as dfn from "date-fns";
 
 import { P } from "../Texts";
-import { IClub } from "../../types/types";
+import { FormEnum, IClub, statusEnum } from "../../types/types";
 import { colors } from "../../utils/colors";
 import { MdOutlineBarChart } from "react-icons/md";
-import { BsChevronDown } from "react-icons/bs";
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+import { useState } from "react";
 
 const Style = styled.div<{ invalid: "true" | "false" }>`
 	border: 1px solid;
@@ -70,7 +71,11 @@ const Prediction = ({
 
 const Team = ({ team }: { team: IClub }) => (
 	<div className="flex items-center">
-		<img src={team?.clubLogo} className="h-6 w-6 mr-1 md:mr-3" alt={team?.name} />
+		<img
+			src={team?.clubLogo}
+			className="h-6 w-6 mr-1 md:mr-3"
+			alt={team?.name}
+		/>
 		<P className="text-[#000301] text-[0.8em]">{team?.name}</P>
 	</div>
 );
@@ -86,6 +91,9 @@ export const MatchCard = ({
 	locked = false,
 	invalid = false,
 	result,
+	head2head,
+	awayForm,
+	homeForm,
 }: {
 	away: any;
 	home: any;
@@ -96,6 +104,9 @@ export const MatchCard = ({
 	inactive?: boolean;
 	invalid?: boolean;
 	isScoreSet?: boolean;
+	head2head: any;
+	awayForm: string;
+	homeForm: string;
 	prediction?: "" | "HOME" | "DRAW" | "AWAY";
 	result?: "" | "AWAY" | "DRAW" | "HOME";
 	adminSet?: boolean;
@@ -105,6 +116,8 @@ export const MatchCard = ({
 	const captureSelection = (value: any) => {
 		onChange ? onChange(id, value) : null;
 	};
+
+	const [showStats, setShowStats] = useState(false);
 
 	return (
 		<Style className="p-4 rounded-md" invalid={invalid ? "true" : "false"}>
@@ -160,16 +173,151 @@ export const MatchCard = ({
 				<hr className="my-4" />
 				<div className="flex items-center justify-between gap-4">
 					<div className="flex items-center justify-between gap-4">
-						<button type="button" className="flex items-center w-fit gap-1">
+						<button
+							type="button"
+							className="flex items-center w-fit gap-1"
+							onClick={() => setShowStats(!showStats)}
+						>
 							<MdOutlineBarChart size={18} color={colors.accent} />
 							<p className="text-[#2A2E33] font-light">Stats</p>
-							<BsChevronDown size={12} color="#2A2E33" />
+							{showStats ? (
+								<BsChevronUp size={12} color="#2A2E33" />
+							) : (
+								<BsChevronDown size={12} color="#2A2E33" />
+							)}
 						</button>
 					</div>
 					<p className="text-[#8C97A7] text-sm font-light">
-						{dfn.format(matchTime, "eee dd MMM, HH:mm ")}
+						{matchTime ? dfn.format(matchTime, "eee dd MMM, HH:mm ") : ""}
 					</p>
 				</div>
+
+				{showStats && (
+					<>
+						<hr className="my-4" />
+						{awayForm && homeForm && (
+							<>
+								<h4 className="text-[#6D7786] text-sm mb-4">
+									Form (Last 5 matches)
+								</h4>
+								<div className="bg-[#F5F8FA] border border-[#F5F8FA] rounded-lg p-3">
+									<div className="flex justify-between items-center">
+										{/* Home Team */}
+										<div className="flex items-center">
+											<img
+												src={home?.clubLogo}
+												className="h-6 w-6 mr-1 md:mr-2"
+												alt={home?.name}
+											/>
+											<P className="text-[#000301] text-[0.8em] uppercase">
+												{home?.name?.substring(0, 3)}
+											</P>
+										</div>
+										<div className="flex items-center space-x-1">
+											{homeForm.split("").map((form, index) => {
+												const typedForm = form as keyof typeof FormEnum;
+												return (
+													<div
+														style={{ background: FormEnum[typedForm] }}
+														className="flex items-center justify-center h-6 w-6 text-white rounded-full text-sm"
+														key={index}
+													>
+														{form}
+													</div>
+												);
+											})}
+										</div>
+									</div>
+									<div className="flex justify-between items-center space-y-2">
+										{/* Away Team */}
+										<div className="flex items-center">
+											<img
+												src={away?.clubLogo}
+												className="h-6 w-6 mr-1 md:mr-2"
+												alt={away?.name}
+											/>
+											<P className="text-[#000301] text-[0.8em] uppercase">
+												{away?.name?.substring(0, 3)}
+											</P>
+										</div>
+										<div className="flex items-center space-x-1">
+											{awayForm.split("").map((form, index) => {
+												const typedForm = form as keyof typeof FormEnum;
+												return (
+													<div
+														style={{ background: FormEnum[typedForm] }}
+														className="flex items-center justify-center h-6 w-6 text-white rounded-full text-sm"
+														key={index}
+													>
+														{form}
+													</div>
+												);
+											})}
+										</div>
+									</div>
+								</div>
+							</>
+						)}
+
+						{Array.isArray(head2head) && head2head?.length > 0 && (
+							<>
+								<h4 className="text-[#6D7786] text-sm my-4">
+									H2H (Last 5 matches)
+								</h4>
+								{head2head.map((fixture: any) => {
+									const match = fixture as any;
+									return (
+										<div
+											className="bg-[#F5F8FA] border border-[#F5F8FA] rounded-lg p-4 mb-3"
+											key={match?.fixture?.id}
+										>
+											{/* Match Date */}
+											<p className="text-[#8C97A7] text-[10px] text-right font-light">
+												{match?.fixture?.date
+													? dfn.format(
+															new Date(match?.fixture?.date),
+															"dd MMM yyyy"
+													  )
+													: ""}
+											</p>
+											{/* Scoreline */}
+											<div className="flex justify-between items-center mt-3">
+												{/* Home team */}
+												<div className="flex items-center">
+													<img
+														src={match?.teams?.home?.logo}
+														className="h-6 w-6 mr-1 md:mr-2"
+														alt={match?.teams?.home?.name}
+													/>
+													<P className="text-[#000301] text-[0.8em] uppercase">
+														{match?.teams?.home?.name?.substring(0, 3)}
+													</P>
+												</div>
+												{/* Goals */}
+												<div className="flex items-center gap-x-2">
+													<p className="text-[#020300]">{match?.goals?.home}</p>
+													<p className="text-[#020300]">-</p>
+													<p className="text-[#020300]">{match?.goals?.home}</p>
+												</div>
+												{/* Away team */}
+												<div className="flex items-center">
+													<img
+														src={match?.teams?.away?.logo}
+														className="h-6 w-6 mr-1 md:mr-2"
+														alt={match?.teams?.away?.name}
+													/>
+													<P className="text-[#000301] text-[0.8em] uppercase">
+														{match?.teams?.away?.name?.substring(0, 3)}
+													</P>
+												</div>
+											</div>
+										</div>
+									);
+								})}
+							</>
+						)}
+					</>
+				)}
 			</>
 		</Style>
 	);

@@ -338,6 +338,9 @@ const AllFixtures = () => {
 													away={match.awayTeam}
 													id={match.id}
 													matchTime={match.fixtureDateTime}
+													head2head={match.head2head}
+													awayForm={match.awayForm}
+													homeForm={match.homeForm}
 													prediction={
 														specificWeekPredictions?.predictions?.fixtures?.find(
 															(_match) => _match.fixture.id === match.id
@@ -585,6 +588,9 @@ const AllFixtures = () => {
 														away={match.awayTeam}
 														id={match.id}
 														matchTime={match.fixtureDateTime}
+														head2head={match.head2head}
+														awayForm={match.awayForm}
+														homeForm={match.homeForm}
 														prediction={match.prediction}
 														onChange={updateSelection}
 														invalid={!!errors?.[match?.id]}

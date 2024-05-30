@@ -62,7 +62,7 @@ export const getAllWeeksAPI = createAsyncThunk(
 	({ seasonId }: FieldValues, { dispatch }) => {
 		dispatch(setIsFetchingAllWeeks(true));
 		axiosInstance
-			.get(`/weeks/season/${seasonId}`)
+			.get(`/weeks/season/${seasonId}/published`)
 			.then((data) => {
 				dispatch(setIsFetchingAllWeeks(false));
 				const weeks = Array.isArray(data?.data?.data)
@@ -159,6 +159,24 @@ export const getSpecificWeekPredictionAPI = createAsyncThunk(
 		dispatch(setIsFetchingSpecificWeekPrediction(true));
 		axiosInstance
 			.get(`/predictions/week/${weekId}`)
+			.then((data) => {
+				dispatch(setIsFetchingSpecificWeekPrediction(false));
+				dispatch(setSpecificWeekPrediction(data?.data?.data));
+			})
+			.catch((error) => {
+				dispatch(setSpecificWeekPrediction(null));
+				dispatch(setIsFetchingSpecificWeekPrediction(false));
+				toastError(error?.response?.data?.message);
+			});
+	}
+);
+
+export const getSpecificUserWeekPredictionAPI = createAsyncThunk(
+	"fixtures/getSpecificUserWeekPrediction",
+	({ username, weekId }: FieldValues, { dispatch }) => {
+		dispatch(setIsFetchingSpecificWeekPrediction(true));
+		axiosInstance
+			.get(`/leaderboard/predictions/user/${username}/week/${weekId}`)
 			.then((data) => {
 				dispatch(setIsFetchingSpecificWeekPrediction(false));
 				dispatch(setSpecificWeekPrediction(data?.data?.data));
