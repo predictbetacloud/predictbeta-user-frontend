@@ -145,6 +145,9 @@ export const submitPredictionAPI = createAsyncThunk(
 					data?.data?.message ??
 						"Your prediction has been submitted succesfully"
 				);
+				getSpecificWeekPredictionAPI({
+					weekId,
+				});
 			})
 			.catch((error) => {
 				dispatch(setIsSubmittingPredictions(false));

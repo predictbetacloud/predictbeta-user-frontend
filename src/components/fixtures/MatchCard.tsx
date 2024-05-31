@@ -4,7 +4,7 @@ import { IoIosLock } from "react-icons/io";
 import * as dfn from "date-fns";
 
 import { P } from "../Texts";
-import { FormEnum, IClub, statusEnum } from "../../types/types";
+import { FormEnum, IClub } from "../../types/types";
 import { colors } from "../../utils/colors";
 import { MdOutlineBarChart } from "react-icons/md";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";

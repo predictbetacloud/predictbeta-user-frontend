@@ -152,6 +152,9 @@ const LandingPage = () => {
 												key={match.id}
 												home={match.homeTeam}
 												away={match.awayTeam}
+												head2head={match.head2head}
+												awayForm={match.awayForm}
+												homeForm={match.homeForm}
 												id={match.id}
 												matchTime={match.fixtureDateTime}
 												prediction={match.prediction}
