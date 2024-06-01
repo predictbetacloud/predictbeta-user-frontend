@@ -297,7 +297,7 @@ export const MatchCard = ({
 												<div className="flex items-center gap-x-2">
 													<p className="text-[#020300]">{match?.goals?.home}</p>
 													<p className="text-[#020300]">-</p>
-													<p className="text-[#020300]">{match?.goals?.home}</p>
+													<p className="text-[#020300]">{match?.goals?.away}</p>
 												</div>
 												{/* Away team */}
 												<div className="flex items-center">

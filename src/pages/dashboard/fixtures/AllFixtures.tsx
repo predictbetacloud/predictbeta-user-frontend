@@ -295,18 +295,31 @@ const AllFixtures = () => {
 				{/* Countdown */}
 				{activeWeek?.deadline ? (
 					<div className="">
-						<div className="flex items-center">
-							<BsFillClockFill color={colors.blue900} fill={colors.white} />
+						<div className="lg:flex items-center">
+							<BsFillClockFill
+								className="hidden lg:block"
+								color={colors.blue900}
+								fill={colors.white}
+							/>
 							{!isBefore(new Date(), new Date(String(activeWeek?.deadline))) ? (
-								<p className="ml-4 text-[#fff]">
+								<p className="lg:ml-4 text-[#fff]">
 									Prediction deadline has passed
 								</p>
 							) : (
 								<>
-									<p className="ml-4 text-[#fff]">
-										Time left until the end of this round
-									</p>
-									<CustomCountDown deadline={activeWeek?.deadline} />
+									<div className="flex lg:block gap-x-2 items-center justify-center">
+										<BsFillClockFill
+											className="lg:hidden"
+											color={colors.blue900}
+											fill={colors.white}
+										/>
+										<p className="lg:ml-4 text-[#fff]">
+											Time left until the end of this round
+										</p>
+									</div>
+									<div className="flex justify-center">
+										<CustomCountDown deadline={activeWeek?.deadline} />
+									</div>
 								</>
 							)}
 						</div>
@@ -560,11 +573,11 @@ const AllFixtures = () => {
 										<div className="mt-6 px-4">
 											<hr className="mt-8" />
 
-											<Button
+											<Button.OutlineWhite
 												className="w-full"
 												type="submit"
 												disabled
-												title="You have already predicted"
+												title={`Week Score: ${specificWeekPredictions?.score}`}
 											/>
 										</div>
 									</div>

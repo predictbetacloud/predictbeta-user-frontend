@@ -70,8 +70,8 @@ const Header = ({ title }: Props) => {
 					<>
 						{/* Countdown */}
 						{selectedWeek?.deadline ? (
-							<div className="hidden md:flex items-center justify-between">
-								<div className="flex items-center mr-20">
+							<div className="hidden lg:flex items-center justify-between">
+								<div className="flex items-center xl:mr-20">
 									<BsFillClockFill color={colors.blue900} fill={colors.white} />
 									{!isBefore(
 										new Date(),
