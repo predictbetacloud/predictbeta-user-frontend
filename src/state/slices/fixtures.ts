@@ -16,12 +16,12 @@ const initialState: FixtureState = {
 	specificWeek: null,
 	specificWeekPrediction: null,
 	matches: [],
-	isFetchingSeasons: false,
-	isFetchingSpecificSeason: false,
-	isFetchingWeeks: false,
-	isFetchingSpecificWeek: false,
-	isFetchingSpecificWeekPrediction: false,
-	isFetchingMatches: false,
+	isFetchingSeasons: true,
+	isFetchingSpecificSeason: true,
+	isFetchingWeeks: true,
+	isFetchingSpecificWeek: true,
+	isFetchingSpecificWeekPrediction: true,
+	isFetchingMatches: true,
 	isSubmittingPredictions: false,
 };
 

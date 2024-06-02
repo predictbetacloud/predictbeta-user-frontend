@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import {
@@ -44,13 +44,13 @@ const LandingPage = () => {
 	const seasons = useAppSelector(selectAllSeasons);
 
 	// Get all Season
-	useMemo(() => {
+	useEffect(() => {
 		dispatch(getAllSeasonsAPI({}));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	// Make latest week the active week
-	useMemo(() => {
+	useEffect(() => {
 		if (allWeeks?.[0]?.id) {
 			// if week is in query use that week
 			if (seasons?.[0]?.id && allWeeks?.[0]?.id) {

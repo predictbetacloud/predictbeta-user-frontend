@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 
 import DashboardLayout from "../../../components/layout/DashboardLayout";
@@ -45,7 +45,7 @@ const AllPrivateLeagues = () => {
 	const [page, setPage] = useState(1);
 
 	// Get all private leagues
-	useMemo(() => {
+	useEffect(() => {
 		dispatch(getAllPrivateLeaguesAPI());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

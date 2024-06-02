@@ -64,14 +64,14 @@ const PrivateLeagueWeekLeaderboard = () => {
 	} | null>(null);
 
 	// Get all Season
-	useMemo(() => {
+	useEffect(() => {
 		dispatch(getAllSeasonsAPI({}));
 		dispatch(getSpecificPrivateLeagueAPI({ leagueId }));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	// Make latest week the active week
-	useMemo(() => {
+	useEffect(() => {
 		if (allWeeks?.[0]?.id) {
 			// if week is in query use that week
 			if (query_week) {
@@ -97,7 +97,7 @@ const PrivateLeagueWeekLeaderboard = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [allWeeks, query_week]);
 
-	useMemo(() => {
+	useEffect(() => {
 		if (query_season) {
 			const activeSeason = seasons.find(
 				(_season) => _season.name === query_season

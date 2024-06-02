@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import queryString from "query-string";
 
@@ -48,13 +48,13 @@ const SeasonLeaderboard = () => {
 	} | null>(null);
 
 	// Get all Season
-	useMemo(() => {
+	useEffect(() => {
 		dispatch(getAllSeasonsAPI({}));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	// Make latest season the active week
-	useMemo(() => {
+	useEffect(() => {
 		if (query_season) {
 			const activeSeason = seasons.find(
 				(_season) => _season.name === query_season
@@ -76,7 +76,7 @@ const SeasonLeaderboard = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [seasons, query_season]);
 
-	useMemo(() => {
+	useEffect(() => {
 		if (query_season) {
 			const activeSeason = seasons.find(
 				(_season) => _season.name === query_season
