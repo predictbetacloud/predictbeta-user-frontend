@@ -52,7 +52,7 @@ const EditPassword = () => {
 						<h3 className="text-xl text-[#222222] font-medium mb-4">
 							Reset Password
 						</h3>
-						<p className="text-[#222222] mb-4">
+						<p className="text-[#222222] mb-4 text-sm">
 							Request an OTP to use in changing your password
 						</p>
 

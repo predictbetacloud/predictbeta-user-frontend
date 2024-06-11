@@ -188,7 +188,7 @@ export const MatchCard = ({
 						</button>
 					</div>
 					<p className="text-[#8C97A7] text-sm font-light">
-						{matchTime ? dfn.format(matchTime, "eee dd MMM, HH:mm ") : ""}
+						{matchTime ? dfn.format(dfn.subHours(matchTime, 1), "eee dd MMM, hh:mm aa") : ""}
 					</p>
 				</div>
 

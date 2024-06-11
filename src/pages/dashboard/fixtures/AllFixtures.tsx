@@ -103,7 +103,6 @@ const AllFixtures = () => {
 	// Get all Season
 	useEffect(() => {
 		dispatch(getAllSeasonsAPI({}));
-		dispatch(getAllPlayersAPI({}));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -157,6 +156,11 @@ const AllFixtures = () => {
 						weekId: selectedWeek?.id,
 					})
 				);
+				dispatch(
+					getAllPlayersAPI({
+						weekId: selectedWeek?.id,
+					})
+				);
 			}
 		} else if (seasons?.[0]?.id && selectedWeek?.id) {
 			dispatch(
@@ -167,6 +171,11 @@ const AllFixtures = () => {
 			);
 			dispatch(
 				getSpecificWeekPredictionAPI({
+					weekId: selectedWeek?.id,
+				})
+			);
+			dispatch(
+				getAllPlayersAPI({
 					weekId: selectedWeek?.id,
 				})
 			);
@@ -216,9 +225,13 @@ const AllFixtures = () => {
 		..._predictions
 	}: FieldValues) => {
 		const predictions = formatPredictionsFromObjectToArray(_predictions);
+		const activeSeason = seasons.find(
+			(_season) => _season.name === query_season
+		);
 
 		dispatch(
 			submitPredictionAPI({
+				seasonId: activeSeason?.id,
 				weekId: Number(selectedWeek?.id),
 				mostLikelyToScore: { playerId: mostLikelyToScore.id },
 				moreLikelyToScore: { playerId: moreLikelyToScore.id },
@@ -520,7 +533,7 @@ const AllFixtures = () => {
 										<div className="">
 											<label htmlFor="timeOfFirstGoal" className="mb-2 block">
 												<p className="text-[#222222] text-sm">
-													Minute the first goal in the round be scored
+													Minute the earliest goal in the round will be scored
 												</p>
 											</label>
 											<Input
@@ -568,16 +581,27 @@ const AllFixtures = () => {
 												/>
 											))}
 										</div>
-										<div className="mt-6 px-4">
-											<hr className="mt-8" />
+										{specificWeekPredictions?.score ? (
+											<div className="mt-6 px-4">
+												<hr className="mb-8" />
 
-											<Button.OutlineWhite
-												className="w-full"
-												type="submit"
-												disabled
-												title={`Week Score: ${specificWeekPredictions?.score}`}
-											/>
-										</div>
+												<Button.OutlineWhite
+													className="w-full"
+													type="submit"
+													disabled
+													title={`Week Score: ${specificWeekPredictions?.score}`}
+												/>
+											</div>
+										) : (
+											<div className="mt-6 px-4">
+												<Button.OutlineWhite
+													className="w-full"
+													type="submit"
+													disabled
+													title={`Prediction made already`}
+												/>
+											</div>
+										)}
 									</div>
 								</div>
 							</section>
@@ -809,7 +833,7 @@ const AllFixtures = () => {
 											<div className="">
 												<label htmlFor="timeOfFirstGoal" className="mb-2 block">
 													<p className="text-[#222222] text-sm">
-														Minute the first goal in the round be scored
+														Minute the earliest goal in the round will be scored
 													</p>
 												</label>
 												<Input

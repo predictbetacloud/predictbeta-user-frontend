@@ -111,7 +111,9 @@ const Sidebar = () => {
 							<P className="text-[#212934] text-sm">
 								{user?.firstName} {user?.lastName}
 							</P>
-							<P className="text-[#8895A7] text-xs">{user?.email}</P>
+							<P className="text-[#8895A7] text-xs text-wrap max-w-[150px] text-ellipsis overflow-hidden">
+								{user?.email}
+							</P>
 						</div>
 					</div>
 					<Button.Outline

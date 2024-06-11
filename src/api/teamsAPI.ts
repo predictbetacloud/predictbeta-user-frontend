@@ -7,10 +7,10 @@ import { setAllPlayers, setIsFetchingAllPlayers } from "../state/slices/teams";
 
 export const getAllPlayersAPI = createAsyncThunk(
 	"teams/getAllPlayers",
-	(_: FieldValues, { dispatch }) => {
+	({ weekId }: FieldValues, { dispatch }) => {
 		dispatch(setIsFetchingAllPlayers(true));
 		axiosInstance
-			.get(`/players`)
+			.get(`/players/week/${weekId}`)
 			.then((data) => {
 				dispatch(setIsFetchingAllPlayers(false));
 				dispatch(setAllPlayers(data.data?.data));

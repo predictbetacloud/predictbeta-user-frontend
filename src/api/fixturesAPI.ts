@@ -120,6 +120,7 @@ export const submitPredictionAPI = createAsyncThunk(
 	"fixtures/submitPrediction",
 	(
 		{
+			seasonId,
 			weekId,
 			predictions,
 			mostLikelyToScore,
@@ -141,13 +142,21 @@ export const submitPredictionAPI = createAsyncThunk(
 			})
 			.then((data) => {
 				dispatch(setIsSubmittingPredictions(false));
+				dispatch(
+					getSpecificWeekPredictionAPI({
+						weekId,
+					})
+				);
+				dispatch(
+					getAllMatchesAPI({
+						seasonId,
+						weekId,
+					})
+				);
 				toastSuccess(
 					data?.data?.message ??
 						"Your prediction has been submitted succesfully"
 				);
-				getSpecificWeekPredictionAPI({
-					weekId,
-				});
 			})
 			.catch((error) => {
 				dispatch(setIsSubmittingPredictions(false));

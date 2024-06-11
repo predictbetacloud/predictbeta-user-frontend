@@ -85,9 +85,9 @@ const failureResponseHandler = async (error: AxiosError) => {
 	}
 
 	// Request Timeout
-	if (error.message.includes("Network")) {
+	if (error.message.includes("Network") && error?.response?.status !== 500) {
 		// alert(`Could not connect to network`);
-		toastError("Please check your internet connection and try again.");
+		toastError("Could not connect to network");
 		return Promise.reject(error);
 	}
 

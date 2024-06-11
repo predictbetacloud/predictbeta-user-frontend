@@ -142,8 +142,6 @@ const WeekLeaderboard = () => {
 	// 	}
 	// });
 
-	console.log(query_season, query_week);
-
 	const columns = useMemo<ColumnDef<LeaderboardItem>[]>(
 		() => [
 			{
