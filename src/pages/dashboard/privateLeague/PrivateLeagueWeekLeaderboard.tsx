@@ -166,8 +166,6 @@ const PrivateLeagueWeekLeaderboard = () => {
 		[]
 	);
 
-	console.log("leaderboard", leaderboard);
-
 	return (
 		<DashboardLayout
 			title={
