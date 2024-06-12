@@ -87,8 +87,19 @@ const AllFixtures = () => {
 		handleSubmit,
 		control,
 		trigger,
+		watch,
 		formState: { errors },
 	} = useForm();
+
+	const mostLikelyToScore = watch("mostLikelyToScore");
+	const moreLikelyToScore = watch("moreLikelyToScore");
+	const likelyToScore = watch("likelyToScore");
+
+	const selectedPlayers = [
+		mostLikelyToScore?.id,
+		moreLikelyToScore?.id,
+		likelyToScore?.id,
+	];
 
 	// Set matches
 	if (matches?.[0]?.id !== allMatches?.[0]?.id) {
@@ -683,7 +694,9 @@ const AllFixtures = () => {
 														<Select
 															ref={ref}
 															onChange={onChange}
-															options={allPlayers}
+															options={allPlayers.filter(
+																(player) => !selectedPlayers.includes(player.id)
+															)}
 															value={value}
 															isLoading={isFetchingAllPlayers}
 															components={{
@@ -739,7 +752,9 @@ const AllFixtures = () => {
 														<Select
 															ref={ref}
 															onChange={onChange}
-															options={allPlayers}
+															options={allPlayers.filter(
+																(player) => !selectedPlayers.includes(player.id)
+															)}
 															value={value}
 															isLoading={isFetchingAllPlayers}
 															components={{
@@ -792,7 +807,9 @@ const AllFixtures = () => {
 														<Select
 															ref={ref}
 															onChange={onChange}
-															options={allPlayers}
+															options={allPlayers.filter(
+																(player) => !selectedPlayers.includes(player.id)
+															)}
 															value={value}
 															isLoading={isFetchingAllPlayers}
 															components={{
