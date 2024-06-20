@@ -400,10 +400,16 @@ const AllFixtures = () => {
 									<div className="grid md:grid-cols-2 gap-6 py-6">
 										{/* Most likely To Score to score? */}
 										<div>
-											<label htmlFor="mostLikelyToScore" className="mb-2 block">
+											<label
+												htmlFor="mostLikelyToScore"
+												className="mb-2 flex gap-2"
+											>
 												<p className="text-[#222222] text-sm">
 													Most likely to score?
 												</p>
+												<div className="py-1 px-2 bg-gray-100 rounded-md">
+													<p className="text-[#EB1536] text-xs">5 points</p>
+												</div>
 											</label>
 											<Controller
 												control={control}
@@ -447,10 +453,16 @@ const AllFixtures = () => {
 
 										{/* More likely To Score to score? */}
 										<div>
-											<label htmlFor="moreLikelyToScore" className="mb-2 block">
+											<label
+												htmlFor="moreLikelyToScore"
+												className="mb-2 flex gap-2"
+											>
 												<p className="text-[#222222] text-sm">
 													More likely to score?
 												</p>
+												<div className="py-1 px-2 bg-gray-100 rounded-md">
+													<p className="text-[#EB1536] text-xs">3 points</p>
+												</div>
 											</label>
 											<Controller
 												control={control}
@@ -494,10 +506,13 @@ const AllFixtures = () => {
 
 										{/* Likely to score? */}
 										<div>
-											<label htmlFor="likelyToScore" className="mb-2 block">
+											<label htmlFor="likelyToScore" className="mb-2 flex gap-2">
 												<p className="text-[#222222] text-sm">
 													Likely to score?
 												</p>
+												<div className="py-1 px-2 bg-gray-100 rounded-md">
+													<p className="text-[#EB1536] text-xs">1 points</p>
+												</div>
 											</label>
 											<Controller
 												control={control}
@@ -678,11 +693,14 @@ const AllFixtures = () => {
 											<div>
 												<label
 													htmlFor="mostLikelyToScore"
-													className="mb-2 block"
+													className="mb-2 flex items-center gap-2"
 												>
 													<p className="text-[#222222] text-sm">
 														Most likely to score?
 													</p>
+													<div className="py-1 px-2 bg-gray-100 rounded-md">
+														<p className="text-[#EB1536] text-xs">5 points</p>
+													</div>
 												</label>
 												<Controller
 													control={control}
@@ -736,11 +754,14 @@ const AllFixtures = () => {
 											<div>
 												<label
 													htmlFor="moreLikelyToScore"
-													className="mb-2 block"
+													className="mb-2 flex gap-2"
 												>
 													<p className="text-[#222222] text-sm">
 														More likely to score?
 													</p>
+													<div className="py-1 px-2 bg-gray-100 rounded-md">
+														<p className="text-[#EB1536] text-xs">3 points</p>
+													</div>
 												</label>
 												<Controller
 													control={control}
@@ -792,10 +813,16 @@ const AllFixtures = () => {
 
 											{/* Likely to score? */}
 											<div>
-												<label htmlFor="likelyToScore" className="mb-2 block">
+												<label
+													htmlFor="likelyToScore"
+													className="mb-2 flex gap-2"
+												>
 													<p className="text-[#222222] text-sm">
 														Likely to score?
 													</p>
+													<div className="py-1 px-2 bg-gray-100 rounded-md">
+														<p className="text-[#EB1536] text-xs">1 points</p>
+													</div>
 												</label>
 												<Controller
 													control={control}
