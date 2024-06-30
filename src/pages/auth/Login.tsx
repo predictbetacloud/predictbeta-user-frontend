@@ -34,11 +34,15 @@ const Login = () => {
 
 	return (
 		<main className="w-screen h-screen px-4 md:px-0 bg-[#FFFFFF] flex flex-col items-center justify-center">
-			<img src={logo} alt="Predictbeta" />
-			<form onSubmit={handleSubmit(submit)} className="mt-10 md:min-w-[400px]">
+			<Link to="/">
+				<img src={logo} alt="Predictbeta" />
+			</Link>
 
-				<h3 className="text-xl text-[#222222] font-medium mb-8">Welcome back, log in to manage your account</h3>
-				
+			<form onSubmit={handleSubmit(submit)} className="mt-10 md:min-w-[400px]">
+				<h3 className="text-xl text-[#222222] font-medium mb-8">
+					Welcome back, log in to manage your account
+				</h3>
+
 				{/* Email */}
 				<div className="mt-5">
 					<label htmlFor="email" className="mb-2 block">

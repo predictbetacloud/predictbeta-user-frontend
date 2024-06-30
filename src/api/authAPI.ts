@@ -127,7 +127,9 @@ export const loginAPI = createAsyncThunk(
 				dispatch(setIsPerformingAuthAction(false));
 
 				if (globalRouter.navigate) {
-					if (globalRouter.location?.state?.from) {
+					if (globalRouter.location && globalRouter.location.state.from) {
+						console.log("router", globalRouter);
+						console.log("location", globalRouter?.location);
 						globalRouter.navigate(globalRouter?.location?.state?.from);
 					} else {
 						globalRouter.navigate("/dashboard/fixtures");

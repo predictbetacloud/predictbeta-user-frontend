@@ -50,6 +50,21 @@ export const getWeekLeaderboardAPI = createCancelableThunk(
 	}
 );
 
+export const getPublicWeekLeaderboardAPI = createCancelableThunk(
+	"leaderboard/getWeekLeaderboard",
+	"getWeekLeaderboard",
+	({ weekId }) => `/leaderboard/week/${weekId}/public`,
+	setIsFetchingWeekLeaderboard,
+	setLeaderboard,
+	{
+		data: [],
+		totalElements: 0,
+		elementsPerPage: 0,
+		totalPages: 0,
+		currentPage: 0,
+	}
+);
+
 // export const getMonthLeaderboardAPI = createAsyncThunk(
 // 	"leaderboard/getWeekLeaderboard",
 // 	({ params }: FieldValues, { dispatch }) => {
@@ -80,6 +95,21 @@ export const getWeekLeaderboardAPI = createCancelableThunk(
 // );
 
 export const getMonthLeaderboardAPI = createCancelableThunk(
+	"leaderboard/getWeekLeaderboard",
+	"getWeekLeaderboard",
+	({}) => `/leaderboard/month`,
+	setIsFetchingMonthLeaderboard,
+	setLeaderboard,
+	{
+		data: [],
+		totalElements: 0,
+		elementsPerPage: 0,
+		totalPages: 0,
+		currentPage: 0,
+	}
+);
+
+export const getPublicMonthLeaderboardAPI = createCancelableThunk(
 	"leaderboard/getWeekLeaderboard",
 	"getWeekLeaderboard",
 	({}) => `/leaderboard/month`,
@@ -127,6 +157,21 @@ export const getSeasonLeaderboardAPI = createCancelableThunk(
 	"leaderboard/getSeasonLeaderboard",
 	"getSeasonLeaderboard",
 	({ seasonId }) => `/leaderboard/season/${seasonId}`,
+	setIsFetchingSeasonLeaderboard,
+	setLeaderboard,
+	{
+		data: [],
+		totalElements: 0,
+		elementsPerPage: 0,
+		totalPages: 0,
+		currentPage: 0,
+	}
+);
+
+export const getPublicSeasonLeaderboardAPI = createCancelableThunk(
+	"leaderboard/getSeasonLeaderboard",
+	"getSeasonLeaderboard",
+	({ seasonId }) => `/leaderboard/season/${seasonId}/public`,
 	setIsFetchingSeasonLeaderboard,
 	setLeaderboard,
 	{

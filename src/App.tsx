@@ -1,11 +1,7 @@
-import { useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 // import { ErrorBoundary } from "react-error-boundary";
 
-import { getUserInfoAPI, refreshTokenAPI } from "./api/authAPI";
-import { useAppDispatch, useAppSelector } from "./state/hooks";
-import { selectAuth } from "./state/slices/auth";
-import { callFunctionInInterval } from "./utils/helpers";
+import { useAppSelector } from "./state/hooks";
 import { globalRouter } from "./utils/utils";
 
 // import ErrorFallback from "./components/layout/ErrorFallback";
@@ -38,36 +34,18 @@ import SeasonLeaderboard from "./pages/dashboard/leaderboard/SeasonLeaderboard";
 import MonthLeaderboard from "./pages/dashboard/leaderboard/MonthLeaderboard";
 import VerifyEmail from "./pages/auth/VerifyEmail";
 import UserPredictionHistory from "./pages/dashboard/predictionHistory/UserPredictionHistory";
+import PublicWeekLeaderboard from "./pages/public/PublicWeekLeaderboard";
+import PublicMonthLeaderboard from "./pages/public/PublicMonthLeaderboard";
+import PublicSeasonLeaderboard from "./pages/public/PublicSeasonLeaderboard";
 
 function App() {
 	const navigate = useNavigate();
 	const location = useLocation();
-	const dispatch = useAppDispatch();
 
-	const { refresh_token, user } = useAppSelector(selectAuth);
 	const showDepositModal = useAppSelector(selectShowDepositModal);
 
 	globalRouter.navigate = navigate;
 	globalRouter.location = location;
-
-	useEffect(() => {
-		if (refresh_token) {
-			dispatch(refreshTokenAPI());
-			const clearTimer = callFunctionInInterval(
-				() => dispatch(refreshTokenAPI()),
-				23 * 60 * 60000
-			);
-			return () => {
-				clearTimer();
-			};
-		}
-	}, []);
-
-	useEffect(() => {
-		if (user?.id) {
-			dispatch(getUserInfoAPI({ id: user?.id }));
-		}
-	}, [user?.id]);
 
 	return (
 		// <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -79,6 +57,12 @@ function App() {
 				<Route path="/about-us" element={<AboutPage />} />
 				<Route path="/how-to-play" element={<HowToPlayPage />} />
 				<Route path="/faq" element={<FaqPage />} />
+				<Route path="/leaderboard/month" element={<PublicMonthLeaderboard />} />
+				<Route
+					path="/leaderboard/season"
+					element={<PublicSeasonLeaderboard />}
+				/>
+				<Route path="/leaderboard" element={<PublicWeekLeaderboard />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/verify" element={<VerifyEmail />} />
