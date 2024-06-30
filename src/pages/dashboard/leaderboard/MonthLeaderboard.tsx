@@ -21,7 +21,7 @@ import { getMonthLeaderboardAPI } from "../../../api/leaderboardAPI";
 const MonthLeaderboard = () => {
 	const dispatch = useAppDispatch();
 
-	const [, setSearchParams] = useSearchParams();
+	const [searchParams, setSearchParams] = useSearchParams();
 	const l = useLocation();
 
 	const queries = queryString.parse(l.search);
@@ -35,12 +35,32 @@ const MonthLeaderboard = () => {
 	);
 
 	useEffect(() => {
+		if (!query_month || !query_year) {
+			setSearchParams({
+				year: String(query_year ?? new Date().getFullYear()),
+				month: String(query_month ?? new Date().getMonth() + 1),
+			});
+		}
+	}, []);
+
+	useEffect(() => {
 		if (query_month && query_year) {
 			dispatch(
 				getMonthLeaderboardAPI({
 					params: {
 						month: query_month,
 						year: query_year,
+						limit: 10,
+						page,
+					},
+				})
+			);
+		} else {
+			dispatch(
+				getMonthLeaderboardAPI({
+					params: {
+						month: new Date().getMonth() + 1,
+						year: new Date().getFullYear(),
 						limit: 10,
 						page,
 					},
@@ -133,6 +153,8 @@ const MonthLeaderboard = () => {
 					current_page={Number(page ?? 1)}
 					setCurrentPage={(page: number): void => {
 						setSearchParams({
+							year: String(query_year ?? new Date().getFullYear()),
+							month: String(query_month ?? new Date().getMonth() + 1),
 							page: String(page),
 						});
 					}}

@@ -69,7 +69,7 @@ const UserPredictionHistory = () => {
 
 	// Get all Season
 	useEffect(() => {
-		dispatch(getAllSeasonsAPI({ tokenKey: "getAllSeasons" }));
+		dispatch(getAllSeasonsAPI({}));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

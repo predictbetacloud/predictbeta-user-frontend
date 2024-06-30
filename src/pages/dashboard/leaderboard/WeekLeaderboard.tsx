@@ -54,7 +54,7 @@ const WeekLeaderboard = () => {
 
 	// Get all Season
 	useEffect(() => {
-		dispatch(getAllSeasonsAPI({tokenKey: 'getAllSeasons'}));
+		dispatch(getAllSeasonsAPI({}));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -113,7 +113,7 @@ const WeekLeaderboard = () => {
 			);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [selectedWeek]);
+	}, [selectedWeek, page]);
 
 	// Make latest season the active season
 	useEffect(() => {
@@ -274,6 +274,8 @@ const WeekLeaderboard = () => {
 					current_page={Number(page ?? 1)}
 					setCurrentPage={(page: number): void => {
 						setSearchParams({
+							season: String(query_season),
+							week: String(query_week),
 							page: String(page),
 						});
 					}}

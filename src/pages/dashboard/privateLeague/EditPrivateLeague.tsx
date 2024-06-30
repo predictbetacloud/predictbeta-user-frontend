@@ -95,7 +95,7 @@ const EditPrivateLeague = () => {
 	);
 
 	useEffect(() => {
-		dispatch(getAllSeasonsAPI({tokenKey: 'getAllSeasons'}));
+		dispatch(getAllSeasonsAPI({}));
 		dispatch(getSpecificPrivateLeagueAPI({ leagueId }));
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps

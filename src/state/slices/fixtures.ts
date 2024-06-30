@@ -38,7 +38,10 @@ export const fixtureSlice = createSlice({
 			state.specificSeason = action.payload;
 		},
 		setWeeks: (state, action: PayloadAction<IWeek[]>) => {
-			state.weeks = action.payload;
+			const weeks = Array.isArray(action.payload)
+				? action.payload.reverse()
+				: [];
+			state.weeks = weeks;
 		},
 		setSpecificWeek: (state, action: PayloadAction<IWeek>) => {
 			state.specificWeek = action.payload;
@@ -50,7 +53,10 @@ export const fixtureSlice = createSlice({
 			state.specificWeekPrediction = action.payload;
 		},
 		setMatches: (state, action: PayloadAction<IMatch[]>) => {
-			state.matches = action.payload;
+			const matches = Array.isArray(action.payload)
+				? action.payload.reverse()
+				: [];
+			state.matches = matches;
 		},
 		setIsFetchingAllSeasons: (
 			state,

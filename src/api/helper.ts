@@ -9,13 +9,13 @@ let abortControllers: { [key: string]: AbortController } = {};
 
 export const createCancelableThunk = (
 	type: string,
+	tokenKey: string,
 	getUrl: (params: FieldValues) => string,
 	isFetchingAction: (isFetching: boolean) => { type: string; payload: boolean },
-	setAction: (data: any) => { type: string; payload: any }
+	setAction: (data: any) => { type: string; payload: any },
+	failedArgs?: any
 ) => {
 	return createAsyncThunk(type, async (params: FieldValues, { dispatch }) => {
-		const { tokenKey, ...restParams } = params;
-
 		// Abort the previous request if it exists
 		if (abortControllers[tokenKey]) {
 			abortControllers[tokenKey].abort();
@@ -27,19 +27,23 @@ export const createCancelableThunk = (
 
 		try {
 			dispatch(isFetchingAction(true));
-
-			const response = await axiosInstance.get(getUrl(restParams), {
+			console.log("params", params);
+			const response = await axiosInstance.get(getUrl(params), {
 				signal,
-				params: restParams,
+				...params,
 			});
 
 			dispatch(isFetchingAction(false));
-			setAction(response.data.data);
+			dispatch(setAction(response.data.data));
 		} catch (error: any) {
 			if (axios.isCancel(error) || error.name === "AbortError") {
 				console.log("Request canceled:", error.message);
 			} else {
-				setAction(null);
+				if (failedArgs) {
+					dispatch(setAction(failedArgs));
+				} else {
+					dispatch(setAction(null));
+				}
 				dispatch(isFetchingAction(false));
 				toastError(error.response?.data?.message);
 			}
