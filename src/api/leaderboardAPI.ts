@@ -1,8 +1,3 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { FieldValues } from "react-hook-form";
-
-import axiosInstance from "../connection/defaultClient";
-import { toastError } from "../utils/toast";
 import {
 	setIsFetchingMonthLeaderboard,
 	setIsFetchingSeasonLeaderboard,
@@ -43,7 +38,7 @@ import { createCancelableThunk } from "./helper";
 export const getWeekLeaderboardAPI = createCancelableThunk(
 	"leaderboard/getWeekLeaderboard",
 	"getWeekLeaderboard",
-	({ weekId, params }) => `/leaderboard/week/${weekId}`,
+	({ weekId }) => `/leaderboard/week/${weekId}`,
 	setIsFetchingWeekLeaderboard,
 	setLeaderboard,
 	{
@@ -87,7 +82,7 @@ export const getWeekLeaderboardAPI = createCancelableThunk(
 export const getMonthLeaderboardAPI = createCancelableThunk(
 	"leaderboard/getWeekLeaderboard",
 	"getWeekLeaderboard",
-	({ params }) => `/leaderboard/month`,
+	({}) => `/leaderboard/month`,
 	setIsFetchingMonthLeaderboard,
 	setLeaderboard,
 	{
@@ -131,7 +126,7 @@ export const getMonthLeaderboardAPI = createCancelableThunk(
 export const getSeasonLeaderboardAPI = createCancelableThunk(
 	"leaderboard/getSeasonLeaderboard",
 	"getSeasonLeaderboard",
-	({ seasonId, params }) => `/leaderboard/season/${seasonId}`,
+	({ seasonId }) => `/leaderboard/season/${seasonId}`,
 	setIsFetchingSeasonLeaderboard,
 	setLeaderboard,
 	{
@@ -142,4 +137,3 @@ export const getSeasonLeaderboardAPI = createCancelableThunk(
 		currentPage: 0,
 	}
 );
-

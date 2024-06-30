@@ -21,7 +21,7 @@ import { getMonthLeaderboardAPI } from "../../../api/leaderboardAPI";
 const MonthLeaderboard = () => {
 	const dispatch = useAppDispatch();
 
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [, setSearchParams] = useSearchParams();
 	const l = useLocation();
 
 	const queries = queryString.parse(l.search);
