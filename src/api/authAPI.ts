@@ -15,6 +15,7 @@ import {
 import { toastError, toastSuccess } from "../utils/toast";
 import { globalRouter } from "../utils/utils";
 import { setWallet } from "../state/slices/wallet";
+import axios from "axios";
 
 const sessionName = import.meta.env.VITE_REACT_APP_SLUG + "_session";
 
@@ -242,13 +243,22 @@ export const newPasswordAPI = createAsyncThunk(
 	}
 );
 
+let getUserInfoCancelToken: AbortController;
+
 export const getUserInfoAPI = createAsyncThunk(
 	"auth/getUserInfo",
 	({ id }: FieldValues, { dispatch }) => {
 		dispatch(setIsFetchingUserInfo(true));
 
+		if (getUserInfoCancelToken) {
+			getUserInfoCancelToken.abort("Operation canceled due to new request.");
+		}
+
+		getUserInfoCancelToken = new AbortController();
+		const { signal } = getUserInfoCancelToken;
+
 		axiosInstance
-			.get(`/users/${id}`)
+			.get(`/users/${id}`, { signal })
 			.then((data) => {
 				const newState = {
 					user: {
@@ -275,8 +285,12 @@ export const getUserInfoAPI = createAsyncThunk(
 				// localStorage.setItem(sessionName, JSON.stringify(newState));
 			})
 			.catch((error) => {
-				dispatch(setIsFetchingUserInfo(false));
-				toastError(error?.response?.data?.message);
+				if (axios.isCancel(error) || error.name === "AbortError") {
+					console.log("Request canceled:", error.message);
+				} else {
+					dispatch(setIsFetchingUserInfo(false));
+					toastError(error?.response?.data?.message);
+				}
 			});
 	}
 );
@@ -318,8 +332,10 @@ export const logOutAPI = createAsyncThunk(
 	}
 );
 
+let refreshRequestCancelToken: AbortController;
+
 export const refreshTokenAPI = createAsyncThunk(
-	"users/refresh",
+	"auth/refresh",
 	async (_, { dispatch }) => {
 		const authState = store.getState().auth;
 		const { refresh_token, retryCount: _retryCount } = authState;
@@ -329,15 +345,23 @@ export const refreshTokenAPI = createAsyncThunk(
 
 		const retry = Number(retryCount) < maxCount ? true : false;
 
+		if (refreshRequestCancelToken) {
+			refreshRequestCancelToken.abort("Operation canceled due to new request.");
+		}
+
+		refreshRequestCancelToken = new AbortController();
+		const { signal } = refreshRequestCancelToken;
+
 		if (retry) {
 			axiosInstance
 				.post(
-					`/users/refresh-token`,
+					`/auth/refresh-token`,
 					{ refreshToken: refresh_token },
 					{
 						headers: {
 							Authorization: `Bearer ${refresh_token}`,
 						},
+						signal,
 					}
 				)
 				.then((data) => {
@@ -351,37 +375,44 @@ export const refreshTokenAPI = createAsyncThunk(
 					dispatch(updateRetryCount(String(0)));
 				})
 				.catch((error) => {
-					dispatch(
-						updateRetryCount(retry ? (Number(retryCount) + 1).toString() : "0")
-					);
-
-					if (
-						(error && error.response && error.response.status === 401) ||
-						(error.data &&
-							error?.data?.error &&
-							error.data.error.code === 401) ||
-						(error && error.response && error.response.status === 403) ||
-						(error.data && error?.data?.error && error.data.error.code === 403)
-					) {
-						localStorage.removeItem(sessionName);
+					if (axios.isCancel(error) || error.name === "AbortError") {
+						console.log("Request canceled:", error.message);
+					} else {
 						dispatch(
-							updateAuth({
-								user: null,
-								token: null,
-								refresh_token: null,
-							})
+							updateRetryCount(
+								retry ? (Number(retryCount) + 1).toString() : "0"
+							)
 						);
+						if (
+							(error && error.response && error.response.status === 401) ||
+							(error.data &&
+								error?.data?.error &&
+								error.data.error.code === 401) ||
+							(error && error.response && error.response.status === 403) ||
+							(error.data &&
+								error?.data?.error &&
+								error.data.error.code === 403)
+						) {
+							localStorage.removeItem(sessionName);
+							dispatch(
+								updateAuth({
+									user: null,
+									token: null,
+									refresh_token: null,
+								})
+							);
 
-						if (globalRouter.navigate) {
-							globalRouter.navigate("/login", {
-								state: { from: window.location.pathname },
-							});
+							if (globalRouter.navigate) {
+								globalRouter.navigate("/", {
+									state: { from: window.location.pathname },
+								});
+							}
 						}
 					}
 				});
 		} else {
 			if (globalRouter.navigate) {
-				globalRouter.navigate("/login", {
+				globalRouter.navigate("/", {
 					state: { from: window.location.pathname },
 				});
 			}
