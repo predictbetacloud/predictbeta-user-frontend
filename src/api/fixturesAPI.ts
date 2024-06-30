@@ -18,7 +18,6 @@ import {
 	setSpecificWeekPrediction,
 	setWeeks,
 } from "../state/slices/fixtures";
-import { createCancelableThunk } from "./helper";
 
 // Season
 
