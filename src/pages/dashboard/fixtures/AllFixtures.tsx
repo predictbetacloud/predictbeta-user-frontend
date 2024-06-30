@@ -36,7 +36,11 @@ import { SelectionIcon } from "../../../assets/icons";
 import ErrorMessage from "../../../components/inputs/ErrorMessage";
 import SelectionCard from "../../../components/fixtures/SelectionCard";
 import IndicatorSeparator from "../../../components/IndicatorSeparator";
-import { defaultStyle, invalidStyle } from "../../../utils/selectStyle";
+import {
+	correctStyle,
+	defaultStyle,
+	invalidStyle,
+} from "../../../utils/selectStyle";
 import { getAllPlayersAPI } from "../../../api/teamsAPI";
 import {
 	selectAllPlayers,
@@ -113,7 +117,7 @@ const AllFixtures = () => {
 
 	// Get all Season
 	useEffect(() => {
-		dispatch(getAllSeasonsAPI({}));
+		dispatch(getAllSeasonsAPI({ tokenKey: "getAllSeasons" }));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -395,7 +399,7 @@ const AllFixtures = () => {
 									</div>
 									<hr className="my-8" />
 									<h3 className="text-[#000] font-medium text-lg text-center">
-										Decider
+										Deciders
 									</h3>
 									<div className="grid md:grid-cols-2 gap-6 py-6">
 										{/* Most likely To Score to score? */}
@@ -442,9 +446,14 @@ const AllFixtures = () => {
 														isClearable
 														isDisabled
 														styles={
-															errors?.mostLikelyToScore
-																? invalidStyle
-																: defaultStyle
+															specificWeekPredictions?.results?.scorers?.some(
+																(player) =>
+																	player.id ===
+																	specificWeekPredictions?.predictions
+																		?.mostLikelyToScore?.id
+															)
+																? correctStyle
+																: invalidStyle
 														}
 													/>
 												)}
@@ -495,9 +504,14 @@ const AllFixtures = () => {
 														isClearable
 														isDisabled
 														styles={
-															errors?.moreLikelyToScore
-																? invalidStyle
-																: defaultStyle
+															specificWeekPredictions?.results?.scorers?.some(
+																(player) =>
+																	player.id ===
+																	specificWeekPredictions?.predictions
+																		?.moreLikelyToScore?.id
+															)
+																? correctStyle
+																: invalidStyle
 														}
 													/>
 												)}
@@ -506,7 +520,10 @@ const AllFixtures = () => {
 
 										{/* Likely to score? */}
 										<div>
-											<label htmlFor="likelyToScore" className="mb-2 flex gap-2">
+											<label
+												htmlFor="likelyToScore"
+												className="mb-2 flex gap-2"
+											>
 												<p className="text-[#222222] text-sm">
 													Likely to score?
 												</p>
@@ -546,9 +563,14 @@ const AllFixtures = () => {
 														menuPlacement="auto"
 														isDisabled
 														styles={
-															errors?.likelyToScore
-																? invalidStyle
-																: defaultStyle
+															specificWeekPredictions?.results?.scorers?.some(
+																(player) =>
+																	player.id ===
+																	specificWeekPredictions?.predictions
+																		?.likelyToScore?.id
+															)
+																? correctStyle
+																: invalidStyle
 														}
 													/>
 												)}
@@ -570,7 +592,13 @@ const AllFixtures = () => {
 												defaultValue={
 													specificWeekPredictions?.predictions?.timeOfFirstGoal
 												}
-												className={`w-full input`}
+												className={`w-full input ${
+													specificWeekPredictions?.predictions
+														?.timeOfFirstGoal ===
+													specificWeekPredictions?.results?.timeOfFirstGoal
+														? "correct"
+														: "invalid"
+												}`}
 											/>
 										</div>
 									</div>
@@ -682,7 +710,7 @@ const AllFixtures = () => {
 										</div>
 										<hr className="my-8" />
 										<h3 className="text-[#000] font-medium text-lg text-center">
-											Decider
+											Deciders
 										</h3>
 										<p className="md:text-center text-[#5F6B7A] text-sm mt-3">
 											Select three likely to score different scorers and minute

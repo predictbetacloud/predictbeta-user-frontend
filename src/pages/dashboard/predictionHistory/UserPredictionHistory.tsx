@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import queryString from "query-string";
+import Select from "react-select";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { AiOutlineLoading } from "react-icons/ai";
 
@@ -22,10 +23,18 @@ import {
 	getSpecificUserWeekPredictionAPI,
 } from "../../../api/fixturesAPI";
 import { VscFilter } from "react-icons/vsc";
-import { InputPlaceholder } from "../../../components/inputs/Input";
+import { Input, InputPlaceholder } from "../../../components/inputs/Input";
 import CustomListBox from "../../../components/inputs/CustomListBox";
 import PageLoading from "../../../components/loaders/PageLoading";
 import SelectionCard from "../../../components/fixtures/SelectionCard";
+import { correctStyle, invalidStyle } from "../../../utils/selectStyle";
+import IndicatorSeparator from "../../../components/IndicatorSeparator";
+import { Controller, useForm } from "react-hook-form";
+import { getAllPlayersAPI } from "../../../api/teamsAPI";
+import {
+	selectAllPlayers,
+	selectIsFetchingAllPlayers,
+} from "../../../state/slices/teams";
 
 const UserPredictionHistory = () => {
 	const dispatch = useAppDispatch();
@@ -44,19 +53,23 @@ const UserPredictionHistory = () => {
 		selectIsFetchingSpecificWeekPrediction
 	);
 	const specificWeekPredictions = useAppSelector(selectSpecificWeekPrediction);
+	const isFetchingAllPlayers = useAppSelector(selectIsFetchingAllPlayers);
 
 	const allWeeks = useAppSelector(selectAllWeeks);
 	const allMatches = useAppSelector(selectMatches);
 	const seasons = useAppSelector(selectAllSeasons);
+	const allPlayers = useAppSelector(selectAllPlayers);
 
 	const [selectedWeek, setSelectedWeek] = useState<{
 		id: string;
 		number: string;
 	} | null>(null);
 
+	const { control } = useForm();
+
 	// Get all Season
 	useEffect(() => {
-		dispatch(getAllSeasonsAPI({}));
+		dispatch(getAllSeasonsAPI({ tokenKey: "getAllSeasons" }));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -102,6 +115,11 @@ const UserPredictionHistory = () => {
 			}
 			if (selectedWeek?.id) {
 				dispatch(
+					getAllPlayersAPI({
+						weekId: selectedWeek?.id,
+					})
+				);
+				dispatch(
 					getSpecificUserWeekPredictionAPI({
 						weekId: selectedWeek?.id,
 						username,
@@ -112,6 +130,11 @@ const UserPredictionHistory = () => {
 			dispatch(
 				getAllMatchesAPI({
 					seasonId: seasons?.[0]?.id,
+					weekId: selectedWeek?.id,
+				})
+			);
+			dispatch(
+				getAllPlayersAPI({
 					weekId: selectedWeek?.id,
 				})
 			);
@@ -144,10 +167,8 @@ const UserPredictionHistory = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [seasons, query_season]);
 
-	console.log(query_season, query_week);
-
 	return (
-		<DashboardLayout title="Prediction History">
+		<DashboardLayout title={`Prediction History - ${username}`}>
 			<section className="predictbeta-header bg-white w-full px-4 lg:px-8 py-3 flex items-center justify-between">
 				{/* season select */}
 				<div className="flex items-center gap-4">
@@ -245,6 +266,212 @@ const UserPredictionHistory = () => {
 											/>
 										))}
 									</div>
+									<hr className="my-8" />
+									<h3 className="text-[#000] font-medium text-lg text-center">
+										Deciders
+									</h3>
+									<div className="grid md:grid-cols-2 gap-6 py-6">
+										{/* Most likely To Score to score? */}
+										<div>
+											<label
+												htmlFor="mostLikelyToScore"
+												className="mb-2 flex gap-2"
+											>
+												<p className="text-[#222222] text-sm">
+													Most likely to score?
+												</p>
+												<div className="py-1 px-2 bg-gray-100 rounded-md">
+													<p className="text-[#EB1536] text-xs">5 points</p>
+												</div>
+											</label>
+											<Controller
+												control={control}
+												name="mostLikelyToScore"
+												rules={{
+													required: "Make a selection",
+												}}
+												disabled
+												defaultValue={allPlayers.find(
+													(player) =>
+														player.id ===
+														specificWeekPredictions?.predictions
+															?.mostLikelyToScore?.id
+												)}
+												render={({ field: { onChange, value, ref } }) => (
+													<Select
+														ref={ref}
+														onChange={onChange}
+														options={allPlayers}
+														value={value}
+														isLoading={isFetchingAllPlayers}
+														components={{
+															IndicatorSeparator,
+														}}
+														getOptionValue={(option) => option["id"]}
+														getOptionLabel={(option) => option["name"]}
+														maxMenuHeight={300}
+														placeholder="- Select -"
+														classNamePrefix="react-select"
+														isClearable
+														isDisabled
+														styles={
+															specificWeekPredictions?.results?.scorers?.some(
+																(player) =>
+																	player.id ===
+																	specificWeekPredictions?.predictions
+																		?.mostLikelyToScore?.id
+															)
+																? correctStyle
+																: invalidStyle
+														}
+													/>
+												)}
+											/>
+										</div>
+
+										{/* More likely To Score to score? */}
+										<div>
+											<label
+												htmlFor="moreLikelyToScore"
+												className="mb-2 flex gap-2"
+											>
+												<p className="text-[#222222] text-sm">
+													More likely to score?
+												</p>
+												<div className="py-1 px-2 bg-gray-100 rounded-md">
+													<p className="text-[#EB1536] text-xs">3 points</p>
+												</div>
+											</label>
+											<Controller
+												control={control}
+												name="moreLikelyToScore"
+												rules={{
+													required: "Make a selection",
+												}}
+												disabled
+												defaultValue={allPlayers.find(
+													(player) =>
+														player.id ===
+														specificWeekPredictions?.predictions
+															?.moreLikelyToScore?.id
+												)}
+												render={({ field: { onChange, value, ref } }) => (
+													<Select
+														ref={ref}
+														onChange={onChange}
+														options={allPlayers}
+														value={value}
+														isLoading={isFetchingAllPlayers}
+														components={{
+															IndicatorSeparator,
+														}}
+														getOptionValue={(option) => option["id"]}
+														getOptionLabel={(option) => option["name"]}
+														maxMenuHeight={300}
+														placeholder="- Select -"
+														classNamePrefix="react-select"
+														isClearable
+														isDisabled
+														styles={
+															specificWeekPredictions?.results?.scorers?.some(
+																(player) =>
+																	player.id ===
+																	specificWeekPredictions?.predictions
+																		?.moreLikelyToScore?.id
+															)
+																? correctStyle
+																: invalidStyle
+														}
+													/>
+												)}
+											/>
+										</div>
+
+										{/* Likely to score? */}
+										<div>
+											<label
+												htmlFor="likelyToScore"
+												className="mb-2 flex gap-2"
+											>
+												<p className="text-[#222222] text-sm">
+													Likely to score?
+												</p>
+												<div className="py-1 px-2 bg-gray-100 rounded-md">
+													<p className="text-[#EB1536] text-xs">1 points</p>
+												</div>
+											</label>
+											<Controller
+												control={control}
+												name="likelyToScore"
+												rules={{
+													required: "Make a selection",
+												}}
+												disabled
+												defaultValue={allPlayers.find(
+													(player) =>
+														player.id ===
+														specificWeekPredictions?.predictions?.likelyToScore
+															?.id
+												)}
+												render={({ field: { onChange, value, ref } }) => (
+													<Select
+														ref={ref}
+														onChange={onChange}
+														options={allPlayers}
+														value={value}
+														isLoading={isFetchingAllPlayers}
+														components={{
+															IndicatorSeparator,
+														}}
+														getOptionValue={(option) => option["id"]}
+														getOptionLabel={(option) => option["name"]}
+														maxMenuHeight={300}
+														placeholder="- Select -"
+														classNamePrefix="react-select"
+														isClearable
+														menuPlacement="auto"
+														isDisabled
+														styles={
+															specificWeekPredictions?.results?.scorers?.some(
+																(player) =>
+																	player.id ===
+																	specificWeekPredictions?.predictions
+																		?.likelyToScore?.id
+															)
+																? correctStyle
+																: invalidStyle
+														}
+													/>
+												)}
+											/>
+										</div>
+
+										{/* Goal time */}
+										<div className="">
+											<label htmlFor="timeOfFirstGoal" className="mb-2 block">
+												<p className="text-[#222222] text-sm">
+													Minute the earliest goal in the round will be scored
+												</p>
+											</label>
+											<Input
+												id="timeOfFirstGoal"
+												type="text"
+												placeholder="1"
+												disabled
+												defaultValue={
+													specificWeekPredictions?.predictions?.timeOfFirstGoal
+												}
+												className={`w-full input ${
+													specificWeekPredictions?.predictions
+														?.timeOfFirstGoal ===
+													specificWeekPredictions?.results?.timeOfFirstGoal
+														? "correct"
+														: "invalid"
+												}`}
+											/>
+										</div>
+									</div>
+
 									<div className="mt-6 bg-[#f5f8fa] border border-gray-400 border-dashed rounded-md text-center py-3 px-10">
 										<p className="text-[#5F6B7A]">
 											Week {query_week} points:{" "}

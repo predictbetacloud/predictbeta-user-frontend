@@ -21,21 +21,29 @@ export const Input = styled.input`
 		color: var(--neutral-ash);
 	}
 
+	&:disabled {
+		background: #f5f6f8;
+		color: var(--primary-black);
+
+		&:hover {
+			cursor: not-allowed;
+		}
+	}
+
 	&.invalid {
 		border-color: var(--alert-red);
 		background: #d52a2a40;
+		color: #eb1536;
 
 		&::placeholder {
 			color: #eb1536;
 		}
 	}
 
-	&:disabled {
-		background: #f5f6f8;
-		color: #8c97a7;
-		&:hover {
-			cursor: not-allowed;
-		}
+	&.correct {
+		background: #e2f4eb;
+		color: #55b486;
+		border-color: #55b486;
 	}
 `;
 

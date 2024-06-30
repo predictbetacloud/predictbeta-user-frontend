@@ -18,6 +18,7 @@ import {
 	setSpecificWeekPrediction,
 	setWeeks,
 } from "../state/slices/fixtures";
+import { createCancelableThunk } from "./helper";
 
 // Season
 
@@ -37,6 +38,13 @@ export const getAllSeasonsAPI = createAsyncThunk(
 			});
 	}
 );
+
+// export const getAllSeasonsAPI = createCancelableThunk(
+// 	"fixtures/getAllSeasons",
+// 	() => `/seasons`,
+// 	setIsFetchingAllSeasons,
+// 	setSeasons
+// );
 
 export const getSpecificSeasonAPI = createAsyncThunk(
 	"fixtures/getSpecificSeason",

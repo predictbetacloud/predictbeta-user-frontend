@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export const defaultStyle = {
+import { StylesConfig } from "react-select";
+
+export const defaultStyle: StylesConfig = {
 	control: (baseStyles: any, state: { isFocused: any }) => ({
 		...baseStyles,
 		background: "#F5F6F8",
@@ -28,14 +30,14 @@ export const defaultStyle = {
 		fontSize: "14px",
 		lineHeight: "22px",
 	}),
-	option: (baseStyles: any, state: { isFocused: any; isselected: any }) => ({
+	option: (baseStyles: any, state: { isFocused: any; isSelected: any }) => ({
 		...baseStyles,
 		fontFamily: "Rubik",
 		fontStyle: "normal",
 		fontWeight: 400,
 		fontSize: "14px",
 		lineHeight: "22px",
-		color: state.isselected ? "#FFFFFF" : "#121212",
+		color: state.isSelected ? "#FFFFFF" : "#121212",
 	}),
 	valueContainer: (baseStyles: any) => ({
 		...baseStyles,
@@ -58,7 +60,7 @@ export const defaultStyle = {
 	}),
 };
 
-export const invalidStyle = {
+export const invalidStyle: StylesConfig = {
 	control: (baseStyles: any, state: { isFocused: any }) => ({
 		...baseStyles,
 		background: "#d52a2a40",
@@ -78,8 +80,54 @@ export const invalidStyle = {
 		fontSize: "14px",
 		lineHeight: "22px",
 	}),
+	singleValue: (baseStyles: any) => ({
+		...baseStyles,
+		color: "#eb1536",
+		padding: 0,
+		fontFamily: "Rubik",
+		fontStyle: "normal",
+		fontWeight: 400,
+		fontSize: "14px",
+		lineHeight: "22px",
+	}),
 	// dropdownIndicator: () => ({
-		// ...baseStyles,
-		// color: "#eb1536",
+	// ...baseStyles,
+	// color: "#eb1536",
+	// }),
+};
+
+export const correctStyle: StylesConfig = {
+	control: (baseStyles: any, state: { isFocused: any }) => ({
+		...baseStyles,
+		background: "#e2f4eb",
+		border: state.isFocused ? "1px solid #55b486" : "1px solid #55b486",
+		borderRadius: "4px",
+		padding: "0 5px",
+		minHeight: "43px",
+		color: "#55b486",
+	}),
+	singleValue: (baseStyles: any) => ({
+		...baseStyles,
+		color: "#55b486",
+		padding: 0,
+		fontFamily: "Rubik",
+		fontStyle: "normal",
+		fontWeight: 400,
+		fontSize: "14px",
+		lineHeight: "22px",
+	}),
+	placeholder: (baseStyles: any) => ({
+		...baseStyles,
+		color: "#55b486",
+		padding: 0,
+		fontFamily: "Rubik",
+		fontStyle: "normal",
+		fontWeight: 400,
+		fontSize: "14px",
+		lineHeight: "22px",
+	}),
+	// dropdownIndicator: () => ({
+	// ...baseStyles,
+	// color: "#eb1536",
 	// }),
 };

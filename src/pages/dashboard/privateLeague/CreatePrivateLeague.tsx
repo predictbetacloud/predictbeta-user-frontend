@@ -83,7 +83,7 @@ const CreatePrivateLeague = () => {
 	);
 
 	useEffect(() => {
-		dispatch(getAllSeasonsAPI({}));
+		dispatch(getAllSeasonsAPI({tokenKey: 'getAllSeasons'}));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
