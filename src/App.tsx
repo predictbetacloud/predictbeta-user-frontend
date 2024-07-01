@@ -1,7 +1,7 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 // import { ErrorBoundary } from "react-error-boundary";
 
-import { useAppDispatch, useAppSelector } from "./state/hooks";
+import { useAppSelector } from "./state/hooks";
 import { globalRouter } from "./utils/utils";
 
 // import ErrorFallback from "./components/layout/ErrorFallback";
@@ -37,16 +37,13 @@ import UserPredictionHistory from "./pages/dashboard/predictionHistory/UserPredi
 import PublicWeekLeaderboard from "./pages/public/PublicWeekLeaderboard";
 import PublicMonthLeaderboard from "./pages/public/PublicMonthLeaderboard";
 import PublicSeasonLeaderboard from "./pages/public/PublicSeasonLeaderboard";
-import { selectAuth } from "./state/slices/auth";
-import { useEffect } from "react";
-import { refreshTokenAPI } from "./api/authAPI";
-import { callFunctionInInterval } from "./utils/helpers";
+// import { selectAuth } from "./state/slices/auth";
 
 function App() {
-	const dispatch = useAppDispatch();
+	// const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const location = useLocation();
-	const { refresh_token } = useAppSelector(selectAuth);
+	// const { refresh_token } = useAppSelector(selectAuth);
 
 	const showDepositModal = useAppSelector(selectShowDepositModal);
 
