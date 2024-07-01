@@ -128,13 +128,21 @@ export const loginAPI = createAsyncThunk(
 				dispatch(setIsPerformingAuthAction(false));
 
 				if (globalRouter.navigate) {
-					if (globalRouter.location && globalRouter.location.state.from) {
+					console.log("in navigate", globalRouter.location);
+					if (
+						globalRouter.location &&
+						globalRouter.location.state &&
+						globalRouter.location.state.from
+					) {
 						console.log("router", globalRouter);
 						console.log("location", globalRouter?.location);
 						globalRouter.navigate(globalRouter?.location?.state?.from);
 					} else {
+						console.log("navigate but no state");
 						globalRouter.navigate("/dashboard/fixtures");
 					}
+				} else {
+					console.log("no navigate");
 				}
 			})
 			.catch((error) => {
@@ -404,7 +412,9 @@ export const refreshTokenAPI = createAsyncThunk(
 
 							if (globalRouter.navigate) {
 								globalRouter.navigate("/", {
-									state: { from: window.location.pathname },
+									state: {
+										from: `${globalRouter.location?.pathname}${globalRouter.location?.search}`,
+									},
 								});
 							}
 						}
@@ -413,7 +423,9 @@ export const refreshTokenAPI = createAsyncThunk(
 		} else {
 			if (globalRouter.navigate) {
 				globalRouter.navigate("/", {
-					state: { from: window.location.pathname },
+					state: {
+						from: `${globalRouter.location?.pathname}${globalRouter.location?.search}`,
+					},
 				});
 			}
 		}

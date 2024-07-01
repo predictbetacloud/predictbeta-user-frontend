@@ -1,7 +1,7 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 // import { ErrorBoundary } from "react-error-boundary";
 
-import { useAppSelector } from "./state/hooks";
+import { useAppDispatch, useAppSelector } from "./state/hooks";
 import { globalRouter } from "./utils/utils";
 
 // import ErrorFallback from "./components/layout/ErrorFallback";
@@ -37,15 +37,34 @@ import UserPredictionHistory from "./pages/dashboard/predictionHistory/UserPredi
 import PublicWeekLeaderboard from "./pages/public/PublicWeekLeaderboard";
 import PublicMonthLeaderboard from "./pages/public/PublicMonthLeaderboard";
 import PublicSeasonLeaderboard from "./pages/public/PublicSeasonLeaderboard";
+import { selectAuth } from "./state/slices/auth";
+import { useEffect } from "react";
+import { refreshTokenAPI } from "./api/authAPI";
+import { callFunctionInInterval } from "./utils/helpers";
 
 function App() {
+	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const location = useLocation();
+	const { refresh_token } = useAppSelector(selectAuth);
 
 	const showDepositModal = useAppSelector(selectShowDepositModal);
 
 	globalRouter.navigate = navigate;
 	globalRouter.location = location;
+
+	// useEffect(() => {
+	// 	if (refresh_token) {
+	// 		dispatch(refreshTokenAPI());
+	// 		const clearTimer = callFunctionInInterval(
+	// 			() => dispatch(refreshTokenAPI()),
+	// 			23 * 60 * 60000
+	// 		);
+	// 		return () => {
+	// 			clearTimer();
+	// 		};
+	// 	}
+	// }, []);
 
 	return (
 		// <ErrorBoundary FallbackComponent={ErrorFallback}>

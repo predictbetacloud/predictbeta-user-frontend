@@ -3,18 +3,18 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { selectAuth } from "../../state/slices/auth";
-import { getUserInfoAPI, refreshTokenAPI } from "../../api/authAPI";
-import { callFunctionInInterval } from "../../utils/helpers";
+import { getUserInfoAPI } from "../../api/authAPI";
 import { globalRouter } from "../../utils/utils";
 
 type Props = { children: ReactNode; title?: string };
 
 const DashboardLayout = ({ children, title }: Props) => {
-	const { refresh_token, user } = useAppSelector(selectAuth);
+	const { user } = useAppSelector(selectAuth);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		if (user?.id) {
+			console.log("user id exists");
 			dispatch(getUserInfoAPI({ id: user?.id }));
 		} else {
 			if (globalRouter.navigate) {
@@ -31,19 +31,6 @@ const DashboardLayout = ({ children, title }: Props) => {
 			}
 		}
 	}, [user?.id]);
-
-	useEffect(() => {
-		if (refresh_token) {
-			dispatch(refreshTokenAPI());
-			const clearTimer = callFunctionInInterval(
-				() => dispatch(refreshTokenAPI()),
-				23 * 60 * 60000
-			);
-			return () => {
-				clearTimer();
-			};
-		}
-	}, []);
 
 	return (
 		<section>
