@@ -65,7 +65,7 @@ const Drawer = () => {
 							leaveFrom="translate-x-0"
 							leaveTo="-translate-x-full"
 						>
-							<Dialog.Panel className="w-[80vw] h-screen transform overflow-hidden bg-white p-6 px-4 text-left align-middle shadow-xl transition-all flex flex-col justify-between">
+							<Dialog.Panel className="w-[80vw] h-screen transform overflow-hidden bg-white p-6 pb-10 px-4 text-left align-middle shadow-xl transition-all flex flex-col justify-between">
 								<section>
 									<div className="flex items-center justify-between pb-4 mb-2">
 										<img src={logo} alt="Predictbeta" className="h-12" />
