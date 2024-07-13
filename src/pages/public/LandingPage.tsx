@@ -90,7 +90,7 @@ const LandingPage = () => {
 				<div className="lg:w-1/2 flex-shrink-0 lg:pt-24">
 					<h1 className="text-[50px] lg:text-[56px] font-semibold leading-[55px] lg:leading-[68px]">
 						<span className="text-[#eb1536]">Predict</span>! <br />
-						Take Everyone’s Money<span className="text-[#eb1536]">.</span>
+						Take Your Share<span className="text-[#eb1536]">.</span>
 					</h1>
 					<p className="mt-4 mb-8 text-[#5F6B7A]">
 						Luck or skill? Let’s see who’s better.

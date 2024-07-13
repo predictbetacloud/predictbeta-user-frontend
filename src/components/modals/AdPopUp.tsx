@@ -65,7 +65,7 @@ const AdPopUp = () => {
 									<div className="flex items-center justify-between mt-8">
 										<div className="md:w-3/5">
 											<h2 className="text-3xl lg:text-6xl text-white font-bold">
-												We’re the fastest growing sports prediction platform!
+												We’re the fastest growing FREE sports prediction community!
 											</h2>
 										</div>
 										{/* Match img */}
