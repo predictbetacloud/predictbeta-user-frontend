@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
+import { FaTiktok } from "react-icons/fa";
 
 import logo from "../../assets/logo/logo-light.svg";
 // import goBetLogo from "../../assets/images/Gobet-Featured-Image 1.png";
@@ -43,22 +44,28 @@ const PublicFooter = () => {
 				</p>
 				<div className="flex items-center gap-x-4 mt-4 md:mt-0">
 					<a
-						href="#"
-						className="flex items-center justify-center w-8 h-8 rounded-full bg-[#EB1536]"
+						href="https://x.com/predictbeta?s=11&t=zQ2VH2EhRxbRQ3E-8zuNIA"
+						target="_blank" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#EB1536]"
 					>
 						<FaXTwitter color="#FFF" />
 					</a>
 					<a
-						href="#"
-						className="flex items-center justify-center w-8 h-8 rounded-full bg-[#EB1536]"
+						href="https://www.facebook.com/share/gDU5uy7r2FJwko4g/?mibextid=LQQJ4d"
+						target="_blank" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#EB1536]"
 					>
 						<FaFacebookF color="#FFF" />
 					</a>
 					<a
-						href="#"
-						className="flex items-center justify-center w-8 h-8 rounded-full bg-[#EB1536]"
+						href="https://www.instagram.com/predictbeta"
+						target="_blank" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#EB1536]"
 					>
 						<FaInstagram color="#FFF" />
+					</a>
+					<a
+						href="https://www.tiktok.com/@predictbeta?_t=8oAS8UTdYNy&_r=1"
+						target="_blank" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#EB1536]"
+					>
+						<FaTiktok color="#FFF" />
 					</a>
 				</div>
 			</div>
