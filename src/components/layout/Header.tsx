@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/logo/logo-dark.svg";
 import Button from "../Buttons";
 import { useEffect, useState } from "react";
@@ -53,9 +53,9 @@ const Header = ({ title }: Props) => {
 	return (
 		<header className="bg-[#051B30] py-3 px-4 lg:px-8 sticky top-0 flex items-center justify-between z-[100]">
 			<div className="flex items-center">
-				<div className="md:px-10 flex-shrink-0">
+				<Link to="/" className="md:px-10 flex-shrink-0">
 					<img src={logo} alt="Predictbeta" className="" />
-				</div>
+				</Link>
 
 				{title ? (
 					<h1 className="lg:hidden text-white font-semibold text-sm ml-4">
