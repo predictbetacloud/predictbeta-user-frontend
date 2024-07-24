@@ -23,7 +23,7 @@ const TabNav = ({
 	const pageLink = window.location.pathname;
 
 	return (
-		<nav className="flex space-x-8 rounded-sm w-full md:w-fit bg-red-700">
+		<nav className="flex space-x-8 rounded-sm w-full md:w-fit">
 			{hasAction ? (
 				<>
 					{tabs.map((tab, key) => (

@@ -14,7 +14,7 @@ const PublicHeader = () => {
 	return (
 		<header className="flex items-center justify-between w-full px-4 md:px-10 lg:px-20 xl:px-40 py-2 bg-white shadow-sm z-10 sticky top-0">
 			<div className="flex items-center">
-				<img src={logo} alt="Predictbeta" className="md:mr-8" />
+				<Link to="/"><img src={logo} alt="Predictbeta" className="md:mr-8" /></Link>
 				<nav className="hidden lg:flex items-center gap-x-8">
 					{routes.map((route) => (
 						<Link

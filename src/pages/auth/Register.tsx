@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -14,6 +14,7 @@ import { signUpAPI } from "../../api/authAPI";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { selectAuth } from "../../state/slices/auth";
 import CustomPhoneInput from "../../components/inputs/CustomPhoneInput";
+
 
 const Register = () => {
 	const dispatch = useAppDispatch();
@@ -49,6 +50,12 @@ const Register = () => {
 			})
 		);
 	};
+
+	// useEffect(() => {
+	// 	const getLocation = ()=>{
+
+	// 	}
+	// }, [])
 
 	return (
 		<main className="w-screen min-h-screen px-4 md:px-0 py-20 bg-[#FFFFFF] flex flex-col items-center justify-center">
