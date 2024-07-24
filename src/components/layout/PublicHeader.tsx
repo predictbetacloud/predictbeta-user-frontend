@@ -7,6 +7,7 @@ const routes: { title: string; route: string }[] = [
 	{ title: "Home", route: "/" },
 	{ title: "How to Play", route: "/how-to-play" },
 	{ title: "Leaderboard", route: "/leaderboard" },
+	{ title: "HallaBet", route: "/https://www.hallabet.com/prematch" },
 	{ title: "FAQs", route: "/faq" },
 ];
 
@@ -17,14 +18,27 @@ const PublicHeader = () => {
 				<Link to="/"><img src={logo} alt="Predictbeta" className="md:mr-8" /></Link>
 				<nav className="hidden lg:flex items-center gap-x-8">
 					{routes.map((route) => (
+						<>
+						{route.title === 'HallaBet' ? (
+								<a href="https://www.hallabet.com/prematch" target="_blank" className="font-extrabold px-2 text-lg">
+								<span className="text-[#3E4095]">Halla</span>
+								<span className="text-[#eb1536]">Bet</span>
+								</a>
+							) : (
 						<Link
 							key={route.title}
 							to={route.route}
-							className="text-[#153243] hover:text-[#eb1536]"
+							className={`text-[#153243] hover:text-[#eb1536]`}
 						>
+							
 							{route.title}
 						</Link>
+							) }
+						</>
+						
 					))}
+
+					
 					{/* <a
 						href="https://gobet247.com"
 						className="text-[#153243] hover:text-[#eb1536]"
