@@ -27,6 +27,7 @@ import { selectShowAdPopUp, setShowAdPopUp } from "../../state/slices/auth";
 import AdPopUp from "../../components/modals/AdPopUp";
 import HeroSection from "../../components/Hero";
 import { useNavigate } from "react-router";
+import TopWinners from "../../components/TopWinners";
 
 const LandingPage = () => {
 	const dispatch = useAppDispatch();
@@ -87,10 +88,7 @@ const LandingPage = () => {
 			<HeroSection/>
 
 			{/* Carousel section */}
-			<div className="px-4 md:px-40 mt-10 md:-mt-96 mb-24 font-medium">
-				<h3 className="mb-5 lg:mt-32 text-[#2A2E33]">Recent winners</h3>
-				<WinnersCarousel winners={winners} />
-			</div>
+			<TopWinners/>
 
 			{/* Weekly Predictions Teaser */}
 			<section
