@@ -17,7 +17,7 @@ import PublicHeader from "../../components/layout/PublicHeader";
 import Button from "../../components/Buttons";
 import WinnersCarousel from "../../components/WinnersCarousel";
 
-
+import winners from "../../utils/winners";
 import { colors } from "../../utils/colors";
 import {
 	getAllMatchesAPI,
@@ -30,7 +30,6 @@ import PublicFooter from "../../components/layout/PublicFooter";
 import { selectShowAdPopUp, setShowAdPopUp } from "../../state/slices/auth";
 import AdPopUp from "../../components/modals/AdPopUp";
 import Hero from "../../components/Hero";
-import TopWinners from "./TopWinners";
 
 const LandingPage = () => {
 	const dispatch = useAppDispatch();
@@ -91,11 +90,14 @@ const LandingPage = () => {
 			<Hero/>
 
 			{/* Carousel section */}
-			<TopWinners/>
+			<div className="px-4 md:px-40 mt-10 md:-mt-96 mb-24 font-medium">
+				<h3 className="mb-5 lg:mt-32 text-[#2A2E33]">Recent winners</h3>
+				<WinnersCarousel winners={winners} />
+			</div>
 
 			{/* Weekly Predictions Teaser */}
 			<section
-				className="px-4 md:px-10 lg:px-40 pt-8 lg:py-16 mb-10 lg:mb-0"
+				className="px-4 md:px-40 pt-16 lg:py-32 mb-10 lg:mb-0"
 				style={{
 					background: colors.peach,
 				}}
