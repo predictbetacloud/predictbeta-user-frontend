@@ -21,8 +21,8 @@ const PublicHeader = () => {
 						<>
 						{route.title === 'HallaBet' ? (
 								<a href="https://www.hallabet.com/prematch" target="_blank" className="font-extrabold px-2 text-lg">
-								<span className="text-[#3E4095]">Halla</span>
-								<span className="text-[#eb1536]">Bet</span>
+									<span className="text-[#3E4095]">Halla</span>
+									<span className="text-[#eb1536]">Bet</span>
 								</a>
 							) : (
 						<Link
