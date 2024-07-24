@@ -11,9 +11,6 @@ import {
 } from "../../state/slices/fixtures";
 
 import PublicHeader from "../../components/layout/PublicHeader";
-import WinnersCarousel from "../../components/WinnersCarousel";
-
-import winners from "../../utils/winners";
 import { colors } from "../../utils/colors";
 import {
 	getAllMatchesAPI,
