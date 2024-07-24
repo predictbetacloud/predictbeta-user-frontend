@@ -17,7 +17,7 @@ import PublicHeader from "../../components/layout/PublicHeader";
 import Button from "../../components/Buttons";
 import WinnersCarousel from "../../components/WinnersCarousel";
 
-import winners from "../../utils/winners";
+
 import { colors } from "../../utils/colors";
 import {
 	getAllMatchesAPI,
@@ -29,6 +29,8 @@ import { MatchCard } from "../../components/fixtures/MatchCard";
 import PublicFooter from "../../components/layout/PublicFooter";
 import { selectShowAdPopUp, setShowAdPopUp } from "../../state/slices/auth";
 import AdPopUp from "../../components/modals/AdPopUp";
+import Hero from "../../components/Hero";
+import TopWinners from "./TopWinners";
 
 const LandingPage = () => {
 	const dispatch = useAppDispatch();
@@ -86,40 +88,14 @@ const LandingPage = () => {
 		<main className="bg-white">
 			<PublicHeader />
 			{/* Hero Image */}
-			<section className="px-6 md:px-40 pt-10 lg:pt-0 max-h-screen w-full lg:flex justify-between">
-				<div className="lg:w-1/2 flex-shrink-0 lg:pt-24">
-					<h1 className="text-[50px] lg:text-[56px] font-semibold leading-[55px] lg:leading-[68px]">
-						<span className="text-[#eb1536]">Predict</span>! <br />
-						Take Your Share<span className="text-[#eb1536]">.</span>
-					</h1>
-					<p className="mt-4 mb-8 text-[#5F6B7A]">
-						Luck or skill? Let’s see who’s better.
-					</p>
-					<div className="flex items-center gap-x-5">
-						<Link to="/dashboard/fixtures">
-							<Button title="Start predicting" />
-						</Link>
-						<Link to="/dashboard/private-league">
-							<Button.OutlineRed title="Create a league" />
-						</Link>
-					</div>
-				</div>
-				<img
-					src={heroImg}
-					alt="We play ball"
-					className="hidden lg:block max-h-[90vh] -translate-x-20 -translate-y-10 transform z-0"
-				/>
-			</section>
+			<Hero/>
 
 			{/* Carousel section */}
-			<div className="px-4 md:px-40 mt-10 md:-mt-96 mb-24 font-medium">
-				<h3 className="mb-5 lg:mt-32 text-[#2A2E33]">Recent winners</h3>
-				<WinnersCarousel winners={winners} />
-			</div>
+			<TopWinners/>
 
 			{/* Weekly Predictions Teaser */}
 			<section
-				className="px-4 md:px-40 pt-16 lg:py-32 mb-10 lg:mb-0"
+				className="px-4 md:px-10 lg:px-40 pt-16 lg:py-32 mb-10 lg:mb-0"
 				style={{
 					background: colors.peach,
 				}}

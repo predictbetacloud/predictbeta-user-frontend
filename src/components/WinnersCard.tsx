@@ -19,9 +19,9 @@ export const WinnersCard = ({
 	};
 }) => {
 	return (
-		<Style className="py-5 px-6 flex items-center">
+		<Style className="flex-1 py-4 px-6 md:px-2 xl:px-5 flex items-center gap-4 md:gap-2 lg:gap-5">
 			<div
-				className="rounded-full w-16 h-16 mr-4 text-[#3F3E4D] flex items-center justify-center"
+				className="rounded-full w-[60px] h-[60px] text-2xl md:text-lg md:w-[35px] md:h-[35px] text-[#3F3E4D] flex items-center justify-center p-2"
 				style={{
 					border: "1px solid #EB1536",
 					boxShadow: "0px 0px 0px 3px rgba(249, 99, 99, 0.25)",
@@ -31,7 +31,7 @@ export const WinnersCard = ({
 			</div>
 			<div>
 				<div className="flex items-baseline">
-					<p className="text-xs text-[#5F6B7A] font-light">{winner?.currency ?? "NGN"}</p>
+					<p className="text-xs text-[#5F6B7A] font-light">{winner?.currency ?? "NGN "}</p>
 					<p className="text-xl font-medium text-[#2A2E33]">
 						{winner?.amount?.toLocaleString() ?? 0}
 					</p>
