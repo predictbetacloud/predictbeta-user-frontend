@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -50,18 +49,18 @@ const Register = () => {
 		);
 	};
 
-	useEffect(() => {
-		navigator.geolocation.getCurrentPosition(pos=>{
-			const {longitude, latitude} = pos.coords
-			console.log(latitude, longitude)
-			let res;
+	// useEffect(() => {
+	// 	navigator.geolocation.getCurrentPosition(pos=>{
+	// 		const {longitude, latitude} = pos.coords
+	// 		console.log(latitude, longitude)
+	// 		let res;
 			
-			const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
-			fetch(url).then(res=>res.json()).then(data=>{console.log(data); res = data});
-			const stateUrl = `https://app.ecwid.com/api/v3/storeId/states?countryCode=US`;
-			fetch(stateUrl).then(res=>res.json()).then(states=>console.log(states));
-		})
-	}, [])
+	// 		const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+	// 		fetch(url).then(res=>res.json()).then(data=>{console.log(data); res = data});
+	// 		const stateUrl = `https://app.ecwid.com/api/v3/storeId/states?countryCode=US`;
+	// 		fetch(stateUrl).then(res=>res.json()).then(states=>console.log(states));
+	// 	})
+	// }, [])
 
 	return (
 		<main className="w-screen min-h-screen px-4 md:px-0 py-20 bg-[#FFFFFF] flex flex-col items-center justify-center">
