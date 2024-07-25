@@ -13,6 +13,7 @@ import { signUpAPI } from "../../api/authAPI";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { selectAuth } from "../../state/slices/auth";
 import CustomPhoneInput from "../../components/inputs/CustomPhoneInput";
+import { useState } from "react";
 
 const Register = () => {
 	const dispatch = useAppDispatch();
