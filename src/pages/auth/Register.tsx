@@ -15,7 +15,7 @@ const Register = () => {
 		<main className="w-screen min-h-screen px-4 md:px-0 py-20 bg-[#FFFFFF] flex flex-col items-center justify-center">
 			<div className=" p-4 flex flex-col gap-2 justify-center items-center border-2 rounded-lg">
 				<Link to="/"><img src={logo} alt="Predictbeta" /></Link>
-				<h3 className="text-xl text-[#222222] font-medium mb-2">
+				<h3 className="text-xl text-[#222222] font-medium mb-2 text-center">
 						Create an account to make predictions
 					</h3>
 				<div className="flex justify-around">
