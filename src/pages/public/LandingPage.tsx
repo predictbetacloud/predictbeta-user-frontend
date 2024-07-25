@@ -89,7 +89,7 @@ const LandingPage = () => {
 
 			{/* Weekly Predictions Teaser */}
 			<section
-				className="px-4 md:px-40 pt-16 lg:py-32 mb-10 lg:mb-0"
+				className="px-4 md:px-10 lg:px-40 pt-16 lg:py-32 mb-10 lg:mb-0"
 				style={{
 					background: colors.peach,
 				}}
@@ -115,7 +115,7 @@ const LandingPage = () => {
 					) : (
 						<>
 							{allMatches?.length > 0 ? (
-								<div className="grid md:grid-cols-2 gap-6">
+								<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 									{allMatches?.map((match, idx) => (
 										<div key={idx}>
 											<MatchCard
