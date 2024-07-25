@@ -16,7 +16,6 @@ const routes: { title: string; route: string }[] = [
 	{ title: "Home", route: "/" },
 	{ title: "How to Play", route: "/how-to-play" },
 	{ title: "Leaderboard", route: "/leaderboard" },
-	{ title: "HallaBet", route: "https://www.hallabet.com/prematch" },
 	{ title: "FAQs", route: "/faq" },
 ];
 
@@ -76,27 +75,17 @@ const PublicDrawer = () => {
 									</div>
 
 									{/* Routes */}
-									<div className="flex flex-col gap-4 flex-grow justify-between">
+									<div className="flex flex-col flex-grow justify-between">
 										{/* Links */}
 										{routes.map((route) => (
-											<>
-												{route.title === 'HallaBet' ? (
-														<a href={route.route} target="_blank" className="font-extrabold text-lg">
-														<span className="text-[#3E4095]">Halla</span>
-														<span className="text-[#eb1536]">Bet</span>
-														</a>
-													) : (
-												<Link
-													key={route.title}
-													to={route.route}
-													className={`text-[#153243] hover:text-[#eb1536]`}
-												>
-													
-													{route.title}
-												</Link>
-													) }
-											</>
-											
+											<Link
+												key={route.title}
+												to={route.route}
+												className="text-[#153243] hover:text-[#eb1536] block my-2"
+												onClick={() => dispatch(togglePublicDrawer())}
+											>
+												{route.title}
+											</Link>
 										))}
 									</div>
 
