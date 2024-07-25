@@ -1,4 +1,3 @@
-import { Controller, FieldValues, useForm } from "react-hook-form";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
@@ -10,8 +9,8 @@ import Button from "../../components/Buttons";
 import { signUpAPI } from "../../api/authAPI";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { selectAuth } from "../../state/slices/auth";
-import CustomPhoneInput from "../../components/inputs/CustomPhoneInput";
 import { useState } from "react";
+import { FieldValues, useForm } from "react-hook-form";
 
 const EmailRegistration = () => {
     const dispatch = useAppDispatch();
@@ -23,7 +22,6 @@ const EmailRegistration = () => {
 	const {
 		register,
 		handleSubmit,
-		control,
 		formState: { errors },
 	} = useForm();
 
