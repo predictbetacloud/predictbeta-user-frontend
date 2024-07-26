@@ -5,6 +5,7 @@ import PublicHeader from "../../components/layout/PublicHeader";
 import { IoLogoFacebook } from "react-icons/io5";
 import { FaXTwitter } from "react-icons/fa6";
 import { Instagram } from "../../assets/icons";
+import { FaTiktok } from "react-icons/fa";
 const ContactPage = () => {
 	return (
 		<>
@@ -36,21 +37,26 @@ const ContactPage = () => {
 								<p className="font-semibold">+234 915 4379 148</p>
 							</a>
 						</div>
-						<div className="rounded-lg border-[#DDEFFF] border p-6 flex items-center justify-center">
+						<a href="https://www.facebook.com/share/gDU5uy7r2FJwko4g/?mibextid=LQQJ4d" className="rounded-lg border-[#DDEFFF] border p-6 flex items-center justify-center" target="_blank">
 							<IoLogoFacebook size={24} color="#315CB8" className="mr-2.5" />
 							<p className="mr-2.5">Facebook:</p>
 							<p className="font-semibold">@PredictBeta</p>
-						</div>
-						<div className="rounded-lg border-[#DDEFFF] border p-6 flex items-center justify-center">
+						</a>
+						<a href="https://x.com/predictbeta?s=11&t=zQ2VH2EhRxbRQ3E-8zuNIA" className="rounded-lg border-[#DDEFFF] border p-6 flex items-center justify-center" target="_blank">
 							<FaXTwitter size={24} className="mr-2.5" />
-							<p className="mr-2.5">:</p>
+							<p className="mr-2.5">Twitter:</p>
 							<p className="font-semibold">@PredictBeta</p>
-						</div>
-						<div className="rounded-lg border-[#DDEFFF] border p-6 flex items-center justify-center">
+						</a>
+						<a href="https://www.instagram.com/predictbeta" className="rounded-lg border-[#DDEFFF] border p-6 flex items-center justify-center" target="_blank">
 							<Instagram size={24} className="mr-2.5" />
 							<p className="mr-2.5">Instagram:</p>
 							<p className="font-semibold">@PredictBeta</p>
-						</div>
+						</a>
+						<a href="https://www.tiktok.com/@predictbeta?_t=8oAS8UTdYNy&_r=1" className="rounded-lg border-[#DDEFFF] border p-6 flex items-center justify-center" target="_blank">
+							<FaTiktok size={24} className="mr-2.5" />
+							<p className="mr-2.5">TikTok:</p>
+							<p className="font-semibold">@PredictBeta</p>
+						</a>
 					</div>
 				</section>
 			</main>
