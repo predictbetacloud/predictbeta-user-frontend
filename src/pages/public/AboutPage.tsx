@@ -10,34 +10,26 @@ const AboutPage = () => {
 				<section className="py-20 px-4 bg-[#051B30] text-center mb-16">
 					<h1 className="text-white font-semibold text-4xl mb-4">About Us</h1>
 					<p className="text-[#E1E7EC] max-w-[600px] mx-auto">
-						If you are reading this, then you already know what we know; we make
-						you a little richer with your correct sport predictions!
+						We might be the easiest sports prediction and entertainment platform in the world but you’ll soon find out that nothing is truly easy.
 					</p>
 				</section>
 				<section className="px-4 md:px-40 mb-20">
 					<div className="md:w-1/2">
 						<h3 className="text-[#212934] font-semibold text-2xl mb-3">
-							What we do
+							Who we are and what we do
 						</h3>
 						<p className="text-[#212934]">
-							Predictbeta is a one of a kind sport prediction entertainment
-							platform owned by TwinLove Media Limited. We offer a monetary
-							rewarding sports prediction league on a fixture/weekly basis on
-							our platform to help you make the best of your prediction
-							super-powers.
+							Predictbeta is a one of a kind sport prediction, entertainment platform owned by PredictBeta Nigeria Limited. We offer a monetary rewarding free sports prediction leagues on a draw/weekly basis on our platform. 
 						</p>
 						<p className="text-[#212934] mt-3">
-							Wins on Predictbeta are weekly and payout happens immediately after
-							every match-week on the platform. Our league offerings go from
-							general league to private league for our subscribers.
+							Our drive is to lead the growth of positive sports communities using simple sport predictions to create entertainment and fuel passion.
 						</p>
 
 						<h3 className="text-[#212934] font-semibold text-2xl mb-3 mt-8">
 							Goal
 						</h3>
 						<p className="text-[#212934]">
-							Our primary goal at Predictbeta is enjoyment, sport banter and
-							getting you a little richer.
+							As a brand, we believe in the spirit of sharing.
 						</p>
 						<p className="text-[#212934] mt-3">
 							Just like we have in sport leagues, we’re using this platform to
@@ -46,13 +38,18 @@ const AboutPage = () => {
 							money while doing that.
 						</p>
 
-						{/* <h3 className="text-[#212934] font-semibold text-2xl mb-3 mt-8">
-							Partners
-						</h3>
-						<p className="text-[#212934]">
-							Predictbeta owned by TwinLove Media Limited operate with the
-							following partners:
-						</p> */}
+						<p className="text-[#212934] mt-3">
+							Wins on Predictbeta are weekly and payout happens immediately after every match-week on the platform. Our league offerings go from general league to private league for all our subscribers/users.
+
+						</p>
+
+						<p className="text-[#212934] mt-3">
+							Do you have what it takes to win every week or make the top 10 at the end of the season for a share of our grand prize?
+						</p>
+						<p className="text-[#212934] mt-3 font-bold">
+							Let's see you try!
+						</p>
+						<p className="text-[#212934] mt-3 text-[#EC1636]">PredictBeta is powered by Hallabet.</p>
 					</div>
 				</section>
 			</main>
