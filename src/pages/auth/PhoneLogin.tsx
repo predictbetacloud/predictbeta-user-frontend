@@ -1,19 +1,17 @@
-import { Controller, FieldValues, useForm } from "react-hook-form";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { Controller, FieldValues, useForm } from 'react-hook-form';
+import { loginAPI } from '../../api/authAPI';
+import { selectAuth } from '../../state/slices/auth';
+import { Input } from '../../components/inputs/Input';
+import { P } from '../../components/Texts';
+import ErrorMessage from '../../components/inputs/ErrorMessage';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import Button from '../../components/Buttons';
+import CustomPhoneInput from '../../components/inputs/CustomPhoneInput';
 
-import ErrorMessage from "../../components/inputs/ErrorMessage";
-import { P } from "../../components/Texts";
-import { Input } from "../../components/inputs/Input";
-import Button from "../../components/Buttons";
-
-import { signUpAPI } from "../../api/authAPI";
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
-import { selectAuth } from "../../state/slices/auth";
-import CustomPhoneInput from "../../components/inputs/CustomPhoneInput";
-import { useState } from "react";
-
-const PhoneRegistration = () => {
+const PhoneLogin = () => {
     const dispatch = useAppDispatch();
 	const { isPerformingAuthAction } = useAppSelector(selectAuth);
 
@@ -23,52 +21,17 @@ const PhoneRegistration = () => {
 	const {
 		register,
 		handleSubmit,
-		control,
+        control,
 		formState: { errors },
 	} = useForm();
 
 	// Form Submission Handler
-	const submit = ({
-		password,
-		mobileNumber,
-		firstName,
-		lastName,
-		userName,
-	}: FieldValues) => {
-		dispatch(
-			signUpAPI({
-				password,
-				mobileNumber,
-				firstName,
-				middleName: userName,
-				surname: lastName,
-                signUpType:'PHONE'
-			})
-		);
+	const submit = ({ phone, password }: FieldValues) => {
+		dispatch(loginAPI({ phone, password, signInType:'PHONE' }));
 	};
   return (
-    <form onSubmit={handleSubmit(submit)} className="md:w-[400px]">
-
-        {/* user name */}
-        <div className="mt-5">
-            <label htmlFor="userName" className="mb-2 block">
-                <P className="text-[#222222] text-sm">User name</P>
-            </label>
-            <Input
-                id="userName"
-                type="text"
-                placeholder="Your user name"
-                {...register("userName", {
-                    required: "Enter your user name",
-                })}
-                className={`w-full input ${errors?.userName ? "invalid" : ""}`}
-            />
-            {errors?.userName && (
-                <ErrorMessage message={errors.userName.message?.toString()} />
-            )}
-        </div>
-
-
+    <form onSubmit={handleSubmit(submit)} className="mt-2 w-full md:w-[400px]">
+					
         {/* Phone Number */}
         <div className="mt-5">
             <label htmlFor="mobileNumber" className="mb-2 block">
@@ -108,7 +71,7 @@ const PhoneRegistration = () => {
                 <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="Enter strong password"
+                    placeholder="Enter password here"
                     {...register("password", {
                         required: "Please enter password",
                     })}
@@ -127,37 +90,30 @@ const PhoneRegistration = () => {
             )}
         </div>
 
-        <p className="text-xs mt-4">
-            By creating an account, you agree that you’re above 18 years of age
-            and also to our{" "}
-            <Link to="/terms" className="">
-                <span className="text-[#EB1536]">Terms & Conditions</span>
-            </Link>
-        </p>
+        <Link
+            to="/forgot-password"
+            className="w-fit ml-auto block text-xs mt-4"
+        >
+            <p className="text-[#EB1536]">Forgot password?</p>
+        </Link>
 
         <div className="mt-5">
             <Button
                 className="w-full"
-                title="Create account"
+                title="Log in"
                 type="submit"
                 loading={isPerformingAuthAction}
             />
         </div>
 
         <p className="mt-4 md:text-center text-xs">
-            Have an account with HallBet?{" "}
-            <Link to="#" className="">
-                <span className="text-[#EB1536]">Confirm</span>
-            </Link>
-        </p>
-        <p className="mt-4 md:text-center text-xs">
-            Have an account?{" "}
-            <Link to="/login" className="">
-                <span className="text-[#EB1536]">Log in</span>
+            Don’t have an account?{" "}
+            <Link to="/register" className="">
+                <span className="text-[#EB1536]">Create account</span>
             </Link>
         </p>
     </form>
   )
 }
 
-export default PhoneRegistration
+export default PhoneLogin

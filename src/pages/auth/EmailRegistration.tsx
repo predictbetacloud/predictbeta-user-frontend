@@ -40,6 +40,7 @@ const EmailRegistration = () => {
 				firstName,
 				middleName: userName,
 				surname: lastName,
+                signUpType:'EMAIL'
 			})
 		);
 	};
@@ -128,6 +129,12 @@ const EmailRegistration = () => {
                 loading={isPerformingAuthAction}
             />
         </div>
+        <p className="mt-4 md:text-center text-xs">
+            Have an account with HallBet?{" "}
+            <Link to="#" className="">
+                <span className="text-[#EB1536]">Confirm</span>
+            </Link>
+        </p>
 
         <p className="mt-4 md:text-center text-xs">
             Have an account?{" "}
