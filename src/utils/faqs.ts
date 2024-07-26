@@ -42,27 +42,12 @@ const faqs = [
 	},
 	{
 		title:'Does Extra-Time win count as a win on PredictBeta?',
-		content:'No, it does not. A win/lose/draw on PredictBeta means a game finished in either of the three scenarios during regulation time.'
-	},
-	{
-		title: "How does PredictBeta make profit?",
-		content:
-			"PredictBeta makes profit by keeping 10% of all predictions made on the platform.",
+		content:'No, it does not. A Home win, Away win, or draw on PredictBeta means a game finished in either of the three scenarios during regulation time.'
 	},
 	{
 		title: "What is the minimum age to predict on PredictBeta?",
 		content:
-			"You’re allowed to predict on PredictBeta from 18 years upward. Anything less is now allowed.",
-	},
-	{
-		title: "When does match week prediction expire on PredictBeta?",
-		content:
-			"Every match week round of prediction expires an hour before the first game of that match week. Hence, you can start submitting your prediction immediately when they are published on PredictBeta.",
-	},
-	{
-		title: "How much to register on PredictBeta?",
-		content:
-			"It is absolutely free to open an account on PredictBeta and you can have as many accounts as possible.",
+			"You’re allowed to predict on PredictBeta from 18 years upward. Anything less is not allowed.",
 	},
 	{
 		title: "Can I edit my prediction after submitting it on PredictBeta?",
