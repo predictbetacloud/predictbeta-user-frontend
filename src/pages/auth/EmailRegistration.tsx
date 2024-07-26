@@ -97,6 +97,7 @@ const EmailRegistration = () => {
                     placeholder="Enter strong password"
                     {...register("password", {
                         required: "Please enter password",
+                        pattern:{value:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-]).{8,}$/, message:'Password must have 8 characters, One special character, One uppercase, One lower case'}
                     })}
                     className={`w-full input ${errors?.password ? "invalid" : ""}`}
                 />
