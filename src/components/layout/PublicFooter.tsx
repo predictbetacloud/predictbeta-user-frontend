@@ -3,6 +3,7 @@ import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { FaTiktok } from "react-icons/fa";
 
 import logo from "../../assets/logo/logo-light.svg";
+import hallaBetLogo from "../../assets/logo/hallabet.png"
 // import goBetLogo from "../../assets/images/Gobet-Featured-Image 1.png";
 
 const routes: { title: string; route: string }[] = [
@@ -16,7 +17,10 @@ const PublicFooter = () => {
 		<footer className="w-full relative bottom-0">
 			{/* top */}
 			<div className="md:flex items-center justify-between py-6 px-6 md:px-40 bg-white">
-				<img src={logo} alt="Predictbeta" className="md:mr-8" />
+				<div className="flex gap-8 items-center">
+					<Link to="/" className="border-r-2"><img src={logo} alt="Predictbeta" className="md:mr-8" /></Link>
+					<a href="https://www.hallabet.com" target="_blank"><img src={hallaBetLogo} width={120} alt="HallaBet" className="md:mr-8 rounded-md" /></a>
+				</div>
 				<nav className="flex items-center gap-x-8 mt-4 md:mt-0">
 					{routes.map((route) => (
 						<Link
@@ -42,6 +46,7 @@ const PublicFooter = () => {
 					© {new Date().getFullYear()} - Predictbeta. All rights reserved |
 					(18+) Predict Responsibly
 				</p>
+				<a href="https://www.hallabet.com" target="_blank" className="text-[#EB1536]">Powered by HallBet.</a>
 				<div className="flex items-center gap-x-4 mt-4 md:mt-0">
 					<a
 						href="https://x.com/predictbeta?s=11&t=zQ2VH2EhRxbRQ3E-8zuNIA"
