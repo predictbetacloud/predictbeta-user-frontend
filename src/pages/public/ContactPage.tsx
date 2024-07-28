@@ -6,6 +6,7 @@ import { IoLogoFacebook } from "react-icons/io5";
 import { FaXTwitter } from "react-icons/fa6";
 import { Instagram } from "../../assets/icons";
 import { FaTiktok } from "react-icons/fa";
+import { GiRotaryPhone } from "react-icons/gi";
 const ContactPage = () => {
 	return (
 		<>
@@ -31,10 +32,17 @@ const ContactPage = () => {
 
 					<div className="grid md:grid-cols-2 gap-4">
 						<div className="rounded-lg border-[#DDEFFF] border p-6 flex items-center justify-center">
+							<GiRotaryPhone size={24} color="#031332" className="mr-2.5" />
+							<p className="mr-2.5">Call Us:</p>
+							<a href="tel:++234 7082481037">
+								<p className="font-semibold">+234 7082481037</p>
+							</a>
+						</div>
+						<div className="rounded-lg border-[#DDEFFF] border p-6 flex items-center justify-center">
 							<IoLogoWhatsapp size={24} color="#27AE60" className="mr-2.5" />
 							<p className="mr-2.5">Whatsapp:</p>
-							<a href="tel:+2349154379148">
-								<p className="font-semibold">+234 915 4379 148</p>
+							<a href="tel:+234 8168448979 ">
+								<p className="font-semibold">+234 8168448979 8</p>
 							</a>
 						</div>
 						<a href="https://www.facebook.com/share/gDU5uy7r2FJwko4g/?mibextid=LQQJ4d" className="rounded-lg border-[#DDEFFF] border p-6 flex items-center justify-center" target="_blank">
