@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import logo from "../../assets/logo/logo-light.svg";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MdOutlineMailLock } from "react-icons/md";
 import { FaPhoneVolume } from "react-icons/fa6";
 import EmailRegistration from "./EmailRegistration";
@@ -13,16 +13,7 @@ const Register = () => {
 	const [country, setCountry] = useState('')
 	const [state, setState] = useState('')
 
-useEffect(() => {
-	window.navigator.geolocation.getCurrentPosition(pos=>{
-		const {latitude, longitude} = pos.coords
-		const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
-		fetch(url).then(res=>res.json()).then(data=>{
-			setCountry(data?.address?.country)
-			setState(data?.address?.state)
-		});
-	})
-}, [])
+
  
 	return (
 		<main className="w-screen min-h-screen px-4 md:px-0 py-20 bg-[#FFFFFF] flex flex-col items-center justify-center">
