@@ -9,8 +9,6 @@ import {
 	selectIsFetchingMatches,
 	selectMatches,
 } from "../../state/slices/fixtures";
-
-import PublicHeader from "../../components/layout/PublicHeader";
 import { colors } from "../../utils/colors";
 import {
 	getAllMatchesAPI,
@@ -18,13 +16,8 @@ import {
 	getAllWeeksAPI,
 } from "../../api/fixturesAPI";
 import PageLoading from "../../components/loaders/PageLoading";
-import { MatchCard } from "../../components/fixtures/MatchCard";
 import PublicFooter from "../../components/layout/PublicFooter";
-import { selectShowAdPopUp, setShowAdPopUp } from "../../state/slices/auth";
-import AdPopUp from "../../components/modals/AdPopUp";
-import HeroSection from "../../components/Hero";
 import { useNavigate } from "react-router";
-import TopWinners from "../../components/TopWinners";
 import { MatchCardMin } from "../../components/fixtures/MatchCardMin";
 
 const NextPage = () => {
@@ -34,7 +27,6 @@ const NextPage = () => {
 	const isFetchingSeasons = useAppSelector(selectIsFetchingAllSeasons);
 	const isFetchingWeeks = useAppSelector(selectIsFetchingAllWeeks);
 	const isFetchingMatches = useAppSelector(selectIsFetchingMatches);
-	const showAdPopUp = useAppSelector(selectShowAdPopUp);
 
 	const allWeeks = useAppSelector(selectAllWeeks);
 	const allMatches = useAppSelector(selectMatches);
@@ -71,13 +63,6 @@ const NextPage = () => {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [seasons]);
-
-	useEffect(() => {
-		dispatch(setShowAdPopUp(true));
-		return () => {
-			dispatch(setShowAdPopUp(false));
-		};
-	}, []);
 
 	return (
 		<main className="bg-white">

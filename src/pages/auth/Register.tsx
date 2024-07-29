@@ -14,7 +14,7 @@ const Register = () => {
 	const [state, setState] = useState('')
 
 useEffect(() => {
-	navigator.geolocation.getCurrentPosition(pos=>{
+	window.navigator.geolocation.getCurrentPosition(pos=>{
 		const {latitude, longitude} = pos.coords
 		const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
 		fetch(url).then(res=>res.json()).then(data=>{
