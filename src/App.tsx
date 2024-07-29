@@ -37,6 +37,7 @@ import UserPredictionHistory from "./pages/dashboard/predictionHistory/UserPredi
 import PublicWeekLeaderboard from "./pages/public/PublicWeekLeaderboard";
 import PublicMonthLeaderboard from "./pages/public/PublicMonthLeaderboard";
 import PublicSeasonLeaderboard from "./pages/public/PublicSeasonLeaderboard";
+import NextPage from "./pages/public/next";
 // import { selectAuth } from "./state/slices/auth";
 
 function App() {
@@ -73,6 +74,7 @@ function App() {
 				<Route path="/about-us" element={<AboutPage />} />
 				<Route path="/how-to-play" element={<HowToPlayPage />} />
 				<Route path="/faq" element={<FaqPage />} />
+				<Route path="/next" element={<NextPage />} />
 				<Route path="/leaderboard/month" element={<PublicMonthLeaderboard />} />
 				<Route
 					path="/leaderboard/season"

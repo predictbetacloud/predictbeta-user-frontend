@@ -13,8 +13,17 @@ import { signUpAPI } from "../../api/authAPI";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { selectAuth } from "../../state/slices/auth";
 import CustomPhoneInput from "../../components/inputs/CustomPhoneInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+useEffect(() => {
+	navigator.geolocation.getCurrentPosition(pos=>{
+		const {latitude, longitude} = pos.coords
+		console.log('Lat', latitude)
+		console.log('Lon', longitude)
+		console.log(pos);
+	})
+}, [])
+ 
 
 const RegisterBackup = () => {
 	const dispatch = useAppDispatch();

@@ -12,7 +12,12 @@ import { selectAuth } from "../../state/slices/auth";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 
-const EmailRegistration = () => {
+interface PropsTypes {
+    country:string,
+    state:string
+}
+
+const EmailRegistration = ({country, state}:PropsTypes) => {
     const dispatch = useAppDispatch();
 	const { isPerformingAuthAction } = useAppSelector(selectAuth);
 
@@ -29,17 +34,17 @@ const EmailRegistration = () => {
 	const submit = ({
 		email,
 		password,
-		firstName,
-		lastName,
 		userName,
 	}: FieldValues) => {
 		dispatch(
 			signUpAPI({
 				email,
 				password,
-				firstName,
-				middleName: userName,
-				surname: lastName,
+                username:userName,
+                country,
+                state,
+                countryCode:'',
+                mobileNumber:'',
                 signUpType:'EMAIL'
 			})
 		);

@@ -38,7 +38,7 @@ const successResponseHandler = (response: AxiosResponse) => {
 
 	// Log response
 	if (import.meta.env.VITE_REACT_APP_APP_ENV === "development") {
-		console.log(response.data);
+		// console.log(response.data);
 	}
 
 	// Additional checks for API that does not utilize the HTTP status code properly
