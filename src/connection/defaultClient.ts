@@ -81,7 +81,7 @@ const failureResponseHandler = async (error: AxiosError) => {
 
 	// Log error response
 	if (import.meta.env.VITE_REACT_APP_APP_ENV === "development") {
-		console.log(error);
+		// console.log(error);
 	}
 
 	// Request Timeout
@@ -160,7 +160,7 @@ axiosInstance.interceptors.request.use((req) => {
 
 	// Log requests
 	if (import.meta.env.VITE_REACT_APP_APP_ENV === "development") {
-		console.log(req);
+		// console.log(req);
 	}
 
 	return req;
