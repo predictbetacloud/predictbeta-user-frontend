@@ -26,23 +26,31 @@ export const signUpAPI = createAsyncThunk(
 			email,
 			password,
 			mobileNumber,
-			firstName,
-			middleName,
-			surname,
+			username,
+			country,
+			state,
+			signUpType
 		}: FieldValues,
 		{ dispatch }
 	) => {
 		dispatch(setIsPerformingAuthAction(true));
+		const bodyData = signUpType === 'EMAIL' ? {
+			email,
+			password,
+			username,
+			country,
+			state,
+			signUpType
+		} : {
+			password,
+			mobileNumber,
+			username,
+			country,
+			state,
+			signUpType
+		}
 		axiosInstance
-			.post(`/users`, {
-				email,
-				password,
-				mobileNumber,
-				firstName,
-				middleName,
-				username: middleName,
-				surname,
-			})
+			.post(`/users`, bodyData)
 			.then((data) => {
 				toastSuccess(
 					data?.data?.message ?? "Your account has been created successfully"

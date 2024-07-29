@@ -13,7 +13,13 @@ import { selectAuth } from "../../state/slices/auth";
 import CustomPhoneInput from "../../components/inputs/CustomPhoneInput";
 import { useState } from "react";
 
-const PhoneRegistration = () => {
+interface PropsTypes {
+    country:string,
+    state:string
+}
+
+
+const PhoneRegistration = ({country, state}:PropsTypes) => {
     const dispatch = useAppDispatch();
 	const { isPerformingAuthAction } = useAppSelector(selectAuth);
 
@@ -29,19 +35,19 @@ const PhoneRegistration = () => {
 
 	// Form Submission Handler
 	const submit = ({
-		password,
 		mobileNumber,
-		firstName,
-		lastName,
+		password,
 		userName,
 	}: FieldValues) => {
 		dispatch(
 			signUpAPI({
+				email:'',
 				password,
-				mobileNumber,
-				firstName,
-				middleName: userName,
-				surname: lastName,
+                username:userName,
+                country,
+                state,
+                countryCode:'',
+                mobileNumber,
                 signUpType:'PHONE'
 			})
 		);
@@ -99,7 +105,7 @@ const PhoneRegistration = () => {
             )}
         </div>
 
-        {/* Passowrd */}
+        {/* Password */}
         <div className="mt-5">
             <label htmlFor="password" className="mb-2 block">
                 <P className="text-[#222222] text-sm">Password</P>
