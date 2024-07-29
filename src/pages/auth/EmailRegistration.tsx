@@ -12,17 +12,12 @@ import { selectAuth } from "../../state/slices/auth";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 
-
 const EmailRegistration = () => {
     const dispatch = useAppDispatch();
 	const { isPerformingAuthAction } = useAppSelector(selectAuth);
 
 	const [showPassword, setShowPassword] = useState(false);
-    const [country, setCountry] = useState('Nigeria')
-	const [state, setState] = useState('Enugu')
 
-    setCountry('Nigeria')
-    setState('Enugu');
 	// Form Handler
 	const {
 		register,
@@ -34,17 +29,17 @@ const EmailRegistration = () => {
 	const submit = ({
 		email,
 		password,
+		firstName,
+		lastName,
 		userName,
 	}: FieldValues) => {
 		dispatch(
 			signUpAPI({
 				email,
 				password,
-                username:userName,
-                country,
-                state,
-                countryCode:'',
-                mobileNumber:'',
+				firstName,
+				middleName: userName,
+				surname: lastName,
                 signUpType:'EMAIL'
 			})
 		);

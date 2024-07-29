@@ -13,18 +13,12 @@ import { selectAuth } from "../../state/slices/auth";
 import CustomPhoneInput from "../../components/inputs/CustomPhoneInput";
 import { useState } from "react";
 
-
 const PhoneRegistration = () => {
     const dispatch = useAppDispatch();
 	const { isPerformingAuthAction } = useAppSelector(selectAuth);
 
 	const [showPassword, setShowPassword] = useState(false);
 
-    const [country, setCountry] = useState('Nigeria')
-	const [state, setState] = useState('Enugu')
-
-    setCountry('Nigeria')
-    setState('Enugu');
 	// Form Handler
 	const {
 		register,
@@ -35,19 +29,19 @@ const PhoneRegistration = () => {
 
 	// Form Submission Handler
 	const submit = ({
-		mobileNumber,
 		password,
+		mobileNumber,
+		firstName,
+		lastName,
 		userName,
 	}: FieldValues) => {
 		dispatch(
 			signUpAPI({
-				email:'',
 				password,
-                username:userName,
-                country,
-                state,
-                countryCode:'',
-                mobileNumber,
+				mobileNumber,
+				firstName,
+				middleName: userName,
+				surname: lastName,
                 signUpType:'PHONE'
 			})
 		);
