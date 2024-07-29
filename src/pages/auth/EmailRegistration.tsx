@@ -12,16 +12,14 @@ import { selectAuth } from "../../state/slices/auth";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 
-interface PropsTypes {
-    country:string,
-    state:string
-}
 
-const EmailRegistration = ({country, state}:PropsTypes) => {
+const EmailRegistration = () => {
     const dispatch = useAppDispatch();
 	const { isPerformingAuthAction } = useAppSelector(selectAuth);
 
 	const [showPassword, setShowPassword] = useState(false);
+    const [country, setCountry] = useState('Nigeria')
+	const [state, setState] = useState('Enugu')
 
 	// Form Handler
 	const {

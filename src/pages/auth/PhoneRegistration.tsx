@@ -13,17 +13,15 @@ import { selectAuth } from "../../state/slices/auth";
 import CustomPhoneInput from "../../components/inputs/CustomPhoneInput";
 import { useState } from "react";
 
-interface PropsTypes {
-    country:string,
-    state:string
-}
 
-
-const PhoneRegistration = ({country, state}:PropsTypes) => {
+const PhoneRegistration = () => {
     const dispatch = useAppDispatch();
 	const { isPerformingAuthAction } = useAppSelector(selectAuth);
 
 	const [showPassword, setShowPassword] = useState(false);
+
+    const [country, setCountry] = useState('Nigeria')
+	const [state, setState] = useState('Enugu')
 
 	// Form Handler
 	const {

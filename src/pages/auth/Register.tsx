@@ -10,8 +10,6 @@ import PhoneRegistration from "./PhoneRegistration";
 
 const Register = () => {
 	const [type, setType] = useState('email')
-	const [country, setCountry] = useState('')
-	const [state, setState] = useState('')
 
 
  
@@ -32,8 +30,8 @@ const Register = () => {
 						<span>Phone</span>
 					</button>
 				</div>
-				{type === 'email' && <EmailRegistration country={country} state={state}/>}
-				{type === 'phone' && <PhoneRegistration country={country} state={state}/>}
+				{type === 'email' && <EmailRegistration/>}
+				{type === 'phone' && <PhoneRegistration/>}
 			</div>
 		</main>
 	);
