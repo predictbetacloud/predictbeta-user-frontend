@@ -74,7 +74,6 @@ function App() {
 				<Route path="/about-us" element={<AboutPage />} />
 				<Route path="/how-to-play" element={<HowToPlayPage />} />
 				<Route path="/faq" element={<FaqPage />} />
-				<Route path="/next" element={<NextPage />} />
 				<Route path="/leaderboard/month" element={<PublicMonthLeaderboard />} />
 				<Route
 					path="/leaderboard/season"
