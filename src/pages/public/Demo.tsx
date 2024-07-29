@@ -17,12 +17,10 @@ import {
 } from '../../api/fixturesAPI'
 import PageLoading from '../../components/loaders/PageLoading'
 import PublicFooter from '../../components/layout/PublicFooter'
-import { useNavigate } from 'react-router'
 import { MatchCardMin } from '../../components/fixtures/MatchCardMin'
 
 const DemoPage = () => {
   const dispatch = useAppDispatch()
-  let navigate = useNavigate()
 
   const isFetchingSeasons = useAppSelector(selectIsFetchingAllSeasons)
   const isFetchingWeeks = useAppSelector(selectIsFetchingAllWeeks)
