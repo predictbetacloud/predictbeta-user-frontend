@@ -10,8 +10,6 @@ import PhoneRegistration from "./PhoneRegistration";
 
 const Register = () => {
 	const [type, setType] = useState('email')
-
-
  
 	return (
 		<main className="w-screen min-h-screen px-4 md:px-0 py-20 bg-[#FFFFFF] flex flex-col items-center justify-center">

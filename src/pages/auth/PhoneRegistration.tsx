@@ -23,6 +23,8 @@ const PhoneRegistration = () => {
     const [country, setCountry] = useState('Nigeria')
 	const [state, setState] = useState('Enugu')
 
+    setCountry('Nigeria')
+    setState('Enugu');
 	// Form Handler
 	const {
 		register,
