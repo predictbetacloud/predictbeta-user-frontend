@@ -25,12 +25,10 @@ export const signUpAPI = createAsyncThunk(
 		{
 			email,
 			password,
-			username,
-			country,
-			state,
-			countryCode,
 			mobileNumber,
-			signUpType,
+			firstName,
+			middleName,
+			surname,
 		}: FieldValues,
 		{ dispatch }
 	) => {
@@ -40,11 +38,10 @@ export const signUpAPI = createAsyncThunk(
 				email,
 				password,
 				mobileNumber,
-				username,
-				country,
-				state,
-				countryCode,
-				signUpType,
+				firstName,
+				middleName,
+				username: middleName,
+				surname,
 			})
 			.then((data) => {
 				toastSuccess(
