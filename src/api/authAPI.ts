@@ -110,11 +110,19 @@ export const updateProfileAPI = createAsyncThunk(
 
 export const loginAPI = createAsyncThunk(
 	"auth/login",
-	({ email, password }: FieldValues, { dispatch }) => {
+	({ email, phoneNumber, password, loginType }: FieldValues, { dispatch }) => {
 		dispatch(setIsPerformingAuthAction(true));
-
+		const bodyData = loginType === 'EMAIL' ? {
+			email,
+			password,
+			loginType
+		} : {
+			password,
+			phoneNumber,
+			loginType
+		}
 		axiosInstance
-			.post(`/users/login`, { email, password })
+			.post(`/users/login`, bodyData)
 			.then((data) => {
 				const newState = {
 					user: {

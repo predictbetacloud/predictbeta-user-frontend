@@ -25,7 +25,7 @@ const EmailLogin = () => {
 
 	// Form Submission Handler
 	const submit = ({ email, password }: FieldValues) => {
-		dispatch(loginAPI({ email, password, signInType:'EMAIL' }));
+		dispatch(loginAPI({ email, password, loginType:'EMAIL' }));
 	};
   return (
     <form onSubmit={handleSubmit(submit)} className="mt-4 w-full md:w-[400px]">

@@ -26,8 +26,8 @@ const PhoneLogin = () => {
 	} = useForm();
 
 	// Form Submission Handler
-	const submit = ({ phone, password }: FieldValues) => {
-		dispatch(loginAPI({ phone, password, signInType:'PHONE' }));
+	const submit = ({ mobileNumber, password }: FieldValues) => {
+		dispatch(loginAPI({ phoneNumber:mobileNumber, password, loginType:'PHONE' }));
 	};
   return (
     <form onSubmit={handleSubmit(submit)} className="mt-2 w-full md:w-[400px]">
