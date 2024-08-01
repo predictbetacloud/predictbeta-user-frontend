@@ -7,16 +7,17 @@ import hallaBetLogo from "../../assets/logo/hallabet.png"
 // import goBetLogo from "../../assets/images/Gobet-Featured-Image 1.png";
 
 const routes: { title: string; route: string }[] = [
-	{ title: "About us", route: "/about-us" },
-	{ title: "Contact us", route: "/contact" },
+	{ title: "About", route: "/about-us" },
+	{ title: "Contact", route: "/contact" },
 	{ title: "Terms & conditions", route: "/terms" },
+	{ title: "Privacy & Policy", route: "/policy" },
 ];
 
 const PublicFooter = () => {
 	return (
 		<footer className="w-full relative bottom-0">
 			{/* top */}
-			<div className="md:flex items-center justify-between py-6 px-6 md:px-40 bg-white">
+			<div className="md:flex items-center justify-between py-6 px-6 md:px-4 lg:px-30 xl:px-40 bg-white">
 				<div className="flex gap-8 items-center">
 					<Link to="/" className="border-r-2"><img src={logo} alt="Predictbeta" className="md:mr-8" /></Link>
 					<a href="https://www.hallabet.com" target="_blank"><img src={hallaBetLogo} width={120} alt="HallaBet" className="md:mr-8 rounded-md" /></a>
@@ -41,7 +42,7 @@ const PublicFooter = () => {
 			</div>
 
 			{/* copyright */}
-			<div className="md:flex items-center justify-between bg-[#051B30] py-3 px-6 md:px-40">
+			<div className="md:flex items-center justify-between bg-[#051B30] py-3 px-6  md:px-4 lg:px-30 xl:px-40">
 				<p className="text-white font-light text-xs md:text-sm">
 					© {new Date().getFullYear()} - Predictbeta. All rights reserved |
 					(18+) Predict Responsibly
