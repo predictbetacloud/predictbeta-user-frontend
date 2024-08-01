@@ -38,6 +38,7 @@ import PublicWeekLeaderboard from "./pages/public/PublicWeekLeaderboard";
 import PublicMonthLeaderboard from "./pages/public/PublicMonthLeaderboard";
 import PublicSeasonLeaderboard from "./pages/public/PublicSeasonLeaderboard";
 import DemoPage from "./pages/public/Demo";
+import Policy from "./pages/public/Policy";
 // import { selectAuth } from "./state/slices/auth";
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
 				<Route path="/how-to-play" element={<HowToPlayPage />} />
 				<Route path="/faq" element={<FaqPage />} />
 				<Route path="/demo" element={<DemoPage />} />
+				<Route path="/policy" element={<Policy />} />
 				<Route path="/leaderboard/month" element={<PublicMonthLeaderboard />} />
 				<Route
 					path="/leaderboard/season"
