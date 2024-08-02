@@ -18,7 +18,7 @@ import { formatCurrency } from "../../../utils/utils";
 import { getWalletHistoryAPI } from "../../../api/walletAPI";
 import { selectAuth } from "../../../state/slices/auth";
 import PillIndicator from "../../../components/PillIndicators";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 const Wallet = () => {
 	const dispatch = useAppDispatch();
