@@ -138,7 +138,6 @@ const SeasonLeaderboard = () => {
 				<TabNav
 					tabs={[
 						{ path: "/dashboard/leaderboard", title: "Week" },
-						{ path: "/dashboard/leaderboard/month", title: "Month" },
 						{ path: "/dashboard/leaderboard/season", title: "Season" },
 					]}
 				/>
