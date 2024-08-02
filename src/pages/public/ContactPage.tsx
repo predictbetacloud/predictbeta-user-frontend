@@ -23,9 +23,9 @@ const ContactPage = () => {
 					<div className="rounded-lg border-[#DDEFFF] border p-6 flex items-center justify-center mb-4">
 						<IoMdMail size={24} color="#003859" className="mr-2.5" />
 						<p className="mr-2.5">Email:</p>
-						<a href="mailto:Support@myPredictBeta.com">
+						<a href="mailto:help@predictbeta.com">
 							<p className="text-[#0D7FE9] font-semibold">
-								Support@myPredictBeta.com
+								help@predictbeta.com
 							</p>
 						</a>
 					</div>
@@ -34,15 +34,15 @@ const ContactPage = () => {
 						<div className="rounded-lg border-[#DDEFFF] border p-6 flex items-center justify-center">
 							<GiRotaryPhone size={24} color="#031332" className="mr-2.5" />
 							<p className="mr-2.5">Call Us:</p>
-							<a href="tel:++234 7082481037">
-								<p className="font-semibold">+234 7082481037</p>
+							<a href="tel:+2348168448979">
+								<p className="font-semibold">+2348168448979</p>
 							</a>
 						</div>
 						<div className="rounded-lg border-[#DDEFFF] border p-6 flex items-center justify-center">
 							<IoLogoWhatsapp size={24} color="#27AE60" className="mr-2.5" />
 							<p className="mr-2.5">Whatsapp:</p>
-							<a href="tel:+234 8168448979 ">
-								<p className="font-semibold">+234 8168448979 8</p>
+							<a href="tel:07082481037">
+								<p className="font-semibold">070824810378</p>
 							</a>
 						</div>
 						<a href="https://www.facebook.com/share/gDU5uy7r2FJwko4g/?mibextid=LQQJ4d" className="rounded-lg border-[#DDEFFF] border p-6 flex items-center justify-center" target="_blank">
