@@ -26,6 +26,9 @@ import HeroSection from "../../components/Hero";
 import { useNavigate } from "react-router";
 import TopWinners from "../../components/TopWinners";
 
+import LeftAdvertCards from "../../components/LeftAdvertCards";
+import RightAdvertCards from "../../components/RightAdvertCards";
+
 const LandingPage = () => {
 	const dispatch = useAppDispatch();
 	let navigate = useNavigate();
@@ -89,7 +92,7 @@ const LandingPage = () => {
 
 			{/* Weekly Predictions Teaser */}
 			<section
-				className="px-4 md:px-10 lg:px-40 pt-16 lg:py-32 mb-10 lg:mb-0"
+				className="px-4 pt-16 lg:py-32 mb-10 lg:mb-0"
 				style={{
 					background: colors.peach,
 				}}
@@ -100,53 +103,60 @@ const LandingPage = () => {
 				>
 					Are you up to the task this week?
 				</h2>
-				<div className="p-4 lg:p-8 bg-white rounded-xl">
-					<p
-						color={colors.grey700}
-						className="pb-2 inline-block mb-6 text-[#2A2E33]"
-						style={{
-							borderBottom: `3px solid ${colors.accent}`,
-						}}
-					>
-						This Week’s Fixtures
-					</p>
-					{isFetchingMatches || isFetchingWeeks || isFetchingSeasons ? (
-						<PageLoading />
-					) : (
-						<>
-							{allMatches?.length > 0 ? (
-								<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-									{allMatches?.map((match, idx) => (
-										<div key={idx}>
-											<MatchCard
-												key={match.id}
-												home={match.homeTeam}
-												away={match.awayTeam}
-												head2head={match.head2head}
-												awayForm={match.awayForm}
-												homeForm={match.homeForm}
-												id={match.id}
-												matchTime={match.fixtureDateTime}
-												prediction={match.prediction}
-												onChange={() => {
-													navigate("/dashboard/fixtures");
-												}}
-											/>
-										</div>
-									))}
-								</div>
+				<div className="p-4 lg:p-8 rounded-xl">
+					
+					<div className="flex flex-col lg:flex-row justify-between gap-6 bg-white">
+						<LeftAdvertCards />
+						<div className="flex-1">
+							<p
+								color={colors.grey700}
+								className="py-2 inline-block mb-6 text-[#2A2E33]"
+								style={{
+									borderBottom: `3px solid ${colors.accent}`,
+								}}
+							>
+								This Week’s Fixtures
+							</p>
+							{isFetchingMatches || isFetchingWeeks || isFetchingSeasons ? (
+								<PageLoading />
 							) : (
-								<div className="flex items-center justify-center py-20 lg:py-32 flex-col">
-									<h3 className="font-bold text-3xl mb-2">
-										There no matches for this week
-									</h3>
-									<p className="">
-										Matches will show here once they are published.
-									</p>
-								</div>
+								<>
+									{allMatches?.length > 0 ? (
+										<div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+											{allMatches?.map((match, idx) => (
+												<div key={idx}>
+													<MatchCard
+														key={match.id}
+														home={match.homeTeam}
+														away={match.awayTeam}
+														head2head={match.head2head}
+														awayForm={match.awayForm}
+														homeForm={match.homeForm}
+														id={match.id}
+														matchTime={match.fixtureDateTime}
+														prediction={match.prediction}
+														onChange={() => {
+															navigate("/dashboard/fixtures");
+														}}
+													/>
+												</div>
+											))}
+										</div>
+									) : (
+										<div className="flex items-center justify-center py-20 lg:py-32 flex-col">
+											<h3 className="font-bold text-3xl mb-2">
+												There no matches for this week
+											</h3>
+											<p className="">
+												Matches will show here once they are published.
+											</p>
+										</div>
+									)}
+								</>
 							)}
-						</>
-					)}
+						</div>
+						<RightAdvertCards/>
+					</div>
 					{/* {isFetchingCurrentDraw ? (
 						<BallLoader className="mx-auto" />
 					) : (
