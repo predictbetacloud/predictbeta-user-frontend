@@ -18,7 +18,7 @@ import { formatCurrency } from "../../../utils/utils";
 import { getWalletHistoryAPI } from "../../../api/walletAPI";
 import { selectAuth } from "../../../state/slices/auth";
 import PillIndicator from "../../../components/PillIndicators";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 
 const Wallet = () => {
 	const dispatch = useAppDispatch();
@@ -109,7 +109,7 @@ const Wallet = () => {
 					title="Deposit"
 					onClick={() => dispatch(setShowDepositModal(true))}
 				/>
-				<Button.Blue title="Withdraw" />
+				<a href="https://www.hallabet.com" target="_blank"><Button.Blue title="Withdraw" /></a>
 			</section>
 			<section className="w-screen lg:w-full p-4 lg:p-8">
 				<Table
