@@ -205,15 +205,13 @@ const WeekLeaderboard = () => {
 					]}
 				/>
 				<div>
-					<form>
-						<Input
-							id="password"
-							type="text"
-							placeholder="Search playername..."
-							onChange={(e)=>setSearch(e.target.value)}
-							className={`w-full md:flex-1`}
-						/>
-					</form>
+					<Input
+						id="password"
+						type="text"
+						placeholder="Search playername..."
+						onChange={(e)=>setSearch(e.target.value)}
+						className={`w-full md:flex-1`}
+					/>
 				</div>
 				{/* season select */}
 				<div className="flex items-center gap-4 py-3">
