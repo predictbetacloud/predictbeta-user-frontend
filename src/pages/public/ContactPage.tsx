@@ -49,8 +49,8 @@ const ContactPage = () => {
 						<div className="rounded-lg border-[#DDEFFF] border p-6 flex items-center justify-center">
 							<FaTelegramPlane size={24} color="#031332" className="mr-2.5" />
 							<p className="mr-2.5">Telegram</p>
-							<a href="tel:+2348168448979">
-								<p className="font-semibold">+2348168448979</p>
+							<a href="tel:+2347082481037">
+								<p className="font-semibold">+2347082481037</p>
 							</a>
 						</div>
 						<a href="https://www.facebook.com/share/gDU5uy7r2FJwko4g/?mibextid=LQQJ4d" className="rounded-lg border-[#DDEFFF] border p-6 flex items-center justify-center" target="_blank">
