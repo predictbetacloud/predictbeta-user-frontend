@@ -12,7 +12,6 @@ import { statusEnum, WalletHistoryItem } from "../../../types/types";
 import {
 	selectIsFetchingWalletInfo,
 	selectWalletHistory,
-	setShowDepositModal,
 } from "../../../state/slices/wallet";
 import { formatCurrency } from "../../../utils/utils";
 import { getWalletHistoryAPI } from "../../../api/walletAPI";

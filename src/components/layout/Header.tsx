@@ -1,10 +1,9 @@
 import { useLocation } from "react-router-dom";
 import logo from "../../assets/logo/logo-dark.svg";
-import Button from "../Buttons";
 import { useEffect, useState } from "react";
 import queryString from "query-string";
 
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
+import { useAppSelector } from "../../state/hooks";
 import { selectAuth, selectIsFetchingUserInfo } from "../../state/slices/auth";
 import { formatCurrency } from "../../utils/utils";
 import { TextSkeleton } from "../loaders/TextSkeleton";
@@ -13,7 +12,6 @@ import { BsFillClockFill } from "react-icons/bs";
 import { colors } from "../../utils/colors";
 import { selectAllWeeks } from "../../state/slices/fixtures";
 import CustomCountDown from "../Countdown";
-import { setShowDepositModal } from "../../state/slices/wallet";
 import { IWeek } from "../../types/types";
 import { isBefore } from "date-fns";
 import Drawer from "./Drawer";
@@ -29,7 +27,6 @@ const Header = ({ title }: Props) => {
 	const [selectedWeek, setSelectedWeek] = useState<IWeek | null>(null);
 
 	const [hideBalance, setHideBalance] = useState(false);
-	const dispatch = useAppDispatch();
 
 	const toggleHideBalance = () => setHideBalance(!hideBalance);
 	const { wallet } = useAppSelector(selectAuth);
