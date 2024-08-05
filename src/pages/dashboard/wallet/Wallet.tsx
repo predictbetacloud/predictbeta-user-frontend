@@ -105,10 +105,10 @@ const Wallet = () => {
 	return (
 		<DashboardLayout title="Wallet">
 			<section className="px-4 lg:px-8 py-4 flex items-center justify-end gap-x-4">
-				<Button
+				{/* <Button
 					title="Deposit"
 					onClick={() => dispatch(setShowDepositModal(true))}
-				/>
+				/> */}
 				<a href="https://www.hallabet.com" target="_blank"><Button.Blue title="Withdraw" /></a>
 			</section>
 			<section className="w-screen lg:w-full p-4 lg:p-8">

@@ -132,11 +132,11 @@ const Header = ({ title }: Props) => {
 						</div>
 					</div>
 
-					<Button
+					{/* <Button
 						title="Deposit"
 						className=""
 						onClick={() => dispatch(setShowDepositModal(true))}
-					/>
+					/> */}
 				</div>
 			</div>
 
