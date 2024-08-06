@@ -61,8 +61,6 @@ const AllFixtures = () => {
 	const query_week = queries?.week;
 	const query_season = queries?.season;
 
-	
-
 	const isFetchingSeasons = useAppSelector(selectIsFetchingAllSeasons);
 	const isFetchingWeeks = useAppSelector(selectIsFetchingAllWeeks);
 	const isFetchingMatches = useAppSelector(selectIsFetchingMatches);
@@ -78,12 +76,10 @@ const AllFixtures = () => {
 	const seasons = useAppSelector(selectAllSeasons);
 	const allPlayers = useAppSelector(selectAllPlayers);
 
-
 	const [selectedWeek, setSelectedWeek] = useState<{
 		id: string;
 		number: string;
 	} | null>(null);
-
 	const [activeWeek, setActiveWeek] = useState<IWeek | null>(null);
 
 	const [matches, setMatches] = useState(allMatches);
@@ -125,25 +121,7 @@ const AllFixtures = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	// Make latest season the active season
-	useEffect(() => {
-		if (query_season) {
-			const activeSeason = seasons.find(
-				(_season) => _season.name === query_season
-			);
-			if (activeSeason?.id) {
-				dispatch(getAllWeeksAPI({ seasonId: activeSeason?.id }));
-			}
-		} else {
-			const index = seasons.length - 1
-			if (seasons?.[index]?.id) {
-				dispatch(getAllWeeksAPI({ seasonId: seasons?.[index]?.id }));
-			}
-		}
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [seasons, query_season]);
-
+	// Make latest week the active week
 	useEffect(() => {
 		if (allWeeks?.[0]?.id) {
 			// if week is in query use that week
@@ -163,11 +141,10 @@ const AllFixtures = () => {
 					});
 				}
 			} else {
-				const index = seasons.length - 1
 				setSearchParams({
 					season: query_season
 						? String(query_season)
-						: String(seasons?.[index]?.name),
+						: String(seasons?.[0]?.name),
 					week: String(allWeeks?.[0]?.number),
 				});
 			}
@@ -176,7 +153,6 @@ const AllFixtures = () => {
 	}, [allWeeks, query_week]);
 
 	useEffect(() => {
-		const index = seasons.length - 1
 		if (query_season) {
 			const activeSeason = seasons.find(
 				(_season) => _season.name === query_season
@@ -201,10 +177,10 @@ const AllFixtures = () => {
 					})
 				);
 			}
-		} else if (seasons?.[index]?.id && selectedWeek?.id) {
+		} else if (seasons?.[0]?.id && selectedWeek?.id) {
 			dispatch(
 				getAllMatchesAPI({
-					seasonId: seasons?.[index]?.id,
+					seasonId: seasons?.[0]?.id,
 					weekId: selectedWeek?.id,
 				})
 			);
@@ -221,6 +197,25 @@ const AllFixtures = () => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [selectedWeek]);
+
+	// Make latest season the active season
+	useEffect(() => {
+		if (query_season) {
+			const activeSeason = seasons.find(
+				(_season) => _season.name === query_season
+			);
+
+			if (activeSeason?.id) {
+				dispatch(getAllWeeksAPI({ seasonId: activeSeason?.id }));
+			}
+		} else {
+			if (seasons?.[0]?.id) {
+				dispatch(getAllWeeksAPI({ seasonId: seasons?.[0]?.id }));
+			}
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [seasons, query_season]);
 
 	// Update Selection
 	const updateSelection = (matchId: number, prediction: any) => {
