@@ -9,7 +9,7 @@ const images3 = [img2, img4, img1, img6, img6]
 import Slider from "react-slick";
 
 
-const SideAdvert = () => {
+const RightSideAdvert = () => {
   const settings = {
     dots: false,
     fade:true,
@@ -24,6 +24,13 @@ const SideAdvert = () => {
   return (
     <div className="w-full lg:w-[20%]">
       <Slider {...settings}>
+        {images3.map((url,i)=>(
+          <a href="https://www.hallabet.com" target='_blank' className="w-full" key={i}>
+            <img src={url} className="w-[100%]" alt='advert-img' />
+        </a>
+        ))}
+      </Slider>
+      <Slider {...settings}>
         {images.map((url,i)=>(
           <a href="https://www.hallabet.com" target='_blank' className="w-full" key={i}>
             <img src={url} className="w-[100%]" alt='advert-img' />
@@ -37,15 +44,8 @@ const SideAdvert = () => {
         </a>
         ))}
       </Slider>
-      <Slider {...settings}>
-        {images3.map((url,i)=>(
-          <a href="https://www.hallabet.com" target='_blank' className="w-full" key={i}>
-            <img src={url} className="w-[100%]" alt='advert-img' />
-        </a>
-        ))}
-      </Slider>
     </div>
   )
 }
 
-export default SideAdvert
+export default RightSideAdvert

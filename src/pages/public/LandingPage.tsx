@@ -26,6 +26,8 @@ import HeroSection from "../../components/Hero";
 import { useNavigate } from "react-router";
 import TopWinners from "../../components/TopWinners";
 import SideAdvert from "../../components/SideAdvert";
+import LeftSideAdvert from "../../components/LeftSideAdvert";
+import RightSideAdvert from "../../components/RightSideAdvert";
 
 const LandingPage = () => {
 	const dispatch = useAppDispatch();
@@ -83,10 +85,10 @@ const LandingPage = () => {
 		<main className="bg-white">
 			<PublicHeader />
 			{/* Hero Image */}
-			{/* <HeroSection/> */}
+			<HeroSection/>
 
 			{/* Carousel section */}
-			<TopWinners/>
+			{/* <TopWinners/> */}
 
 			{/* Weekly Predictions Teaser */}
 			<section
@@ -104,7 +106,7 @@ const LandingPage = () => {
 				<div className="p-4 lg:p-8 rounded-xl">
 					
 					<div className="flex flex-col lg:flex-row justify-between gap-6 bg-white">
-						<SideAdvert />
+						<LeftSideAdvert />
 						<div className="flex-1">
 							<p
 								color={colors.grey700}
@@ -153,7 +155,7 @@ const LandingPage = () => {
 								</>
 							)}
 						</div>
-						<SideAdvert/>
+						<RightSideAdvert/>
 					</div>
 					{/* {isFetchingCurrentDraw ? (
 						<BallLoader className="mx-auto" />

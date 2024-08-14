@@ -9,7 +9,7 @@ const images3 = [img2, img4, img1, img6, img6]
 import Slider from "react-slick";
 
 
-const SideAdvert = () => {
+const LeftSideAdvert = () => {
   const settings = {
     dots: false,
     fade:true,
@@ -48,4 +48,4 @@ const SideAdvert = () => {
   )
 }
 
-export default SideAdvert
+export default LeftSideAdvert
