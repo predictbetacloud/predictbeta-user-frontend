@@ -24,8 +24,6 @@ import { selectShowAdPopUp, setShowAdPopUp } from "../../state/slices/auth";
 import AdPopUp from "../../components/modals/AdPopUp";
 import HeroSection from "../../components/Hero";
 import { useNavigate } from "react-router";
-import TopWinners from "../../components/TopWinners";
-import SideAdvert from "../../components/SideAdvert";
 import LeftSideAdvert from "../../components/LeftSideAdvert";
 import RightSideAdvert from "../../components/RightSideAdvert";
 
