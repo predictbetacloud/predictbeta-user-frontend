@@ -25,9 +25,7 @@ import AdPopUp from "../../components/modals/AdPopUp";
 import HeroSection from "../../components/Hero";
 import { useNavigate } from "react-router";
 import TopWinners from "../../components/TopWinners";
-
-import LeftAdvertCards from "../../components/LeftAdvertCards";
-import RightAdvertCards from "../../components/RightAdvertCards";
+import SideAdvert from "../../components/SideAdvert";
 
 const LandingPage = () => {
 	const dispatch = useAppDispatch();
@@ -85,7 +83,7 @@ const LandingPage = () => {
 		<main className="bg-white">
 			<PublicHeader />
 			{/* Hero Image */}
-			<HeroSection/>
+			{/* <HeroSection/> */}
 
 			{/* Carousel section */}
 			<TopWinners/>
@@ -106,7 +104,7 @@ const LandingPage = () => {
 				<div className="p-4 lg:p-8 rounded-xl">
 					
 					<div className="flex flex-col lg:flex-row justify-between gap-6 bg-white">
-						<LeftAdvertCards />
+						<SideAdvert />
 						<div className="flex-1">
 							<p
 								color={colors.grey700}
@@ -155,7 +153,7 @@ const LandingPage = () => {
 								</>
 							)}
 						</div>
-						<RightAdvertCards/>
+						<SideAdvert/>
 					</div>
 					{/* {isFetchingCurrentDraw ? (
 						<BallLoader className="mx-auto" />
