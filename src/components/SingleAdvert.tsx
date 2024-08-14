@@ -4,12 +4,10 @@ import img4 from '../assets/images/ads/ads-1.jpeg'
 import img5 from '../assets/images/ads/ads-5.jpeg'
 import img6 from '../assets/images/ads/ads-4.jpg'
 const images = [img1, img2, img4, img5, img6]
-const images2  = [img6, img5,img4, img2, img1]
-const images3 = [img2, img4, img1, img6, img6]
 import Slider from "react-slick";
 
 
-const LeftSideAdvert = () => {
+const SingleAdvert = () => {
   const settings = {
     dots: false,
     fade:true,
@@ -30,22 +28,8 @@ const LeftSideAdvert = () => {
         </a>
         ))}
       </Slider>
-      <Slider {...settings}>
-        {images2.map((url,i)=>(
-          <a href="https://www.hallabet.com" target='_blank' className="w-full" key={i}>
-            <img src={url} className="w-[100%]" alt='advert-img' />
-        </a>
-        ))}
-      </Slider>
-      <Slider {...settings}>
-        {images3.map((url,i)=>(
-          <a href="https://www.hallabet.com" target='_blank' className="w-full" key={i}>
-            <img src={url} className="w-[100%]" alt='advert-img' />
-        </a>
-        ))}
-      </Slider>
     </div>
   )
 }
 
-export default LeftSideAdvert
+export default SingleAdvert

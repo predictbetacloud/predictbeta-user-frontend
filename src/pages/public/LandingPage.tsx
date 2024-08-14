@@ -104,7 +104,7 @@ const LandingPage = () => {
 				<div className="p-4 lg:p-8 rounded-xl">
 					
 					<div className="flex flex-col lg:flex-row justify-between gap-6 bg-white">
-						<LeftSideAdvert />
+						<div className="w-full lg:w-[20%]"><LeftSideAdvert/></div>
 						<div className="flex-1">
 							<p
 								color={colors.grey700}
@@ -153,7 +153,7 @@ const LandingPage = () => {
 								</>
 							)}
 						</div>
-						<RightSideAdvert/>
+						<div className="w-full lg:w-[20%]"><RightSideAdvert/></div>
 					</div>
 					{/* {isFetchingCurrentDraw ? (
 						<BallLoader className="mx-auto" />

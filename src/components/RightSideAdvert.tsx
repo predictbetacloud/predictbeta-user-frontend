@@ -17,12 +17,12 @@ const RightSideAdvert = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    speed: 1000,
-    autoplaySpeed: 5000,
+    speed: 2000,
+    autoplaySpeed: 10000,
     cssEase: "linear"
   };
   return (
-    <div className="w-full lg:w-[20%]">
+    <div className="w-full">
       <Slider {...settings}>
         {images3.map((url,i)=>(
           <a href="https://www.hallabet.com" target='_blank' className="w-full" key={i}>

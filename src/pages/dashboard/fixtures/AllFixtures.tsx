@@ -51,6 +51,7 @@ import CustomCountDown from "../../../components/Countdown";
 import { BsFillClockFill } from "react-icons/bs";
 import { IWeek } from "../../../types/types";
 import { colors } from "../../../utils/colors";
+import SingleAdvert from "../../../components/SingleAdvert";
 
 const AllFixtures = () => {
 	const dispatch = useAppDispatch();
@@ -992,7 +993,11 @@ const AllFixtures = () => {
 												)}
 											</div>
 										</div>
+										<div className="w-[330px] mt-6">
+											<SingleAdvert/>
+										</div>
 									</div>
+									
 								</section>
 							) : (
 								<div className="flex items-center justify-center py-20 lg:py-32 flex-col">
