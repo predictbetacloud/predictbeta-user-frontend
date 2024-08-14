@@ -90,7 +90,7 @@ const LandingPage = () => {
 
 			{/* Weekly Predictions Teaser */}
 			<section
-				className="px-4 pt-16 lg:py-32 mb-10 lg:mb-0"
+				className=" pt-4 lg:py-8 mb-10 lg:mb-0"
 				style={{
 					background: colors.peach,
 				}}
