@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import logo from "../../assets/logo/logo-light.svg";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MdOutlineMailLock } from "react-icons/md";
 import { FaPhoneVolume } from "react-icons/fa6";
 import EmailRegistration from "./EmailRegistration";
@@ -10,19 +10,17 @@ import PhoneRegistration from "./PhoneRegistration";
 
 const Register = () => {
 	const [type, setType] = useState('email')
-	const [country, setCountry] = useState('')
-	const [state, setState] = useState('')
 
-useEffect(() => {
-	window.navigator.geolocation.getCurrentPosition(pos=>{
-		const {latitude, longitude} = pos.coords
-		const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
-		fetch(url).then(res=>res.json()).then(data=>{
-			setCountry(data?.address?.country)
-			setState(data?.address?.state)
-		});
-	})
-}, [])
+// useEffect(() => {
+// 	window.navigator.geolocation.getCurrentPosition(pos=>{
+// 		const {latitude, longitude} = pos.coords
+// 		const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+// 		fetch(url).then(res=>res.json()).then(data=>{
+// 			setCountry(data?.address?.country)
+// 			setState(data?.address?.state)
+// 		});
+// 	})
+// }, [])
  
 	return (
 		<main className="w-screen min-h-screen px-4 md:px-0 py-20 bg-[#FFFFFF] flex flex-col items-center justify-center">
@@ -41,8 +39,8 @@ useEffect(() => {
 						<span>Phone</span>
 					</button>
 				</div>
-				{type === 'email' && <EmailRegistration country={country} state={state}/>}
-				{type === 'phone' && <PhoneRegistration country={country} state={state}/>}
+				{type === 'email' && <EmailRegistration country='' state=''/>}
+				{type === 'phone' && <PhoneRegistration country='' state=''/>}
 			</div>
 		</main>
 	);
