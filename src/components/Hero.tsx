@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
-    <section className="px-4 md:px-10 lg:px-40 lg:pt-0 max-h-screen w-full md:flex justify-between">
+    <section className="px-4 md:px-10 lg:px-40 lg:pt-0 max-h-screen w-full md:flex md:justify-between md:items-center">
         <div className="md:w-[55%] lg:w-[50%] flex-shrink-0 py-10">
             <h1 className="text-[50px] lg:text-[56px] font-semibold leading-[55px] lg:leading-[68px]">
                 <span className="text-[#eb1536]">Predict</span>! <br />

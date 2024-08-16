@@ -24,10 +24,8 @@ import { selectShowAdPopUp, setShowAdPopUp } from "../../state/slices/auth";
 import AdPopUp from "../../components/modals/AdPopUp";
 import HeroSection from "../../components/Hero";
 import { useNavigate } from "react-router";
-import TopWinners from "../../components/TopWinners";
-
-import LeftAdvertCards from "../../components/LeftAdvertCards";
-import RightAdvertCards from "../../components/RightAdvertCards";
+import LeftSideAdvert from "../../components/LeftSideAdvert";
+import RightSideAdvert from "../../components/RightSideAdvert";
 
 const LandingPage = () => {
 	const dispatch = useAppDispatch();
@@ -88,11 +86,11 @@ const LandingPage = () => {
 			<HeroSection/>
 
 			{/* Carousel section */}
-			<TopWinners/>
+			{/* <TopWinners/> */}
 
 			{/* Weekly Predictions Teaser */}
 			<section
-				className="px-4 pt-16 lg:py-32 mb-10 lg:mb-0"
+				className=" pt-4 lg:py-8 mb-10 lg:mb-0"
 				style={{
 					background: colors.peach,
 				}}
@@ -106,7 +104,7 @@ const LandingPage = () => {
 				<div className="p-4 lg:p-8 rounded-xl">
 					
 					<div className="flex flex-col lg:flex-row justify-between gap-6 bg-white">
-						<LeftAdvertCards />
+						<div className="w-full lg:w-[20%]"><LeftSideAdvert/></div>
 						<div className="flex-1">
 							<p
 								color={colors.grey700}
@@ -155,7 +153,7 @@ const LandingPage = () => {
 								</>
 							)}
 						</div>
-						<RightAdvertCards/>
+						<div className="w-full lg:w-[20%]"><RightSideAdvert/></div>
 					</div>
 					{/* {isFetchingCurrentDraw ? (
 						<BallLoader className="mx-auto" />
