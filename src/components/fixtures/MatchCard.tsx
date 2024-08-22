@@ -214,7 +214,7 @@ export const MatchCard = ({
 											</P>
 										</div>
 										<div className="flex items-center space-x-1">
-											{homeForm.split("").map((form, index) => {
+											{homeForm?.split("")?.map((form, index) => {
 												const typedForm = form as keyof typeof FormEnum;
 												return (
 													<div
