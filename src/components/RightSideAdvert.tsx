@@ -30,14 +30,14 @@ const RightSideAdvert = () => {
         </a>
         ))}
       </Slider>
-      <Slider {...settings}>
+      <Slider {...settings} className='hidden md:block'>
         {images.map((url,i)=>(
           <a href="https://www.hallabet.com" target='_blank' className="w-full" key={i}>
             <img src={url} className="w-[100%]" alt='advert-img' />
         </a>
         ))}
       </Slider>
-      <Slider {...settings}>
+      <Slider {...settings} className='hidden md:block'>
         {images2.map((url,i)=>(
           <a href="https://www.hallabet.com" target='_blank' className="w-full" key={i}>
             <img src={url} className="w-[100%]" alt='advert-img' />
