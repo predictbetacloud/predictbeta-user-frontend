@@ -47,7 +47,7 @@ const PublicFooter = () => {
 					© {new Date().getFullYear()} - Predictbeta. All rights reserved |
 					(18+) Predict Responsibly
 				</p>
-				<a href="https://www.hallabet.com" target="_blank" className="text-[#EB1536]">Powered by HallBet.</a>
+				<a href="https://www.hallabet.com" target="_blank" className="text-[#EB1536]">Powered by HallaBet.</a>
 				<div className="flex items-center gap-x-4 mt-4 md:mt-0">
 					<a
 						href="https://x.com/predictbeta?s=11&t=zQ2VH2EhRxbRQ3E-8zuNIA"

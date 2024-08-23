@@ -486,7 +486,7 @@ const UserPredictionHistory = () => {
 					) : (
 						<div className="flex items-center justify-center py-20 lg:py-32 px-4 lg:px-0 flex-col text-center">
 							<h3 className="font-bold text-3xl mb-2">
-								There no Predictions for this week
+								There are no Predictions for this week
 							</h3>
 							<p className="">
 								This user didn't make any prediction for this week.
