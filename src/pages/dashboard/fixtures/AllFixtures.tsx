@@ -249,9 +249,9 @@ const AllFixtures = () => {
 			submitPredictionAPI({
 				seasonId: activeSeason?.id,
 				weekId: Number(selectedWeek?.id),
-				mostLikelyToScore: { playerId: mostLikelyToScore.id },
-				moreLikelyToScore: { playerId: moreLikelyToScore.id },
-				likelyToScore: { playerId: likelyToScore.id },
+				mostLikelyToScore: { playerId: mostLikelyToScore?.id },
+				moreLikelyToScore: { playerId: moreLikelyToScore?.id },
+				likelyToScore: { playerId: likelyToScore?.id },
 				timeOfFirstGoal: Number(timeOfFirstGoal),
 				predictions,
 			})

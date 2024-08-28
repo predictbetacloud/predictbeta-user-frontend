@@ -152,7 +152,7 @@ const PhoneRegistration = ({country, state}:PropsTypes) => {
         </div>
 
         <p className="mt-4 md:text-center text-xs">
-            Have an account with HallBet?{" "}
+            Have an account with HallaBet?{" "}
             <Link to="#" className="">
                 <span className="text-[#EB1536]">Confirm</span>
             </Link>
