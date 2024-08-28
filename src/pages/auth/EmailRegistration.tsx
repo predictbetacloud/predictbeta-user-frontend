@@ -10,7 +10,8 @@ import { signUpAPI } from "../../api/authAPI";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { selectAuth } from "../../state/slices/auth";
 import { useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
+import { Controller, FieldValues, useForm } from "react-hook-form";
+import CustomPhoneInput from "../../components/inputs/CustomPhoneInput";
 
 interface PropsTypes {
     country:string,
@@ -27,6 +28,7 @@ const EmailRegistration = ({country, state}:PropsTypes) => {
 	const {
 		register,
 		handleSubmit,
+        control,
 		formState: { errors },
 	} = useForm();
 
@@ -35,12 +37,14 @@ const EmailRegistration = ({country, state}:PropsTypes) => {
 		email,
 		password,
 		userName,
+        mobileNumber
 	}: FieldValues) => {
 		dispatch(
 			signUpAPI({
 				email,
 				password,
                 username:userName,
+                mobileNumber,
                 country,
                 state,
                 signUpType:'EMAIL'
@@ -85,6 +89,35 @@ const EmailRegistration = ({country, state}:PropsTypes) => {
             />
             {errors?.email && (
                 <ErrorMessage message={errors.email.message?.toString()} />
+            )}
+        </div>
+        {/* Phone Number */}
+        <div className="mt-5">
+            <label htmlFor="mobileNumber" className="mb-2 block">
+                <P className="text-[#222222] text-sm">Phone number</P>
+            </label>
+            <Controller
+                control={control}
+                name="mobileNumber"
+                rules={{
+                    required: "Please enter your phone number",
+                }}
+                render={({ field: { onChange, value } }) => (
+                    <CustomPhoneInput
+                        onChange={onChange}
+                        value={value}
+                        defaultCountry="NG"
+                        placeholder="Your phone number"
+                        className={errors.mobileNumber ? "invalid" : ""}
+                    />
+                )}
+            />
+            {errors?.mobileNumber && (
+                <ErrorMessage
+                    message={
+                        errors?.mobileNumber && errors?.mobileNumber.message?.toString()
+                    }
+                />
             )}
         </div>
 
