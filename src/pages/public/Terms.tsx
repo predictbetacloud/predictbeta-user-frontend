@@ -76,6 +76,7 @@ const Terms = () => {
 							click on withdraw funds.
 						</p>
 					</li>
+					<li>A predictor on <b>Predictbeta.com</b> can only have one account. In a situation where a predictor is determined to have multiple accounts, this predictor will be <span className="text-red-500 font-bold">banned</span> from Predictbeta’s general league and will also waive their rights to redeem their prizes if they finish in either of the winning positions</li>
 					<li>
 						<p className="text-[#212934]">
 							When withdraw funds is initiated, the user is redirected to the
