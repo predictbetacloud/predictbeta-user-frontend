@@ -214,7 +214,17 @@ export const MatchCard = ({
 											</P>
 										</div>
 										<div className="flex items-center space-x-1">
-											{homeForm && homeForm?.split("")?.map((form, index) => {
+											{Array.isArray(homeForm) && homeForm.length > 0
+  ? homeForm.map((form, index) => { const typedForm = form as keyof typeof FormEnum;
+												return (
+													<div
+														style={{ background: FormEnum[typedForm] }}
+														className="flex items-center justify-center h-6 w-6 text-white rounded-full text-sm"
+														key={index}
+													>
+														{form}
+													</div>
+												);}) : (typeof homeForm === 'string' ? homeForm.split("") : []).map((form, index) => {
 												const typedForm = form as keyof typeof FormEnum;
 												return (
 													<div
@@ -241,7 +251,17 @@ export const MatchCard = ({
 											</P>
 										</div>
 										<div className="flex items-center space-x-1">
-											{awayForm && awayForm.split("").map((form, index) => {
+											{Array.isArray(awayForm) && awayForm.length > 0
+  ? awayForm.map((form, index) => {const typedForm = form as keyof typeof FormEnum;
+												return (
+													<div
+														style={{ background: FormEnum[typedForm] }}
+														className="flex items-center justify-center h-6 w-6 text-white rounded-full text-sm"
+														key={index}
+													>
+														{form}
+													</div>
+												);}) : (typeof awayForm === 'string' ? awayForm.split("") : []).map((form, index) => {
 												const typedForm = form as keyof typeof FormEnum;
 												return (
 													<div
