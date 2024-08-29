@@ -423,7 +423,7 @@ const AllFixtures = () => {
 													required: "Make a selection",
 												}}
 												disabled
-												defaultValue={allPlayers.find(
+												defaultValue={allPlayers?.find(
 													(player) =>
 														player.id ===
 														specificWeekPredictions?.predictions
@@ -481,7 +481,7 @@ const AllFixtures = () => {
 													required: "Make a selection",
 												}}
 												disabled
-												defaultValue={allPlayers.find(
+												defaultValue={allPlayers?.find(
 													(player) =>
 														player.id ===
 														specificWeekPredictions?.predictions
@@ -539,7 +539,7 @@ const AllFixtures = () => {
 													required: "Make a selection",
 												}}
 												disabled
-												defaultValue={allPlayers.find(
+												defaultValue={allPlayers?.find(
 													(player) =>
 														player.id ===
 														specificWeekPredictions?.predictions?.likelyToScore
