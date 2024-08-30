@@ -2,10 +2,10 @@ import img1 from '../assets/images/ads/ads-1.jpg'
 import img2 from '../assets/images/ads/ads-2.jpg'
 import img3 from '../assets/images/ads/ads-3.jpeg'
 import img4 from '../assets/images/ads/ads-4.jpeg'
-import img5 from '../assets/images/ads/ads-4.jpg'
-const images = [img1, img2, img4, img5, img3]
-const images2  = [img5, img4,img3, img2, img1]
-const images3 = [img2, img4, img1, img3, img5]
+import img5 from '../assets/images/ads/ads-4.jpeg'
+const images = [img4, img2, img1, img5, img3]
+const images2  = [img5, img4,img2, img3, img1]
+const images3 = [img3, img4, img1, img2, img5]
 import Slider from "react-slick";
 
 
