@@ -29,26 +29,30 @@ export const signUpAPI = createAsyncThunk(
 			username,
 			country,
 			state,
-			signUpType
+			signUpType,
 		}: FieldValues,
 		{ dispatch }
 	) => {
 		dispatch(setIsPerformingAuthAction(true));
-		const bodyData = signUpType === 'EMAIL' ? {
-			email,
-			password,
-			username,
-			country,
-			state,
-			signUpType
-		} : {
-			password,
-			mobileNumber,
-			username,
-			country,
-			state,
-			signUpType
-		}
+		const bodyData =
+			signUpType === "EMAIL"
+				? {
+						email,
+						password,
+						username,
+						country,
+						state,
+						signUpType,
+						mobileNumber,
+				  }
+				: {
+						password,
+						mobileNumber,
+						username,
+						country,
+						state,
+						signUpType,
+				  };
 		axiosInstance
 			.post(`/users`, bodyData)
 			.then((data) => {
@@ -112,15 +116,18 @@ export const loginAPI = createAsyncThunk(
 	"auth/login",
 	({ email, phoneNumber, password, loginType }: FieldValues, { dispatch }) => {
 		dispatch(setIsPerformingAuthAction(true));
-		const bodyData = loginType === 'EMAIL' ? {
-			email,
-			password,
-			loginType
-		} : {
-			password,
-			phoneNumber,
-			loginType
-		}
+		const bodyData =
+			loginType === "EMAIL"
+				? {
+						email,
+						password,
+						loginType,
+				  }
+				: {
+						password,
+						phoneNumber,
+						loginType,
+				  };
 		axiosInstance
 			.post(`/users/login`, bodyData)
 			.then((data) => {
