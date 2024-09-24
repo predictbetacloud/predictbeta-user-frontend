@@ -30,7 +30,7 @@ export const routes: {
 }[] = [
 	{
 		path: "/dashboard/fixtures",
-		title: "Home - Games",
+		title: "Predictions",
 		icon: <HomeIcon />,
 	},
 	{
