@@ -3,3 +3,8 @@ node_modules
 
 # Sentry Config File
 .env.sentry-build-plugin
+
+# amplify
+.amplify
+amplify_outputs*
+amplifyconfiguration*
