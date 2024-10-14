@@ -185,7 +185,7 @@ const SeasonLeaderboard = () => {
 			<section className="w-full p-4 md:p-8">
 				<Table
 					data={
-						leaderboard?.data.filter((lead) => {
+						leaderboard?.data?.filter((lead) => {
 							return search.toLowerCase() === ""
 								? lead
 								: lead.username.toLowerCase().includes(search.toLowerCase());
