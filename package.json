@@ -16,6 +16,7 @@
     "@sentry/react": "^8.25.0",
     "@sentry/vite-plugin": "^2.22.0",
     "@tanstack/react-table": "^8.11.3",
+    "aws-amplify": "^6.6.4",
     "axios": "^1.6.5",
     "date-fns": "^3.2.0",
     "query-string": "^8.1.0",
@@ -35,6 +36,8 @@
     "styled-components": "^6.1.6"
   },
   "devDependencies": {
+    "@aws-amplify/backend": "^1.4.0",
+    "@aws-amplify/backend-cli": "^1.2.9",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@types/react-slick": "^0.23.13",
@@ -42,12 +45,17 @@
     "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.16",
+    "aws-cdk": "^2.162.1",
+    "aws-cdk-lib": "^2.162.1",
+    "constructs": "^10.4.1",
+    "esbuild": "^0.24.0",
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.4.0",
-    "typescript": "^5.2.2",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3",
     "vite": "^5.0.8"
   }
 }
