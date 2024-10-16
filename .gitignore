@@ -4,7 +4,10 @@ node_modules
 # Sentry Config File
 .env.sentry-build-plugin
 
+.env*.local
+
 # amplify
 .amplify
 amplify_outputs*
 amplifyconfiguration*
+
