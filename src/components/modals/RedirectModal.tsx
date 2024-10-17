@@ -36,12 +36,12 @@ const RedirectModal = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-[800px] transform overflow-hidden rounded-lg p-6 md:px-16 md:py-24  shadow-xl transition-all ">
+              <Dialog.Panel className="w-full max-w-[550px] transform overflow-hidden rounded-lg p-6 md:px-16 md:py-24  shadow-xl transition-all ">
                 <div className="flex justify-center items-center w-full bg-white ">
                   <a
                     target="_blank"
                     href="https://hallabet.com/prematch?bookedBet=VT19632"
-                    className="w-full"
+                    className="w-full  "
                   >
                     <img
                       src={redirectImage}
