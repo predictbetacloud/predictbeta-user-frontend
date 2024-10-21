@@ -28,8 +28,9 @@ const NewPassword = () => {
 	} = useForm();
 
 	// Form Submission Handler
-	const submit = ({ oneTimeToken, password }: FieldValues) => {
-		dispatch(newPasswordAPI({ oneTimeToken, password }));
+	const submit = ({ oneTimePassword, password }: FieldValues) => {
+		dispatch(newPasswordAPI({ oneTimePassword, password }));
+		console.log({oneTimePassword, password});
 	};
 
 	return (
@@ -45,20 +46,20 @@ const NewPassword = () => {
 
 				{/* OTP */}
 				<div className="mt-5">
-					<label htmlFor="oneTimeToken" className="mb-2 block">
+					<label htmlFor="oneTimePassword" className="mb-2 block">
 						<P className="text-[#222222] text-sm">OTP</P>
 					</label>
 					<Input
-						id="oneTimeToken"
+						id="oneTimePassword"
 						type="text"
 						placeholder="Enter OTP"
-						{...register("oneTimeToken", {
+						{...register("oneTimePassword", {
 							required: "Enter the OTP sent to you",
 						})}
-						className={`w-full input ${errors?.oneTimeToken ? "invalid" : ""}`}
+						className={`w-full input ${errors?.oneTimePassword ? "invalid" : ""}`}
 					/>
-					{errors?.oneTimeToken && (
-						<ErrorMessage message={errors.oneTimeToken.message?.toString()} />
+					{errors?.oneTimePassword && (
+						<ErrorMessage message={errors.oneTimePassword.message?.toString()} />
 					)}
 				</div>
 

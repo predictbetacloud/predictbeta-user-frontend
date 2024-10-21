@@ -249,29 +249,29 @@ export const forgotPasswordAPI = createAsyncThunk(
 );
 
 export const newPasswordAPI = createAsyncThunk(
-	"auth/new-password",
-	({ oneTimePassword, password }: FieldValues, { dispatch }) => {
-		dispatch(setIsPerformingAuthAction(true));
-		axiosInstance
-			.post(`/users/new-password-otp`, {
-				oneTimePassword,
-				password,
-			})
-			.then((data) => {
-				toastSuccess(
-					data?.data?.message ?? "New password set up successfully."
-				);
-				dispatch(setIsPerformingAuthAction(false));
+  "auth/new-password",
+  ({ oneTimePassword, password }: FieldValues, { dispatch }) => {
+    dispatch(setIsPerformingAuthAction(true));
+    axiosInstance
+      .post(`/users/new-password-otp`, {
+        oneTimePassword,
+        password,
+      })
+      .then((data) => {
+        toastSuccess(
+          data?.data?.message ?? "New password set up successfully."
+        );
+        dispatch(setIsPerformingAuthAction(false));
 
-				if (globalRouter.navigate) {
-					globalRouter.navigate("/login");
-				}
-			})
-			.catch((error) => {
-				dispatch(setIsPerformingAuthAction(false));
-				toastError(error?.response?.data?.message);
-			});
-	}
+        if (globalRouter.navigate) {
+          globalRouter.navigate("/login");
+        }
+      })
+      .catch((error) => {
+        dispatch(setIsPerformingAuthAction(false));
+        toastError(error?.response?.data?.message);
+      });
+  }
 );
 
 let getUserInfoCancelToken: AbortController;
