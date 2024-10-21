@@ -1016,10 +1016,7 @@ const AllFixtures = () => {
           )}
         </>
       )}
-      <RedirectModal
-        showAdvert={showAdvert}
-        setShowAdvert={setShowAdvert}
-      />
+      <RedirectModal showAdvert={showAdvert} setShowAdvert={setShowAdvert} />
     </DashboardLayout>
   );
 };
