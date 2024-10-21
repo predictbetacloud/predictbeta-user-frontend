@@ -86,7 +86,7 @@ const AllFixtures = () => {
 
   const [matches, setMatches] = useState(allMatches);
   const [isWeekDeadlineElasped, setIsWeekDeadlineElasped] = useState(true);
-  const [showAdvert, setShowAdvert] = useState(true);
+  const [showAdvert, setShowAdvert] = useState(false);
 
   const {
     register,
