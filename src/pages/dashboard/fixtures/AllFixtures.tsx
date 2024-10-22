@@ -662,6 +662,9 @@ const AllFixtures = () => {
                       </div>
                     )}
                   </div>
+                  <div className="w-[330px] mt-6">
+                    <SingleAdvert />
+                  </div>
                 </div>
               </section>
             </>
