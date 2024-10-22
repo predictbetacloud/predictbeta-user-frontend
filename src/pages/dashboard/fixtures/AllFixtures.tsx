@@ -52,6 +52,7 @@ import { BsFillClockFill } from "react-icons/bs";
 import { IWeek } from "../../../types/types";
 import { colors } from "../../../utils/colors";
 import SingleAdvert from "../../../components/SingleAdvert";
+import RedirectModal from "../../../components/modals/RedirectModal";
 
 const AllFixtures = () => {
   const dispatch = useAppDispatch();
@@ -85,6 +86,7 @@ const AllFixtures = () => {
 
   const [matches, setMatches] = useState(allMatches);
   const [isWeekDeadlineElasped, setIsWeekDeadlineElasped] = useState(true);
+  const [showAdvert, setShowAdvert] = useState(false);
 
   const {
     register,
@@ -255,7 +257,9 @@ const AllFixtures = () => {
         timeOfFirstGoal: Number(timeOfFirstGoal),
         predictions,
       })
-    );
+    ).then(() => {
+      setShowAdvert(true);
+    });
   };
 
   return (
@@ -1012,6 +1016,7 @@ const AllFixtures = () => {
           )}
         </>
       )}
+      <RedirectModal showAdvert={showAdvert} setShowAdvert={setShowAdvert} />
     </DashboardLayout>
   );
 };
