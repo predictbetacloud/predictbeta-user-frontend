@@ -1,8 +1,9 @@
 import img1 from "../assets/images/ads/400-percent-welcome-bonus.jpeg";
 import img2 from "../assets/images/ads/NGN500-freebet.jpeg";
 import playYourFavourite from "../assets/images/ads/play-your-favourite.jpg";
+import customerServiceWeek from "../assets/images/ads/HallaBetGiveaway.jpg";
 
-const images = [img1, img2, playYourFavourite];
+const images = [img1, img2, playYourFavourite, customerServiceWeek];
 
 import Slider from "react-slick";
 
