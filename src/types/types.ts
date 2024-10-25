@@ -77,13 +77,6 @@ export interface TeamState {
   isFetchingAllPlayers: boolean;
 }
 
-// export interface UserPosition {
-//   position: number;
-//   username: string;
-//   location: string | null;
-//   points: number;
-// }
-
 export interface Result {
   data: UserPosition[];
   totalPages: number;
@@ -94,11 +87,6 @@ export interface Result {
 export interface IPaginatedLeaderboard {
   result: Result;
   userPosition: UserPosition;
-  // data: UserPosition[];
-  // totalElements: number;
-  // elementsPerPage: number;
-  // totalPages: number;
-  // currentPage: number;
 }
 
 export interface UserPosition {

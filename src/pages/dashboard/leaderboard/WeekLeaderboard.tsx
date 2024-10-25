@@ -6,7 +6,7 @@ import DashboardLayout from "../../../components/layout/DashboardLayout";
 import Table from "../../../components/Table";
 
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
-import { UserPosition, IPaginatedLeaderboard } from "../../../types/types";
+import { UserPosition } from "../../../types/types";
 import { getWeekLeaderboardAPI } from "../../../api/leaderboardAPI";
 import {
   selectAllSeasons,
@@ -195,14 +195,6 @@ const WeekLeaderboard = () => {
     [query_season, query_week]
   );
 
-  useEffect(() => {
-    console.log("Leaderboard ong:", leaderboard);
-  }, [leaderboard]);
-
-  // 	  useEffect(() => {
-  //     console.log("Leaderboard data:", leaderboard?.result?.data);
-  //   }, [leaderboard]);
-
   return (
     <DashboardLayout title="Leaderboard">
       <section className="predictbeta-header bg-white w-full px-4 md:px-8 flex lg:items-end lg:justify-between flex-col-reverse lg:flex-row gap-4 lg:gap-0 ">
@@ -281,6 +273,31 @@ const WeekLeaderboard = () => {
         </div>
       </section>
       <section className="w-full p-4 md:p-8">
+        <div className="CurrentUser">
+          <h1 className="text-2xl font-bold text-[#051B30] py-5 ">
+            Your position
+          </h1>
+          <Table
+            data={leaderboard?.userPosition ? [leaderboard.userPosition] : []}
+            columns={columns}
+            rows={1}
+            loading={
+              isFetchingSeasons || isFetchingWeeks || isFetchingWeekLeaderboard
+            }
+            totalPages={1}
+            isLeaderboardTable
+            current_page={1}
+            setCurrentPage={(page: number): void => {
+              setSearchParams({
+                season: String(query_season),
+                week: String(query_week),
+                page: String(page),
+              });
+            }}
+            empty_message=""
+            empty_sub_message=""
+          />
+        </div>
         <Table
           data={
             leaderboard?.result?.data?.filter((lead) => {
