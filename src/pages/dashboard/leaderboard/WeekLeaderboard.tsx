@@ -273,9 +273,9 @@ const WeekLeaderboard = () => {
         </div>
       </section>
       <section className="w-full p-4 md:p-8">
-        <div className="CurrentUser">
+        <div className="pb-5">
           <h1 className="text-2xl font-bold text-[#051B30] py-5 ">
-            Your position
+            Your Position
           </h1>
           <Table
             data={leaderboard?.userPosition ? [leaderboard.userPosition] : []}
@@ -294,36 +294,41 @@ const WeekLeaderboard = () => {
                 page: String(page),
               });
             }}
-            empty_message=""
-            empty_sub_message=""
+            empty_message="You are not on the leaderboard"
+            empty_sub_message="Predict games to get on the leaderboard"
           />
         </div>
-        <Table
-          data={
-            leaderboard?.result?.data?.filter((lead) => {
-              return search.toLowerCase() === ""
-                ? lead
-                : lead.username.toLowerCase().includes(search.toLowerCase());
-            }) ?? []
-          }
-          columns={columns}
-          rows={10}
-          loading={
-            isFetchingSeasons || isFetchingWeeks || isFetchingWeekLeaderboard
-          }
-          totalPages={leaderboard?.result?.totalPages ?? 1}
-          isLeaderboardTable
-          current_page={Number(page ?? 1)}
-          setCurrentPage={(page: number): void => {
-            setSearchParams({
-              season: String(query_season),
-              week: String(query_week),
-              page: String(page),
-            });
-          }}
-          empty_message="No leaderboard"
-          empty_sub_message="There is no leaderboard for this week"
-        />
+        <div className="">
+          <h1 className="text-2xl font-bold text-[#051B30] py-5 ">
+            This Week's Rankings
+          </h1>
+          <Table
+            data={
+              leaderboard?.result?.data?.filter((lead) => {
+                return search.toLowerCase() === ""
+                  ? lead
+                  : lead.username.toLowerCase().includes(search.toLowerCase());
+              }) ?? []
+            }
+            columns={columns}
+            rows={10}
+            loading={
+              isFetchingSeasons || isFetchingWeeks || isFetchingWeekLeaderboard
+            }
+            totalPages={leaderboard?.result?.totalPages ?? 1}
+            isLeaderboardTable
+            current_page={Number(page ?? 1)}
+            setCurrentPage={(page: number): void => {
+              setSearchParams({
+                season: String(query_season),
+                week: String(query_week),
+                page: String(page),
+              });
+            }}
+            empty_message="No leaderboard"
+            empty_sub_message="There is no leaderboard for this week"
+          />
+        </div>
       </section>
     </DashboardLayout>
   );
