@@ -311,7 +311,7 @@ function Table({
           ) : (
             <>
               <div className="flex items-center justify-center flex-col py-20 lg:py-32">
-                <h3 className="font-bold text-3xl mb-2">
+                <h3 className="font-bold text-3xl text-center mb-2">
                   {empty_message ?? "Check later!"}
                 </h3>
                 <P className="">{empty_sub_message ?? "Nothing to show"}</P>
