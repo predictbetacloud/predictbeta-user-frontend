@@ -10,32 +10,33 @@ import Slider from "react-slick";
 
 const SingleAdvert = () => {
 	const settings = {
-		dots: false,
-		fade: true,
-		infinite: true,
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		autoplay: true,
-		speed: 2000,
-		autoplaySpeed: 10000,
-		cssEase: "linear",
-	};
+    dots: false,
+    fade: true,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 10000,
+    cssEase: "linear",
+    arrows: false,
+  };
 	return (
-		<div className="w-full">
-			<Slider {...settings}>
-				{images.map((url, i) => (
-					<a
-						href="https://www.hallabet.com"
-						target="_blank"
-						className="w-full"
-						key={i}
-					>
-						<img src={url} className="w-[100%]" alt="advert-img" />
-					</a>
-				))}
-			</Slider>
-		</div>
-	);
+    <div className="w-full">
+      <Slider {...settings}>
+        {images.map((url, i) => (
+          <a
+            href="https://www.hallabet.com"
+            target="_blank"
+            className="w-full flex justify-center"
+            key={i}
+          >
+            <img src={url} className="w-[70%] lg:w-[100%]" alt="advert-img" />
+          </a>
+        ))}
+      </Slider>
+    </div>
+  );
 };
 
 export default SingleAdvert;
