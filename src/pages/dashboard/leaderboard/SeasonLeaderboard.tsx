@@ -185,7 +185,7 @@ const SeasonLeaderboard = () => {
       <section className="w-full p-4 md:p-8">
         <Table
           data={
-            leaderboard?.data?.filter((lead) => {
+            leaderboard?.result?.data?.filter((lead) => {
               return search.toLowerCase() === ""
                 ? lead
                 : lead.username.toLowerCase().includes(search.toLowerCase());
@@ -194,7 +194,7 @@ const SeasonLeaderboard = () => {
           columns={columns}
           rows={10}
           loading={isFetchingSeasons || isFetchingSeasonLeaderboard}
-          totalPages={leaderboard?.totalPages ?? 1}
+          totalPages={leaderboard?.result?.totalPages ?? 1}
           isLeaderboardTable
           current_page={Number(page ?? 1)}
           setCurrentPage={(page: number): void => {

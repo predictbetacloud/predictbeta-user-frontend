@@ -155,11 +155,11 @@ const PublicMonthLeaderboard = () => {
       <main className="px-4 md:px-40 mb-20">
         <section className="w-full p-4 md:p-8">
           <Table
-            data={leaderboard?.data ?? []}
+            data={leaderboard?.result?.data ?? []}
             columns={columns}
             rows={10}
             loading={isFetchingMonthLeaderboard}
-            totalPages={leaderboard?.totalPages ?? 1}
+            totalPages={leaderboard?.result?.totalPages ?? 1}
             isLeaderboardTable
             current_page={Number(page ?? 1)}
             setCurrentPage={(page: number): void => {
