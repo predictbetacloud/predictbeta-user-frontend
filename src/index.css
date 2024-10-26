@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
 body {
 	/* font-family: "Lato", sans-serif; */
 	font-family: "Rubik", sans-serif;
@@ -41,6 +47,7 @@ body {
 }
 
 @layer utilities {
+
 	/* Overrides */
 	/* React Select  */
 	.react-select__control:hover {
@@ -78,34 +85,32 @@ body {
 .Toastify__toast-theme--colored.Toastify__toast--info {
 	border: solid 1px #5d65f6;
 }
+
 .Toastify__toast-theme--colored.Toastify__toast--success {
 	border: solid 1px #55b486;
 }
+
 .Toastify__toast-theme--colored.Toastify__toast--warning {
 	border: solid 1px #f1c40f;
 }
+
 .Toastify__toast-theme--colored.Toastify__toast--error {
 	border: solid 1px #d52a2a;
 }
 
-.Toastify__toast-theme--colored.Toastify__toast--info
-	.Toastify__toast-icon
-	> svg {
+.Toastify__toast-theme--colored.Toastify__toast--info .Toastify__toast-icon>svg {
 	color: #5d65f6;
 }
-.Toastify__toast-theme--colored.Toastify__toast--success
-	.Toastify__toast-icon
-	> svg {
+
+.Toastify__toast-theme--colored.Toastify__toast--success .Toastify__toast-icon>svg {
 	color: #55b486;
 }
-.Toastify__toast-theme--colored.Toastify__toast--warning
-	.Toastify__toast-icon
-	> svg {
+
+.Toastify__toast-theme--colored.Toastify__toast--warning .Toastify__toast-icon>svg {
 	color: #f1c40f;
 }
-.Toastify__toast-theme--colored.Toastify__toast--error
-	.Toastify__toast-icon
-	> svg {
+
+.Toastify__toast-theme--colored.Toastify__toast--error .Toastify__toast-icon>svg {
 	color: #d52a2a;
 }
 
