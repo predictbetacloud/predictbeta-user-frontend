@@ -674,7 +674,7 @@ const AllFixtures = () => {
               className="py-5 lg:py-10 px-4 lg:px-8"
             >
               {matches?.length > 0 ? (
-                <section className="flex ">
+                <section className="flex flex-col ">
                   <div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
                     <div className="grid md:grid-cols-2 gap-6">
                       {matches?.map((match, idx) => (
