@@ -608,7 +608,7 @@ const AllFixtures = () => {
                     </div>
                   </div>
                 </div>
-                <div className="lg:block md:w-1/3 md:pl-8">
+                <div className="lg:block lg:w1/3 lg:pl-8 py-5 lg:py-0 ">
                   <div className="bg-white pb-7 rounded-md border">
                     <div className="bg-[#EB1536] px-2 py-3 flex items-center justify-center rounded-md rounded-b-none space-x-2.5 mb-6">
                       <SelectionIcon />
@@ -674,7 +674,7 @@ const AllFixtures = () => {
               className="py-5 lg:py-10 px-4 lg:px-8"
             >
               {matches?.length > 0 ? (
-                <section className="flex flex-col lg:flex-row py-5 lg:py-10 px-4 lg:px-8 ">
+                <section className="flex flex-col lg:flex-row">
                   <div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
                     <div className="grid md:grid-cols-2 gap-6">
                       {matches?.map((match, idx) => (
@@ -966,8 +966,8 @@ const AllFixtures = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="lg:block md:w-1/3 md:pl-8">
-                    <div className="bg-white pb-7 rounded-md border">
+                  <div className="lg:block lg:w-1/3 lg:pl-8 py-5 lg:py-0">
+                    <div className="bg-white pb-7 rounded-md border  ">
                       <div className="bg-[#EB1536] px-2 py-3 flex items-center justify-center rounded-md rounded-b-none space-x-2.5 mb-6">
                         <SelectionIcon />
                         <p className="text-white">Selections</p>
