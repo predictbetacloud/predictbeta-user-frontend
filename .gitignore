@@ -1,4 +1,8 @@
 node_modules
+dist
+dist-ssr
+*.local
+
 .env
 
 # Sentry Config File
