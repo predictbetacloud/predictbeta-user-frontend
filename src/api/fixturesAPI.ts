@@ -195,7 +195,7 @@ export const submitPredictionAPI = createAsyncThunk(
 				);
 				toastSuccess(
 					data?.data?.message ??
-						"Your prediction has been submitted succesfully"
+						"Your prediction has been submitted successfully"
 				);
 			})
 			.catch((error) => {
