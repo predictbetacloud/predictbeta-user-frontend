@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import queryString from "query-string";
 
@@ -17,6 +17,7 @@ import { VscFilter } from "react-icons/vsc";
 import TabNav from "../../../components/layout/TabNav";
 import { createYearRange, monthEnum } from "../../../utils/utils";
 import { getMonthLeaderboardAPI } from "../../../api/leaderboardAPI";
+import { Input } from "../../../components/inputs/Input";
 
 const MonthLeaderboard = () => {
   const dispatch = useAppDispatch();
@@ -33,6 +34,8 @@ const MonthLeaderboard = () => {
   const isFetchingMonthLeaderboard = useAppSelector(
     selectIsFetchingMonthLeaderboard
   );
+
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     if (!query_month || !query_year) {
@@ -96,6 +99,14 @@ const MonthLeaderboard = () => {
     []
   );
 
+  // Filter the leaderboard data based on the search query
+  const filteredData = useMemo(() => {
+    if (!leaderboard?.result?.data) return [];
+    return leaderboard.result.data.filter((player) =>
+      player.username.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [leaderboard, search]);
+
   return (
     <DashboardLayout title="Month Leaderboard">
       <section className="predictbeta-header bg-white w-full px-4 md:px-8 flex lg:items-end lg:justify-between flex-col-reverse lg:flex-row gap-4 lg:gap-0">
@@ -106,7 +117,15 @@ const MonthLeaderboard = () => {
             { path: "/dashboard/leaderboard/season", title: "Season" },
           ]}
         />
-        {/* season select */}
+        <div className="py-3">
+          <Input
+            id="search"
+            type="text"
+            placeholder="Search playername..."
+            onChange={(e) => setSearch(e.target.value)}
+            className={`w-full md:flex-1`}
+          />
+        </div>
         <div className="flex items-center gap-4 py-3">
           <CustomListBox
             options={createYearRange(new Date().getFullYear())?.map((year) => ({
@@ -123,8 +142,6 @@ const MonthLeaderboard = () => {
             title={"Year"}
             icon={<VscFilter />}
           />
-
-          {/* month select */}
           <CustomListBox
             options={monthEnum?.map((month) => ({
               name: month.name,
@@ -143,24 +160,52 @@ const MonthLeaderboard = () => {
         </div>
       </section>
       <section className="w-full p-4 md:p-8">
-        <Table
-          data={leaderboard?.result?.data ?? []}
-          columns={columns}
-          rows={10}
-          loading={isFetchingMonthLeaderboard}
-          totalPages={leaderboard?.result?.totalPages ?? 1}
-          isLeaderboardTable
-          current_page={Number(page ?? 1)}
-          setCurrentPage={(page: number): void => {
-            setSearchParams({
-              year: String(query_year ?? new Date().getFullYear()),
-              month: String(query_month ?? new Date().getMonth() + 1),
-              page: String(page),
-            });
-          }}
-          empty_message="No leaderboard"
-          empty_sub_message="There is no leaderboard for this month"
-        />
+        <div className="pb-5">
+          <h1 className="text-2xl font-bold text-[#051B30] py-5 ">
+            Your Position
+          </h1>
+          <Table
+            data={leaderboard?.userPosition ? [leaderboard.userPosition] : []}
+            columns={columns}
+            rows={1}
+            loading={isFetchingMonthLeaderboard}
+            totalPages={1}
+            isLeaderboardTable
+            current_page={1}
+            setCurrentPage={(page: number): void => {
+              setSearchParams({
+                year: String(query_year ?? new Date().getFullYear()),
+                month: String(query_month ?? new Date().getMonth() + 1),
+                page: String(page),
+              });
+            }}
+            empty_message="You are not on the leaderboard"
+            empty_sub_message="Predict games to get on the leaderboard"
+          />
+        </div>
+        <div className="">
+          <h1 className="text-2xl font-bold text-[#051B30] py-5 ">
+            This Month's Rankings
+          </h1>
+          <Table
+            data={filteredData}
+            columns={columns}
+            rows={10}
+            loading={isFetchingMonthLeaderboard}
+            totalPages={leaderboard?.result?.totalPages ?? 1}
+            isLeaderboardTable
+            current_page={Number(page ?? 1)}
+            setCurrentPage={(page: number): void => {
+              setSearchParams({
+                year: String(query_year ?? new Date().getFullYear()),
+                month: String(query_month ?? new Date().getMonth() + 1),
+                page: String(page),
+              });
+            }}
+            empty_message="No leaderboard"
+            empty_sub_message="There is no leaderboard for this month"
+          />
+        </div>
       </section>
     </DashboardLayout>
   );

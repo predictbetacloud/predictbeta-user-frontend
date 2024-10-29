@@ -207,7 +207,7 @@ const WeekLeaderboard = () => {
         />
         <div className="py-3">
           <Input
-            id="password"
+            id="search"
             type="text"
             placeholder="Search playername..."
             onChange={(e) => setSearch(e.target.value)}
