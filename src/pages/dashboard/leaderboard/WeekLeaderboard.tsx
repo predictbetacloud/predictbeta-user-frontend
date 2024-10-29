@@ -275,7 +275,7 @@ const WeekLeaderboard = () => {
       <section className="w-full p-4 md:p-8">
         <div className="pb-5">
           <h1 className="text-2xl font-bold text-[#051B30] py-5 ">
-            Your Position
+            Your Position this week
           </h1>
           <Table
             data={leaderboard?.userPosition ? [leaderboard.userPosition] : []}
