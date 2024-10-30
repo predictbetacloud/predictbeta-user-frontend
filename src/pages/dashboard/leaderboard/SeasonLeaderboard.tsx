@@ -146,7 +146,7 @@ const SeasonLeaderboard = () => {
         />
         <div>
           <Input
-            id="password"
+            id="search"
             type="text"
             placeholder="Search playername..."
             onChange={(e) => setSearch(e.target.value)}
@@ -183,29 +183,57 @@ const SeasonLeaderboard = () => {
         </div>
       </section>
       <section className="w-full p-4 md:p-8">
-        <Table
-          data={
-            leaderboard?.result?.data?.filter((lead) => {
-              return search.toLowerCase() === ""
-                ? lead
-                : lead.username.toLowerCase().includes(search.toLowerCase());
-            }) ?? []
-          }
-          columns={columns}
-          rows={10}
-          loading={isFetchingSeasons || isFetchingSeasonLeaderboard}
-          totalPages={leaderboard?.result?.totalPages ?? 1}
-          isLeaderboardTable
-          current_page={Number(page ?? 1)}
-          setCurrentPage={(page: number): void => {
-            setSearchParams({
-              season: String(query_season),
-              page: String(page),
-            });
-          }}
-          empty_message="No leaderboard"
-          empty_sub_message="There is no leaderboard for this season"
-        />
+        <div className="pb-5">
+          <h1 className="text-2xl font-bold text-[#051B30] py-5 ">
+            Your Position this season
+          </h1>
+          <Table
+            data={leaderboard?.userPosition ? [leaderboard.userPosition] : []}
+            columns={columns}
+            rows={1}
+            loading={isFetchingSeasons || isFetchingSeasonLeaderboard}
+            totalPages={1}
+            isLeaderboardTable
+            current_page={1}
+            setCurrentPage={(page: number): void => {
+              setSearchParams({
+                season: String(query_season),
+                page: String(page),
+              });
+            }}
+            empty_message="You are not on the leaderboard"
+            empty_sub_message="Predict games to get on the leaderboard"
+          />
+        </div>
+        <div className="">
+          <h1 className="text-2xl font-bold text-[#051B30] py-5 ">
+            This Season's Rankings
+          </h1>
+
+          <Table
+            data={
+              leaderboard?.result?.data?.filter((lead) => {
+                return search.toLowerCase() === ""
+                  ? lead
+                  : lead.username.toLowerCase().includes(search.toLowerCase());
+              }) ?? []
+            }
+            columns={columns}
+            rows={10}
+            loading={isFetchingSeasons || isFetchingSeasonLeaderboard}
+            totalPages={leaderboard?.result?.totalPages ?? 1}
+            isLeaderboardTable
+            current_page={Number(page ?? 1)}
+            setCurrentPage={(page: number): void => {
+              setSearchParams({
+                season: String(query_season),
+                page: String(page),
+              });
+            }}
+            empty_message="No leaderboard"
+            empty_sub_message="There is no leaderboard for this season"
+          />
+        </div>
       </section>
     </DashboardLayout>
   );
