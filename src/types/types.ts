@@ -163,7 +163,7 @@ export interface IMatch {
   homeForm: string;
   awayForm: string;
   head2head: any;
-  outcome?: "win" | "lose";
+  outcome?: "win" | "lose" | "pending";
 }
 
 export const predictionEnum = {

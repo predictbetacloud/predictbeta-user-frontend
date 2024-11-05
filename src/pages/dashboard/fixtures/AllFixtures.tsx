@@ -630,10 +630,17 @@ const AllFixtures = () => {
                             outcome:
                               specificWeekPredictions?.predictions?.fixtures?.find(
                                 (_match) => _match.fixture.id === match.id
-                              )?.result ===
+                              )?.result === undefined ||
                               specificWeekPredictions?.results?.fixtures?.find(
                                 (_match) => _match.fixture.id === match.id
-                              )?.result
+                              )?.result === undefined
+                                ? "pending"
+                                : specificWeekPredictions?.predictions?.fixtures?.find(
+                                    (_match) => _match.fixture.id === match.id
+                                  )?.result ===
+                                  specificWeekPredictions?.results?.fixtures?.find(
+                                    (_match) => _match.fixture.id === match.id
+                                  )?.result
                                 ? "win"
                                 : "lose",
                           }}
