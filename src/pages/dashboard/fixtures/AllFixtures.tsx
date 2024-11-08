@@ -364,6 +364,7 @@ const AllFixtures = () => {
       {isFetchingMatches ||
       isFetchingWeeks ||
       isFetchingSeasons ||
+      isFetchingAllPlayers || 
       isFetchingSpecificWeekPredictions ? (
         <PageLoading />
       ) : (
