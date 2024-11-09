@@ -45,6 +45,11 @@ export const Input = styled.input`
 		color: #55b486;
 		border-color: #55b486;
 	}
+	&.pending {
+		background: #FBF1E6;
+		color: #d97706;
+		border-color: #d97706;
+	}
 `;
 
 export const InputPlaceholder = styled.div`

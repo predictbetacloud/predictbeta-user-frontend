@@ -96,6 +96,30 @@ export const invalidStyle: StylesConfig = {
 	// }),
 };
 
+
+export const pendingStyle: StylesConfig = {
+  control: (baseStyles: any, state: { isFocused: any }) => ({
+    ...baseStyles,
+    background: "#FBF1E6",
+    border: state.isFocused ? "1px solid #d97706" : "1px solid #d97706",
+    borderRadius: "4px",
+    padding: "0 5px",
+    minHeight: "43px",
+    color: "#55b486",
+  }),
+  singleValue: (baseStyles: any) => ({
+    ...baseStyles,
+    color: "#d97706",
+    padding: 0,
+    fontFamily: "Rubik",
+    fontStyle: "normal",
+    fontWeight: 400,
+    fontSize: "14px",
+    lineHeight: "22px",
+  }),
+};
+
+
 export const correctStyle: StylesConfig = {
 	control: (baseStyles: any, state: { isFocused: any }) => ({
 		...baseStyles,

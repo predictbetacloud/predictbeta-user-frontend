@@ -8,20 +8,20 @@ import { Controller, useForm } from "react-hook-form";
 import DashboardLayout from "../../../components/layout/DashboardLayout";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import {
-	selectAllSeasons,
-	selectAllWeeks,
-	selectIsFetchingAllSeasons,
-	selectIsFetchingAllWeeks,
-	selectIsFetchingMatches,
-	selectIsFetchingSpecificWeekPrediction,
-	selectMatches,
-	selectSpecificWeekPrediction,
+  selectAllSeasons,
+  selectAllWeeks,
+  selectIsFetchingAllSeasons,
+  selectIsFetchingAllWeeks,
+  selectIsFetchingMatches,
+  selectIsFetchingSpecificWeekPrediction,
+  selectMatches,
+  selectSpecificWeekPrediction,
 } from "../../../state/slices/fixtures";
 import {
-	getAllMatchesAPI,
-	getAllSeasonsAPI,
-	getAllWeeksAPI,
-	getSpecificWeekPredictionAPI,
+  getAllMatchesAPI,
+  getAllSeasonsAPI,
+  getAllWeeksAPI,
+  getSpecificWeekPredictionAPI,
 } from "../../../api/fixturesAPI";
 import { VscFilter } from "react-icons/vsc";
 import { Input, InputPlaceholder } from "../../../components/inputs/Input";
@@ -29,142 +29,146 @@ import CustomListBox from "../../../components/inputs/CustomListBox";
 import PageLoading from "../../../components/loaders/PageLoading";
 import SelectionCard from "../../../components/fixtures/SelectionCard";
 import IndicatorSeparator from "../../../components/IndicatorSeparator";
-import { correctStyle, invalidStyle } from "../../../utils/selectStyle";
 import {
-	selectAllPlayers,
-	selectIsFetchingAllPlayers,
+  pendingStyle,
+  correctStyle,
+  invalidStyle,
+} from "../../../utils/selectStyle";
+import {
+  selectAllPlayers,
+  selectIsFetchingAllPlayers,
 } from "../../../state/slices/teams";
 import { getAllPlayersAPI } from "../../../api/teamsAPI";
 
 const PredictionHistory = () => {
-	const dispatch = useAppDispatch();
-	const [, setSearchParams] = useSearchParams();
-	const l = useLocation();
+  const dispatch = useAppDispatch();
+  const [, setSearchParams] = useSearchParams();
+  const l = useLocation();
 
-	const queries = queryString.parse(l.search);
-	const query_week = queries?.week;
-	const query_season = queries?.season;
+  const queries = queryString.parse(l.search);
+  const query_week = queries?.week;
+  const query_season = queries?.season;
 
-	const isFetchingSeasons = useAppSelector(selectIsFetchingAllSeasons);
-	const isFetchingWeeks = useAppSelector(selectIsFetchingAllWeeks);
-	const isFetchingMatches = useAppSelector(selectIsFetchingMatches);
-	const isFetchingSpecificWeekPredictions = useAppSelector(
-		selectIsFetchingSpecificWeekPrediction
-	);
-	const specificWeekPredictions = useAppSelector(selectSpecificWeekPrediction);
-	const isFetchingAllPlayers = useAppSelector(selectIsFetchingAllPlayers);
+  const isFetchingSeasons = useAppSelector(selectIsFetchingAllSeasons);
+  const isFetchingWeeks = useAppSelector(selectIsFetchingAllWeeks);
+  const isFetchingMatches = useAppSelector(selectIsFetchingMatches);
+  const isFetchingSpecificWeekPredictions = useAppSelector(
+    selectIsFetchingSpecificWeekPrediction
+  );
+  const specificWeekPredictions = useAppSelector(selectSpecificWeekPrediction);
+  const isFetchingAllPlayers = useAppSelector(selectIsFetchingAllPlayers);
 
-	const allWeeks = useAppSelector(selectAllWeeks);
-	const allMatches = useAppSelector(selectMatches);
-	const seasons = useAppSelector(selectAllSeasons);
-	const allPlayers = useAppSelector(selectAllPlayers);
+  const allWeeks = useAppSelector(selectAllWeeks);
+  const allMatches = useAppSelector(selectMatches);
+  const seasons = useAppSelector(selectAllSeasons);
+  const allPlayers = useAppSelector(selectAllPlayers);
 
-	const [selectedWeek, setSelectedWeek] = useState<{
-		id: string;
-		number: string;
-	} | null>(null);
+  const [selectedWeek, setSelectedWeek] = useState<{
+    id: string;
+    number: string;
+  } | null>(null);
 
-	const { control } = useForm();
+  const { control } = useForm();
 
-	// Get all Season
-	useEffect(() => {
-		dispatch(getAllSeasonsAPI({}));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+  // Get all Season
+  useEffect(() => {
+    dispatch(getAllSeasonsAPI({}));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-	// Make latest week the active week
-	useEffect(() => {
-		if (allWeeks?.[0]?.id) {
-			// if week is in query use that week
-			if (query_week) {
-				const activeWeek = allWeeks.find(
-					(_week) => _week.number === Number(query_week)
-				);
+  // Make latest week the active week
+  useEffect(() => {
+    if (allWeeks?.[0]?.id) {
+      // if week is in query use that week
+      if (query_week) {
+        const activeWeek = allWeeks.find(
+          (_week) => _week.number === Number(query_week)
+        );
 
-				if (activeWeek) {
-					setSelectedWeek({
-						id: String(activeWeek?.id),
-						number: String(activeWeek?.number),
-					});
-				}
-			} else {
-				setSearchParams({
-					season: query_season
-						? String(query_season)
-						: String(seasons?.[0]?.name),
-					week: String(allWeeks?.[0]?.number),
-				});
-			}
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [allWeeks, query_week]);
+        if (activeWeek) {
+          setSelectedWeek({
+            id: String(activeWeek?.id),
+            number: String(activeWeek?.number),
+          });
+        }
+      } else {
+        setSearchParams({
+          season: query_season
+            ? String(query_season)
+            : String(seasons?.[0]?.name),
+          week: String(allWeeks?.[0]?.number),
+        });
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allWeeks, query_week]);
 
-	useEffect(() => {
-		if (query_season) {
-			const activeSeason = seasons.find(
-				(_season) => _season.name === query_season
-			);
-			if (activeSeason?.id && selectedWeek?.id) {
-				dispatch(
-					getAllMatchesAPI({
-						seasonId: activeSeason?.id,
-						weekId: selectedWeek?.id,
-					})
-				);
-			}
-			if (selectedWeek?.id) {
-				dispatch(
-					getAllPlayersAPI({
-						weekId: selectedWeek?.id,
-					})
-				);
-				dispatch(
-					getSpecificWeekPredictionAPI({
-						weekId: selectedWeek?.id,
-					})
-				);
-			}
-		} else if (seasons?.[0]?.id && selectedWeek?.id) {
-			dispatch(
-				getAllPlayersAPI({
-					weekId: selectedWeek?.id,
-				})
-			);
-			dispatch(
-				getAllMatchesAPI({
-					seasonId: seasons?.[0]?.id,
-					weekId: selectedWeek?.id,
-				})
-			);
-			dispatch(
-				getSpecificWeekPredictionAPI({
-					weekId: selectedWeek?.id,
-				})
-			);
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [selectedWeek]);
+  useEffect(() => {
+    if (query_season) {
+      const activeSeason = seasons.find(
+        (_season) => _season.name === query_season
+      );
+      if (activeSeason?.id && selectedWeek?.id) {
+        dispatch(
+          getAllMatchesAPI({
+            seasonId: activeSeason?.id,
+            weekId: selectedWeek?.id,
+          })
+        );
+      }
+      if (selectedWeek?.id) {
+        dispatch(
+          getAllPlayersAPI({
+            weekId: selectedWeek?.id,
+          })
+        );
+        dispatch(
+          getSpecificWeekPredictionAPI({
+            weekId: selectedWeek?.id,
+          })
+        );
+      }
+    } else if (seasons?.[0]?.id && selectedWeek?.id) {
+      dispatch(
+        getAllPlayersAPI({
+          weekId: selectedWeek?.id,
+        })
+      );
+      dispatch(
+        getAllMatchesAPI({
+          seasonId: seasons?.[0]?.id,
+          weekId: selectedWeek?.id,
+        })
+      );
+      dispatch(
+        getSpecificWeekPredictionAPI({
+          weekId: selectedWeek?.id,
+        })
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedWeek]);
 
-	// Make latest season the active season
-	useEffect(() => {
-		if (query_season) {
-			const activeSeason = seasons.find(
-				(_season) => _season.name === query_season
-			);
+  // Make latest season the active season
+  useEffect(() => {
+    if (query_season) {
+      const activeSeason = seasons.find(
+        (_season) => _season.name === query_season
+      );
 
-			if (activeSeason?.id) {
-				dispatch(getAllWeeksAPI({ seasonId: activeSeason?.id }));
-			}
-		} else {
-			if (seasons?.[0]?.id) {
-				dispatch(getAllWeeksAPI({ seasonId: seasons?.[0]?.id }));
-			}
-		}
+      if (activeSeason?.id) {
+        dispatch(getAllWeeksAPI({ seasonId: activeSeason?.id }));
+      }
+    } else {
+      if (seasons?.[0]?.id) {
+        dispatch(getAllWeeksAPI({ seasonId: seasons?.[0]?.id }));
+      }
+    }
 
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [seasons, query_season]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [seasons, query_season]);
 
-	return (
+  return (
     <DashboardLayout title="Prediction History">
       <section className="predictbeta-header bg-white w-full px-4 lg:px-8 py-3 flex items-center justify-between">
         {/* season select */}
@@ -325,14 +329,16 @@ const PredictionHistory = () => {
                             isClearable
                             isDisabled
                             styles={
-                              specificWeekPredictions?.results?.scorers?.some(
-                                (player) =>
-                                  player.id ===
-                                  specificWeekPredictions?.predictions
-                                    ?.mostLikelyToScore?.id
-                              )
-                                ? correctStyle
-                                : invalidStyle
+                              specificWeekPredictions?.results
+                                ? specificWeekPredictions?.results?.scorers?.some(
+                                    (player) =>
+                                      player.id ===
+                                      specificWeekPredictions?.predictions
+                                        ?.mostLikelyToScore?.id
+                                  )
+                                  ? correctStyle
+                                  : invalidStyle
+                                : pendingStyle
                             }
                           />
                         )}
@@ -383,14 +389,16 @@ const PredictionHistory = () => {
                             isClearable
                             isDisabled
                             styles={
-                              specificWeekPredictions?.results?.scorers?.some(
-                                (player) =>
-                                  player.id ===
-                                  specificWeekPredictions?.predictions
-                                    ?.moreLikelyToScore?.id
-                              )
-                                ? correctStyle
-                                : invalidStyle
+                              specificWeekPredictions?.results
+                                ? specificWeekPredictions?.results?.scorers?.some(
+                                    (player) =>
+                                      player.id ===
+                                      specificWeekPredictions?.predictions
+                                        ?.moreLikelyToScore?.id
+                                  )
+                                  ? correctStyle
+                                  : invalidStyle
+                                : pendingStyle
                             }
                           />
                         )}
@@ -442,14 +450,16 @@ const PredictionHistory = () => {
                             menuPlacement="auto"
                             isDisabled
                             styles={
-                              specificWeekPredictions?.results?.scorers?.some(
-                                (player) =>
-                                  player.id ===
-                                  specificWeekPredictions?.predictions
-                                    ?.likelyToScore?.id
-                              )
-                                ? correctStyle
-                                : invalidStyle
+                              specificWeekPredictions?.results
+                                ? specificWeekPredictions?.results?.scorers?.some(
+                                    (player) =>
+                                      player.id ===
+                                      specificWeekPredictions?.predictions
+                                        ?.likelyToScore?.id
+                                  )
+                                  ? correctStyle
+                                  : invalidStyle
+                                : pendingStyle
                             }
                           />
                         )}
@@ -472,11 +482,13 @@ const PredictionHistory = () => {
                           specificWeekPredictions?.predictions?.timeOfFirstGoal
                         }
                         className={`w-full input ${
-                          specificWeekPredictions?.predictions
-                            ?.timeOfFirstGoal ===
-                          specificWeekPredictions?.results?.timeOfFirstGoal
-                            ? "correct"
-                            : "invalid"
+                          specificWeekPredictions?.results
+                            ? specificWeekPredictions?.predictions
+                                ?.timeOfFirstGoal ===
+                              specificWeekPredictions?.results?.timeOfFirstGoal
+                              ? "correct"
+                              : "invalid"
+                            : "pending"
                         }`}
                       />
                     </div>
