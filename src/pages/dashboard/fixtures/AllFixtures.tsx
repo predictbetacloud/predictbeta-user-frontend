@@ -37,6 +37,7 @@ import ErrorMessage from "../../../components/inputs/ErrorMessage";
 import SelectionCard from "../../../components/fixtures/SelectionCard";
 import IndicatorSeparator from "../../../components/IndicatorSeparator";
 import {
+  pendingStyle,
   correctStyle,
   defaultStyle,
   invalidStyle,
@@ -364,7 +365,7 @@ const AllFixtures = () => {
       {isFetchingMatches ||
       isFetchingWeeks ||
       isFetchingSeasons ||
-      isFetchingAllPlayers || 
+      isFetchingAllPlayers ||
       isFetchingSpecificWeekPredictions ? (
         <PageLoading />
       ) : (
@@ -452,14 +453,16 @@ const AllFixtures = () => {
                             isClearable
                             isDisabled
                             styles={
-                              specificWeekPredictions?.results?.scorers?.some(
-                                (player) =>
-                                  player.id ===
-                                  specificWeekPredictions?.predictions
-                                    ?.mostLikelyToScore?.id
-                              )
-                                ? correctStyle
-                                : invalidStyle
+                              specificWeekPredictions?.results
+                                ? specificWeekPredictions?.results?.scorers?.some(
+                                    (player) =>
+                                      player.id ===
+                                      specificWeekPredictions?.predictions
+                                        ?.mostLikelyToScore?.id
+                                  )
+                                  ? correctStyle
+                                  : invalidStyle
+                                : pendingStyle
                             }
                           />
                         )}
@@ -510,14 +513,16 @@ const AllFixtures = () => {
                             isClearable
                             isDisabled
                             styles={
-                              specificWeekPredictions?.results?.scorers?.some(
-                                (player) =>
-                                  player.id ===
-                                  specificWeekPredictions?.predictions
-                                    ?.moreLikelyToScore?.id
-                              )
-                                ? correctStyle
-                                : invalidStyle
+                              specificWeekPredictions?.results
+                                ? specificWeekPredictions?.results?.scorers?.some(
+                                    (player) =>
+                                      player.id ===
+                                      specificWeekPredictions?.predictions
+                                        ?.moreLikelyToScore?.id
+                                  )
+                                  ? correctStyle
+                                  : invalidStyle
+                                : pendingStyle
                             }
                           />
                         )}
@@ -569,14 +574,16 @@ const AllFixtures = () => {
                             menuPlacement="auto"
                             isDisabled
                             styles={
-                              specificWeekPredictions?.results?.scorers?.some(
-                                (player) =>
-                                  player.id ===
-                                  specificWeekPredictions?.predictions
-                                    ?.likelyToScore?.id
-                              )
-                                ? correctStyle
-                                : invalidStyle
+                              specificWeekPredictions?.results
+                                ? specificWeekPredictions?.results?.scorers?.some(
+                                    (player) =>
+                                      player.id ===
+                                      specificWeekPredictions?.predictions
+                                        ?.likelyToScore?.id
+                                  )
+                                  ? correctStyle
+                                  : invalidStyle
+                                : pendingStyle
                             }
                           />
                         )}
@@ -599,11 +606,13 @@ const AllFixtures = () => {
                           specificWeekPredictions?.predictions?.timeOfFirstGoal
                         }
                         className={`w-full input ${
-                          specificWeekPredictions?.predictions
-                            ?.timeOfFirstGoal ===
-                          specificWeekPredictions?.results?.timeOfFirstGoal
-                            ? "correct"
-                            : "invalid"
+                          specificWeekPredictions?.results
+                            ? specificWeekPredictions?.predictions
+                                ?.timeOfFirstGoal ===
+                              specificWeekPredictions?.results?.timeOfFirstGoal
+                              ? "correct"
+                              : "invalid"
+                            : "pending"
                         }`}
                       />
                     </div>
