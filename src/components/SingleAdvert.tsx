@@ -22,16 +22,16 @@ const SingleAdvert = () => {
     arrows: false,
   };
 	return (
-    <div className="w-full">
+    <div className="w-full md:w-1/2 lg:w-full mx-auto rounded-md ">
       <Slider {...settings}>
         {images.map((url, i) => (
           <a
             href="https://www.hallabet.com"
             target="_blank"
-            className="w-full flex justify-center"
+            className="flex justify-center"
             key={i}
           >
-            <img src={url} className="w-[70%] lg:w-[100%]" alt="advert-img" />
+            <img src={url} className="w-[100%] rounded-md " alt="advert-img" />
           </a>
         ))}
       </Slider>

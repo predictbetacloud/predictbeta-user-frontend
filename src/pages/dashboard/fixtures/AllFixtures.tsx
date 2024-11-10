@@ -265,9 +265,9 @@ const AllFixtures = () => {
 
   return (
     <DashboardLayout>
-      <section className="predictbeta-header bg-white w-full px-4 lg:px-8 py-3 flex items-center justify-between">
+      <section className="predictbeta-header bg-white w-full px-4 lg:px-6 py-3 flex items-center justify-between">
         {/* season select */}
-        <div className="flex items-center gap-4">
+        <div className="w-full flex items-center gap-4 justify-between sm:justify-start">
           {isFetchingSeasons || !seasons ? (
             <InputPlaceholder>
               <AiOutlineLoading
@@ -373,8 +373,8 @@ const AllFixtures = () => {
           {Array.isArray(specificWeekPredictions?.predictions?.fixtures) &&
           specificWeekPredictions?.predictions?.fixtures?.length > 0 ? (
             <>
-              <section className="flex flex-col lg:flex-row py-5 lg:py-10 px-4 lg:px-8 ">
-                <div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
+              <section className="py-5 lg:py-10 px-4 lg:px-6 grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <div className="bg-white h-fit p-3 md:p-5 border rounded-lg col-span-1 lg:col-span-2">
                   <div className="grid md:grid-cols-2 gap-6">
                     {matches?.map((match, idx) => (
                       <div key={idx}>
@@ -594,7 +594,8 @@ const AllFixtures = () => {
                     <div className="">
                       <label htmlFor="timeOfFirstGoal" className="mb-2 block">
                         <p className="text-[#222222] text-sm">
-                          Minute the earliest goal in the round will be scored
+                          What minute will the first goal in the round be
+                          scored?
                         </p>
                       </label>
                       <Input
@@ -618,7 +619,7 @@ const AllFixtures = () => {
                     </div>
                   </div>
                 </div>
-                <div className="lg:block lg:w1/3 lg:pl-8 py-5 lg:py-0 ">
+                <div className="lg:block lg:py-0 col-span-1 space-y-5 ">
                   <div className="bg-white pb-7 rounded-md border">
                     <div className="bg-[#EB1536] px-2 py-3 flex items-center justify-center rounded-md rounded-b-none space-x-2.5 mb-6">
                       <SelectionIcon />
@@ -679,7 +680,7 @@ const AllFixtures = () => {
                       </div>
                     )}
                   </div>
-                  <div className="w-[330px] mt-6">
+                  <div className="w-full">
                     <SingleAdvert />
                   </div>
                 </div>
@@ -691,7 +692,7 @@ const AllFixtures = () => {
               className="py-5 lg:py-10 px-4 lg:px-8"
             >
               {matches?.length > 0 ? (
-                <section className="flex flex-col lg:flex-row">
+                <section>
                   <div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
                     <div className="grid md:grid-cols-2 gap-6">
                       {matches?.map((match, idx) => (
@@ -930,7 +931,8 @@ const AllFixtures = () => {
                       <div className="">
                         <label htmlFor="timeOfFirstGoal" className="mb-2 block">
                           <p className="text-[#222222] text-sm">
-                            Minute the earliest goal in the round will be scored
+                            What minute will the first goal in the round be
+                            scored?
                           </p>
                         </label>
                         <Input
@@ -1017,7 +1019,7 @@ const AllFixtures = () => {
                         )}
                       </div>
                     </div>
-                    <div className="w-[330px] mt-6">
+                    <div className="w-full">
                       <SingleAdvert />
                     </div>
                   </div>
