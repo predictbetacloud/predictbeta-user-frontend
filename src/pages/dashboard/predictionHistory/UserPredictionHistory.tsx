@@ -466,7 +466,8 @@ const UserPredictionHistory = () => {
                     <div className="">
                       <label htmlFor="timeOfFirstGoal" className="mb-2 block">
                         <p className="text-[#222222] text-sm">
-                          Minute the earliest goal in the round will be scored
+                          What minute will the first goal in the round be
+                          scored?
                         </p>
                       </label>
                       <Input

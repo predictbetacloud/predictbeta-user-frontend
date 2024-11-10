@@ -33,14 +33,14 @@ const DashboardLayout = ({ children, title }: Props) => {
 	}, [user?.id]);
 
 	return (
-		<section>
-			<Header title={title} />
-			<main className="flex w-screen items-start">
-				<Sidebar />
-				<section className="flex-grow">{children}</section>
-			</main>
-		</section>
-	);
+    <section>
+      <Header title={title} />
+      <main className="flex max-w-[84rem] mx-auto">
+        <Sidebar />
+        <section className="w-full lg:w-[80%]">{children}</section>
+      </main>
+    </section>
+  );
 };
 
 export default DashboardLayout;
