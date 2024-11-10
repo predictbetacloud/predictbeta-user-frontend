@@ -687,13 +687,10 @@ const AllFixtures = () => {
               </section>
             </>
           ) : (
-            <form
-              onSubmit={handleSubmit(onPredict)}
-              className="py-5 lg:py-10 px-4 lg:px-8"
-            >
+            <form onSubmit={handleSubmit(onPredict)}>
               {matches?.length > 0 ? (
-                <section>
-                  <div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
+                <section className="py-5 px-4 lg:px-6 grid grid-cols-1 lg:grid-cols-3 gap-4">
+                  <div className="bg-white h-fit p-3 md:p-5 border rounded-lg col-span-1 lg:col-span-2">
                     <div className="grid md:grid-cols-2 gap-6">
                       {matches?.map((match, idx) => (
                         <div key={idx}>
@@ -985,7 +982,7 @@ const AllFixtures = () => {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="lg:block lg:py-0 col-span-1 space-y-5">
                     <div className="bg-white pb-7 rounded-md border  ">
                       <div className="bg-[#EB1536] px-2 py-3 flex items-center justify-center rounded-md rounded-b-none space-x-2.5 mb-6">
