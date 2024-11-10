@@ -619,7 +619,7 @@ const AllFixtures = () => {
                     </div>
                   </div>
                 </div>
-                <div className="lg:block lg:py-0 col-span-1 space-y-5 ">
+                <div className="lg:block lg:py-0 col-span-1 space-y-5">
                   <div className="bg-white pb-7 rounded-md border">
                     <div className="bg-[#EB1536] px-2 py-3 flex items-center justify-center rounded-md rounded-b-none space-x-2.5 mb-6">
                       <SelectionIcon />
@@ -985,7 +985,8 @@ const AllFixtures = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="lg:block lg:w-1/3 lg:pl-8 py-5 lg:py-0">
+                  {/* here  */}
+                  <div className="lg:block lg:py-0 col-span-1 space-y-5">
                     <div className="bg-white pb-7 rounded-md border  ">
                       <div className="bg-[#EB1536] px-2 py-3 flex items-center justify-center rounded-md rounded-b-none space-x-2.5 mb-6">
                         <SelectionIcon />
