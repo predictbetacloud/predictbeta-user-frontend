@@ -259,7 +259,7 @@ const AllFixtures = () => {
         predictions,
       })
     ).then(() => {
-      setShowAdvert(true);
+      setShowAdvert(false);
     });
   };
 
@@ -373,8 +373,8 @@ const AllFixtures = () => {
           {Array.isArray(specificWeekPredictions?.predictions?.fixtures) &&
           specificWeekPredictions?.predictions?.fixtures?.length > 0 ? (
             <>
-              <section className="flex flex-col lg:flex-row py-5 lg:py-10 px-4 lg:px-8 ">
-                <div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
+              <section className="flexflex-collg:flexrowpy-5lg:py-10px-4lg:px8 bg-teal-500   grid grid-cols-3 ">
+                <div className="flex-grow bg-wite p-3 md:p-5 border rounded-lg col-span-2 ">
                   <div className="grid md:grid-cols-2 gap-6">
                     {matches?.map((match, idx) => (
                       <div key={idx}>
@@ -618,15 +618,15 @@ const AllFixtures = () => {
                     </div>
                   </div>
                 </div>
-                <div className="lg:block lg:w1/3 lg:pl-8 py-5 lg:py-0 ">
+                <div className="lg:blocklg:w1/3lg:pl-8py-5lg:py-0 w-full ">
                   <div className="bg-white pb-7 rounded-md border">
                     <div className="bg-[#EB1536] px-2 py-3 flex items-center justify-center rounded-md rounded-b-none space-x-2.5 mb-6">
                       <SelectionIcon />
                       <p className="text-white">Selections</p>
                     </div>
                     <div
-                      className="px-4 space-y-4 overflow-y-auto"
-                      style={{ maxHeight: "450px" }}
+                      className="px-4 space-y-4 overflow-y-auto  "
+                      // style={{ maxHeight: "450px" }}
                     >
                       {matches?.map((match) => (
                         <SelectionCard
