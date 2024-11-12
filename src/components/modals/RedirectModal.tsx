@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-import redirectImage from "../../assets/images/redirectPopUpWeek11.jpg";
+import redirectImage from "../../assets/images/redirectPopUpWeek12.jpg";
 
 const RedirectModal = ({
   showAdvert,
@@ -44,7 +44,7 @@ const RedirectModal = ({
                 <div className="flex justify-center items-center w-full bg-white ">
                   <a
                     target="_blank"
-                    href="https://hallabet.com/prematch?bookedBet=IL74535"
+                    href="https://hallabet.com/prematch?bookedBet=XB63837"
                     className="w-full"
                   >
                     <img
