@@ -234,6 +234,7 @@ const UserPredictionHistory = () => {
       {isFetchingMatches ||
       isFetchingWeeks ||
       isFetchingSeasons ||
+      isFetchingAllPlayers ||
       isFetchingSpecificWeekPredictions ? (
         <PageLoading />
       ) : (
