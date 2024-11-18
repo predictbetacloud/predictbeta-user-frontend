@@ -20,7 +20,7 @@ const PublicHeader = () => {
 					{routes.map((route) => (
 						<>
 						{route.title === 'HallaBet' ? (
-								<a href={route.route} target="_blank" className="font-extrabold px-2 text-lg">
+								<a key={route.title} href={route.route} target="_blank" className="font-extrabold px-2 text-lg">
 									<span className="text-[#3E4095]">Halla</span>
 									<span className="text-[#eb1536]">Bet</span>
 								</a>

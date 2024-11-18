@@ -90,7 +90,7 @@ const EmailLogin = () => {
       </div>
 
       <p className="mt-4 md:text-center text-xs">
-        Don’t have an account?{" "}
+        Don&apos;t have an account?{" "}
         <Link to="/register" className="">
           <span className="text-[#EB1536]">Create account</span>
         </Link>
