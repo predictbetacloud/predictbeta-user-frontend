@@ -11,7 +11,7 @@ import { signUpAPI } from "../../api/authAPI";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { selectAuth } from "../../state/slices/auth";
 import CustomPhoneInput from "../../components/inputs/CustomPhoneInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface PropsTypes {
     country:string,
@@ -21,9 +21,19 @@ interface PropsTypes {
 
 const PhoneRegistration = ({country, state}:PropsTypes) => {
     const dispatch = useAppDispatch();
+    const [influencerValue, setInfluencerValue] = useState<string | null>(null);
 	const { isPerformingAuthAction } = useAppSelector(selectAuth);
 
 	const [showPassword, setShowPassword] = useState(false);
+
+    useEffect(() => {
+      const searchParams = new URLSearchParams(location.search);
+      const influencer = searchParams.get("influencer");
+
+      if (influencer) {
+        setInfluencerValue(influencer);
+      }
+    }, [location]);
 
 	// Form Handler
 	const {
@@ -48,7 +58,8 @@ const PhoneRegistration = ({country, state}:PropsTypes) => {
                 state,
                 countryCode:'',
                 mobileNumber,
-                signUpType:'PHONE'
+                signUpType:'PHONE',
+                referralCode: influencerValue,
 			})
 		);
 	};
