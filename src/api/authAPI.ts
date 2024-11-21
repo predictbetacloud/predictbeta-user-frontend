@@ -30,6 +30,7 @@ export const signUpAPI = createAsyncThunk(
 			country,
 			state,
 			signUpType,
+			referralCode,
 		}: FieldValues,
 		{ dispatch }
 	) => {
@@ -44,6 +45,7 @@ export const signUpAPI = createAsyncThunk(
 						state,
 						signUpType,
 						mobileNumber,
+						referralCode,
 				  }
 				: {
 						password,
@@ -52,6 +54,7 @@ export const signUpAPI = createAsyncThunk(
 						country,
 						state,
 						signUpType,
+						referralCode,
 				  };
 		axiosInstance
 			.post(`/users`, bodyData)

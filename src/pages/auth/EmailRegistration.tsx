@@ -9,7 +9,7 @@ import Button from "../../components/Buttons";
 import { signUpAPI } from "../../api/authAPI";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { selectAuth } from "../../state/slices/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import CustomPhoneInput from "../../components/inputs/CustomPhoneInput";
 
@@ -20,9 +20,20 @@ interface PropsTypes {
 
 const EmailRegistration = ({ country, state }: PropsTypes) => {
 	const dispatch = useAppDispatch();
+	const [influencerValue, setInfluencerValue] = useState<string | null>(null);
 	const { isPerformingAuthAction } = useAppSelector(selectAuth);
 
 	const [showPassword, setShowPassword] = useState(false);
+
+	useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const influencer = searchParams.get("influencer");
+
+    if (influencer) {
+      setInfluencerValue(influencer);
+      
+    }
+  }, [location]);
 
 	// Form Handler
 	const {
@@ -43,6 +54,7 @@ const EmailRegistration = ({ country, state }: PropsTypes) => {
 				country,
 				state,
 				signUpType: "EMAIL",
+				referralCode: influencerValue,
 			})
 		);
 	};
