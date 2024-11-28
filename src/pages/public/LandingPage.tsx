@@ -39,7 +39,6 @@ const LandingPage = () => {
 	const allWeeks = useAppSelector(selectAllWeeks);
 	const allMatches = useAppSelector(selectMatches);
 	const seasons = useAppSelector(selectAllSeasons);
-	const user = useAppSelector(selectAuth);
 
 	// Get all Season
 	useEffect(() => {
