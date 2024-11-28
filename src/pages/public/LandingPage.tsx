@@ -20,7 +20,7 @@ import {
 import PageLoading from "../../components/loaders/PageLoading";
 import { MatchCard } from "../../components/fixtures/MatchCard";
 import PublicFooter from "../../components/layout/PublicFooter";
-import { selectAuth, selectShowAdPopUp, setShowAdPopUp } from "../../state/slices/auth";
+import { selectShowAdPopUp, setShowAdPopUp } from "../../state/slices/auth";
 import AdPopUp from "../../components/modals/AdPopUp";
 import HeroSection from "../../components/Hero";
 import { useNavigate } from "react-router";
