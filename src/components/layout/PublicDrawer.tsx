@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { IoCloseCircleSharp, IoMenuOutline } from "react-icons/io5";
+import { selectAuth } from "../../state/slices/auth";
 
 import logo from "../../assets/logo/logo-light.svg";
 
@@ -11,6 +12,7 @@ import {
 } from "../../state/slices/drawer";
 import { Link } from "react-router-dom";
 import Button from "../Buttons";
+import { logOutAPI } from "../../api/authAPI";
 
 const routes: { title: string; route: string }[] = [
 	{ title: "Home", route: "/" },
@@ -22,6 +24,7 @@ const routes: { title: string; route: string }[] = [
 
 const PublicDrawer = () => {
 	const dispatch = useAppDispatch();
+	const { user } = useAppSelector(selectAuth);
 
 	const showDrawer = useAppSelector(selectPublicDrawerState);
 
@@ -79,7 +82,7 @@ const PublicDrawer = () => {
 									<div className="flex flex-col gap-4 flex-grow justify-between">
 										{/* Links */}
 										{routes.map((route) => (
-											<>
+											<div key={route.title} >
 												{route.title === 'HallaBet' ? (
 														<a href={route.route} target="_blank" className="font-extrabold text-lg">
 														<span className="text-[#3E4095]">Halla</span>
@@ -95,25 +98,39 @@ const PublicDrawer = () => {
 													{route.title}
 												</Link>
 													) }
-											</>
+											</div>
 											
 										))}
 									</div>
 
-									<Link
-										to="/login"
-										className="block mt-4"
-										onClick={() => dispatch(togglePublicDrawer())}
-									>
-										<Button.OutlineWhite className="w-full" title="Login" />
-									</Link>
-									<Link
-										to="/register"
-										className="block mt-4"
-										onClick={() => dispatch(togglePublicDrawer())}
-									>
-										<Button.Blue className="w-full" title="Create account" />
-									</Link>
+									{
+										user && Object.keys(user).length > 0 ? (
+											<div className="flex items-center gap-x-5">
+												<Button.Blue
+													title="Log out"
+													className="mt-3 w-full"
+													onClick={() => dispatch(logOutAPI())}
+												/>
+											</div>
+										) : (
+											<div className="flex flex-col items-center w-full">
+												<Link
+													to="/login"
+													className="block w-full"
+													onClick={() => dispatch(togglePublicDrawer())}
+												>
+													<Button.OutlineWhite className="w-full" title="Login" />
+												</Link>
+												<Link
+													to="/register"
+													className="block w-full mt-4"
+													onClick={() => dispatch(togglePublicDrawer())}
+												>
+													<Button.Blue className="w-full" title="Create account" />
+												</Link>
+											</div>
+										)
+									}
 								</section>
 								{/* <Button.Outline
 									title="Log out"

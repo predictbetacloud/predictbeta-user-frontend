@@ -20,7 +20,7 @@ import {
 import PageLoading from "../../components/loaders/PageLoading";
 import { MatchCard } from "../../components/fixtures/MatchCard";
 import PublicFooter from "../../components/layout/PublicFooter";
-import { selectShowAdPopUp, setShowAdPopUp } from "../../state/slices/auth";
+import { selectAuth, selectShowAdPopUp, setShowAdPopUp } from "../../state/slices/auth";
 import AdPopUp from "../../components/modals/AdPopUp";
 import HeroSection from "../../components/Hero";
 import { useNavigate } from "react-router";
@@ -39,6 +39,7 @@ const LandingPage = () => {
 	const allWeeks = useAppSelector(selectAllWeeks);
 	const allMatches = useAppSelector(selectMatches);
 	const seasons = useAppSelector(selectAllSeasons);
+	const user = useAppSelector(selectAuth);
 
 	// Get all Season
 	useEffect(() => {
@@ -73,11 +74,13 @@ const LandingPage = () => {
 	}, [seasons]);
 
 	useEffect(() => {
-		dispatch(setShowAdPopUp(true));
-		return () => {
-			dispatch(setShowAdPopUp(false));
-		};
-	}, []);
+    // if (user && Object.keys(user).length === 0) {
+      dispatch(setShowAdPopUp(true));
+    // }
+    return () => {
+      dispatch(setShowAdPopUp(false));
+    };
+  }, []);
 
 	return (
 		<main className="bg-white">

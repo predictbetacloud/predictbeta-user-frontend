@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/logo/logo-dark.svg";
 import { useEffect, useState } from "react";
 import queryString from "query-string";
@@ -54,7 +54,9 @@ const Header = ({ title }: Props) => {
           <div className="w-[24%]">
             <div className="flex items-center">
               <div className="md:px10 flex-shrink-0">
-                <img src={logo} alt="Predictbeta" className="" />
+                <Link to="/">
+                  <img src={logo} alt="Predictbeta" className="" />
+                </Link>
               </div>
 
               {title ? (

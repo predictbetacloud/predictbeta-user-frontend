@@ -72,7 +72,7 @@ const AdPopUp = () => {
 										{/* Match img */}
 										<img src={matchImg} alt="match" className="hidden lg:block" />
 									</div>
-									<Link to="/login">
+									<Link to="/dashboard/fixtures">
 										<Button title="Join predictbeta" className="mt-8" />
 									</Link>
 									<hr className="mt-4 border-gray-600" />
