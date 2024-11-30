@@ -28,7 +28,7 @@ const PublicHeader = () => {
         </Link>
         <nav className="hidden lg:flex items-center gap-x-8">
           {routes.map((route) => (
-            <div key={route.title}  >
+            <div key={route.title}>
               {route.title === "HallaBet" ? (
                 <a
                   key={route.title}
@@ -62,10 +62,7 @@ const PublicHeader = () => {
       {user && Object.keys(user).length > 0 ? (
         <div className="hidden lg:flex items-center gap-x-5">
           <Link to="/dashboard/fixtures">
-            <Button.OutlineWhite
-              title="My Dashboard"
-              className="hover:bg-gray-400"
-            />
+            <Button title="My Dashboard" className="whitespace-nowrap " />
           </Link>
           <Button.Blue
             title="Log out"
