@@ -105,12 +105,17 @@ const PublicDrawer = () => {
 
 									{
 										user && Object.keys(user).length > 0 ? (
+											<div className="mt-3 flex flex-col itemscenter w-full">
+												  <Link to="/dashboard/fixtures">
+            <Button title="My Dashboard" className="whitespace-nowrap w-full" />
+          </Link>
 											<div className="flex items-center gap-x-5">
 												<Button.Blue
 													title="Log out"
 													className="mt-3 w-full"
 													onClick={() => dispatch(logOutAPI())}
 												/>
+											</div>
 											</div>
 										) : (
 											<div className="flex flex-col items-center w-full">
