@@ -735,8 +735,8 @@ const AllFixtures = () => {
                       Deciders
                     </h3>
                     <p className="md:text-center text-[#5F6B7A] text-sm mt-3">
-                      Select three likely to score different scorers and minute
-                      of first goal to decide your tie
+                      Select three likely different scorers and the minute the
+                      first goal of the round will be scored
                     </p>
                     <div className="grid md:grid-cols-2 gap-6 py-6">
                       {/* Most likely To Score to score? */}
