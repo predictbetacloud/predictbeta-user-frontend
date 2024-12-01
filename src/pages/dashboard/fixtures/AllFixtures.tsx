@@ -593,7 +593,7 @@ const AllFixtures = () => {
                     {/* Goal time */}
                     <div className="">
                       <label htmlFor="timeOfFirstGoal" className="mb-2 block">
-                        <p className="text-[#222222] text-sm py-1">
+                        <p className="text-[#222222] text-sm py-0.5">
                           At what minute will the first goal be scored?
                         </p>
                       </label>
