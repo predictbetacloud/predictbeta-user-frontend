@@ -15,3 +15,5 @@ dist-ssr
 amplify_outputs*
 amplifyconfiguration*
 
+*:Zone.Identifier
+

@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo/logo-light.svg";
 import Button from "../Buttons";
 import PublicDrawer from "./PublicDrawer";
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
-import { selectAuth } from "../../state/slices/auth";
+import { useAppDispatch } from "../../state/hooks";
 import { logOutAPI } from "../../api/authAPI";
 
 const routes: { title: string; route: string }[] = [
@@ -15,10 +14,13 @@ const routes: { title: string; route: string }[] = [
 ];
 
 const PublicHeader = () => {
-  const { user } = useAppSelector(selectAuth);
+  const user = JSON.parse(
+    localStorage.getItem("predictbeta-user_session") || "{}"
+  );
+  
   const dispatch = useAppDispatch();
 
-  console.log(user)
+  
 
   return (
     <header className="flex items-center justify-between w-full px-4 md:px-10 lg:px-20 xl:px-40 py-2 bg-white shadow-sm z-10 sticky top-0">

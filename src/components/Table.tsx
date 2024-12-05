@@ -314,7 +314,7 @@ function Table({
                 <h3 className="font-bold text-3xl text-center mb-2">
                   {empty_message ?? "Check later!"}
                 </h3>
-                <P className="">{empty_sub_message ?? "Nothing to show"}</P>
+                <P className="text-center">{empty_sub_message ?? "Nothing to show"}</P>
               </div>
             </>
           )}
