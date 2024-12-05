@@ -1,10 +1,11 @@
 import img1 from "../assets/images/ads/15-percent-weekly-cashback.jpg";
-import img2 from "../assets/images/ads/50-percent-acca-cashback.jpg";
+// import img2 from "../assets/images/ads/50-percent-acca-cashback.jpg";
+import decemberGoodieBag from "../assets/images/decemberGoodieBag.jpg";
 import img3 from "../assets/images/ads/400-percent-welcome-bonus.jpeg";
 import img4 from "../assets/images/ads/beta-betting-hallabet.jpeg";
 import img5 from "../assets/images/ads/play-your-favourite.jpg";
 
-const images = [img1, img2, img4, img5, img3];
+const images = [img1, decemberGoodieBag, img4, img5, img3];
 // const images2 = [img5, img4, img3, img2, img1];
 // const images3 = [img2, img4, img1, img3, img5];
 
