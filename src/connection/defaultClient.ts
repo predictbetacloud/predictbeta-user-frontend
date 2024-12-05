@@ -118,6 +118,7 @@ const failureResponseHandler = async (error: AxiosError) => {
 			dispatch(logOutAPI());
 		} else {
 			if (globalRouter.navigate) {
+				dispatch(logOutAPI());
 				if (!["/", "/login"].includes(window.location.pathname)) {
 					globalRouter.navigate("/login", {
 						state: { from: window.location.pathname },
