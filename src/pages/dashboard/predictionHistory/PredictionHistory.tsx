@@ -470,7 +470,7 @@ const PredictionHistory = () => {
                     <div className="">
                       <label htmlFor="timeOfFirstGoal" className="mb-2 block">
                         <p className="text-[#222222] text-sm py-0.5">
-                          At what minute will the first goal be scored?
+                          At what minute will the earliest goal be scored?
                         </p>
                       </label>
                       <Input
