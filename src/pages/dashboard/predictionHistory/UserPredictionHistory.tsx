@@ -7,20 +7,20 @@ import { AiOutlineLoading } from "react-icons/ai";
 import DashboardLayout from "../../../components/layout/DashboardLayout";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import {
-	selectAllSeasons,
-	selectAllWeeks,
-	selectIsFetchingAllSeasons,
-	selectIsFetchingAllWeeks,
-	selectIsFetchingMatches,
-	selectIsFetchingSpecificWeekPrediction,
-	selectMatches,
-	selectSpecificWeekPrediction,
+  selectAllSeasons,
+  selectAllWeeks,
+  selectIsFetchingAllSeasons,
+  selectIsFetchingAllWeeks,
+  selectIsFetchingMatches,
+  selectIsFetchingSpecificWeekPrediction,
+  selectMatches,
+  selectSpecificWeekPrediction,
 } from "../../../state/slices/fixtures";
 import {
-	getAllMatchesAPI,
-	getAllSeasonsAPI,
-	getAllWeeksAPI,
-	getSpecificUserWeekPredictionAPI,
+  getAllMatchesAPI,
+  getAllSeasonsAPI,
+  getAllWeeksAPI,
+  getSpecificUserWeekPredictionAPI,
 } from "../../../api/fixturesAPI";
 import { VscFilter } from "react-icons/vsc";
 import { Input, InputPlaceholder } from "../../../components/inputs/Input";
@@ -32,142 +32,142 @@ import IndicatorSeparator from "../../../components/IndicatorSeparator";
 import { Controller, useForm } from "react-hook-form";
 import { getAllPlayersAPI } from "../../../api/teamsAPI";
 import {
-	selectAllPlayers,
-	selectIsFetchingAllPlayers,
+  selectAllPlayers,
+  selectIsFetchingAllPlayers,
 } from "../../../state/slices/teams";
 
 const UserPredictionHistory = () => {
-	const dispatch = useAppDispatch();
-	const [, setSearchParams] = useSearchParams();
-	const l = useLocation();
-	const { username } = useParams();
+  const dispatch = useAppDispatch();
+  const [, setSearchParams] = useSearchParams();
+  const l = useLocation();
+  const { username } = useParams();
 
-	const queries = queryString.parse(l.search);
-	const query_week = queries?.week;
-	const query_season = queries?.season;
+  const queries = queryString.parse(l.search);
+  const query_week = queries?.week;
+  const query_season = queries?.season;
 
-	const isFetchingSeasons = useAppSelector(selectIsFetchingAllSeasons);
-	const isFetchingWeeks = useAppSelector(selectIsFetchingAllWeeks);
-	const isFetchingMatches = useAppSelector(selectIsFetchingMatches);
-	const isFetchingSpecificWeekPredictions = useAppSelector(
-		selectIsFetchingSpecificWeekPrediction
-	);
-	const specificWeekPredictions = useAppSelector(selectSpecificWeekPrediction);
-	const isFetchingAllPlayers = useAppSelector(selectIsFetchingAllPlayers);
+  const isFetchingSeasons = useAppSelector(selectIsFetchingAllSeasons);
+  const isFetchingWeeks = useAppSelector(selectIsFetchingAllWeeks);
+  const isFetchingMatches = useAppSelector(selectIsFetchingMatches);
+  const isFetchingSpecificWeekPredictions = useAppSelector(
+    selectIsFetchingSpecificWeekPrediction
+  );
+  const specificWeekPredictions = useAppSelector(selectSpecificWeekPrediction);
+  const isFetchingAllPlayers = useAppSelector(selectIsFetchingAllPlayers);
 
-	const allWeeks = useAppSelector(selectAllWeeks);
-	const allMatches = useAppSelector(selectMatches);
-	const seasons = useAppSelector(selectAllSeasons);
-	const allPlayers = useAppSelector(selectAllPlayers);
+  const allWeeks = useAppSelector(selectAllWeeks);
+  const allMatches = useAppSelector(selectMatches);
+  const seasons = useAppSelector(selectAllSeasons);
+  const allPlayers = useAppSelector(selectAllPlayers);
 
-	const [selectedWeek, setSelectedWeek] = useState<{
-		id: string;
-		number: string;
-	} | null>(null);
+  const [selectedWeek, setSelectedWeek] = useState<{
+    id: string;
+    number: string;
+  } | null>(null);
 
-	const { control } = useForm();
+  const { control } = useForm();
 
-	// Get all Season
-	useEffect(() => {
-		dispatch(getAllSeasonsAPI({}));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+  // Get all Season
+  useEffect(() => {
+    dispatch(getAllSeasonsAPI({}));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-	// Make latest week the active week
-	useEffect(() => {
-		if (allWeeks?.[0]?.id) {
-			// if week is in query use that week
-			if (query_week) {
-				const activeWeek = allWeeks.find(
-					(_week) => _week.number === Number(query_week)
-				);
+  // Make latest week the active week
+  useEffect(() => {
+    if (allWeeks?.[0]?.id) {
+      // if week is in query use that week
+      if (query_week) {
+        const activeWeek = allWeeks.find(
+          (_week) => _week.number === Number(query_week)
+        );
 
-				if (activeWeek) {
-					setSelectedWeek({
-						id: String(activeWeek?.id),
-						number: String(activeWeek?.number),
-					});
-				}
-			} else {
-				setSearchParams({
-					season: query_season
-						? String(query_season)
-						: String(seasons?.[0]?.name),
-					week: String(allWeeks?.[0]?.number),
-				});
-			}
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [allWeeks, query_week]);
+        if (activeWeek) {
+          setSelectedWeek({
+            id: String(activeWeek?.id),
+            number: String(activeWeek?.number),
+          });
+        }
+      } else {
+        setSearchParams({
+          season: query_season
+            ? String(query_season)
+            : String(seasons?.[0]?.name),
+          week: String(allWeeks?.[0]?.number),
+        });
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allWeeks, query_week]);
 
-	useEffect(() => {
-		if (query_season) {
-			const activeSeason = seasons.find(
-				(_season) => _season.name === query_season
-			);
-			if (activeSeason?.id && selectedWeek?.id) {
-				dispatch(
-					getAllMatchesAPI({
-						seasonId: activeSeason?.id,
-						weekId: selectedWeek?.id,
-					})
-				);
-			}
-			if (selectedWeek?.id) {
-				dispatch(
-					getAllPlayersAPI({
-						weekId: selectedWeek?.id,
-					})
-				);
-				dispatch(
-					getSpecificUserWeekPredictionAPI({
-						weekId: selectedWeek?.id,
-						username,
-					})
-				);
-			}
-		} else if (seasons?.[0]?.id && selectedWeek?.id) {
-			dispatch(
-				getAllMatchesAPI({
-					seasonId: seasons?.[0]?.id,
-					weekId: selectedWeek?.id,
-				})
-			);
-			dispatch(
-				getAllPlayersAPI({
-					weekId: selectedWeek?.id,
-				})
-			);
-			dispatch(
-				getSpecificUserWeekPredictionAPI({
-					weekId: selectedWeek?.id,
-					username,
-				})
-			);
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [selectedWeek]);
+  useEffect(() => {
+    if (query_season) {
+      const activeSeason = seasons.find(
+        (_season) => _season.name === query_season
+      );
+      if (activeSeason?.id && selectedWeek?.id) {
+        dispatch(
+          getAllMatchesAPI({
+            seasonId: activeSeason?.id,
+            weekId: selectedWeek?.id,
+          })
+        );
+      }
+      if (selectedWeek?.id) {
+        dispatch(
+          getAllPlayersAPI({
+            weekId: selectedWeek?.id,
+          })
+        );
+        dispatch(
+          getSpecificUserWeekPredictionAPI({
+            weekId: selectedWeek?.id,
+            username,
+          })
+        );
+      }
+    } else if (seasons?.[0]?.id && selectedWeek?.id) {
+      dispatch(
+        getAllMatchesAPI({
+          seasonId: seasons?.[0]?.id,
+          weekId: selectedWeek?.id,
+        })
+      );
+      dispatch(
+        getAllPlayersAPI({
+          weekId: selectedWeek?.id,
+        })
+      );
+      dispatch(
+        getSpecificUserWeekPredictionAPI({
+          weekId: selectedWeek?.id,
+          username,
+        })
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedWeek]);
 
-	// Make latest season the active season
-	useEffect(() => {
-		if (query_season) {
-			const activeSeason = seasons.find(
-				(_season) => _season.name === query_season
-			);
+  // Make latest season the active season
+  useEffect(() => {
+    if (query_season) {
+      const activeSeason = seasons.find(
+        (_season) => _season.name === query_season
+      );
 
-			if (activeSeason?.id) {
-				dispatch(getAllWeeksAPI({ seasonId: activeSeason?.id }));
-			}
-		} else {
-			if (seasons?.[0]?.id) {
-				dispatch(getAllWeeksAPI({ seasonId: seasons?.[0]?.id }));
-			}
-		}
+      if (activeSeason?.id) {
+        dispatch(getAllWeeksAPI({ seasonId: activeSeason?.id }));
+      }
+    } else {
+      if (seasons?.[0]?.id) {
+        dispatch(getAllWeeksAPI({ seasonId: seasons?.[0]?.id }));
+      }
+    }
 
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [seasons, query_season]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [seasons, query_season]);
 
-	return (
+  return (
     <DashboardLayout title={`Prediction History - ${username}`}>
       <section className="predictbeta-header bg-white w-full px-4 lg:px-8 py-3 flex items-center justify-between">
         {/* season select */}
@@ -467,7 +467,7 @@ const UserPredictionHistory = () => {
                     <div className="">
                       <label htmlFor="timeOfFirstGoal" className="mb-2 block">
                         <p className="text-[#222222] text-sm py-0.5 ">
-                          At what minute will the first goal be scored?
+                          At what minute will the earliest goal be scored?
                         </p>
                       </label>
                       <Input
