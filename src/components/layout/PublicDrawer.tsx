@@ -27,7 +27,7 @@ const PublicDrawer = () => {
     localStorage.getItem("predictbeta-user_session") || "{}"
   );
 
-  console.log(user);
+  
 
   const showDrawer = useAppSelector(selectPublicDrawerState);
 
