@@ -152,7 +152,7 @@ export interface IWeek {
   deadline?: string | number;
 }
 export interface IMatch {
-  prediction: "" | "HOME" | "DRAW" | "AWAY" | undefined;
+  prediction: "" | "HOME" | "DRAW" | "AWAY" | "NULL" | undefined;
   awayTeam: IClub;
   homeTeam: IClub;
   id: number;
@@ -163,13 +163,14 @@ export interface IMatch {
   homeForm: string;
   awayForm: string;
   head2head: any;
-  outcome?: "win" | "lose" | "pending";
+  outcome?: "win" | "lose" | "pending" | "NULL";
 }
 
 export const predictionEnum = {
   AWAY: "AWAY",
   HOME: "HOME",
   DRAW: "DRAW",
+  NULL: "NULL",
 };
 
 export type Prediction = {
@@ -191,7 +192,7 @@ export interface IWeekPrediction {
         homeTeam: IClub;
         awayTeam: IClub;
       };
-      result: "HOME" | "AWAY" | "DRAW";
+      result: "HOME" | "AWAY" | "DRAW" | "NULL";
     }[];
     timeOfFirstGoal: number;
     mostLikelyToScore: IPlayer;
@@ -210,7 +211,7 @@ export interface IWeekPrediction {
         homeTeam: IClub;
         awayTeam: IClub;
       };
-      result: "HOME" | "AWAY" | "DRAW";
+      result: "HOME" | "AWAY" | "DRAW" | "NULL";
     }[];
     timeOfFirstGoal: number;
     scorers: IPlayer[];
