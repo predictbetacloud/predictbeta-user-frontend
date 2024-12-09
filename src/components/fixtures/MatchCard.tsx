@@ -18,16 +18,18 @@ const Style = styled.div<{ invalid: "true" | "false" }>`
 
 interface PredictionStyle {
 	isselected: "true" | "false";
-	isCorrect: "true" | "false";
+	isCorrect: "true" | "false" | "NULL";
 }
 
 const PredictionStyle = styled.div<PredictionStyle>`
 	background: ${(props) =>
 		props.isCorrect === "true"
 			? colors.green700
+			: props.isCorrect === "NULL"
+			? colors.grey700
 			: props.isselected === "true"
-			? "#EB1536"
-			: "#051B30"};
+			? colors.accent
+			: colors.blue900};
 	padding: 8px 14px;
 `;
 
@@ -49,7 +51,7 @@ const Prediction = ({
 	title?: string;
 	locked: boolean;
 	inactive: boolean;
-	result: "" | "HOME" | "DRAW" | "AWAY" | undefined;
+	result: "" | "HOME" | "DRAW" | "AWAY" | "NULL" | undefined;
 	value: any;
 }) => (
 	<PredictionStyle
@@ -58,7 +60,7 @@ const Prediction = ({
 		} ${className ? className : ""}`}
 		style={style}
 		onClick={inactive ? () => {} : () => onClick(value)}
-		isCorrect={result === value ? "true" : "false"}
+		isCorrect={result === "NULL" ? "NULL" : result === value ? "true" : "false"}
 		isselected={selectedPrediction === value ? "true" : "false"}
 	>
 		{locked ? (
@@ -107,8 +109,8 @@ export const MatchCard = ({
 	head2head: any;
 	awayForm: string;
 	homeForm: string;
-	prediction?: "" | "HOME" | "DRAW" | "AWAY";
-	result?: "" | "AWAY" | "DRAW" | "HOME";
+	prediction?: "" | "HOME" | "DRAW" | "AWAY" | "NULL";
+	result?: "" | "AWAY" | "DRAW" | "HOME" | "NULL";
 	adminSet?: boolean;
 	toggleUpdateModal?: () => void;
 	toggleDeleteModal?: () => void;

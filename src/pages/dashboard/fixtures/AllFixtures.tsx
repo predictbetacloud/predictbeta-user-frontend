@@ -373,6 +373,7 @@ const AllFixtures = () => {
           {Array.isArray(specificWeekPredictions?.predictions?.fixtures) &&
           specificWeekPredictions?.predictions?.fixtures?.length > 0 ? (
             <>
+              {/* hello */}
               <section className="py-5 lg:py-10 px-4 lg:px-6 grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <div className="bg-white h-fit p-3 md:p-5 border rounded-lg col-span-1 lg:col-span-2">
                   <div className="grid md:grid-cols-2 gap-6">
@@ -643,8 +644,8 @@ const AllFixtures = () => {
                               )?.result === undefined ||
                               specificWeekPredictions?.results?.fixtures?.find(
                                 (_match) => _match.fixture.id === match.id
-                              )?.result === undefined
-                                ? "pending"
+                              )?.result === "NULL"
+                                ? "NULL"
                                 : specificWeekPredictions?.predictions?.fixtures?.find(
                                     (_match) => _match.fixture.id === match.id
                                   )?.result ===
