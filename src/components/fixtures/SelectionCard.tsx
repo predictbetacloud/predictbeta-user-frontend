@@ -5,7 +5,6 @@ import { IMatch } from "../../types/types";
 import { GreenTick, PendingIcon, RedClose } from "../../assets/icons";
 
 const Style = styled.div<{ outcome: string | undefined }>`
-  
   background: ${(props) =>
     props.outcome === "win"
       ? "#D4F5E9"
@@ -13,15 +12,24 @@ const Style = styled.div<{ outcome: string | undefined }>`
       ? "#FDEDED"
       : props.outcome === "NULL"
       ? "#E1E7EC"
-      : "white"};
+      : "#FFF"};
+  border: 0.5px solid
+    ${(props) =>
+      props.outcome === "win"
+        ? "#55b486"
+        : props.outcome === "lose"
+        ? "#D52A2A"
+        : props.outcome === "NULL"
+        ? "#E1E7EC"
+        : "#e1e7ec"};
 `;
+
 
 const SelectionCard = ({ match, type }: { match: IMatch; type?: string }) => {
   return (
     <Style
-      className={`px-4 py-2 flex items-center justify-between rounded-md`}
+      className={`px-4 py-2 flex items-center justify-between rounded-md border-[0.5px] `}
       outcome={match?.outcome}
-      style={{ borderColor: match?.outcome === "NULL" ? "#E1E7EC" : "" }}
     >
       <div className="w-full">
         <div className="flex items-center">
@@ -73,4 +81,3 @@ const SelectionCard = ({ match, type }: { match: IMatch; type?: string }) => {
 };
 
 export default SelectionCard;
-

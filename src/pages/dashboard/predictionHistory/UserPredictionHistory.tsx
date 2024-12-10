@@ -243,7 +243,7 @@ const UserPredictionHistory = () => {
           specificWeekPredictions?.predictions?.fixtures.length > 0 ? (
             <>
               <section className="flex py-5 lg:py-10 px-4 lg:px-8">
-                <div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
+                <div className="flex-grow bgwhite p-3 md:p-5 border rounded-lg">
                   <div className="grid md:grid-cols-2 gap-6">
                     {allMatches?.map((match) => (
                       <SelectionCard
@@ -262,6 +262,13 @@ const UserPredictionHistory = () => {
                               (_match) => _match.fixture.id === match.id
                             )?.result === undefined
                               ? "pending"
+                              : specificWeekPredictions?.predictions?.fixtures?.find(
+                                  (_match) => _match.fixture.id === match.id
+                                )?.result === "NULL" ||
+                                specificWeekPredictions?.results?.fixtures?.find(
+                                  (_match) => _match.fixture.id === match.id
+                                )?.result === "NULL"
+                              ? "NULL"
                               : specificWeekPredictions?.predictions?.fixtures?.find(
                                   (_match) => _match.fixture.id === match.id
                                 )?.result ===

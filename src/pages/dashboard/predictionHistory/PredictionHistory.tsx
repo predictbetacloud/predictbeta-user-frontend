@@ -239,7 +239,7 @@ const PredictionHistory = () => {
           {Array.isArray(specificWeekPredictions?.predictions?.fixtures) &&
           specificWeekPredictions?.predictions?.fixtures.length > 0 ? (
             <>
-              <section className="md:w-4/5 flex py-5 lg:py-10 px-4 lg:px-8">
+              <section className="md:w-full flex py-5 lg:py-10 px-4 lg:px-8">
                 <div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
                   <div className="grid md:grid-cols-2 gap-6">
                     {allMatches?.map((match) => (
@@ -259,6 +259,13 @@ const PredictionHistory = () => {
                               (_match) => _match.fixture.id === match.id
                             )?.result === undefined
                               ? "pending"
+                              : specificWeekPredictions?.predictions?.fixtures?.find(
+                                  (_match) => _match.fixture.id === match.id
+                                )?.result === "NULL" ||
+                                specificWeekPredictions?.results?.fixtures?.find(
+                                  (_match) => _match.fixture.id === match.id
+                                )?.result === "NULL"
+                              ? "NULL"
                               : specificWeekPredictions?.predictions?.fixtures?.find(
                                   (_match) => _match.fixture.id === match.id
                                 )?.result ===
