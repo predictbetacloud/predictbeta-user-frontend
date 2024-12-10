@@ -243,7 +243,7 @@ const UserPredictionHistory = () => {
           specificWeekPredictions?.predictions?.fixtures.length > 0 ? (
             <>
               <section className="flex py-5 lg:py-10 px-4 lg:px-8">
-                <div className="flex-grow bgwhite p-3 md:p-5 border rounded-lg">
+                <div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
                   <div className="grid md:grid-cols-2 gap-6">
                     {allMatches?.map((match) => (
                       <SelectionCard
