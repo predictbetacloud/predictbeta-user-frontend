@@ -264,6 +264,13 @@ const UserPredictionHistory = () => {
                               ? "pending"
                               : specificWeekPredictions?.predictions?.fixtures?.find(
                                   (_match) => _match.fixture.id === match.id
+                                )?.result === "NULL" ||
+                                specificWeekPredictions?.results?.fixtures?.find(
+                                  (_match) => _match.fixture.id === match.id
+                                )?.result === "NULL"
+                              ? "NULL"
+                              : specificWeekPredictions?.predictions?.fixtures?.find(
+                                  (_match) => _match.fixture.id === match.id
                                 )?.result ===
                                 specificWeekPredictions?.results?.fixtures?.find(
                                   (_match) => _match.fixture.id === match.id
