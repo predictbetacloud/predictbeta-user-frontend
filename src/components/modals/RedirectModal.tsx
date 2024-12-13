@@ -44,7 +44,7 @@ const RedirectModal = ({
                 <div className="flex justify-center items-center w-full bg-white ">
                   <a
                     target="_blank"
-                    href="https://hallabet.com/prematch?bookedBet=PN54116"
+                    href="https://hallabet.com/prematch?bookedBet=DI47285"
                     className="w-full"
                   >
                     <img
