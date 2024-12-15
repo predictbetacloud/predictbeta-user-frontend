@@ -259,7 +259,7 @@ const AllFixtures = () => {
         predictions,
       })
     ).then(() => {
-      setShowAdvert(true);
+      setShowAdvert(false);
     });
   };
 
