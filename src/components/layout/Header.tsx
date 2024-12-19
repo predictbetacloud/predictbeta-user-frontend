@@ -3,6 +3,7 @@ import logo from "../../assets/logo/logo-dark.svg";
 import { useEffect, useState } from "react";
 import queryString from "query-string";
 
+
 import { useAppSelector } from "../../state/hooks";
 import { selectAuth, selectIsFetchingUserInfo } from "../../state/slices/auth";
 import { formatCurrency } from "../../utils/utils";
@@ -15,6 +16,7 @@ import CustomCountDown from "../Countdown";
 import { IWeek } from "../../types/types";
 import { isBefore } from "date-fns";
 import Drawer from "./Drawer";
+import { PiBellRingingFill } from "react-icons/pi";
 
 type Props = { title?: string };
 
@@ -101,7 +103,22 @@ const Header = ({ title }: Props) => {
             ) : (
               <h1 className="text-white font-semibold text-lg">{title}</h1>
             )}
-            <div className="flex items-center justifyend  ">
+            <div className="flex items-center gap-3 justifyend  ">
+              <button className="relative bg-transparent hover:bg-gray-700 transition-all ease-in-out duration-200 border border-[#F5F8FA] rounded-full p-[5px] ">
+                <PiBellRingingFill className="h-6 w-6" fill="#F5F8FA" />
+                <div className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-[#EB1536] opacity-75 animate-ping" />
+                  <span
+                    className="absolute inline-flex h-full w-full rounded-full bg-[#EB1536] opacity-75 animate-ping "
+                    style={{ animationDelay: "500ms" }}
+                  />
+                  <span
+                    className="absolute inline-flex h-full w-full rounded-full bg-[#EB1536] opacity-75 animate-ping "
+                    style={{ animationDelay: "1000ms" }}
+                  />
+                  <span className="relative inline-flex h-2 w-2 items-center justify-center rounded-full bg-[#EB1536] text-xs text-primary-foreground" />
+                </div>
+              </button>
               {/* Balance */}
               <div className="rounded-md p-2 px-3 flex items-center bg-[#F5F8FA]">
                 <p className="mr-2 text-[#212934]">Balance:</p>
@@ -111,9 +128,7 @@ const Header = ({ title }: Props) => {
                 ) : (
                   <>
                     {hideBalance ? (
-                      <p className="mr-1 text-[#2A2E33] font-semibold">
-                        ********
-                      </p>
+                      <p className="mr-1 text-[#2A2E33] font-semibold">****</p>
                     ) : (
                       <p className="mr-1 text-[#2A2E33] font-semibold">
                         {formatCurrency(wallet?.balance || 0)}
