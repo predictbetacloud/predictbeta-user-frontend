@@ -20,7 +20,7 @@ const Affiliates = () => {
           <div className="md:w-2/3">
             {/* Getting Started */}
             <h3 className="text-[#212934] font-semibold text-4xl mb-3">
-              Getting Started
+              How to Participate
             </h3>
             <ul className="px-4 list-disc space-y-2">
               <li>
@@ -38,7 +38,7 @@ const Affiliates = () => {
               <li>
                 <p className="text-[#212934]">
                   Each time a friend signs up with your referral code, you earn
-                  2 points. Refer a total of 10 friends and earn 20 points.
+                  2 points. You can only refer a maximum of 10 friend per week.
                 </p>
               </li>
               <li>
@@ -49,8 +49,9 @@ const Affiliates = () => {
               </li>
               <li>
                 <p className="text-[#212934]">
-                  You can ONLY trigger your referral points when you have the
-                  maximum number of 20 points.
+                  You can trigger your referral points before the end of a
+                  prediction round. Note that referral points can only be
+                  triggered before submitting your predictions for a game round.
                 </p>
               </li>
               <li>
@@ -61,8 +62,8 @@ const Affiliates = () => {
               </li>
               <li>
                 <p className="text-[#212934]">
-                  If you do not use your referral points within a game round, they
-                  will be lost.
+                  If you do not use your referral points within a game round,
+                  they will forfeited and lost.
                 </p>
               </li>
               <li>
