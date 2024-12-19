@@ -26,6 +26,9 @@ import CustomListBox from "../../../components/inputs/CustomListBox";
 import { VscFilter } from "react-icons/vsc";
 import TabNav from "../../../components/layout/TabNav";
 
+import AdPopUp from "../../../components/modals/AdPopUp";
+import { selectShowAdPopUp, setShowAdPopUp } from "../../../state/slices/auth";
+
 const WeekLeaderboard = () => {
   const dispatch = useAppDispatch();
 
@@ -43,6 +46,7 @@ const WeekLeaderboard = () => {
   const isFetchingWeekLeaderboard = useAppSelector(
     selectIsFetchingWeekLeaderboard
   );
+  const showAdPopUp = useAppSelector(selectShowAdPopUp);
 
   const allWeeks = useAppSelector(selectAllWeeks);
   const seasons = useAppSelector(selectAllSeasons);
@@ -59,6 +63,15 @@ const WeekLeaderboard = () => {
     dispatch(getAllSeasonsAPI({}));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+      
+        dispatch(setShowAdPopUp(true));
+      
+      return () => {
+        dispatch(setShowAdPopUp(false));
+      };
+    }, []);
 
   // Make latest week the active week
   useEffect(() => {
@@ -330,6 +343,7 @@ const WeekLeaderboard = () => {
           />
         </div>
       </section>
+      {showAdPopUp ? <AdPopUp /> : null}
     </DashboardLayout>
   );
 };
