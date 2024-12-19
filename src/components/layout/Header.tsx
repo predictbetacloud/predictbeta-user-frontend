@@ -3,7 +3,7 @@ import logo from "../../assets/logo/logo-dark.svg";
 import { useEffect, useState } from "react";
 import queryString from "query-string";
 
-
+import { Popover } from "@headlessui/react";
 import { useAppSelector } from "../../state/hooks";
 import { selectAuth, selectIsFetchingUserInfo } from "../../state/slices/auth";
 import { formatCurrency } from "../../utils/utils";
@@ -103,22 +103,47 @@ const Header = ({ title }: Props) => {
             ) : (
               <h1 className="text-white font-semibold text-lg">{title}</h1>
             )}
-            <div className="flex items-center gap-3 justifyend  ">
-              <button className="relative bg-transparent hover:bg-gray-700 transition-all ease-in-out duration-200 border border-[#F5F8FA] rounded-full p-[5px] ">
-                <PiBellRingingFill className="h-6 w-6" fill="#F5F8FA" />
-                <div className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center">
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-[#EB1536] opacity-75 animate-ping" />
-                  <span
-                    className="absolute inline-flex h-full w-full rounded-full bg-[#EB1536] opacity-75 animate-ping "
-                    style={{ animationDelay: "500ms" }}
-                  />
-                  <span
-                    className="absolute inline-flex h-full w-full rounded-full bg-[#EB1536] opacity-75 animate-ping "
-                    style={{ animationDelay: "1000ms" }}
-                  />
-                  <span className="relative inline-flex h-2 w-2 items-center justify-center rounded-full bg-[#EB1536] text-xs text-primary-foreground" />
-                </div>
-              </button>
+            <div className="flex items-center gap-3">
+              <Popover className="relative">
+                <Popover.Button className="relative bg-transparent hover:bg-gray-700 transition-all ease-in-out duration-200 border border-[#F5F8FA] rounded-full p-[5px] ">
+                  <PiBellRingingFill className="h-6 w-6" fill="#F5F8FA" />
+                  <div className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-[#EB1536] opacity-75 animate-ping" />
+                    <span
+                      className="absolute inline-flex h-full w-full rounded-full bg-[#EB1536] opacity-75 animate-ping "
+                      style={{ animationDelay: "500ms" }}
+                    />
+                    <span
+                      className="absolute inline-flex h-full w-full rounded-full bg-[#EB1536] opacity-75 animate-ping "
+                      style={{ animationDelay: "1000ms" }}
+                    />
+                    <span className="relative inline-flex h-2 w-2 items-center justify-center rounded-full bg-[#EB1536] text-xs text-primary-foreground" />
+                  </div>
+                </Popover.Button>
+                <Popover.Panel
+                  as="div"
+                  className="absolute mt-2 right-0 rounded-md bg-blue-100 w-[300px] text-sm/6 transition-all duration-1000 ease-in-out [--anchor-gap:var(--spacing-5)] data-[closed]:-translate-y-1 data-[closed]:opacity-0"
+                  style={{ border: `1px solid ${colors.blue900}` }}
+                >
+                  <div className="p-2 rounded-md flex flex-col gap-2 ">
+                    <h3 className="font-semibold text-[16px] text-[#051B30]">
+                      Become a PredictBeta Affiliate
+                    </h3>
+                    <p className="text-black/50 text-sm/4 ">
+                      Refer friends to predict on PredictBeta and earn 20 points
+                      for each game round you play.
+                    </p>
+                    
+                    <Link
+                      to="/affiliates-program"
+                      className="font-medium text-[#051B30] hover:text-[#EB1536] hover:underline w-fit "
+                    >
+                      Read more
+                    </Link>
+                  </div>
+                </Popover.Panel>
+              </Popover>
+
               {/* Balance */}
               <div className="rounded-md p-2 px-3 flex items-center bg-[#F5F8FA]">
                 <p className="mr-2 text-[#212934]">Balance:</p>
