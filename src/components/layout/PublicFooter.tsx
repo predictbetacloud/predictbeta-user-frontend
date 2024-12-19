@@ -22,7 +22,7 @@ const PublicFooter = () => {
 					<Link to="/" className="border-r-2"><img src={logo} alt="Predictbeta" className="md:mr-8" /></Link>
 					<a href="https://www.hallabet.com" target="_blank"><img src={hallaBetLogo} width={120} alt="HallaBet" className="md:mr-8 rounded-md" /></a>
 				</div>
-				<nav className="flex items-center gap-x-8 mt-4 md:mt-0">
+				<nav className="flex gap-4 mt-4 md:mt-0 flex-col text-left sm:flex-row ">
 					{routes.map((route) => (
 						<Link
 							key={route.title}
