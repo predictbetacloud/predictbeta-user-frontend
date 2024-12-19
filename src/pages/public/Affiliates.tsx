@@ -61,7 +61,7 @@ const Affiliates = () => {
               </li>
               <li>
                 <p className="text-[#212934]">
-                  If you do not use your referral points within the week, they
+                  If you do not use your referral points within a game round, they
                   will be lost.
                 </p>
               </li>
