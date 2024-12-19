@@ -4,6 +4,7 @@ import Button from "../Buttons";
 import PublicDrawer from "./PublicDrawer";
 import { useAppDispatch } from "../../state/hooks";
 import { logOutAPI } from "../../api/authAPI";
+import { PiBellRingingFill } from "react-icons/pi";
 
 const routes: { title: string; route: string }[] = [
   { title: "Home", route: "/" },
@@ -61,27 +62,44 @@ const PublicHeader = () => {
 					</a> */}
         </nav>
       </div>
-      {user && Object.keys(user).length > 0 ? (
-        <div className="hidden lg:flex items-center gap-x-5">
-          <Link to="/dashboard/fixtures">
-            <Button title="My Dashboard" className="whitespace-nowrap " />
-          </Link>
-          <Button.Blue
-            title="Log out"
-            className="w-full"
-            onClick={() => dispatch(logOutAPI())}
-          />
-        </div>
-      ) : (
-        <div className="hidden lg:flex items-center gap-x-5">
-          <Link to="/login">
-            <Button.OutlineWhite title="Login" />
-          </Link>
-          <Link to="/register">
-            <Button.Blue title="Create account" />
-          </Link>
-        </div>
-      )}
+      <div className="flex items-center gap-3">
+        <button className="relative bg-transparent hover:bg-gray-300 transition-all ease-in-out duration-200 border border-[#051B30] rounded-full p-[5px] ">
+          <PiBellRingingFill className="h-6 w-6" fill="#051B30" />
+          <div className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-[#EB1536] opacity-75 animate-ping" />
+            <span
+              className="absolute inline-flex h-full w-full rounded-full bg-[#EB1536] opacity-75 animate-ping"
+              style={{ animationDelay: "500ms" }}
+            />
+            <span
+              className="absolute inline-flex h-full w-full rounded-full bg-[#EB1536] opacity-75 animate-ping"
+              style={{ animationDelay: "1000ms" }}
+            />
+            <span className="relative inline-flex h-[10px] w-[10px] items-center justify-center rounded-full bg-[#EB1536] text-xs text-primary-foreground" />
+          </div>
+        </button>
+        {user && Object.keys(user).length > 0 ? (
+          <div className="hidden lg:flex items-center gap-x-5 ">
+            <Link to="/dashboard/fixtures">
+              <Button title="My Dashboard" className="whitespace-nowrap " />
+            </Link>
+            <Button.Blue
+              title="Log out"
+              className="w-full"
+              onClick={() => dispatch(logOutAPI())}
+            />
+          </div>
+        ) : (
+          <div className="hidden lg:flex items-center gap-x-5">
+            <Link to="/login">
+              <Button.OutlineWhite title="Login" />
+            </Link>
+            <Link to="/register">
+              <Button.Blue title="Create account" />
+            </Link>
+          </div>
+        )}
+      </div>
 
       <PublicDrawer />
     </header>
