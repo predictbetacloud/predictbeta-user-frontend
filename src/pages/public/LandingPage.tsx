@@ -73,9 +73,9 @@ const LandingPage = () => {
 	}, [seasons]);
 
 	useEffect(() => {
-    // if (user && Object.keys(user).length === 0) {
+    
       dispatch(setShowAdPopUp(true));
-    // }
+    
     return () => {
       dispatch(setShowAdPopUp(false));
     };
