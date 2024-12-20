@@ -22,7 +22,7 @@ const routes: { title: string; route: string }[] = [
   { title: "Leaderboard", route: "/leaderboard" },
   { title: "HallaBet", route: "https://www.hallabet.com/prematch" },
   { title: "FAQs", route: "/faq" },
-  { title: "Affiliates", route: "/affiliates-program" },
+  { title: "Referrals", route: "/referral-program" },
 ];
 
 const PublicDrawer = () => {
@@ -63,10 +63,10 @@ const PublicDrawer = () => {
             </h3>
             <p className="text-black/50 text-sm/4 ">
               Refer friends to predict on PredictBeta and earn 20 points for
-              each game round you play.
+              each round you play.
             </p>
             <Link
-              to="/affiliates-program"
+              to="/referral-program"
               className="font-medium text-[#051B30] hover:text-[#EB1536] hover:underline w-fit "
             >
               Read more
