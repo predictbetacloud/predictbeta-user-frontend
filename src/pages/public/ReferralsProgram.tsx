@@ -1,7 +1,7 @@
 import PublicHeader from "../../components/layout/PublicHeader";
 import PublicFooter from "../../components/layout/PublicFooter";
 
-const Affiliates = () => {
+const ReferralsProgram = () => {
   return (
     <>
       <PublicHeader />
@@ -9,7 +9,7 @@ const Affiliates = () => {
         {/* Banner */}
         <section className="py-20 px-4 bg-[#051B30] text-center mb-16">
           <h1 className="text-white font-semibold text-4xl mb-4">
-            PredictBeta Affiliates
+            PredictBeta Referral Program
           </h1>
           <p className="text-[#E1E7EC] max-w-[600px] mx-auto">
             Your prediction points are not enough! Invite friends to sign up on
@@ -38,20 +38,20 @@ const Affiliates = () => {
               <li>
                 <p className="text-[#212934]">
                   Each time a friend signs up with your referral code, you earn
-                  2 points. You can only refer a maximum of 10 friend per week.
+                  2 points. You can only refer a maximum of 10 friends per week.
                 </p>
               </li>
               <li>
                 <p className="text-[#212934]">
-                  When submitting your predictions for a game round, you can
-                  trigger your referral points to be included in your results.
+                  When submitting your predictions for a round, you can trigger
+                  your referral points to be included in your results.
                 </p>
               </li>
               <li>
                 <p className="text-[#212934]">
                   You can trigger your referral points before the end of a
-                  prediction round. Note that referral points can only be
-                  triggered before submitting your predictions for a game round.
+                  prediction round. Note that your referral points can only be
+                  triggered before submitting your predictions for a round.
                 </p>
               </li>
               <li>
@@ -62,13 +62,14 @@ const Affiliates = () => {
               </li>
               <li>
                 <p className="text-[#212934]">
-                  If you do not use your referral points within a game round,
-                  they will forfeited and lost.
+                  If you do not use your referral points within a round, they
+                  will be forfeited and lost.
                 </p>
               </li>
               <li>
                 <p className="text-[#212934]">
-                  You&apos;re now all set for success on PredictBeta!
+                  You&apos;re now all set for success on PredictBeta referral
+                  program!
                 </p>
               </li>
             </ul>
@@ -80,4 +81,4 @@ const Affiliates = () => {
   );
 };
 
-export default Affiliates;
+export default ReferralsProgram;

@@ -39,7 +39,7 @@ import PublicMonthLeaderboard from "./pages/public/PublicMonthLeaderboard";
 import PublicSeasonLeaderboard from "./pages/public/PublicSeasonLeaderboard";
 import DemoPage from "./pages/public/Demo";
 import Policy from "./pages/public/Policy";
-import Affiliates from "./pages/public/Affiliates";
+import ReferralsProgram from "./pages/public/ReferralsProgram";
 // import { selectAuth } from "./state/slices/auth";
 
 function App() {
@@ -67,77 +67,77 @@ function App() {
 	// }, []);
 
 	return (
-		// <ErrorBoundary FallbackComponent={ErrorFallback}>
-		<>
-			<Routes>
-				<Route path="/" element={<LandingPage />} />
-				<Route path="/terms" element={<Terms />} />
-				<Route path="/contact" element={<ContactPage />} />
-				<Route path="/about-us" element={<AboutPage />} />
-				<Route path="/how-to-play" element={<HowToPlayPage />} />
-				<Route path="/faq" element={<FaqPage />} />
-				<Route path="/affiliates-program" element={<Affiliates />} />
-				<Route path="/demo" element={<DemoPage />} />
-				<Route path="/policy" element={<Policy />} />
-				<Route path="/leaderboard/month" element={<PublicMonthLeaderboard />} />
-				<Route
-					path="/leaderboard/season"
-					element={<PublicSeasonLeaderboard />}
-				/>
-				<Route path="/leaderboard" element={<PublicWeekLeaderboard />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/register" element={<Register />} />
-				<Route path="/verify" element={<VerifyEmail />} />
-				<Route path="/forgot-password" element={<ForgotPassword />} />
-				<Route path="/new-password" element={<NewPassword />} />
-				<Route path="/dashboard/account/password" element={<EditPassword />} />
-				<Route path="/dashboard/account" element={<EditProfile />} />
-				<Route path="/dashboard/wallet" element={<Wallet />} />
-				<Route path="/dashboard/fixtures" element={<AllFixtures />} />
-				<Route
-					path="/dashboard/leaderboard/month"
-					element={<MonthLeaderboard />}
-				/>
-				<Route
-					path="/dashboard/leaderboard/season"
-					element={<SeasonLeaderboard />}
-				/>
-				<Route path="/dashboard/leaderboard" element={<WeekLeaderboard />} />
-				<Route
-					path="/dashboard/private-league/standing/:leagueId"
-					element={<PrivateLeagueWeekLeaderboard />}
-				/>
-				<Route
-					path="/dashboard/private-league/edit/:leagueId"
-					element={<EditPrivateLeague />}
-				/>
-				<Route
-					path="/dashboard/private-league/create"
-					element={<CreatePrivateLeague />}
-				/>
-				<Route
-					path="/dashboard/private-league/join"
-					element={<JoinPrivateLeague />}
-				/>
-				<Route
-					path="/dashboard/private-league"
-					element={<AllPrivateLeagues />}
-				/>
-				<Route
-					path="/dashboard/user-prediction-history/:username"
-					element={<UserPredictionHistory />}
-				/>
-				<Route
-					path="/dashboard/prediction-history"
-					element={<PredictionHistory />}
-				/>
-				<Route path="*" element={<NotFound />} />
-			</Routes>
+    // <ErrorBoundary FallbackComponent={ErrorFallback}>
+    <>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/about-us" element={<AboutPage />} />
+        <Route path="/how-to-play" element={<HowToPlayPage />} />
+        <Route path="/faq" element={<FaqPage />} />
+        <Route path="/referral-program" element={<ReferralsProgram />} />
+        <Route path="/demo" element={<DemoPage />} />
+        <Route path="/policy" element={<Policy />} />
+        <Route path="/leaderboard/month" element={<PublicMonthLeaderboard />} />
+        <Route
+          path="/leaderboard/season"
+          element={<PublicSeasonLeaderboard />}
+        />
+        <Route path="/leaderboard" element={<PublicWeekLeaderboard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/verify" element={<VerifyEmail />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/new-password" element={<NewPassword />} />
+        <Route path="/dashboard/account/password" element={<EditPassword />} />
+        <Route path="/dashboard/account" element={<EditProfile />} />
+        <Route path="/dashboard/wallet" element={<Wallet />} />
+        <Route path="/dashboard/fixtures" element={<AllFixtures />} />
+        <Route
+          path="/dashboard/leaderboard/month"
+          element={<MonthLeaderboard />}
+        />
+        <Route
+          path="/dashboard/leaderboard/season"
+          element={<SeasonLeaderboard />}
+        />
+        <Route path="/dashboard/leaderboard" element={<WeekLeaderboard />} />
+        <Route
+          path="/dashboard/private-league/standing/:leagueId"
+          element={<PrivateLeagueWeekLeaderboard />}
+        />
+        <Route
+          path="/dashboard/private-league/edit/:leagueId"
+          element={<EditPrivateLeague />}
+        />
+        <Route
+          path="/dashboard/private-league/create"
+          element={<CreatePrivateLeague />}
+        />
+        <Route
+          path="/dashboard/private-league/join"
+          element={<JoinPrivateLeague />}
+        />
+        <Route
+          path="/dashboard/private-league"
+          element={<AllPrivateLeagues />}
+        />
+        <Route
+          path="/dashboard/user-prediction-history/:username"
+          element={<UserPredictionHistory />}
+        />
+        <Route
+          path="/dashboard/prediction-history"
+          element={<PredictionHistory />}
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
 
-			{showDepositModal ? <DepositFundModal /> : null}
-		</>
-		// </ErrorBoundary>
-	);
+      {showDepositModal ? <DepositFundModal /> : null}
+    </>
+    // </ErrorBoundary>
+  );
 }
 
 export default App;
