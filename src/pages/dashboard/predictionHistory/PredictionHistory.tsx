@@ -242,49 +242,50 @@ const PredictionHistory = () => {
               <section className="md:w-full flex py-5 lg:py-10 px-4 lg:px-8">
                 <div className="flex-grow bg-white p-3 md:p-5 border rounded-lg">
                   <div className="grid md:grid-cols-2 gap-6">
-                    {allMatches?.map((match) => (
-                      <SelectionCard
+                    {allMatches?.map((match, idx) => (
+                      <div
                         key={match.id}
-                        match={{
-                          ...match,
-                          prediction:
-                            specificWeekPredictions?.predictions?.fixtures.find(
-                              (_match) => _match.fixture.id === match.id
-                            )?.result,
-                          outcome:
-                            specificWeekPredictions?.predictions?.fixtures?.find(
-                              (_match) => _match.fixture.id === match.id
-                            )?.result === undefined ||
-                            specificWeekPredictions?.results?.fixtures?.find(
-                              (_match) => _match.fixture.id === match.id
-                            )?.result === undefined
-                              ? "pending"
-                              : specificWeekPredictions?.predictions?.fixtures?.find(
-                                  (_match) => _match.fixture.id === match.id
-                                )?.result === "NULL" ||
-                                specificWeekPredictions?.results?.fixtures?.find(
-                                  (_match) => _match.fixture.id === match.id
-                                )?.result === "NULL"
-                              ? "NULL"
-                              : specificWeekPredictions?.predictions?.fixtures?.find(
-                                  (_match) => _match.fixture.id === match.id
-                                )?.result ===
-                                specificWeekPredictions?.results?.fixtures?.find(
-                                  (_match) => _match.fixture.id === match.id
-                                )?.result
-                              ? "win"
-                              : "lose",
-                          // outcome:
-                          // 	specificWeekPredictions?.predictions?.fixtures.find(
-                          // 		(_match) => _match.fixture.id === match.id
-                          // 	)?.result ===
-                          // 	specificWeekPredictions?.results?.fixtures.find(
-                          // 		(_match) => _match.fixture.id === match.id
-                          // 	)?.result
-                          // 		? "win"
-                          // 		: "lose",
-                        }}
-                      />
+                        className={
+                          idx === allMatches.length - 1 &&
+                          allMatches.length % 2 !== 0
+                            ? "md:col-span-2 md:max-w-md md:mx-auto"
+                            : ""
+                        }
+                      >
+                        <SelectionCard
+                          // key={match.id}
+                          match={{
+                            ...match,
+                            prediction:
+                              specificWeekPredictions?.predictions?.fixtures.find(
+                                (_match) => _match.fixture.id === match.id
+                              )?.result,
+                            outcome:
+                              specificWeekPredictions?.predictions?.fixtures?.find(
+                                (_match) => _match.fixture.id === match.id
+                              )?.result === undefined ||
+                              specificWeekPredictions?.results?.fixtures?.find(
+                                (_match) => _match.fixture.id === match.id
+                              )?.result === undefined
+                                ? "pending"
+                                : specificWeekPredictions?.predictions?.fixtures?.find(
+                                    (_match) => _match.fixture.id === match.id
+                                  )?.result === "NULL" ||
+                                  specificWeekPredictions?.results?.fixtures?.find(
+                                    (_match) => _match.fixture.id === match.id
+                                  )?.result === "NULL"
+                                ? "NULL"
+                                : specificWeekPredictions?.predictions?.fixtures?.find(
+                                    (_match) => _match.fixture.id === match.id
+                                  )?.result ===
+                                  specificWeekPredictions?.results?.fixtures?.find(
+                                    (_match) => _match.fixture.id === match.id
+                                  )?.result
+                                ? "win"
+                                : "lose",
+                          }}
+                        />
+                      </div>
                     ))}
                   </div>
                   <hr className="my-8" />
