@@ -40,6 +40,7 @@ import PublicSeasonLeaderboard from "./pages/public/PublicSeasonLeaderboard";
 import DemoPage from "./pages/public/Demo";
 import Policy from "./pages/public/Policy";
 import ReferralsProgram from "./pages/public/ReferralsProgram";
+import ReferralProgram from "./pages/dashboard/referral-program/ReferralProgram";
 // import { selectAuth } from "./state/slices/auth";
 
 function App() {
@@ -130,6 +131,10 @@ function App() {
         <Route
           path="/dashboard/prediction-history"
           element={<PredictionHistory />}
+        />
+        <Route
+          path="/dashboard/referral-program"
+          element={<ReferralProgram />}
         />
         <Route path="*" element={<NotFound />} />
       </Routes>

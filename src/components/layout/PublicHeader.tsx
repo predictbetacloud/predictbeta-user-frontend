@@ -50,11 +50,11 @@ const PublicHeader = () => {
                 <Link
                   key={route.title}
                   to={route.route}
-                  className={` hover:text-[#eb1536] ${
-                    isActive(route.route)
-                      ? " text-[#eb1536] font-semibold"
-                      : " text-[#153243]"
-                  } `}
+                  className={`hover:text-[#eb1536] ${
+                    route.title === "Referrals" || isActive(route.route)
+                      ? "text-[#eb1536] font-bold"
+                      : "text-[#153243] font-normal"
+                  }`}
                 >
                   {route.title}
                 </Link>
