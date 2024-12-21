@@ -7,12 +7,13 @@ import { selectAuth } from "../../state/slices/auth";
 import { P } from "../Texts";
 import Button from "../Buttons";
 import {
-	DepositIcon,
-	HistoryIcon,
-	HomeIcon,
-	LeaderboardIcon,
-	// PrivateLeagueIcon,
-	SettingsIcon,
+  DepositIcon,
+  HistoryIcon,
+  HomeIcon,
+  LeaderboardIcon,
+  // PrivateLeagueIcon,
+  SettingsIcon,
+  ReferralIcon,
 } from "../../assets/icons";
 import { logOutAPI } from "../../api/authAPI";
 
@@ -24,45 +25,50 @@ const Style = styled.aside`
 `;
 
 export const routes: {
-	icon: any;
-	path: string;
-	title: string;
+  icon: any;
+  path: string;
+  title: string;
 }[] = [
-	{
-		path: "/dashboard/fixtures",
-		title: "Predictions",
-		icon: <HomeIcon />,
-	},
-	{
-		path: "/dashboard/wallet",
-		title: "Wallet",
-		icon: <DepositIcon />,
-	},
-	// {
-	// 	path: "/dashboard/withdraw",
-	// 	title: "Withdraw Funds",
-	// 	icon: <WithdrawIcon />,
-	// },
-	{
-		path: "/dashboard/account",
-		title: "Account Settings",
-		icon: <SettingsIcon />,
-	},
-	{
-		path: "/dashboard/leaderboard",
-		title: "Leaderboard",
-		icon: <LeaderboardIcon />,
-	},
-	{
-		path: "/dashboard/prediction-history",
-		title: "Prediction history",
-		icon: <HistoryIcon />,
-	},
-	// {
-	// 	path: "/dashboard/private-league",
-	// 	title: "Private leagues",
-	// 	icon: <PrivateLeagueIcon />,
-	// },
+  {
+    path: "/dashboard/fixtures",
+    title: "Predictions",
+    icon: <HomeIcon />,
+  },
+  {
+    path: "/dashboard/wallet",
+    title: "Wallet",
+    icon: <DepositIcon />,
+  },
+  // {
+  // 	path: "/dashboard/withdraw",
+  // 	title: "Withdraw Funds",
+  // 	icon: <WithdrawIcon />,
+  // },
+  {
+    path: "/dashboard/account",
+    title: "Account Settings",
+    icon: <SettingsIcon />,
+  },
+  {
+    path: "/dashboard/leaderboard",
+    title: "Leaderboard",
+    icon: <LeaderboardIcon />,
+  },
+  {
+    path: "/dashboard/prediction-history",
+    title: "Prediction history",
+    icon: <HistoryIcon />,
+  },
+  // {
+  // 	path: "/dashboard/private-league",
+  // 	title: "Private leagues",
+  // 	icon: <PrivateLeagueIcon />,
+  // },
+  {
+    path: "/dashboard/referral-program",
+    title: "Referral Program",
+    icon: <ReferralIcon />,
+  },
 ];
 
 const Sidebar = () => {

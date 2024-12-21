@@ -259,7 +259,7 @@ const AllFixtures = () => {
         predictions,
       })
     ).then(() => {
-      setShowAdvert(false);
+      setShowAdvert(true);
     });
   };
 
@@ -375,9 +375,16 @@ const AllFixtures = () => {
             <>
               <section className="py-5 lg:py-10 px-4 lg:px-6 grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <div className="bg-white h-fit p-3 md:p-5 border rounded-lg col-span-1 lg:col-span-2">
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-2 gap-6  ">
                     {matches?.map((match, idx) => (
-                      <div key={idx}>
+                      <div
+                        key={idx}
+                        className={
+                          idx === matches.length - 1 && matches.length % 2 !== 0
+                            ? "md:col-span-2 md:max-w-md md:mx-auto"
+                            : ""
+                        }
+                      >
                         <MatchCard
                           key={match.id}
                           home={match.homeTeam}
@@ -699,7 +706,15 @@ const AllFixtures = () => {
                   <div className="bg-white h-fit p-3 md:p-5 border rounded-lg col-span-1 lg:col-span-2">
                     <div className="grid md:grid-cols-2 gap-6">
                       {matches?.map((match, idx) => (
-                        <div key={idx}>
+                        <div
+                          key={idx}
+                          className={
+                            idx === matches.length - 1 &&
+                            matches.length % 2 !== 0
+                              ? "md:col-span-2 md:max-w-md md:mx-auto"
+                              : ""
+                          }
+                        >
                           <MatchCard
                             key={match.id}
                             home={match.homeTeam}
