@@ -251,7 +251,7 @@ const UserPredictionHistory = () => {
                         className={
                           idx === allMatches.length - 1 &&
                           allMatches.length % 2 !== 0
-                            ? "md:col-span-2 md:max-w-md md:mx-auto"
+                            ? "md:col-span-2 md:w-[380px] lg:w-[400px] md:mx-auto"
                             : ""
                         }
                       >
