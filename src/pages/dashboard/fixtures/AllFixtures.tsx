@@ -381,7 +381,7 @@ const AllFixtures = () => {
                         key={idx}
                         className={
                           idx === matches.length - 1 && matches.length % 2 !== 0
-                            ? "md:col-span-2 md:max-w-md md:mx-auto"
+                            ? "md:col-span-2 md:w-[380px] lg:w-[400px] md:mx-auto"
                             : ""
                         }
                       >
@@ -711,7 +711,7 @@ const AllFixtures = () => {
                           className={
                             idx === matches.length - 1 &&
                             matches.length % 2 !== 0
-                              ? "md:col-span-2 md:max-w-md md:mx-auto"
+                              ? "md:col-span-2 md:w-[380px] lg:w-[400px] md:mx-auto"
                               : ""
                           }
                         >
