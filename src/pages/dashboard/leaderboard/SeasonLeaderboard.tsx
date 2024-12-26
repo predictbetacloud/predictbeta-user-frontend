@@ -24,9 +24,6 @@ import CustomListBox from "../../../components/inputs/CustomListBox";
 import { VscFilter } from "react-icons/vsc";
 import TabNav from "../../../components/layout/TabNav";
 
-import AdPopUp from "../../../components/modals/AdPopUp";
-import { selectShowAdPopUp, setShowAdPopUp } from "../../../state/slices/auth";
-
 const SeasonLeaderboard = () => {
   const dispatch = useAppDispatch();
 
@@ -42,7 +39,6 @@ const SeasonLeaderboard = () => {
   const isFetchingSeasonLeaderboard = useAppSelector(
     selectIsFetchingSeasonLeaderboard
   );
-  const showAdPopUp = useAppSelector(selectShowAdPopUp);
 
   const seasons = useAppSelector(selectAllSeasons);
 
@@ -57,14 +53,6 @@ const SeasonLeaderboard = () => {
   useEffect(() => {
     dispatch(getAllSeasonsAPI({}));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    dispatch(setShowAdPopUp(true));
-
-    return () => {
-      dispatch(setShowAdPopUp(false));
-    };
   }, []);
 
   // Make latest season the active week
@@ -247,7 +235,6 @@ const SeasonLeaderboard = () => {
           />
         </div>
       </section>
-      {showAdPopUp ? <AdPopUp /> : null}
     </DashboardLayout>
   );
 };

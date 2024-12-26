@@ -19,9 +19,6 @@ import { createYearRange, monthEnum } from "../../../utils/utils";
 import { getMonthLeaderboardAPI } from "../../../api/leaderboardAPI";
 import { Input } from "../../../components/inputs/Input";
 
-import AdPopUp from "../../../components/modals/AdPopUp";
-import { selectShowAdPopUp, setShowAdPopUp } from "../../../state/slices/auth";
-
 const MonthLeaderboard = () => {
   const dispatch = useAppDispatch();
 
@@ -37,18 +34,8 @@ const MonthLeaderboard = () => {
   const isFetchingMonthLeaderboard = useAppSelector(
     selectIsFetchingMonthLeaderboard
   );
-  const showAdPopUp = useAppSelector(selectShowAdPopUp);
 
   const [search, setSearch] = useState("");
-
-  useEffect(() => {
-        
-          dispatch(setShowAdPopUp(true));
-        
-        return () => {
-          dispatch(setShowAdPopUp(false));
-        };
-      }, []);
 
   useEffect(() => {
     if (!query_month || !query_year) {
@@ -220,7 +207,6 @@ const MonthLeaderboard = () => {
           />
         </div>
       </section>
-      {showAdPopUp ? <AdPopUp /> : null}
     </DashboardLayout>
   );
 };
