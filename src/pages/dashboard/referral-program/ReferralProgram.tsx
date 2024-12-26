@@ -27,7 +27,7 @@ const ReferralProgram = () => {
               <li>
                 <p className="text-[#212934]">
                   Each time a friend signs up with your referral code, you earn
-                  2 points. You can only refer a maximum of 10 friends per week.
+                  2 points and your friend earns 2 points too. You can only refer a maximum of 10 friends per week.
                 </p>
               </li>
               <li>
