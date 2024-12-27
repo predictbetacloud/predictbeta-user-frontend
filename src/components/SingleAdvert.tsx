@@ -1,16 +1,13 @@
 // import img1 from "../assets/images/ads/400-percent-welcome-bonus.jpeg"; // this was already commented out
-// import img2 from "../assets/images/ads/NGN500-freebet.jpeg";
+import img2 from "../assets/images/ads/NGN500-freebet.jpeg";
 import playYourFavourite from "../assets/images/ads/play-your-favourite.jpg";
 import freeTickets from "../assets/images/Free-Tickets-Promo.jpg";
-// import customerServiceWeek from "../assets/images/ads/HallaBetGiveaway.jpg";
 import DecemberGiveAway from "../assets/images/ads/HallaDecember.jpg";
-import boxingDayFlyer from "../assets/images/boxingDayFlyer.jpg";
 
 
 const images = [
   // img1,
-  // img2,
-  boxingDayFlyer,
+  img2,
   playYourFavourite,
   freeTickets,
   DecemberGiveAway
