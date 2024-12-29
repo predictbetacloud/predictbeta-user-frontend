@@ -18,11 +18,18 @@ const AboutPage = () => {
 						<h3 className="text-[#212934] font-semibold text-2xl mb-3">
 							Who we are and what we do
 						</h3>
-						<p className="text-[#212934]">
-							Predictbeta is a one of a kind sport prediction, entertainment platform owned by PredictBeta Nigeria Limited. We offer a monetary rewarding free sports prediction leagues on a draw/weekly basis on our platform. 
+						<p className="text-[#212934] text-justify ">
+							PredictBeta is a one of a kind social sport prediction, entertainment platform owned by PredictBeta Nigeria Limited. We offer a peer to peer, staked sport prediction service to our users/subscribers to gain monetary rewards and some bragging rights through our three game offers: 
 						</p>
-						<p className="text-[#212934] mt-3">
-							Our drive is to lead the growth of positive sports communities using simple sport predictions to create entertainment and fuel passion.
+						{/* <ul> */}
+						<div  className="text-[#212934] pb-6 pt-2 ">
+							<li>Peer Vs Peer</li>
+							<li>Private League </li>
+							<li>General League</li>
+						</div>
+						{/* </ul> */}
+						<p className="text-[#212934] mt-3 text-justify">
+							Our drive is to lead the growth of positive social sports communities using simple sport predictions to create entertainment and fuel passion. We also provide marketing services for SMEs across Nigeria and Africa.
 						</p>
 
 						<h3 className="text-[#212934] font-semibold text-2xl mb-3 mt-8">
@@ -31,14 +38,14 @@ const AboutPage = () => {
 						<p className="text-[#212934]">
 							As a brand, we believe in the spirit of sharing.
 						</p>
-						<p className="text-[#212934] mt-3">
+						<p className="text-[#212934] mt-3 text-justify">
 							Just like we have in sport leagues, we’re using this platform to
 							promote sports prediction in Nigeria to know who tops the league
 							at the end of the season. But we also want to help you make some
 							money while doing that.
 						</p>
 
-						<p className="text-[#212934] mt-3">
+						<p className="text-[#212934] mt-3 text-justify">
 							Wins on Predictbeta are weekly and payout happens immediately after every match-week on the platform. Our league offerings go from general league to private league for all our subscribers/users.
 
 						</p>
