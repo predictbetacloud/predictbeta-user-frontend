@@ -31,7 +31,7 @@ export const routes: {
 }[] = [
   {
     path: "/dashboard/fixtures",
-    title: "Predictions",
+    title: "General League",
     icon: <HomeIcon />,
   },
   {
