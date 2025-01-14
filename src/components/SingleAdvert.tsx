@@ -1,19 +1,14 @@
 import img1 from "../assets/images/ads/400-percent-welcome-bonus.jpeg"; // this was already commented out
 import img2 from "../assets/images/ads/NGN500-freebet.jpeg";
 
-import referAndEarn from "../assets/images/referAndEarn.jpg";
+// import referAndEarn from "../assets/images/referAndEarn.jpg";
 
-
-const images = [
-  img1,
-  img2,
-  referAndEarn,
-];
+const images = [img1, img2];
 
 import Slider from "react-slick";
 
 const SingleAdvert = () => {
-	const settings = {
+  const settings = {
     dots: false,
     fade: true,
     infinite: true,
@@ -25,7 +20,7 @@ const SingleAdvert = () => {
     cssEase: "linear",
     arrows: false,
   };
-	return (
+  return (
     <div className="w-full md:w-1/2 lg:w-full mx-auto rounded-md ">
       <Slider {...settings}>
         {images.map((url, i) => (
