@@ -13,7 +13,7 @@ import {
   LeaderboardIcon,
   // PrivateLeagueIcon,
   SettingsIcon,
-  ReferralIcon,
+//   ReferralIcon,
 } from "../../assets/icons";
 import { logOutAPI } from "../../api/authAPI";
 
