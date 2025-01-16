@@ -57,7 +57,7 @@ const Header = ({ title }: Props) => {
             <div className="flex items-center">
               <div className="md:px10 flex-shrink-0">
                 <Link to="/">
-                  <img src={logo} alt="Predictbeta" className="" />
+                  <img src={logo} alt="PredictBeta" className="" />
                 </Link>
               </div>
 
@@ -125,7 +125,7 @@ const Header = ({ title }: Props) => {
                   className="absolute mt-2 right-0 rounded-md bg-blue-100 w-[300px] text-sm/6 transition-all duration-1000 ease-in-out [--anchor-gap:var(--spacing-5)] data-[closed]:-translate-y-1 data-[closed]:opacity-0"
                   style={{ border: `1px solid ${colors.blue900}` }}
                 >
-                  <div className="p-2 rounded-md flex flex-col gap-2 ">
+                  <div className="p-2 rounded-md flex flex-col gap-2" >
                     <h3 className="font-semibold text-[16px] text-[#051B30]">
                       Become a PredictBeta Affiliate
                     </h3>
