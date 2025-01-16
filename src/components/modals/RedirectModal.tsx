@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
-import redirectImage from "../../assets/images/redirectPopUpWeek19.jpg";
+import redirectImage from "../../assets/images/redirectPopUpWeek21.jpg";
 
 const RedirectModal = ({
   showAdvert,
