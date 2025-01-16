@@ -14,8 +14,8 @@ const ReferralProgram = () => {
             <ul className="px-4 list-disc space-y-2">
               <li>
                 <p className="text-[#212934]">
-                  To play the PredictBeta league, make sure you already have an
-                  account with us. Sign up!
+                  To play the PredictBeta league, create an account to start
+                  referring!
                 </p>
               </li>
               <li>
@@ -27,7 +27,8 @@ const ReferralProgram = () => {
               <li>
                 <p className="text-[#212934]">
                   Each time a friend signs up with your referral code, you earn
-                  2 points and your friend earns 2 points too. You can only refer a maximum of 10 friends per week.
+                  2 points and your friend earns 2 points too. You can only
+                  refer a maximum of 10 friends per week.
                 </p>
               </li>
               <li>
