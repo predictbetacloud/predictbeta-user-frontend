@@ -25,8 +25,8 @@ const ReferralsProgram = () => {
             <ul className="px-4 list-disc space-y-2">
               <li>
                 <p className="text-[#212934]">
-                  To play the PredictBeta league, make sure you already have an
-                  account with us. Sign up!
+                  To play the PredictBeta league, create an account to start
+                  referring!
                 </p>
               </li>
               <li>
