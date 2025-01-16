@@ -62,7 +62,7 @@ const Header = ({ title }: Props) => {
               </div>
 
               {title ? (
-                <h1 className="lg:hidden text-white font-semibold text-sm ml-4">
+                <h1 className="lg:hidden text-white font-semibold text-sm ml-4 whitespace-nowrap ">
                   {title}
                 </h1>
               ) : null}
