@@ -10,7 +10,8 @@ import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { selectShowAdPopUp, setShowAdPopUp } from "../../state/slices/auth";
 // import Button from "../Buttons";
 // import { Link } from "react-router-dom";
-import referAndEarn from "../../assets/images/referAndEarn.jpg";
+// import referAndEarn from "../../assets/images/referAndEarn.jpg";
+import fiveThousand from "../../assets/images/5kFollowers.jpg";
 
 // const Container = styled.div`
 //   background-image: linear-gradient(
@@ -31,7 +32,7 @@ const AdPopUp = () => {
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10 hidden" onClose={closeModal}>
+      <Dialog as="div" className="relative z-10" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -63,8 +64,8 @@ const AdPopUp = () => {
                 {/* Content */}
                 <div className="flex items-center justify-between w-full">
                   <img
-                    src={referAndEarn}
-                    alt="referAndEarn"
+                    src={fiveThousand}
+                    alt="fiveThousand"
                     className="w-full"
                   />
                 </div>
