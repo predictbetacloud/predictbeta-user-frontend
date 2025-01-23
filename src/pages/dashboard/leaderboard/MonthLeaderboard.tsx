@@ -42,7 +42,7 @@ const MonthLeaderboard = () => {
 
   const [search, setSearch] = useState("");
   useEffect(() => {
-    dispatch(setShowAdPopUp(true));
+    dispatch(setShowAdPopUp(false));
 
     return () => {
       dispatch(setShowAdPopUp(false));
