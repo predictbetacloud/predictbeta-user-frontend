@@ -65,7 +65,7 @@ const WeekLeaderboard = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(setShowAdPopUp(true));
+    dispatch(setShowAdPopUp(false));
 
     return () => {
       dispatch(setShowAdPopUp(false));
