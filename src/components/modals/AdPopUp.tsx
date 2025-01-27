@@ -75,7 +75,7 @@ const AdPopUp = () => {
                           prediction community!
                         </h2>
                       </div>
-                      Match img
+                      {/* Match img */}
                       <img
                         src={matchImg}
                         alt="match"
@@ -83,7 +83,7 @@ const AdPopUp = () => {
                       />
                     </div>
                     <Link to="/dashboard/fixtures">
-                      <Button title="Join predictbeta" className="mt-8" />
+                      <Button title="Join predictBeta" className="mt-8" />
                     </Link>
                     <hr className="mt-4 border-gray-600" />
                     <p className="text-white flex items-center gap-2 py-2">
@@ -105,13 +105,6 @@ const AdPopUp = () => {
                     className="hidden md:block absolute h-full right-0 top-0"
                   />
                 </div>
-                {/* <div className="flex items-center justify-between w-full">
-                  <img
-                    src={fiveThousand}
-                    alt="fiveThousand"
-                    className="w-full"
-                  />
-                </div> */}
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -125,7 +118,7 @@ export default AdPopUp;
 
 {
   /* <div>
-  <h4 className="text-white text-2xl font-medium">Welcome to Predictbeta</h4>
+  <h4 className="text-white text-2xl font-medium">Welcome to PredictBeta</h4>
   <div className="flex items-center justify-between mt-8">
     <div className="md:w-3/5">
       <h2 className="text-3xl lg:text-6xl text-white font-bold">
