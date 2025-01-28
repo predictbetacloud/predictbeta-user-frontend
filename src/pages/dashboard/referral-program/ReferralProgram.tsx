@@ -14,52 +14,54 @@ const ReferralProgram = () => {
             <ul className="px-4 list-disc space-y-2">
               <li>
                 <p className="text-[#212934]">
-                  To play the PredictBeta league, create an account to start
-                  referring!
+                  Firstly, make sure you have a PredictBeta account to refer
+                  others.
                 </p>
               </li>
               <li>
                 <p className="text-[#212934]">
-                  Share your referral code with friends and family to sign up on
-                  PredictBeta. We will provide the referral code for you.
+                  Share your referral link with other people.
                 </p>
               </li>
               <li>
                 <p className="text-[#212934]">
-                  Each time a friend signs up with your referral code, you earn
-                  2 points and your friend earns 2 points too. You can only
-                  refer a maximum of 10 friends per week.
+                  When someone signs up with your referral link on PredictBeta,
+                  you and the person earn 2 points, each.
                 </p>
               </li>
               <li>
                 <p className="text-[#212934]">
-                  When submitting your predictions for a round, you can trigger
-                  your referral points to be included in your results.
+                  All your referral points will be stored in your point wallet.
                 </p>
               </li>
               <li>
                 <p className="text-[#212934]">
-                  You can trigger your referral points before the end of a
-                  prediction round. Note that your referral points can only be
-                  triggered before submitting your predictions for a round.
+                  You can apply up to 20 referral points per round on
+                  PredictBeta.
                 </p>
               </li>
               <li>
                 <p className="text-[#212934]">
-                  The weekly leaderboard will reflect users who added their
-                  referral points.
+                  These points will be added to your current point from your
+                  predictions and will help you climb the leaderboard.
                 </p>
               </li>
               <li>
                 <p className="text-[#212934]">
-                  If you do not use your referral points within a round, they
-                  will be forfeited and lost.
+                  When your referral points help you make the top 3 on the
+                  leaderboard, you win cool cash prizes for that round. No
+                  stories!
                 </p>
               </li>
               <li>
                 <p className="text-[#212934]">
-                  You&apos;re now all set for success on PredictBeta referral
-                  program!
+                  Improve your chances of winning FREE cash prizes by sending
+                  others your referral link, now.
+                </p>
+              </li>
+              <li>
+                <p className="text-[#212934]">
+                  Referring others to PredictBeta is a smart move. Work smart!
                 </p>
               </li>
             </ul>
