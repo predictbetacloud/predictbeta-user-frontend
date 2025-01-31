@@ -13,7 +13,9 @@ const routes: { title: string; route: string }[] = [
   { title: "Home", route: "/" },
   { title: "How to Play", route: "/how-to-play" },
   { title: "Leaderboard", route: "/leaderboard" },
-  // { title: "HallaBet", route: "https://www.hallabet.com/prematch" },
+
+  
+
   { title: "FAQs", route: "/faq" },
   { title: "Referrals", route: "/referral-program" },
 ];
@@ -36,29 +38,17 @@ const PublicHeader = () => {
         <nav className="hidden lg:flex items-center gap-x-4">
           {routes.map((route) => (
             <div key={route.title}>
-              {route.title === "HallaBet" ? (
-                <a
-                  key={route.title}
-                  href={route.route}
-                  target="_blank"
-                  className="font-extrabold px-2 text-lg"
-                >
-                  <span className="text-[#3E4095]">Halla</span>
-                  <span className="text-[#eb1536]">Bet</span>
-                </a>
-              ) : (
-                <Link
-                  key={route.title}
-                  to={route.route}
-                  className={`hover:text-[#eb1536] ${
-                    route.title === "Referrals" || isActive(route.route)
-                      ? "text-[#eb1536] font-bold"
-                      : "text-[#153243] font-normal"
-                  }`}
-                >
-                  {route.title}
-                </Link>
-              )}
+              <Link
+                key={route.title}
+                to={route.route}
+                className={`hover:text-[#eb1536] ${
+                  route.title === "Referrals" || isActive(route.route)
+                    ? "text-[#eb1536] font-bold"
+                    : "text-[#153243] font-normal"
+                }`}
+              >
+                {route.title}
+              </Link>
             </div>
           ))}
 

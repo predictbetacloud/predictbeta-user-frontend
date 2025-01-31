@@ -20,7 +20,6 @@ const routes: { title: string; route: string }[] = [
   { title: "Home", route: "/" },
   { title: "How to Play", route: "/how-to-play" },
   { title: "Leaderboard", route: "/leaderboard" },
-  { title: "HallaBet", route: "https://www.hallabet.com/prematch" },
   { title: "FAQs", route: "/faq" },
   { title: "Referrals", route: "/referral-program" },
 ];
@@ -129,28 +128,17 @@ const PublicDrawer = () => {
                     {/* Links */}
                     {routes.map((route) => (
                       <div key={route.title}>
-                        {route.title === "HallaBet" ? (
-                          <a
-                            href={route.route}
-                            target="_blank"
-                            className="font-extrabold text-lg"
-                          >
-                            <span className="text-[#3E4095]">Halla</span>
-                            <span className="text-[#eb1536]">Bet</span>
-                          </a>
-                        ) : (
-                          <Link
-                            key={route.title}
-                            to={route.route}
-                            className={` hover:text-[#eb1536] ${
-                              isActive(route.route)
-                                ? " text-[#eb1536] font-semibold"
-                                : " text-[#153243]"
-                            } `}
-                          >
-                            {route.title}
-                          </Link>
-                        )}
+                        <Link
+                          key={route.title}
+                          to={route.route}
+                          className={` hover:text-[#eb1536] ${
+                            isActive(route.route)
+                              ? " text-[#eb1536] font-semibold"
+                              : " text-[#153243]"
+                          } `}
+                        >
+                          {route.title}
+                        </Link>
                       </div>
                     ))}
                   </div>

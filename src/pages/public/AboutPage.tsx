@@ -56,7 +56,7 @@ const AboutPage = () => {
 						<p className="text-[#212934] mt-3 font-bold">
 							Let's see you try!
 						</p>
-						<p className="text-[#212934] mt-3 text-[#EC1636]">PredictBeta is powered by Hallabet.</p>
+						{/* <p className="text-[#212934] mt-3 text-[#EC1636]">PredictBeta is powered by Hallabet.</p> */}
 					</div>
 				</section>
 			</main>

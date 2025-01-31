@@ -68,22 +68,22 @@ const Terms = () => {
 							(N50,000), 2nd (N30,000) & 3rd (N20,000).
 						</p>
 					</li>
-					<li>
+					{/* <li>
 						<p className="text-[#212934]">
 							Payment of winnings are made{" "}
 							<span className="font-bold">immediately</span> after the end of a
 							draw and can be withdrawn from winners’ Hallabet account once they
 							click on withdraw funds.
 						</p>
-					</li>
+					</li> */}
 					<li>A predictor on <b>Predictbeta.com</b> can only have one account. In a situation where a predictor is determined to have multiple accounts, this predictor will be <span className="text-red-500 font-bold">banned</span> from Predictbeta’s general league and will also waive their rights to redeem their prizes if they finish in either of the winning positions</li>
-					<li>
+					{/* <li>
 						<p className="text-[#212934]">
 							When withdraw funds is initiated, the user is redirected to the
 							Hallabet website where they already have an existing account as a
 							result of registering on PredictBeta.
 						</p>
-					</li>
+					</li> */}
 					<li>
 						<p className="text-[#212934]">
 							The user logs- in with their exact PredictBeta details and then
