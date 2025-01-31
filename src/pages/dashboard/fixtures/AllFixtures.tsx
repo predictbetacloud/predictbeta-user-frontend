@@ -52,7 +52,7 @@ import CustomCountDown from "../../../components/Countdown";
 import { BsFillClockFill } from "react-icons/bs";
 import { IWeek } from "../../../types/types";
 import { colors } from "../../../utils/colors";
-import SingleAdvert from "../../../components/SingleAdvert";
+// import SingleAdvert from "../../../components/SingleAdvert";
 import RedirectModal from "../../../components/modals/RedirectModal";
 
 const AllFixtures = () => {
