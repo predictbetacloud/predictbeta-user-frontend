@@ -13,7 +13,7 @@ const routes: { title: string; route: string }[] = [
   { title: "Home", route: "/" },
   { title: "How to Play", route: "/how-to-play" },
   { title: "Leaderboard", route: "/leaderboard" },
-  { title: "HallaBet", route: "https://www.hallabet.com/prematch" },
+  // { title: "HallaBet", route: "https://www.hallabet.com/prematch" },
   { title: "FAQs", route: "/faq" },
   { title: "Referrals", route: "/referral-program" },
 ];
