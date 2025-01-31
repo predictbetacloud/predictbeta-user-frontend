@@ -5,7 +5,7 @@ import styled from "styled-components";
 import pattern from "../../assets/images/pop-up pattern.png";
 import legImg from "../../assets/images/pop-up leg-img.png";
 import matchImg from "../../assets/images/pop-up match-img.png";
-import hallaBetLogo from "../../assets/logo/hallabet.png";
+
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { selectShowAdPopUp, setShowAdPopUp } from "../../state/slices/auth";
 import Button from "../Buttons";
@@ -85,18 +85,6 @@ const AdPopUp = () => {
                     <Link to="/dashboard/fixtures">
                       <Button title="Join predictBeta" className="mt-8" />
                     </Link>
-                    <hr className="mt-4 border-gray-600" />
-                    <p className="text-white flex items-center gap-2 py-2">
-                      Powered by{" "}
-                      <a href="https://www.hallabet.com" target="_blank">
-                        <img
-                          src={hallaBetLogo}
-                          width={80}
-                          alt="HallaBet"
-                          className="md:mr-8 rounded-md"
-                        />
-                      </a>
-                    </p>
                   </div>
                   {/* leg img */}
                   <img
@@ -136,14 +124,7 @@ export default AdPopUp;
   <hr className="mt-4 border-gray-600" />
   <p className="text-white flex items-center gap-2 py-2">
     Powered by{" "}
-    <a href="https://www.hallabet.com" target="_blank">
-      <img
-        src={hallaBetLogo}
-        width={80}
-        alt="HallaBet"
-        className="md:mr-8 rounded-md"
-      />
-    </a>
+    
   </p>
 </div>; */
 }

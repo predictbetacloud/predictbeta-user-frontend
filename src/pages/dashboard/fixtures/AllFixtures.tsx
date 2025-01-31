@@ -694,7 +694,7 @@ const AllFixtures = () => {
                     )}
                   </div>
                   <div className="w-full">
-                    <SingleAdvert />
+                    {/* <SingleAdvert /> */}
                   </div>
                 </div>
               </section>
@@ -1038,7 +1038,7 @@ const AllFixtures = () => {
                       </div>
                     </div>
                     <div className="w-full">
-                      <SingleAdvert />
+                      {/* <SingleAdvert /> */}
                     </div>
                   </div>
                 </section>
