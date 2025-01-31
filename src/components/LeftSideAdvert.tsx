@@ -1,5 +1,6 @@
 import img1 from "../assets/images/ads/15-percent-weekly-cashback.jpg";
 // import img2 from "../assets/images/ads/50-percent-acca-cashback.jpg"; // this was already commented out
+
 import img3 from "../assets/images/ads/400-percent-welcome-bonus.jpeg";
 
 import img5 from "../assets/images/ads/play-your-favourite.jpg";
@@ -9,6 +10,7 @@ const images = [
   img5,
   img3,
 ];
+
 
 
 
@@ -28,7 +30,7 @@ const LeftSideAdvert = () => {
   };
   return (
     <div className="w-full">
-      <Slider {...settings}>
+      {/* <Slider {...settings}>
         {images.map((url, i) => (
           <a
             href="#"
@@ -39,7 +41,7 @@ const LeftSideAdvert = () => {
             <img src={url} className="w-[100%]" alt="advert-img" />
           </a>
         ))}
-      </Slider>
+      </Slider> */}
       {/* <Slider {...settings} className="hidden md:block">
 				{images2.map((url, i) => (
 					<a

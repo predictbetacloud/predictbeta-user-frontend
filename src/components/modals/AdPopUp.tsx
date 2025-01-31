@@ -85,6 +85,7 @@ const AdPopUp = () => {
                     <Link to="/dashboard/fixtures">
                       <Button title="Join predictBeta" className="mt-8" />
                     </Link>
+
                   </div>
                   {/* leg img */}
                   <img

@@ -13,7 +13,9 @@ const routes: { title: string; route: string }[] = [
   { title: "Home", route: "/" },
   { title: "How to Play", route: "/how-to-play" },
   { title: "Leaderboard", route: "/leaderboard" },
+
   
+
   { title: "FAQs", route: "/faq" },
   { title: "Referrals", route: "/referral-program" },
 ];

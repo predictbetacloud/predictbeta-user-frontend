@@ -4,6 +4,8 @@ import { FaTiktok } from "react-icons/fa";
 
 import logo from "../../assets/logo/logo-light.svg";
 
+
+
 // import goBetLogo from "../../assets/images/Gobet-Featured-Image 1.png";
 
 const routes: { title: string; route: string }[] = [
@@ -19,6 +21,7 @@ const PublicFooter = () => {
       {/* top */}
       <div className="md:flex items-center justify-between py-6 px-6 md:px-4 lg:px-30 xl:px-40 bg-white">
         <div className="flex gap-8 items-center">
+
           <Link to="/" className="">
             <img src={logo} alt="Predictbeta" className="md:mr-8" />
           </Link>
@@ -48,7 +51,6 @@ const PublicFooter = () => {
           © {new Date().getFullYear()} - Predictbeta. All rights reserved |
           (18+) Predict Responsibly
         </p>
-        
         <div className="flex items-center gap-x-4 mt-4 md:mt-0">
           <a
             href="https://x.com/predictbeta?s=11&t=zQ2VH2EhRxbRQ3E-8zuNIA"
