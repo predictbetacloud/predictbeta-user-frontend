@@ -106,7 +106,7 @@ const LandingPage = () => {
         <div className="p-4 lg:p-8 rounded-xl">
           <div className="flex flex-col lg:flex-row justify-between gap-6 bg-white">
             <div className="w-full lg:w-[20%]">
-              <LeftSideAdvert />
+              {/* <LeftSideAdvert /> */}
             </div>
             <div className="flex-1">
               <p
@@ -165,7 +165,7 @@ const LandingPage = () => {
               )}
             </div>
             <div className="w-full lg:w-[20%]">
-              <RightSideAdvert />
+              {/* <RightSideAdvert /> */}
             </div>
           </div>
           {/* {isFetchingCurrentDraw ? (

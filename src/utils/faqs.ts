@@ -10,11 +10,11 @@ const faqs = [
 		content:
 			"Our predictors can only have one account. This is important to avoid fraudulent activities and give everyone a chance to get a cut of our millions of Naira shared seasonally.",
 	},
-	{
-		title: "Can I sign in to PredictBeta with my Hallabet login details?",
-		content:
-			"Yes, if you have an account with Hallabet, you can simply use the same log in details and you’re in for a chance at free monetary prize each week/ each round. Hallabet is PredictBeta’s marketing partner.",
-	},
+	// {
+	// 	title: "Can I sign in to PredictBeta with my Hallabet login details?",
+	// 	content:
+	// 		"Yes, if you have an account with Hallabet, you can simply use the same log in details and you’re in for a chance at free monetary prize each week/ each round. Hallabet is PredictBeta’s marketing partner.",
+	// },
 	{
 		title: "What other information do I need to know before signing-up on PredictBeta?",
 		content:

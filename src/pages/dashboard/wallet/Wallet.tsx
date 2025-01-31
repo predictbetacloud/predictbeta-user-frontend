@@ -108,7 +108,7 @@ const Wallet = () => {
 					title="Deposit"
 					onClick={() => dispatch(setShowDepositModal(true))}
 				/> */}
-				<a href="https://www.hallabet.com" target="_blank"><Button.Blue title="Withdraw" /></a>
+				<a href="#" target="_blank"><Button.Blue title="Withdraw" /></a>
 			</section>
 			<section className="w-screen lg:w-full p-4 lg:p-8">
 				<Table
