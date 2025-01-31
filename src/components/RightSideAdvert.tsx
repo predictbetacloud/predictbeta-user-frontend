@@ -64,7 +64,9 @@ const RightSideAdvert = () => {
 						<img src={url} className="w-[100%]" alt="advert-img" />
 					</a>
 				))}
+			
 			</Slider> */}
+			 {/* removed hallabet */}
     </div>
   );
 };
