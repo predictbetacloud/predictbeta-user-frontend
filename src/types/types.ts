@@ -50,6 +50,8 @@ export interface UserType {
   username: string;
   mobileNumber: string;
   userId: string;
+  referralCode: string;
+  referralPoints: number;
 }
 
 export interface WalletType {
