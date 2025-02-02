@@ -167,6 +167,7 @@ export const submitPredictionAPI = createAsyncThunk(
 			moreLikelyToScore,
 			likelyToScore,
 			timeOfFirstGoal,
+			point
 		}: FieldValues,
 		{ dispatch }
 	) => {
@@ -179,6 +180,7 @@ export const submitPredictionAPI = createAsyncThunk(
 				moreLikelyToScore,
 				likelyToScore,
 				timeOfFirstGoal,
+				point
 			})
 			.then((data) => {
 				dispatch(setIsSubmittingPredictions(false));
