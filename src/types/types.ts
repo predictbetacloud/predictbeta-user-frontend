@@ -196,6 +196,7 @@ export interface IWeekPrediction {
       };
       result: "HOME" | "AWAY" | "DRAW" | "NULL";
     }[];
+    point: number;
     timeOfFirstGoal: number;
     mostLikelyToScore: IPlayer;
     moreLikelyToScore: IPlayer;

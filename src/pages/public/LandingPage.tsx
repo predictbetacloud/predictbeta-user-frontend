@@ -24,8 +24,8 @@ import { selectShowAdPopUp, setShowAdPopUp } from "../../state/slices/auth";
 import AdPopUp from "../../components/modals/AdPopUp";
 import HeroSection from "../../components/Hero";
 import { useNavigate } from "react-router";
-import LeftSideAdvert from "../../components/LeftSideAdvert";
-import RightSideAdvert from "../../components/RightSideAdvert";
+// import LeftSideAdvert from "../../components/LeftSideAdvert";
+// import RightSideAdvert from "../../components/RightSideAdvert";
 
 const LandingPage = () => {
 	const dispatch = useAppDispatch();

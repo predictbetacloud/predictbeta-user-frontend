@@ -52,10 +52,13 @@ import CustomCountDown from "../../../components/Countdown";
 import { BsFillClockFill } from "react-icons/bs";
 import { IWeek } from "../../../types/types";
 import { colors } from "../../../utils/colors";
-import SingleAdvert from "../../../components/SingleAdvert";
+// import SingleAdvert from "../../../components/SingleAdvert";
 import RedirectModal from "../../../components/modals/RedirectModal";
 
+import { selectAuth } from "../../../state/slices/auth";
+
 const AllFixtures = () => {
+  const { user } = useAppSelector(selectAuth);
   const dispatch = useAppDispatch();
   const [, setSearchParams] = useSearchParams();
   const l = useLocation();
@@ -241,12 +244,25 @@ const AllFixtures = () => {
     moreLikelyToScore,
     likelyToScore,
     timeOfFirstGoal,
+    point,
     ..._predictions
   }: FieldValues) => {
     const predictions = formatPredictionsFromObjectToArray(_predictions);
+
     const activeSeason = seasons.find(
       (_season) => _season.name === query_season
     );
+    
+    console.log({
+      seasonId: activeSeason?.id,
+      weekId: Number(selectedWeek?.id),
+      mostLikelyToScore: { playerId: mostLikelyToScore?.id },
+      moreLikelyToScore: { playerId: moreLikelyToScore?.id },
+      likelyToScore: { playerId: likelyToScore?.id },
+      timeOfFirstGoal: Number(timeOfFirstGoal),
+      point: Number(point),
+      predictions,
+    });
 
     dispatch(
       submitPredictionAPI({
@@ -256,6 +272,7 @@ const AllFixtures = () => {
         moreLikelyToScore: { playerId: moreLikelyToScore?.id },
         likelyToScore: { playerId: likelyToScore?.id },
         timeOfFirstGoal: Number(timeOfFirstGoal),
+        point: Number(point),
         predictions,
       })
     ).then(() => {
@@ -267,59 +284,66 @@ const AllFixtures = () => {
     <DashboardLayout>
       <section className="predictbeta-header bg-white w-full px-4 lg:px-6 py-3 flex items-center justify-between">
         {/* season select */}
-        <div className="w-full flex items-center gap-4 justify-between sm:justify-start">
-          {isFetchingSeasons || !seasons ? (
-            <InputPlaceholder>
-              <AiOutlineLoading
-                className="animate-spin"
-                color="#5D65F6"
-                size={16}
+        <div className="w-full flex-col md:flex-row flex items-center gap-4 justify-between sm:justifystart">
+          <div className="flex gap-4 items-center">
+            {isFetchingSeasons || !seasons ? (
+              <InputPlaceholder>
+                <AiOutlineLoading
+                  className="animate-spin"
+                  color="#5D65F6"
+                  size={16}
+                />
+              </InputPlaceholder>
+            ) : (
+              <CustomListBox
+                options={seasons?.map((season) => ({
+                  name: season.name,
+                  value: String(season.name),
+                }))}
+                onChange={(value: string): void => {
+                  setSearchParams({
+                    season: String(value),
+                    week: "",
+                  });
+                }}
+                defaultOption={String(query_season)}
+                title={"Season"}
+                icon={<VscFilter />}
               />
-            </InputPlaceholder>
-          ) : (
-            <CustomListBox
-              options={seasons?.map((season) => ({
-                name: season.name,
-                value: String(season.name),
-              }))}
-              onChange={(value: string): void => {
-                setSearchParams({
-                  season: String(value),
-                  week: "",
-                });
-              }}
-              defaultOption={String(query_season)}
-              title={"Season"}
-              icon={<VscFilter />}
-            />
-          )}
+            )}
 
-          {/* week select */}
-          {isFetchingWeeks || !allWeeks ? (
-            <InputPlaceholder>
-              <AiOutlineLoading
-                className="animate-spin"
-                color="#5D65F6"
-                size={16}
+            {/* week select */}
+            {isFetchingWeeks || !allWeeks ? (
+              <InputPlaceholder>
+                <AiOutlineLoading
+                  className="animate-spin"
+                  color="#5D65F6"
+                  size={16}
+                />
+              </InputPlaceholder>
+            ) : (
+              <CustomListBox
+                options={allWeeks?.map((week) => ({
+                  name: `Week ${week.number}`,
+                  value: String(week.number),
+                }))}
+                onChange={(value: string): void => {
+                  setSearchParams({
+                    season: String(query_season),
+                    week: String(value),
+                  });
+                }}
+                defaultOption={selectedWeek?.number}
+                title={"Week"}
+                icon={<VscFilter />}
               />
-            </InputPlaceholder>
-          ) : (
-            <CustomListBox
-              options={allWeeks?.map((week) => ({
-                name: `Week ${week.number}`,
-                value: String(week.number),
-              }))}
-              onChange={(value: string): void => {
-                setSearchParams({
-                  season: String(query_season),
-                  week: String(value),
-                });
-              }}
-              defaultOption={selectedWeek?.number}
-              title={"Week"}
-              icon={<VscFilter />}
-            />
-          )}
+            )}
+          </div>
+
+          <div className="flex items-center gap-2">
+            Referrals points:
+            <p className="font-bold text-xl">{user?.referralPoints}</p>
+          </div>
         </div>
       </section>
 
@@ -412,8 +436,33 @@ const AllFixtures = () => {
                     ))}
                   </div>
                   <hr className="my-8" />
+                  <div className="flex flex-col gap-3 ">
+                    <h3 className="text-[#000] font-medium text-lg text-center">
+                      Referral Points Used
+                    </h3>
+                    <Input
+                      id="points"
+                      type="number"
+                      placeholder="0"
+                      defaultValue={
+                        specificWeekPredictions?.predictions?.point
+                      }
+                      {...register("points", {
+                        required: "Enter a valid number",
+                        min: {
+                          value: 2,
+                          message: "Please enter a valid number",
+                        },
+                      })}
+                      className={`w-full input ${
+                        errors?.points ? "invalid" : ""
+                      }`}
+                      disabled
+                    />
+                  </div>
+                  <hr className="my-8" />
                   <h3 className="text-[#000] font-medium text-lg text-center">
-                    Deciders
+                    Deciders Predicted
                   </h3>
                   <div className="grid md:grid-cols-2 gap-6 py-6">
                     {/* Most likely To Score to score? */}
@@ -693,9 +742,7 @@ const AllFixtures = () => {
                       </div>
                     )}
                   </div>
-                  <div className="w-full">
-                    {/* <SingleAdvert /> */}
-                  </div>
+                  <div className="w-full">{/* <SingleAdvert /> */}</div>
                 </div>
               </section>
             </>
@@ -753,8 +800,57 @@ const AllFixtures = () => {
                       ))}
                     </div>
                     <hr className="my-8" />
+                    <div className="flex flex-col gap-3 ">
+                      <h3 className="text-[#000] font-medium text-lg text-center">
+                        Include Referral Points
+                      </h3>
+                      <p className="md:text-center text-[#5F6B7A] text-sm mt-3">
+                        Boost your chances in this game round!{" "}
+                      </p>
+                      <p className="text-gray-500">
+                        Available points: {user?.referralPoints}
+                      </p>
+                      <Input
+                        id="point"
+                        type="number"
+                        placeholder="0"
+                        {...register("point", {
+                          min: {
+                            value: 2,
+                            message: "Please enter a valid number",
+                          },
+                          max: {
+                            value: 20,
+                            message: "You don't have enough points",
+                          },
+                          validate: (value) => {
+                            if (value > (user?.referralPoints ?? 0)) {
+                              return "You don't have enough points";
+                            }
+                          },
+                        })}
+                        className={`w-full input ${
+                          errors?.point ? "invalid" : ""
+                        }`}
+                        disabled={
+                          !isBefore(
+                            new Date(),
+                            new Date(String(activeWeek?.deadline))
+                          )
+                        }
+                      />
+
+                      {errors?.point && (
+                        <ErrorMessage
+                          message={
+                            errors?.point && errors?.point.message?.toString()
+                          }
+                        />
+                      )}
+                    </div>
+                    <hr className="my-8" />
                     <h3 className="text-[#000] font-medium text-lg text-center">
-                      Deciders
+                      Deciders Unpredicted
                     </h3>
                     <p className="md:text-center text-[#5F6B7A] text-sm mt-3">
                       Select three likely different scorers and the minute the
@@ -1037,9 +1133,7 @@ const AllFixtures = () => {
                         )}
                       </div>
                     </div>
-                    <div className="w-full">
-                      {/* <SingleAdvert /> */}
-                    </div>
+                    <div className="w-full">{/* <SingleAdvert /> */}</div>
                   </div>
                 </section>
               ) : (

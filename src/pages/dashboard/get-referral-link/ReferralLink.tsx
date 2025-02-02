@@ -10,8 +10,6 @@ import { LuCopy } from "react-icons/lu";
 const ReferralLink = () => {
   const { user } = useAppSelector(selectAuth);
 
-  console.log(user);
-
   const referralLink = `https://predictbeta.com/register?referralCode=${user?.referralCode}`;
 
   const copyToClipboard = async () => {
