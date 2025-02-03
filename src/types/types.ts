@@ -182,6 +182,7 @@ export type Prediction = {
 
 export interface IWeekPrediction {
   score: number;
+  pointUsed: number;
 
   predictions: {
     fixtures: {
