@@ -1,8 +1,9 @@
-import DashboardLayout from "../../../components/layout/DashboardLayout";
 
-const ReferralPoints = () => {
+import DashboardLayout from '../../../components/layout/DashboardLayout'
+
+const ReferralProgram = () => {
   return (
-    <DashboardLayout title="Referral Points">
+    <DashboardLayout title="Referral Program">
       <section className="md:w-full flex py-5 lg:py-10 px-4 lg:px-8">
         <section className="px-4 mb-20">
           <div className="md:w-2/3">
@@ -69,7 +70,6 @@ const ReferralPoints = () => {
       </section>
     </DashboardLayout>
   );
-};
+}
 
-export default ReferralPoints;
-
+export default ReferralProgram

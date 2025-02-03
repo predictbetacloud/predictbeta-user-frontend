@@ -27,7 +27,7 @@ export const createCancelableThunk = (
 
 		try {
 			dispatch(isFetchingAction(true));
-			console.log("params", params);
+			// console.log("params", params);
 			const response = await axiosInstance.get(getUrl(params), {
 				signal,
 				...params,

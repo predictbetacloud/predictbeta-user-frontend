@@ -104,7 +104,7 @@ const Header = ({ title }: Props) => {
               <h1 className="text-white font-semibold text-lg">{title}</h1>
             )}
             <div className="flex items-center gap-3">
-              <Popover className="relative">
+              <Popover className="relative hidden">
                 <Popover.Button className="relative bg-transparent hover:bg-gray-700 transition-all ease-in-out duration-200 border border-[#F5F8FA] rounded-full p-[5px] ">
                   <PiBellRingingFill className="h-6 w-6" fill="#F5F8FA" />
                   <div className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center">
