@@ -50,8 +50,6 @@ export interface UserType {
   username: string;
   mobileNumber: string;
   userId: string;
-  referralCode: string;
-  referralPoints: number;
 }
 
 export interface WalletType {
@@ -196,7 +194,6 @@ export interface IWeekPrediction {
       };
       result: "HOME" | "AWAY" | "DRAW" | "NULL";
     }[];
-    point: number;
     timeOfFirstGoal: number;
     mostLikelyToScore: IPlayer;
     moreLikelyToScore: IPlayer;

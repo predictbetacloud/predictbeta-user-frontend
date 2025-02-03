@@ -40,34 +40,34 @@ import PublicSeasonLeaderboard from "./pages/public/PublicSeasonLeaderboard";
 import DemoPage from "./pages/public/Demo";
 import Policy from "./pages/public/Policy";
 import ReferralsProgram from "./pages/public/ReferralsProgram";
-import ReferralLink from "./pages/dashboard/get-referral-link/ReferralLink";
+import ReferralProgram from "./pages/dashboard/referral-program/ReferralProgram";
 // import { selectAuth } from "./state/slices/auth";
 
 function App() {
-  // const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  // const { refresh_token } = useAppSelector(selectAuth);
+	// const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+	const location = useLocation();
+	// const { refresh_token } = useAppSelector(selectAuth);
 
-  const showDepositModal = useAppSelector(selectShowDepositModal);
+	const showDepositModal = useAppSelector(selectShowDepositModal);
 
-  globalRouter.navigate = navigate;
-  globalRouter.location = location;
+	globalRouter.navigate = navigate;
+	globalRouter.location = location;
 
-  // useEffect(() => {
-  // 	if (refresh_token) {
-  // 		dispatch(refreshTokenAPI());
-  // 		const clearTimer = callFunctionInInterval(
-  // 			() => dispatch(refreshTokenAPI()),
-  // 			23 * 60 * 60000
-  // 		);
-  // 		return () => {
-  // 			clearTimer();
-  // 		};
-  // 	}
-  // }, []);
+	// useEffect(() => {
+	// 	if (refresh_token) {
+	// 		dispatch(refreshTokenAPI());
+	// 		const clearTimer = callFunctionInInterval(
+	// 			() => dispatch(refreshTokenAPI()),
+	// 			23 * 60 * 60000
+	// 		);
+	// 		return () => {
+	// 			clearTimer();
+	// 		};
+	// 	}
+	// }, []);
 
-  return (
+	return (
     // <ErrorBoundary FallbackComponent={ErrorFallback}>
     <>
       <Routes>
@@ -132,7 +132,10 @@ function App() {
           path="/dashboard/prediction-history"
           element={<PredictionHistory />}
         />
-        <Route path="/dashboard/get-referral-link" element={<ReferralLink />} />
+        <Route
+          path="/dashboard/referral-program"
+          element={<ReferralProgram />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
 
