@@ -32,7 +32,7 @@ const Drawer = () => {
   return (
     <main className="flex items-center gap-2 lg:hidden">
       <Popover className="relative">
-        <Popover.Button className="relative bg-transparent hover:bg-gray-700 transition-all ease-in-out duration-200 border border-[#F5F8FA] rounded-full p-[5px]">
+        <Popover.Button className="relative bg-transparent hover:bg-gray-700 transition-all ease-in-out duration-200 border border-[#F5F8FA] rounded-full p-[5px] hidden">
           <PiBellRingingFill className="h-6 w-6" fill="#F5F8FA" />
           <div className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center">
             <span className="absolute inline-flex h-full w-full rounded-full bg-[#EB1536] opacity-75 animate-ping" />

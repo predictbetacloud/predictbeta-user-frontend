@@ -304,8 +304,6 @@ export const getUserInfoAPI = createAsyncThunk(
 						profilePicUrl: data.data.data?.user.profilePicUrl,
 						lastName: data.data.data?.user.surname,
 						userId: data.data.data?.user.userId,
-						referralCode: data.data.data?.user.referralCode,
-						referralPoints: data.data.data?.user.referralPoints,
 					},
 					wallet: {
 						userId: data.data.data?.wallet.userId,
