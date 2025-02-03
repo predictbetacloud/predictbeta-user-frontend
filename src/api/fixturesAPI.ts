@@ -4,19 +4,19 @@ import { FieldValues } from "react-hook-form";
 import axiosInstance from "../connection/defaultClient";
 import { toastError, toastSuccess } from "../utils/toast";
 import {
-	setIsFetchingAllSeasons,
-	setIsFetchingAllWeeks,
-	setIsFetchingMatches,
-	setIsFetchingSpecificSeason,
-	setIsFetchingSpecificWeek,
-	setIsFetchingSpecificWeekPrediction,
-	setIsSubmittingPredictions,
-	setMatches,
-	setSeasons,
-	setSpecificSeason,
-	setSpecificWeek,
-	setSpecificWeekPrediction,
-	setWeeks,
+  setIsFetchingAllSeasons,
+  setIsFetchingAllWeeks,
+  setIsFetchingMatches,
+  setIsFetchingSpecificSeason,
+  setIsFetchingSpecificWeek,
+  setIsFetchingSpecificWeekPrediction,
+  setIsSubmittingPredictions,
+  setMatches,
+  setSeasons,
+  setSpecificSeason,
+  setSpecificWeek,
+  setSpecificWeekPrediction,
+  setWeeks,
 } from "../state/slices/fixtures";
 import { createCancelableThunk } from "./helper";
 
@@ -40,11 +40,11 @@ import { createCancelableThunk } from "./helper";
 // );
 
 export const getAllSeasonsAPI = createCancelableThunk(
-	"fixtures/getAllSeasons",
-	"getAllSeasons",
-	() => `/seasons`,
-	setIsFetchingAllSeasons,
-	setSeasons
+  "fixtures/getAllSeasons",
+  "getAllSeasons",
+  () => `/seasons`,
+  setIsFetchingAllSeasons,
+  setSeasons
 );
 
 // export const getSpecificSeasonAPI = createAsyncThunk(
@@ -65,11 +65,11 @@ export const getAllSeasonsAPI = createCancelableThunk(
 // );
 
 export const getSpecificSeasonAPI = createCancelableThunk(
-	"fixtures/getSpecificSeason",
-	"getSpecificSeason",
-	({ seasonId }) => `/seasons/${seasonId}`,
-	setIsFetchingSpecificSeason,
-	setSpecificSeason
+  "fixtures/getSpecificSeason",
+  "getSpecificSeason",
+  ({ seasonId }) => `/seasons/${seasonId}`,
+  setIsFetchingSpecificSeason,
+  setSpecificSeason
 );
 
 // Weeks
@@ -95,11 +95,11 @@ export const getSpecificSeasonAPI = createCancelableThunk(
 // );
 
 export const getAllWeeksAPI = createCancelableThunk(
-	"fixtures/getAllWeeks",
-	"getAllWeeks",
-	({ seasonId }) => `/weeks/season/${seasonId}/published`,
-	setIsFetchingAllWeeks,
-	setWeeks
+  "fixtures/getAllWeeks",
+  "getAllWeeks",
+  ({ seasonId }) => `/weeks/season/${seasonId}/published`,
+  setIsFetchingAllWeeks,
+  setWeeks
 );
 
 // export const getSpecificWeekAPI = createAsyncThunk(
@@ -120,11 +120,11 @@ export const getAllWeeksAPI = createCancelableThunk(
 // );
 
 export const getSpecificWeekAPI = createCancelableThunk(
-	"fixtures/getSpecificWeek",
-	"getSpecificWeek",
-	({ weekId }) => `/weeks/${weekId}`,
-	setIsFetchingSpecificWeek,
-	setSpecificWeek
+  "fixtures/getSpecificWeek",
+  "getSpecificWeek",
+  ({ weekId }) => `/weeks/${weekId}`,
+  setIsFetchingSpecificWeek,
+  setSpecificWeek
 );
 
 // Matches
@@ -149,60 +149,62 @@ export const getSpecificWeekAPI = createCancelableThunk(
 // );
 
 export const getAllMatchesAPI = createCancelableThunk(
-	"fixtures/getAllMatches",
-	"getAllMatches",
-	({ seasonId, weekId }) => `/fixtures/season/${seasonId}/week/${weekId}`,
-	setIsFetchingMatches,
-	setMatches
+  "fixtures/getAllMatches",
+  "getAllMatches",
+  ({ seasonId, weekId }) => `/fixtures/season/${seasonId}/week/${weekId}`,
+  setIsFetchingMatches,
+  setMatches
 );
 // Prediction
 export const submitPredictionAPI = createAsyncThunk(
-	"fixtures/submitPrediction",
-	(
-		{
-			seasonId,
-			weekId,
-			predictions,
-			mostLikelyToScore,
-			moreLikelyToScore,
-			likelyToScore,
-			timeOfFirstGoal,
-		}: FieldValues,
-		{ dispatch }
-	) => {
-		dispatch(setIsSubmittingPredictions(true));
-		axiosInstance
-			.post(`/predictions`, {
-				weekId,
-				predictions,
-				mostLikelyToScore,
-				moreLikelyToScore,
-				likelyToScore,
-				timeOfFirstGoal,
-			})
-			.then((data) => {
-				dispatch(setIsSubmittingPredictions(false));
-				dispatch(
-					getSpecificWeekPredictionAPI({
-						weekId,
-					})
-				);
-				dispatch(
-					getAllMatchesAPI({
-						seasonId,
-						weekId,
-					})
-				);
-				toastSuccess(
-					data?.data?.message ??
-						"Your prediction has been submitted successfully"
-				);
-			})
-			.catch((error) => {
-				dispatch(setIsSubmittingPredictions(false));
-				toastError(error?.response?.data?.message);
-			});
-	}
+  "fixtures/submitPrediction",
+  (
+    {
+      seasonId,
+      weekId,
+      predictions,
+      mostLikelyToScore,
+      moreLikelyToScore,
+      likelyToScore,
+      timeOfFirstGoal,
+      point = 0,
+    }: FieldValues,
+    { dispatch }
+  ) => {
+    dispatch(setIsSubmittingPredictions(true));
+    axiosInstance
+      .post(`/predictions`, {
+        weekId,
+        predictions,
+        mostLikelyToScore,
+        moreLikelyToScore,
+        likelyToScore,
+        timeOfFirstGoal,
+        point,
+      })
+      .then((data) => {
+        dispatch(setIsSubmittingPredictions(false));
+        dispatch(
+          getSpecificWeekPredictionAPI({
+            weekId,
+          })
+        );
+        dispatch(
+          getAllMatchesAPI({
+            seasonId,
+            weekId,
+          })
+        );
+        toastSuccess(
+          data?.data?.message ??
+            "Your prediction has been submitted successfully"
+        );
+      })
+      .catch((error) => {
+        dispatch(setIsSubmittingPredictions(false));
+        toastError(error?.response?.data?.message);
+      });
+  }
 );
 
 // export const getSpecificWeekPredictionAPI = createAsyncThunk(
@@ -224,11 +226,11 @@ export const submitPredictionAPI = createAsyncThunk(
 // );
 
 export const getSpecificWeekPredictionAPI = createCancelableThunk(
-	"fixtures/getSpecificWeekPrediction",
-	"getSpecificWeekPrediction",
-	({ weekId }) => `/predictions/week/${weekId}`,
-	setIsFetchingSpecificWeekPrediction,
-	setSpecificWeekPrediction
+  "fixtures/getSpecificWeekPrediction",
+  "getSpecificWeekPrediction",
+  ({ weekId }) => `/predictions/week/${weekId}`,
+  setIsFetchingSpecificWeekPrediction,
+  setSpecificWeekPrediction
 );
 
 // export const getSpecificUserWeekPredictionAPI = createAsyncThunk(
@@ -250,10 +252,10 @@ export const getSpecificWeekPredictionAPI = createCancelableThunk(
 // );
 
 export const getSpecificUserWeekPredictionAPI = createCancelableThunk(
-	"fixtures/getSpecificUserWeekPrediction",
-	"getSpecificUserWeekPrediction",
-	({ username, weekId }) =>
-		`/leaderboard/predictions/user/${username}/week/${weekId}`,
-	setIsFetchingSpecificWeekPrediction,
-	setSpecificWeekPrediction
+  "fixtures/getSpecificUserWeekPrediction",
+  "getSpecificUserWeekPrediction",
+  ({ username, weekId }) =>
+    `/leaderboard/predictions/user/${username}/week/${weekId}`,
+  setIsFetchingSpecificWeekPrediction,
+  setSpecificWeekPrediction
 );
