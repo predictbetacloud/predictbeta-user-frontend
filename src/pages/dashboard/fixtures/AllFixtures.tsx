@@ -445,7 +445,7 @@ const AllFixtures = () => {
                       type="number"
                       placeholder="0"
                       defaultValue={
-                        specificWeekPredictions?.predictions?.point
+                        specificWeekPredictions?.pointUsed
                       }
                       {...register("points", {
                         required: "Enter a valid number",
@@ -462,7 +462,7 @@ const AllFixtures = () => {
                   </div>
                   <hr className="my-8" />
                   <h3 className="text-[#000] font-medium text-lg text-center">
-                    Deciders Predicted
+                    Deciders
                   </h3>
                   <div className="grid md:grid-cols-2 gap-6 py-6">
                     {/* Most likely To Score to score? */}
@@ -850,7 +850,7 @@ const AllFixtures = () => {
                     </div>
                     <hr className="my-8" />
                     <h3 className="text-[#000] font-medium text-lg text-center">
-                      Deciders Unpredicted
+                      Deciders
                     </h3>
                     <p className="md:text-center text-[#5F6B7A] text-sm mt-3">
                       Select three likely different scorers and the minute the
