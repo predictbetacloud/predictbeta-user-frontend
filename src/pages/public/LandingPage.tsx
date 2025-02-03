@@ -2,20 +2,20 @@ import { useEffect } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import {
-	selectAllSeasons,
-	selectAllWeeks,
-	selectIsFetchingAllSeasons,
-	selectIsFetchingAllWeeks,
-	selectIsFetchingMatches,
-	selectMatches,
+  selectAllSeasons,
+  selectAllWeeks,
+  selectIsFetchingAllSeasons,
+  selectIsFetchingAllWeeks,
+  selectIsFetchingMatches,
+  selectMatches,
 } from "../../state/slices/fixtures";
 
 import PublicHeader from "../../components/layout/PublicHeader";
 import { colors } from "../../utils/colors";
 import {
-	getAllMatchesAPI,
-	getAllSeasonsAPI,
-	getAllWeeksAPI,
+  getAllMatchesAPI,
+  getAllSeasonsAPI,
+  getAllWeeksAPI,
 } from "../../api/fixturesAPI";
 import PageLoading from "../../components/loaders/PageLoading";
 import { MatchCard } from "../../components/fixtures/MatchCard";
@@ -28,60 +28,59 @@ import { useNavigate } from "react-router";
 // import RightSideAdvert from "../../components/RightSideAdvert";
 
 const LandingPage = () => {
-	const dispatch = useAppDispatch();
-	let navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  let navigate = useNavigate();
 
-	const isFetchingSeasons = useAppSelector(selectIsFetchingAllSeasons);
-	const isFetchingWeeks = useAppSelector(selectIsFetchingAllWeeks);
-	const isFetchingMatches = useAppSelector(selectIsFetchingMatches);
-	const showAdPopUp = useAppSelector(selectShowAdPopUp);
+  const isFetchingSeasons = useAppSelector(selectIsFetchingAllSeasons);
+  const isFetchingWeeks = useAppSelector(selectIsFetchingAllWeeks);
+  const isFetchingMatches = useAppSelector(selectIsFetchingMatches);
+  const showAdPopUp = useAppSelector(selectShowAdPopUp);
 
-	const allWeeks = useAppSelector(selectAllWeeks);
-	const allMatches = useAppSelector(selectMatches);
-	const seasons = useAppSelector(selectAllSeasons);
+  const allWeeks = useAppSelector(selectAllWeeks);
+  const allMatches = useAppSelector(selectMatches);
+  const seasons = useAppSelector(selectAllSeasons);
 
-	// Get all Season
-	useEffect(() => {
-		dispatch(getAllSeasonsAPI({}));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+  // Get all Season
+  useEffect(() => {
+    dispatch(getAllSeasonsAPI({}));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-	// Make latest week the active week
-	useEffect(() => {
-		if (allWeeks?.[0]?.id) {
-			// if week is in query use that week
-			if (seasons?.[0]?.id && allWeeks?.[0]?.id) {
-				dispatch(
-					getAllMatchesAPI({
-						seasonId: seasons?.[0]?.id,
-						weekId: allWeeks?.[0]?.id,
-					})
-				);
-			}
-		}
+  // Make latest week the active week
+  useEffect(() => {
+    if (allWeeks?.[0]?.id) {
+      // if week is in query use that week
+      if (seasons?.[0]?.id && allWeeks?.[0]?.id) {
+        dispatch(
+          getAllMatchesAPI({
+            seasonId: seasons?.[0]?.id,
+            weekId: allWeeks?.[0]?.id,
+          })
+        );
+      }
+    }
 
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [allWeeks]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allWeeks]);
 
-	// Make latest season the active season
-	useEffect(() => {
-		if (seasons?.[0]?.id) {
-			dispatch(getAllWeeksAPI({ seasonId: seasons?.[0]?.id }));
-		}
+  // Make latest season the active season
+  useEffect(() => {
+    if (seasons?.[0]?.id) {
+      dispatch(getAllWeeksAPI({ seasonId: seasons?.[0]?.id }));
+    }
 
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [seasons]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [seasons]);
 
-	useEffect(() => {
-    
-      dispatch(setShowAdPopUp(true));
-    
+  useEffect(() => {
+    dispatch(setShowAdPopUp(true));
+
     return () => {
       dispatch(setShowAdPopUp(false));
     };
   }, []);
 
-	return (
+  return (
     <main className="bg-white">
       <PublicHeader />
       {/* Hero Image */}
@@ -105,9 +104,7 @@ const LandingPage = () => {
         </h2>
         <div className="p-4 lg:p-8 rounded-xl">
           <div className="flex flex-col lg:flex-row justify-between gap-6 bg-white">
-            <div className="w-full lg:w-[20%]">
-              {/* <LeftSideAdvert /> */}
-            </div>
+            <div className="w-full lg:w-[20%]">{/* <LeftSideAdvert /> */}</div>
             <div className="flex-1">
               <p
                 color={colors.grey700}
@@ -164,9 +161,7 @@ const LandingPage = () => {
                 </>
               )}
             </div>
-            <div className="w-full lg:w-[20%]">
-              {/* <RightSideAdvert /> */}
-            </div>
+            <div className="w-full lg:w-[20%]">{/* <RightSideAdvert /> */}</div>
           </div>
           {/* {isFetchingCurrentDraw ? (
 						<BallLoader className="mx-auto" />
