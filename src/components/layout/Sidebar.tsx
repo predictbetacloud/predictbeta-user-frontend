@@ -65,8 +65,8 @@ export const routes: {
   // 	icon: <PrivateLeagueIcon />,
   // },
   {
-    path: "/dashboard/referral-program",
-    title: "Referral Program",
+    path: "/dashboard/get-referral-link",
+    title: "Get Referral Link",
     icon: <ReferralIcon />,
   },
 ];

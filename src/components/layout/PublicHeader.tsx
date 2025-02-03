@@ -62,7 +62,7 @@ const PublicHeader = () => {
       </div>
 
       <div className="hidden lg:flex items-center gap-x-5">
-        <Popover className="relative hidden">
+        <Popover className="relative">
           <Popover.Button className="relative bg-transparent hover:bg-gray-300 transition-all ease-in-out duration-200 border border-[#051B30] rounded-full p-[5px] ">
             <PiBellRingingFill className="h-6 w-6" fill="#051B30" />
             <div className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center">
