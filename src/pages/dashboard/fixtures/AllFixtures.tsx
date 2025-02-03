@@ -412,6 +412,33 @@ const AllFixtures = () => {
                     ))}
                   </div>
                   <hr className="my-8" />
+
+                  <div className="flex flex-col gap-3 ">
+                    <h3 className="text-[#000] font-medium text-lg text-center">
+                      Referral Points Used
+                    </h3>
+                    <Input
+                      id="points"
+                      type="number"
+                      placeholder="0"
+                      defaultValue={
+                        specificWeekPredictions?.pointUsed
+                      }
+                      {...register("points", {
+                        required: "Enter a valid number",
+                        min: {
+                          value: 2,
+                          message: "Please enter a valid number",
+                        },
+                      })}
+                      className={`w-full input ${
+                        errors?.points ? "invalid" : ""
+                      }`}
+                      disabled
+                    />
+                  </div>
+                  <hr className="my-8" />
+
                   <h3 className="text-[#000] font-medium text-lg text-center">
                     Deciders
                   </h3>
