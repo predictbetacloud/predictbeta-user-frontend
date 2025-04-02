@@ -21,7 +21,7 @@ const routes: { title: string; route: string }[] = [
   { title: "How to Play", route: "/how-to-play" },
   { title: "Leaderboard", route: "/leaderboard" },
   { title: "FAQs", route: "/faq" },
-  { title: "Referrals", route: "/referral-program" },
+  // { title: "Referrals", route: "/referral-program" },
 ];
 
 const PublicDrawer = () => {

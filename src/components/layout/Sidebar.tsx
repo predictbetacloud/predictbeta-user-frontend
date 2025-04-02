@@ -64,11 +64,11 @@ export const routes: {
   // 	title: "Private leagues",
   // 	icon: <PrivateLeagueIcon />,
   // },
-  {
-    path: "/dashboard/referral-program",
-    title: "Referral Program",
-    icon: <ReferralIcon />,
-  },
+//   {
+//     path: "/dashboard/referral-program",
+//     title: "Referral Program",
+//     icon: <ReferralIcon />,
+//   },
 ];
 
 const Sidebar = () => {
