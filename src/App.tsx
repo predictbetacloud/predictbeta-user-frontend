@@ -39,8 +39,8 @@ import PublicMonthLeaderboard from "./pages/public/PublicMonthLeaderboard";
 import PublicSeasonLeaderboard from "./pages/public/PublicSeasonLeaderboard";
 import DemoPage from "./pages/public/Demo";
 import Policy from "./pages/public/Policy";
-import ReferralsProgram from "./pages/public/ReferralsProgram";
-import ReferralProgram from "./pages/dashboard/referral-program/ReferralProgram";
+// import ReferralsProgram from "./pages/public/ReferralsProgram";
+// import ReferralProgram from "./pages/dashboard/referral-program/ReferralProgram";
 // import { selectAuth } from "./state/slices/auth";
 
 function App() {
@@ -77,7 +77,7 @@ function App() {
         <Route path="/about-us" element={<AboutPage />} />
         <Route path="/how-to-play" element={<HowToPlayPage />} />
         <Route path="/faq" element={<FaqPage />} />
-        <Route path="/referral-program" element={<ReferralsProgram />} />
+        {/* <Route path="/referral-program" element={<ReferralsProgram />} /> */}
         <Route path="/demo" element={<DemoPage />} />
         <Route path="/policy" element={<Policy />} />
         <Route path="/leaderboard/month" element={<PublicMonthLeaderboard />} />
@@ -132,10 +132,10 @@ function App() {
           path="/dashboard/prediction-history"
           element={<PredictionHistory />}
         />
-        <Route
+        {/* <Route
           path="/dashboard/referral-program"
           element={<ReferralProgram />}
-        />
+        /> */}
         <Route path="*" element={<NotFound />} />
       </Routes>
 

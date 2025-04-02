@@ -17,7 +17,7 @@ const routes: { title: string; route: string }[] = [
   
 
   { title: "FAQs", route: "/faq" },
-  { title: "Referrals", route: "/referral-program" },
+  // { title: "Referrals", route: "/referral-program" },
 ];
 
 const PublicHeader = () => {
@@ -52,12 +52,6 @@ const PublicHeader = () => {
             </div>
           ))}
 
-          {/* <a
-						href="https://gobet247.com"
-						className="text-[#153243] hover:text-[#eb1536]"
-					>
-						Gobet247
-					</a> */}
         </nav>
       </div>
 
