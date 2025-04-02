@@ -9,16 +9,17 @@ const ButtonStyle = styled.button`
 `;
 
 const PrimaryStyle = styled(ButtonStyle)`
-	background-color: #eb1536;
-	border-radius: 6px;
+  background-color: #d1ac42;
+  border-radius: 6px;
 
-	&:hover {
-		background-color: #eb1536ee;
-	}
+  &:hover {
+    background-color: #a07e20;
+  }
 
-	&:disabled {
-		background-color: #eb153640;
-	}
+  &:disabled {
+    background-color: #d1ab429d;
+    cursor: not-allowed;
+  }
 `;
 
 function Button({
@@ -38,7 +39,7 @@ function Button({
 			onClick={() => onClick()}
 			disabled={disabled || loading}
 			className={
-				"py-2 px-4 flex justify-center items-center text-white text-center rounded-sm " +
+				"py-2 px-4 flex justify-center items-center text-white text-center rounded-sm transition-all ease-in-out duration-300 " +
 				className
 			}
 		>

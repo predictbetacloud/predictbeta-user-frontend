@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { FaFacebookF, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { FaTiktok } from "react-icons/fa";
 
-import logo from "../../assets/logo/logo-light.svg";
+import logo from "../../assets/logo/new-logo.svg";
 
 // import goBetLogo from "../../assets/images/Gobet-Featured-Image 1.png";
 
@@ -48,7 +48,7 @@ const PublicFooter = () => {
           © {new Date().getFullYear()} - Predictbeta. All rights reserved |
           (18+) Predict Responsibly
         </p>
-        
+
         <div className="flex items-center gap-x-4 mt-4 md:mt-0">
           <a
             href="https://x.com/predictbeta?s=11&t=zQ2VH2EhRxbRQ3E-8zuNIA"

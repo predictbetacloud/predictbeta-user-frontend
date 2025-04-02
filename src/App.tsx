@@ -30,6 +30,7 @@ import PrivateLeagueWeekLeaderboard from "./pages/dashboard/privateLeague/Privat
 import EditPrivateLeague from "./pages/dashboard/privateLeague/EditPrivateLeague";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import NewPassword from "./pages/auth/NewPassword";
+import VerificationPage from "./pages/auth/VerificationPage";
 import SeasonLeaderboard from "./pages/dashboard/leaderboard/SeasonLeaderboard";
 import MonthLeaderboard from "./pages/dashboard/leaderboard/MonthLeaderboard";
 import VerifyEmail from "./pages/auth/VerifyEmail";
@@ -91,6 +92,7 @@ function App() {
         <Route path="/verify" element={<VerifyEmail />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/new-password" element={<NewPassword />} />
+        <Route path="/verification" element={<VerificationPage />} />
         <Route path="/dashboard/account/password" element={<EditPassword />} />
         <Route path="/dashboard/account" element={<EditProfile />} />
         <Route path="/dashboard/wallet" element={<Wallet />} />

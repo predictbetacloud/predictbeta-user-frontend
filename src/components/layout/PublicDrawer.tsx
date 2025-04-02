@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { IoCloseCircleSharp, IoMenuOutline } from "react-icons/io5";
 
-import logo from "../../assets/logo/logo-light.svg";
+import logo from "../../assets/logo/new-logo.svg";
 
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import {

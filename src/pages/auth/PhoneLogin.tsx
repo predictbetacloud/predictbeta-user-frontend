@@ -50,7 +50,7 @@ const PhoneLogin = () => {
               onChange={onChange}
               value={value}
               defaultCountry="NG"
-              placeholder="Your phone number"
+              placeholder="Enter your phone number"
               className={errors.mobileNumber ? "invalid" : ""}
             />
           )}
@@ -93,7 +93,7 @@ const PhoneLogin = () => {
       </div>
 
       <Link to="/forgot-password" className="w-fit ml-auto block text-xs mt-4">
-        <p className="text-[#EB1536]">Forgot password?</p>
+        <p className="text-[var(--primary-gold)] hover:underline ">Forgot password?</p>
       </Link>
 
       <div className="mt-5">
@@ -108,7 +108,7 @@ const PhoneLogin = () => {
       <p className="mt-4 md:text-center text-xs">
         Don&apos;t have an account?{" "}
         <Link to="/register" className="">
-          <span className="text-[#EB1536]">Create account</span>
+          <span className="text-[var(--primary-gold)] hover:underline">Create account</span>
         </Link>
       </p>
     </form>

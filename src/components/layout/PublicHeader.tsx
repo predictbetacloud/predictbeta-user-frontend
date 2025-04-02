@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo/logo-light.svg";
+import logo from "../../assets/logo/new-logo.svg";
 import Button from "../Buttons";
 import PublicDrawer from "./PublicDrawer";
 import { useAppDispatch } from "../../state/hooks";
@@ -13,7 +13,7 @@ const routes: { title: string; route: string }[] = [
   { title: "Home", route: "/" },
   { title: "How to Play", route: "/how-to-play" },
   { title: "Leaderboard", route: "/leaderboard" },
-  
+
   { title: "FAQs", route: "/faq" },
   { title: "Referrals", route: "/referral-program" },
 ];

@@ -32,12 +32,12 @@ const EmailLogin = () => {
       {/* Email */}
       <div className="mt-5">
         <label htmlFor="email" className="mb-2 block">
-          <P className="text-[#222222] text-sm">Email address</P>
+          <P className="text-[#222222] text-sm">Email address or username</P>
         </label>
         <Input
           id="email"
           type="email"
-          placeholder="Enter email"
+          placeholder="Enter email or Username"
           {...register("email", {
             required: "Enter a valid email",
           })}
@@ -77,7 +77,7 @@ const EmailLogin = () => {
       </div>
 
       <Link to="/forgot-password" className="w-fit ml-auto block text-xs mt-4">
-        <p className="text-[#EB1536]">Forgot password?</p>
+        <p className="text-[var(--primary-gold)] hover:underline">Forgot password?</p>
       </Link>
 
       <div className="mt-5">
@@ -92,7 +92,9 @@ const EmailLogin = () => {
       <p className="mt-4 md:text-center text-xs">
         Don&apos;t have an account?{" "}
         <Link to="/register" className="">
-          <span className="text-[#EB1536]">Create account</span>
+          <span className="text-[var(--primary-gold)] hover:underline ">
+            Create account
+          </span>
         </Link>
       </p>
     </form>
