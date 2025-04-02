@@ -77,7 +77,7 @@ function App() {
         <Route path="/about-us" element={<AboutPage />} />
         <Route path="/how-to-play" element={<HowToPlayPage />} />
         <Route path="/faq" element={<FaqPage />} />
-        <Route path="/referral-program" element={<ReferralsProgram />} />
+        {/* <Route path="/referral-program" element={<ReferralsProgram />} /> */}
         <Route path="/demo" element={<DemoPage />} />
         <Route path="/policy" element={<Policy />} />
         <Route path="/leaderboard/month" element={<PublicMonthLeaderboard />} />
@@ -132,10 +132,10 @@ function App() {
           path="/dashboard/prediction-history"
           element={<PredictionHistory />}
         />
-        <Route
+        {/* <Route
           path="/dashboard/referral-program"
           element={<ReferralProgram />}
-        />
+        /> */}
         <Route path="*" element={<NotFound />} />
       </Routes>
 
