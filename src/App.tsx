@@ -39,8 +39,8 @@ import PublicMonthLeaderboard from "./pages/public/PublicMonthLeaderboard";
 import PublicSeasonLeaderboard from "./pages/public/PublicSeasonLeaderboard";
 import DemoPage from "./pages/public/Demo";
 import Policy from "./pages/public/Policy";
-import ReferralsProgram from "./pages/public/ReferralsProgram";
-import ReferralProgram from "./pages/dashboard/referral-program/ReferralProgram";
+// import ReferralsProgram from "./pages/public/ReferralsProgram";
+// import ReferralProgram from "./pages/dashboard/referral-program/ReferralProgram";
 // import { selectAuth } from "./state/slices/auth";
 
 function App() {
