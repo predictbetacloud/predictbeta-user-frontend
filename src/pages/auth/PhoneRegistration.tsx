@@ -145,6 +145,29 @@ const PhoneRegistration = ({country, state}:PropsTypes) => {
             )}
         </div>
 
+     	{/* SMS Consent Checkbox */}
+	    <div className="mt-4">
+		<label className="flex items-start">
+		    <input
+			type="checkbox"
+			{...register("smsConsent", {
+			    required: "You must agree to receive SMS notifications",
+			})}
+			className="mt-1 mr-2"
+		    />
+		    <span className="text-xs">
+			I agree to receive SMS notifications from PredictBeta Nigeria Limited. Msg&amp;Data rates may apply. Reply STOP to unsubscribe. See our{' '}
+			<Link to="/privacy" className="text-[#EB1536]">
+			    Privacy Policy
+			</Link>.
+		    </span>
+		</label>
+		{errors.smsConsent && (
+		    <ErrorMessage message={errors.smsConsent.message?.toString()} />
+		)}
+	      </div>
+
+
         <p className="text-xs mt-4">
             By creating an account, you agree that you’re above 18 years of age
             and also to our{" "}
