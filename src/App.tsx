@@ -39,35 +39,50 @@ import PublicMonthLeaderboard from "./pages/public/PublicMonthLeaderboard";
 import PublicSeasonLeaderboard from "./pages/public/PublicSeasonLeaderboard";
 import DemoPage from "./pages/public/Demo";
 import Policy from "./pages/public/Policy";
+import wonCut from "./assets/images/wonCut.png";
 // import ReferralsProgram from "./pages/public/ReferralsProgram";
 // import ReferralProgram from "./pages/dashboard/referral-program/ReferralProgram";
 // import { selectAuth } from "./state/slices/auth";
 
 function App() {
-	// const dispatch = useAppDispatch();
-	const navigate = useNavigate();
-	const location = useLocation();
-	// const { refresh_token } = useAppSelector(selectAuth);
+  // const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  // const { refresh_token } = useAppSelector(selectAuth);
 
-	const showDepositModal = useAppSelector(selectShowDepositModal);
+  const showDepositModal = useAppSelector(selectShowDepositModal);
 
-	globalRouter.navigate = navigate;
-	globalRouter.location = location;
+  globalRouter.navigate = navigate;
+  globalRouter.location = location;
 
-	// useEffect(() => {
-	// 	if (refresh_token) {
-	// 		dispatch(refreshTokenAPI());
-	// 		const clearTimer = callFunctionInInterval(
-	// 			() => dispatch(refreshTokenAPI()),
-	// 			23 * 60 * 60000
-	// 		);
-	// 		return () => {
-	// 			clearTimer();
-	// 		};
-	// 	}
-	// }, []);
+  const isRoutingDisabled = true;
 
-	return (
+  if (isRoutingDisabled) {
+    return (
+      <main className="flex flex-col items-center justify-center bg-white h-screen w-screen overflow-hidden">
+        <img
+          src={wonCut}
+          alt="wonCut Construction"
+          className="max-w-full max-h-full object-contain object-center border border-[#D1AC42] "
+        />
+      </main>
+    );
+  }
+
+  // useEffect(() => {
+  // 	if (refresh_token) {
+  // 		dispatch(refreshTokenAPI());
+  // 		const clearTimer = callFunctionInInterval(
+  // 			() => dispatch(refreshTokenAPI()),
+  // 			23 * 60 * 60000
+  // 		);
+  // 		return () => {
+  // 			clearTimer();
+  // 		};
+  // 	}
+  // }, []);
+
+  return (
     // <ErrorBoundary FallbackComponent={ErrorFallback}>
     <>
       <Routes>
